@@ -407,7 +407,10 @@ def parse_human(pages, extracts):
     for p in pages:
         text = (extracts.get(str(p["pageid"])) or {}).get("extract", "")
         if HISTORY_WORDS.search((p["title"] + " " + text).lower()):
-            out.append({"place": p["title"], "distance_m": round(p["dist"]), "summary": text})
+            # lat/lng/pageid come from the same geosearch response; they let the page show a direction, a map link
+            # and a Wikipedia link for each place. Nothing new is fetched.
+            out.append({"place": p["title"], "distance_m": round(p["dist"]), "summary": text,
+                        "lat": p.get("lat"), "lng": p.get("lon"), "pageid": p.get("pageid")})
     return out[:5]
 
 
@@ -464,7 +467,9 @@ async def fetch_human(client, lat, lng):
         scope, distance_m = human_scope("nearest_place", place, dist), round(dist * 1000)
     else:  # a state or country: its centre says nothing useful about distance
         scope, distance_m = human_scope("region", place), None
-    return [{"place": place["name"], "distance_m": distance_m, "summary": intro}], scope, "ok"
+    # lat/lng/pageid stay None: this is an introduction to a whole city or region, not an individual site
+    return [{"place": place["name"], "distance_m": distance_m, "summary": intro,
+             "lat": None, "lng": None, "pageid": None}], scope, "ok"
 
 
 async def fetch_intro(client, title):

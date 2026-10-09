@@ -107,6 +107,15 @@ def test_parse_human_keeps_history_drops_schools():
     assert not any("Catholic School" in p for p in places)
 
 
+def test_parse_human_keeps_coordinates_and_page_id_for_the_map_and_wikipedia_links():
+    w = load("wikipedia_dover.json")
+    out = geo.parse_human(w["geosearch"], w["extracts"])
+    first = out[0]
+    assert set(first) == {"place", "distance_m", "summary", "lat", "lng", "pageid"}
+    source = next(p for p in w["geosearch"] if p["title"] == first["place"])
+    assert (first["lat"], first["lng"], first["pageid"]) == (source["lat"], source["lon"], source["pageid"])
+
+
 def test_history_words_need_whole_words():
     assert geo.HISTORY_WORDS.search("a roman villa")
     assert not geo.HISTORY_WORDS.search("roman catholic school")
