@@ -42,6 +42,7 @@ app/cache.py     TTL cache and per-IP rate limiter (in memory)
 static/index.html  one mobile-first page, vanilla JS, Leaflet map, no build step
 static/stela.css   the look: sandstone palette, stone-tablet cards, dig layers, animations (all optional)
 static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tested in Node)
+static/stela-game.js   Guess the past and Dig sites nearby (pure logic, tested in Node)
 tests/           parsing and fallback tests on saved real API responses, plus tests of the browser logic
 ```
 
@@ -53,6 +54,22 @@ An ancient-discovery feel in original CSS/SVG only: sandstone, papyrus and deep 
 - **Motion is optional.** Animations are short (under about a second, plus a looping sand-drift while the slow fossil source runs). With `prefers-reduced-motion` nothing animates. Content is never hidden waiting for an animation or a font, so if either fails the page still works.
 - **Light and dark mode** both keep text contrast at 5:1 or better (most pairs are above 10:1) for reading outdoors. Buttons are at least 56 px tall.
 - **Light on the wire.** No images; the page is HTML, one CSS file and one small JS file (about 19 KB gzipped from our server), plus Leaflet from a CDN. The server gzips responses.
+
+## Guess the past and Dig sites nearby
+
+**Guess the past** is an optional game under the story. A pure function (`possibleQuestionTypes`) looks at the facts and says which questions are possible; one or two are picked at random:
+
+| Question | Needs | Answer comes from |
+|---|---|---|
+| What was this place *probably* like? (sea, swamp, desert, river) | a rock type that maps to a setting | the rock type |
+| Slide to guess the rock's age | the rock's age range | Macrostrat |
+| Which animal group appears in the fossil finds? | at least one fossil record (so it appears after the slow fossil source answers) | PBDB |
+| Which nearby place is the oldest? | 2+ human-history pages with a construction or founding date, and a clear oldest | Wikipedia introductions |
+| Which species appears in the rare-animal records? ("recorded", never "alive") | at least one rare-animal record | GBIF |
+
+Questions and answers are computed only from the facts, never from the language model. The wrong options for the fossil and species questions ("decoys") come from fixed lists, are removed if they are in the real data, and are never shown as facts; the reveal says that "not in the records" does not prove something never lived there. After a guess the page reveals the real answer with its supporting facts. If a layer used a wider scope (a regional rock map, the nearest city, a wider fossil search), the question and the reveal say so and show the scope label. If no question is possible the card says: "The scribe has no tablets for this spot. Try walking somewhere new or dropping a pin elsewhere." There is a Skip button, nothing is spoken, and animations respect `prefers-reduced-motion`.
+
+**Dig sites nearby** reuses the human-history pages already fetched from the Wikipedia geosearch (no new data source; the layer now also keeps each page's coordinates and id). Up to 5 are listed with the distance ("about 3 km away, straight line"), the compass direction from you, a one-line summary, a Wikipedia link and an "Open in map" link (a plain OpenStreetMap URL; no routing service). It does not promise walking times, opening hours, prices or that a site is open: it says "Check access and opening times before you go." Sites over about 10 km are labelled far and not presented as a walk. If the human-history layer fell back to the nearest city or region, no individual sites are shown and it says "No individual sites recorded near you. This area's history is about [place]." The nearest site is marked on the map with an original SVG marker.
 
 ## Passport and Walk mode
 
@@ -151,6 +168,10 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - **Wikipedia may rate-limit (HTTP 429)**, especially for anonymous or shared-IP clients. The card then says it could not be checked. Setting `STELA_CONTACT` helps.
 - **Small language models can slip.** Strict prompts reduce invented details but cannot guarantee zero. In testing, a 4B local model sometimes turned scientific names into common names, and once said rare animals "wander" the area. A code check now discards any story that calls the animals alive or living here and shows the plain facts instead. That is why the plain fact cards are always shown under the story.
 - PBDB can take 30 seconds or more for sparse regions.
+- **"Oldest nearby site" uses dates read from text.** Wikipedia introductions have no structured dates, so Stela only reads a date that follows a construction or founding cue ("completed in 1262", "dates to 1575-1520 BC", "founded in the 11th century"). Bare years ("listed in 1973") are ignored, and the question is dropped unless one place is clearly older than the others. The dates may be when a place was built, not when it was first used, and many pages simply have no date, so this question is often unavailable.
+- **The game's decoys are not proof of absence.** "Not in the records" only means not in the records Stela fetched (the most-recorded species, and the fossil groups of one search).
+- **Dig sites are not visit advice.** They are Wikipedia pages that mention history, so many are buildings, rivers or monuments you cannot enter. Directions and distances are straight lines from the point you looked up, and Wikipedia's coordinates for a place can be approximate.
+- **A one-line summary is the first sentence of the introduction**, which Wikipedia sometimes cuts short (for example after "St.").
 - **The passport is per browser and per device.** Clearing site data, using a private window, or switching phones starts a new one. There is no sync, by design.
 - **Walk mode needs the page open and visible.** Browsers pause GPS for hidden pages and locked screens, so it cannot track you in the background. GPS can be slow or inaccurate indoors, under tree cover and in cities; weak fixes are ignored rather than guessed from.
 - **"New rock unit" is best effort.** Names differ between map scales for the same ground, so a change of unit is only reported when both lookups used the same map scale; a change of era (time interval) is always reported. Geological maps are coarse, so boundaries you walk across may not match what is on the ground.

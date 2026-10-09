@@ -79,6 +79,11 @@
       <div class="dig-bar"><button class="btn btn-dig" id="dig-btn" type="button" aria-expanded="false" aria-controls="dig">Dig down &#9660;</button></div>
       <section class="dig" id="dig" hidden aria-label="Dig down through the layers"></section>
 
+      <section class="card game" id="card-game" hidden aria-live="polite">
+        <h2>Guess the past</h2>
+        <div id="game-body"></div>
+      </section>
+
       <div class="cards">
         <article class="card" id="card-rock">
           <h2>Under your feet</h2>
@@ -104,6 +109,11 @@
           <h2>Human history nearby</h2>
           <div id="human"></div>
         </article>
+
+        <article class="card" id="card-sites">
+          <h2>Dig sites nearby</h2>
+          <div id="sites"></div>
+        </article>
       </div>
     </section>
 
@@ -111,6 +121,8 @@
       <p><strong>Honest notes.</strong> Fossil records show what has been <em>found</em> near here, not everything that lived here.</p>
       <p>Whether a place was sea, land or swamp is <em>inferred from the rock type</em>, so it is only ever "probably".</p>
       <p>Animal records show where an animal was observed, not necessarily where it lives.</p>
+      <p>Dig sites are places with a Wikipedia page that mentions history; they may not be open to visitors. Distances are straight lines, not routes. Check access and opening times before you go.</p>
+      <p>The questions in "Guess the past" and their answers come only from the facts on this page, not from the AI narrator. Wrong options are made-up decoys and are never presented as facts.</p>
       <p>The narration is written by an open-weight AI model that is only given the facts shown on this page. Check the cards below it.</p>
       <p>The scribe, the stone tablets and the layers are original decoration. They are not a picture of any real culture or period, and the layers are for orientation, not to scale.</p>
     </div>
@@ -131,6 +143,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="stela-logic.js"></script>
+<script src="stela-game.js"></script>
 <script>
 "use strict";
 const $ = (sel) => document.querySelector(sel);
@@ -181,6 +194,8 @@ let run = 0;                 // incremented on every new lookup so stale replies
 let storyText = "";          // what "Listen" reads
 let marker = null;
 let quiet = false;           // true while a Walk-mode refresh is in progress: no flashy animation
+let lookup = { lat: null, lng: null };  // where the current story is for (used for direction and distance to sites)
+let fossilResp;              // the /api/fossils reply: undefined while loading, null if it failed
 
 const map = L.map("map", { worldCopyJump: true }).setView([20, 10], 2);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -243,6 +258,8 @@ let lastRock = null;  // the most recent mapped rock, to notice when a walker cr
 async function explore(lat, lng, opts = {}) {
   const me = ++run;
   quiet = !!opts.walk;
+  lookup = { lat, lng }; fossilResp = undefined;
+  gameReset(); clearSiteMarker();
   if (!opts.walk) {
     Voice.stop(); setListenLabel();
     storyText = "";
@@ -265,7 +282,7 @@ async function explore(lat, lng, opts = {}) {
   if (opts.walk) { Voice.stop(); setListenLabel(); } else say("");
   renderWhere(data);
   $("#results").hidden = false;
-  if (!opts.walk) { carveAll(); $("#card-story").scrollIntoView(scrollOpts("start")); }
+  if (!opts.walk) { carveAll(); fitToNearestSite(); $("#card-story").scrollIntoView(scrollOpts("start")); }
   if (opts.real) stampPassport(lat, lng, data.facts.rock);
   if (data.facts.rock) lastRock = data.facts.rock;
 
@@ -278,6 +295,7 @@ async function explore(lat, lng, opts = {}) {
     if (me !== run) return;
     setContent($("#fossils"), empty("The fossil database could not be reached right now."));
     digData.fossils = null; digData.fossilScope = null; renderDig();
+    fossilResp = null; gameFossilsArrived();
   });
   return { data };
 }
@@ -347,6 +365,8 @@ function renderWhere(d) {
 
   digData = { rock, ruler: f.time_ruler, scopes: sc, human: hh, fossils: undefined, fossilScope: null };  // fossils: undefined = still loading
   renderDig();
+  renderSites(f);
+  gameBegin(f);
   renderSources(d.sources);
 }
 
@@ -400,6 +420,7 @@ function renderFossils(d) {
   }
   digData.fossils = f; digData.fossilScope = d.scope;
   renderDig();
+  fossilResp = d; gameFossilsArrived();
   renderSources(null, d.source);
 }
 
@@ -650,6 +671,213 @@ document.addEventListener("visibilitychange", () => {
   else if (walk.on) { startWatch(); walkStatus.textContent = "Walk mode is on."; }
 });
 window.addEventListener("pagehide", stopWatch);
+
+/* ---------- Dig sites nearby ----------
+ * Uses only the human-history pages already fetched (Wikipedia geosearch). Individual sites are listed only when that
+ * search covered the user's own area; if it fell back to the nearest city or region we say what the history is about. */
+let siteMarker = null;
+const siteIcon = L.divIcon({
+  className: "site-marker", iconSize: [34, 44], iconAnchor: [17, 42], popupAnchor: [0, -38],
+  html: '<svg viewBox="0 0 34 44" aria-hidden="true"><path d="M17 42C7 30 3 24 3 16a14 14 0 0 1 28 0c0 8-4 14-14 26z" fill="var(--ochre)" stroke="var(--ink)" stroke-width="2.5"/>' +
+    '<path d="M11 21V15a6 6 0 0 1 12 0v6z" fill="var(--card)" stroke="var(--ink)" stroke-width="1.8"/><path d="M13 17h8M13 20h8" stroke="var(--stone-dark)" stroke-width="1.5"/></svg>',
+});
+function clearSiteMarker() { if (siteMarker) { siteMarker.remove(); siteMarker = null; } }
+
+function markNearestSite(sites) {
+  clearSiteMarker();
+  const s = sites[0];
+  if (!s) return;
+  siteMarker = L.marker([s.lat, s.lng], { icon: siteIcon, title: `Nearest dig site: ${s.name}`, alt: `Nearest dig site: ${s.name}` }).addTo(map);
+  siteMarker.bindPopup(h("div", {}, h("strong", {}, s.name), h("br"), "Nearest dig site (straight-line distance, not a route)"));
+}
+
+function fitToNearestSite() {  // show the user's pin and the nearest site together, without zooming in too far
+  if (!siteMarker || lookup.lat == null) return;
+  map.fitBounds(L.latLngBounds([[lookup.lat, lookup.lng], siteMarker.getLatLng()]), { maxZoom: 15, padding: [30, 30], animate: !reduceMotion() });
+}
+
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+function siteItem(s) {
+  const where = [s.direction ? `${capitalize(s.direction.name)} of you` : null, s.distanceText].filter(Boolean).join(" · ");
+  return h("li", {},
+    h("strong", {}, s.name),
+    h("div", { class: "small" }, where),
+    s.summary ? h("p", {}, s.summary) : null,
+    h("div", { class: "site-links" },
+      h("a", { href: s.wikiUrl, target: "_blank", rel: "noopener noreferrer" }, "Wikipedia page ↗"),
+      h("a", { href: s.mapUrl, target: "_blank", rel: "noopener noreferrer" }, "Open in map ↗")));
+}
+
+function renderSites(facts) {
+  const r = StelaGame.digSites(facts, lookup), box = $("#sites");
+  clearSiteMarker();
+  const careNote = [h("p", { class: "small" }, StelaGame.DIG_NOTE),
+    h("p", { class: "small" }, "These are places with a Wikipedia page that mentions history. Many are buildings or monuments that may not be open to visitors. Distances are straight lines, not routes, and no walking time is promised.")];
+  if (r.mode === "unavailable") setContent(box, empty("Could not be checked right now."));
+  else if (r.mode === "wider") {
+    setContent(box, scopeLine(r.scope),
+      h("p", {}, `No individual sites recorded near you. This area's history is about ${r.placeName}.`), careNote);
+  } else if (r.mode === "none") {
+    setContent(box, scopeLine(r.scope) || empty("Nothing recorded nearby."), h("p", {}, "No individual sites recorded near you."));
+  } else {
+    setContent(box, scopeLine(r.scope), h("ul", { class: "sites" }, r.sites.map(siteItem)), careNote);
+    markNearestSite(r.sites);
+  }
+}
+
+/* ---------- Guess the past ----------
+ * Optional and never in the way: it sits below the story, can be skipped at any time, speaks nothing, and shows the real
+ * answer with its supporting facts afterwards. Questions and answers come only from the facts (see stela-game.js). */
+const game = { facts: null, fossils: undefined, q: null, n: 0, total: 1, used: [], phase: "idle", picked: null };
+const gameBox = $("#card-game"), gameBody = $("#game-body");
+const fossilArg = () => game.fossils || undefined;  // pending or failed both mean "no fossil question yet"
+
+function gameReset() {
+  Object.assign(game, { facts: null, fossils: undefined, q: null, n: 0, total: 1, used: [], phase: "idle", picked: null });
+  gameBox.hidden = true;
+  setContent(gameBody);
+}
+function gameBegin(facts) {
+  game.facts = facts;
+  if (StelaGame.possibleQuestionTypes(facts, undefined).length) startGame();
+  else { game.phase = "waiting"; renderGame(); }  // the fossil records (still loading) may make a question possible
+}
+function gameFossilsArrived() {
+  game.fossils = fossilResp;
+  if (game.phase !== "waiting") return;  // a question may be showing already; the next one will see the fossils
+  if (StelaGame.possibleQuestionTypes(game.facts, fossilArg()).length) startGame();
+  else { game.phase = "none"; renderGame(); }
+}
+function startGame() {
+  const types = StelaGame.possibleQuestionTypes(game.facts, fossilArg());
+  game.n = 0; game.used = []; game.total = types.length > 1 && Math.random() < 0.5 ? 2 : 1;
+  nextQuestion();
+}
+function nextQuestion() {
+  const q = StelaGame.pickQuestion(game.facts, fossilArg(), Math.random, game.used);
+  if (!q) { game.phase = "done"; renderGame(); return; }
+  game.q = q; game.used.push(q.type); game.n++; game.phase = "question"; game.picked = null;
+  renderGame();
+}
+function moreQuestionsPossible() {
+  return game.n < game.total && StelaGame.possibleQuestionTypes(game.facts, fossilArg()).some((t) => !game.used.includes(t));
+}
+
+// If a question's facts come from a wider area than the user's own spot, the question and the reveal both say so.
+const widerLead = (q) => (q.scope && q.scope.level !== "exact_area"
+  ? h("p", { class: "small" }, "Heads up: this tablet uses facts from a wider area, not your exact spot.") : null);
+
+function skipButton(label = "Skip") {
+  return h("button", { class: "btn btn-ghost", type: "button", id: "game-skip" }, label);
+}
+
+function renderGame() {
+  gameBox.hidden = false;
+  const skip = (e) => { game.phase = "skipped"; renderGame(); };
+  if (game.phase === "waiting") {
+    setContent(gameBody, h("div", { class: "digging" }, sand(), "The scribe is looking for tablets while the fossil records load..."), h("div", { class: "actions" }, skipButton()));
+    $("#game-skip").addEventListener("click", skip);
+  } else if (game.phase === "none") {
+    setContent(gameBody, h("p", { class: "empty" }, StelaGame.NO_TABLETS));
+  } else if (game.phase === "skipped") {
+    setContent(gameBody, h("p", { class: "small" }, "Skipped. Nothing is lost: the story and facts are all above and below."),
+      h("div", { class: "actions" }, h("button", { class: "btn btn-ghost", type: "button", id: "game-play" }, "Play after all")));
+    $("#game-play").addEventListener("click", startGame);
+  } else if (game.phase === "done") {
+    setContent(gameBody, h("p", {}, "That is all the tablets for this spot."),
+      h("div", { class: "actions" }, h("button", { class: "btn btn-ghost", type: "button", id: "game-play" }, "Play again")));
+    $("#game-play").addEventListener("click", startGame);
+  } else {
+    renderQuestion(skip);
+  }
+}
+
+function renderQuestion(skip) {
+  const q = game.q, revealed = game.phase === "revealed";
+  const head = [h("p", { class: "small game-count" }, `Tablet ${game.n} of ${game.total}`), h("p", { class: "big" }, q.prompt),
+    scopeLine(q.scope), widerLead(q), q.note ? h("p", { class: "small" }, q.note) : null];
+  let body;
+  if (q.type === "age") body = ageControls(q, revealed);
+  else body = h("div", { class: "options" }, q.options.map((o) => {
+    const isAnswer = o.id === q.answerId, isPick = revealed && game.picked === o.id;
+    const mark = revealed ? (isAnswer ? " ✓ Real answer" : isPick ? " (your guess)" : "") : "";
+    const b = h("button", { class: "btn btn-ghost opt" + (revealed && isAnswer ? " opt-real" : ""), type: "button", "data-id": o.id }, o.label + mark);
+    if (revealed) b.disabled = true;
+    else b.addEventListener("click", () => { game.picked = o.id; game.phase = "revealed"; renderGame(); });
+    return b;
+  }));
+  const kids = [...head, body];
+  if (revealed) {
+    const rev = revealBlock(q);
+    kids.push(rev, h("div", { class: "actions" }, h("button", { class: "btn", type: "button", id: "game-next" }, moreQuestionsPossible() ? "Next tablet" : "Done")));
+    setContent(gameBody, kids);
+    $("#game-next").addEventListener("click", () => (moreQuestionsPossible() ? nextQuestion() : (game.phase = "done", renderGame())));
+    carve(rev);
+  } else {
+    kids.push(h("div", { class: "actions" }, skipButton()));
+    setContent(gameBody, kids);
+    $("#game-skip").addEventListener("click", skip);
+  }
+}
+
+function ageControls(q, revealed) {
+  const input = h("input", { type: "range", min: "0", max: "1000", step: "1", value: String(revealed ? game.picked.v : 300), id: "age-slider", "aria-label": "Your guess, in millions of years ago" });
+  const out = h("p", { class: "big age-out", id: "age-out", "aria-live": "off" });
+  const show = () => { const ma = StelaGame.sliderToMa(+input.value); out.textContent = `About ${fmtMa(ma)} million years ago`; input.setAttribute("aria-valuetext", out.textContent); };
+  show();
+  input.addEventListener("input", show);
+  if (revealed) { input.disabled = true; return h("div", { class: "age-box" }, out, input); }
+  const lock = h("button", { class: "btn", type: "button", id: "age-lock" }, "Lock in my guess");
+  lock.disabled = true;  // the slider has to be moved first, so the starting position can never count as a guess
+  input.addEventListener("input", () => { lock.disabled = false; });
+  lock.addEventListener("click", () => { game.picked = { v: +input.value, ma: StelaGame.sliderToMa(+input.value) }; game.phase = "revealed"; renderGame(); });
+  return h("div", { class: "age-box" }, out, input, h("p", { class: "small" }, "The scale is stretched so that younger ages are easy to pick."), lock);
+}
+
+/* The reveal: the real answer plus the supporting fact card. Wrong options are never shown as facts. */
+function revealBlock(q) {
+  const r = q.reveal, box = h("div", { class: "reveal" });
+  const add = (...k) => k.flat().forEach((x) => x != null && box.append(x));
+  const guessed = (label) => h("p", { class: "result" }, game.picked && game.picked === q.answerId ? "You got it." : `You guessed ${label}. Here is the real answer.`);
+  if (q.type === "setting") {
+    const picked = q.options.find((o) => o.id === game.picked);
+    add(guessed(picked ? picked.label.toLowerCase() : "something else"),
+      h("p", { class: "big" }, "Probably " + r.setting.meaning),
+      h("p", {}, `${r.rock.name || "This rock"}${r.rock.lith ? " (" + r.rock.lith + ")" : ""}, ${rockAge(r.rock)}.`),
+      h("p", { class: "small" }, "This is " + r.setting.confidence),
+      scopeLine(q.scope), widerLead(q));
+  } else if (q.type === "age") {
+    const g = StelaGame.gradeAge(game.picked.ma, q.range);
+    const verdict = g.verdict === "inside" ? "Inside the real range." : g.verdict === "close" ? "Close." : "Far off.";
+    add(h("p", { class: "result" }, `You guessed about ${fmtMa(game.picked.ma)} million years ago. ${verdict}`),
+      h("p", { class: "big" }, rockAge(r.rock)),
+      r.ruler ? h("p", { class: "small" }, `That is about ${r.ruler.times_older_than_humans.toLocaleString()} times older than our species.`) : null,
+      eraStrip(r.rock), scopeLine(q.scope), widerLead(q));
+  } else if (q.type === "fossil") {
+    const picked = q.options.find((o) => o.id === game.picked);
+    add(guessed(picked ? picked.label : "something else"),
+      h("p", { class: "big" }, `${r.group}: ${r.count} fossil find${r.count === 1 ? "" : "s"} recorded`),
+      h("ul", { class: "chips" }, r.fossils.classes.map(([name, n]) => h("li", {}, `${name} (${n})`))),
+      h("p", { class: "small" }, "The other options are not among the groups recorded for this search. Fossil records show only what has been found, so that does not prove they never lived nearby."),
+      scopeLine(q.scope), widerLead(q));
+  } else if (q.type === "oldest") {
+    const picked = q.options.find((o) => o.id === game.picked);
+    add(guessed(picked ? picked.label : "something else"),
+      h("p", { class: "big" }, `${q.answerId} is the oldest by these dates`),
+      h("ul", {}, r.sites.map((s) => h("li", {}, h("strong", {}, s.label), ` – ${s.dateText}. `, s.summary))),
+      h("p", { class: "small" }, "Dates are read from the first sentences of each Wikipedia introduction and may be when a place was built or founded, not when it was first used."),
+      scopeLine(q.scope), widerLead(q));
+  } else {  // species
+    const picked = q.options.find((o) => o.id === game.picked);
+    add(guessed(picked ? picked.label : "something else"),
+      h("ul", { class: "records" }, [rareEntry(r.entry)]),
+      h("p", { class: "small" }, q.note),
+      h("p", { class: "small" }, "The other names are not in the records fetched for this area. That does not prove they were never recorded there."),
+      scopeLine(q.scope), widerLead(q));
+  }
+  return box;
+}
 
 /* ---------- Era strip: today on the left, deep time on the right. The rock is a band; human history is a marked sliver. ---------- */
 function eraStrip(rock) {
