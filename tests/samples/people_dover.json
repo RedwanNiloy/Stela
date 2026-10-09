@@ -1,0 +1,2152 @@
+[
+ {
+  "host": "nominatim.openstreetmap.org",
+  "params": {
+   "lat": "51.13",
+   "lon": "1.31",
+   "format": "jsonv2",
+   "addressdetails": "1",
+   "zoom": "18",
+   "accept-language": "en"
+  },
+  "status": 200,
+  "json": {
+   "place_id": 101388706,
+   "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+   "osm_type": "way",
+   "osm_id": 55439912,
+   "lat": "51.1297869",
+   "lon": "1.3096537",
+   "category": "amenity",
+   "type": "place_of_worship",
+   "place_rank": 30,
+   "importance": 6.496604867623434e-05,
+   "addresstype": "amenity",
+   "name": "Dover Baptist Church",
+   "display_name": "Dover Baptist Church, 27-32, Maison Dieu Road, Tower Hamlets, Dover, Kent, England, CT16 1RF, United Kingdom",
+   "address": {
+    "amenity": "Dover Baptist Church",
+    "house_number": "27-32",
+    "road": "Maison Dieu Road",
+    "suburb": "Tower Hamlets",
+    "town": "Dover",
+    "city": "Dover",
+    "county": "Kent",
+    "ISO3166-2-lvl6": "GB-KEN",
+    "state": "England",
+    "ISO3166-2-lvl4": "GB-ENG",
+    "postcode": "CT16 1RF",
+    "country": "United Kingdom",
+    "country_code": "gb"
+   },
+   "boundingbox": [
+    "51.1296186",
+    "51.1299553",
+    "1.3093420",
+    "1.3099653"
+   ]
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "query",
+   "titles": "History of Tower Hamlets|History of Tower Hamlets, Dover|Tower Hamlets, Dover|Tower Hamlets|History of Dover|History of Dover, England|Dover, England|Dover|History of Kent|History of Kent, England|Kent, England|Kent|History of England|History of England, United Kingdom|England, United Kingdom|England|History of United Kingdom|United Kingdom",
+   "prop": "extracts|pageprops",
+   "exintro": "1",
+   "explaintext": "1",
+   "exlimit": "max",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "batchcomplete": "",
+   "query": {
+    "redirects": [
+     {
+      "from": "Dover, England",
+      "to": "Dover"
+     },
+     {
+      "from": "Kent, England",
+      "to": "Kent"
+     },
+     {
+      "from": "History of United Kingdom",
+      "to": "History of the United Kingdom"
+     },
+     {
+      "from": "Tower Hamlets",
+      "to": "London Borough of Tower Hamlets"
+     },
+     {
+      "from": "England, United Kingdom",
+      "to": "England"
+     }
+    ],
+    "pages": {
+     "-1": {
+      "ns": 0,
+      "title": "History of Tower Hamlets",
+      "missing": ""
+     },
+     "-2": {
+      "ns": 0,
+      "title": "History of Tower Hamlets, Dover",
+      "missing": ""
+     },
+     "-3": {
+      "ns": 0,
+      "title": "Tower Hamlets, Dover",
+      "missing": ""
+     },
+     "-4": {
+      "ns": 0,
+      "title": "History of Dover, England",
+      "missing": ""
+     },
+     "-5": {
+      "ns": 0,
+      "title": "History of Kent, England",
+      "missing": ""
+     },
+     "-6": {
+      "ns": 0,
+      "title": "History of England, United Kingdom",
+      "missing": ""
+     },
+     "40419": {
+      "pageid": 40419,
+      "ns": 0,
+      "title": "Dover",
+      "extract": "Dover ( DOH-vər) is a town, major ferry port and civil parish in Kent, England. It faces France across the Strait of Dover, the narrowest part of the English Channel at 33 kilometres (21 mi) from Cap Gris-Nez in France. It lies southeast of Canterbury and east of Maidstone. The town is the administrative centre of the Dover District and home of the Port of Dover. In 2024 it had an estimated population of 44,209.\nArchaeological finds have revealed that the area has always been a focus for peoples entering and leaving Britain. The name derives from the River Dour that flows through it.\nIn recent times the town has undergone transformations, with a high-speed rail link to London, new retail in town with St James' area opened in 2018, and a revamped promenade and beachfront. This followed in 2019, with a new 500 m pier to the west of the harbour, and new marina unveiled as part of a £330 million investment in the area. It has also been a point of destination for many illegal migrant crossings.\nThe Port of Dover provides much of the town's employment, as does tourism, including to the landmark White Cliffs of Dover. There were 368,000 tourists visiting Dover castle in 2019.\nDover is cla",
+      "pageprops": {
+       "page_image_free": "Dover_from_the_top_of_Dover_Castle_-_geograph.org.uk_-_4061940.jpg",
+       "wikibase-shortdesc": "Town and port in Kent, England",
+       "wikibase_item": "Q179224"
+      }
+     },
+     "9316": {
+      "pageid": 9316,
+      "ns": 0,
+      "title": "England",
+      "extract": "England is a country that is part of the United Kingdom. It is located on the island of Great Britain, of which it covers about 62%, and more than 100 smaller adjacent islands. England shares a land border with Scotland to the north and another land border with Wales to the west, and is surrounded by the North Sea to the east, the English Channel to the south, the Celtic Sea to the south-west, and the Irish Sea to the west. Continental Europe lies to the south-east, and Ireland to the west. The population was 56,490,048 according to the 2021 census, with nine million inhabitants in its largest city, London.\nThe area now called England was first inhabited by modern humans during the Upper Paleolithic. It takes its name from the Angles, a Germanic tribe who settled during the 5th and 6th centuries. England became a unified state in the 10th century and has had extensive cultural and legal impact on the wider world since the Age of Discovery, which began during the 15th century. The Kingdom of England, which included Wales after 1535, ceased to be a separate sovereign state on 1 May 1707, when the Acts of Union brought into effect a political union with the Kingdom of Scotland, formin",
+      "pageprops": {
+       "page_image_free": "Flag_of_England.svg",
+       "wikibase-shortdesc": "Country within the United Kingdom",
+       "wikibase_item": "Q21"
+      }
+     },
+     "15700237": {
+      "pageid": 15700237,
+      "ns": 0,
+      "title": "History of Dover",
+      "extract": "The History of Dover, because of the town's proximity to the Continent begins when Stone Age people crossed what was then a land bridge, before the opening up of the English Channel. Since then, successive invasions of peoples have taken place. Archaeological finds have revealed a great deal, particularly about cross channel trade and the attempts of those various inhabitants to build large-scale defences against European invaders on this part of the English coast.\nIn more modern times the emphasis has tended to be on the growth of Dover as a commercial port, both for passenger and freight ferries and for cruise ships. There is also a relatively large tourist industry built around the town's historical sites.",
+      "pageprops": {
+       "defaultsort": "History of Dover",
+       "wikibase_item": "Q5775917"
+      }
+     },
+     "13485": {
+      "pageid": 13485,
+      "ns": 0,
+      "title": "History of England",
+      "extract": "The territory today known as England became inhabited more than 8,000 years ago, as the discovery of stone tools and footprints at Happisburgh in Norfolk have indicated. The earliest evidence for early modern humans in Northwestern Europe, a jawbone discovered in Devon at Kents Cavern in 1927, was re-dated in 2011 to between 41,000 and 44,000 years old. Continuous human habitation in England dates to around 13,000 years ago (see Creswellian), at the end of the Last Glacial Period. The region has numerous remains from the Mesolithic, Neolithic and Bronze Age, such as Stonehenge and Avebury. In the Iron Age, all of Britain south of the Firth of Forth was inhabited by the Celtic people known as the Britons, including some Belgic tribes (e.g. the Atrebates, the Catuvellauni, the Trinovantes, etc.) in the south east. In AD 43 the Roman conquest of Britain began; the Romans maintained control of their province of Britannia until the early 5th century.\nThe end of Roman rule in Britain facilitated the Anglo-Saxon settlement of Britain, which historians often regard as the origin of England and of the English people. The Anglo-Saxons, a collection of various Germanic peoples, established se",
+      "pageprops": {
+       "defaultsort": "History Of England",
+       "page_image_free": "Atlas_Van_der_Hagen-KW1049B11_004-A_NEW_MAP_OF_THE_KINGDOME_of_ENGLAND,_Representing_the_Princedome_of_WALES,_and_other_PROVINCES,_CITIES,_MARKET_TOWNS,_with_the_ROADS_from_TOWN_to_TOWN.jpeg",
+       "wikibase-shortdesc": "",
+       "wikibase_item": "Q11755949"
+      }
+     },
+     "1139260": {
+      "pageid": 1139260,
+      "ns": 0,
+      "title": "History of Kent",
+      "extract": "Kent is a traditional county in South East England with long-established human occupation.",
+      "pageprops": {
+       "defaultsort": "History of Kent",
+       "page_image_free": "Kent_Administrative_Map_1832.png",
+       "wikibase-shortdesc": "English county history",
+       "wikibase_item": "Q5865109"
+      }
+     },
+     "16766": {
+      "pageid": 16766,
+      "ns": 0,
+      "title": "Kent",
+      "extract": "Kent is a ceremonial county in South East England. It is bordered by Essex across the Thames Estuary to the north, the Strait of Dover to the south-east, East Sussex to the south-west, Surrey to the west, and Greater London to the north-west.\nThe county has an area of 3,544 square kilometres (1,368 sq mi) and had an estimated population of 1,931,684 in 2024. The north-west of Kent is densely populated, with Dartford and Gravesend belonging to the Greater London conurbation and Chatham, Gillingham and Rochester forming a second conurbation around the River Medway; the town of Maidstone is to their south. The remainder of the county is more rural, and its principal settlements include the city of Canterbury in the north-east, the seaside resort of Margate on the north-east coast, and the ports of Dover and Folkestone on the east coast. For local government purposes Kent consists of a non-metropolitan county, with twelve districts, and the unitary authority area of Medway. The county historically included south-east Greater London, and is one of the home counties.\nThe north of Kent is a plain bordering the Thames Estuary. South of this is the North Downs, a chalk downland ridge which ",
+      "pageprops": {
+       "page_image_free": "White_Cliffs_of_Dover,_Kent.jpg",
+       "wikibase-shortdesc": "County of England",
+       "wikibase_item": "Q23298"
+      }
+     },
+     "31717": {
+      "pageid": 31717,
+      "ns": 0,
+      "title": "United Kingdom",
+      "extract": "The United Kingdom of Great Britain and Northern Ireland, commonly known as the United Kingdom (UK) or Britain, is a country in Northwestern Europe, off the coast of the continental mainland. It comprises England, Scotland, Wales and Northern Ireland, with a population of over 69 million in 2024. The UK includes the island of Great Britain, the north-eastern part of the island of Ireland, and most of the smaller islands within the British Isles, covering 94,354 square miles (244,376 km2). It shares a land border with the Republic of Ireland and is surrounded by the Atlantic Ocean, the North Sea, the English Channel, the Celtic Sea and the Irish Sea, while maintaining sovereignty over the Crown Dependencies and the British Overseas Territories. The capital and largest city of England and the UK is London; Edinburgh, Cardiff and Belfast are the national capitals of Scotland, Wales and Northern Ireland, respectively.\nThe British Isles have been continuously inhabited since the Neolithic. In AD 43 the Roman conquest of Britain began. The Roman departure between 383 and 410 was followed by Anglo-Saxon settlement beginning around 450. In 1066 the Normans conquered England. Over the 17th ",
+      "pageprops": {
+       "page_image_free": "Flag_of_the_United_Kingdom_(1-2).svg",
+       "wikibase-shortdesc": "Country in Northwestern Europe",
+       "wikibase_item": "Q145"
+      }
+     },
+     "31723": {
+      "pageid": 31723,
+      "ns": 0,
+      "title": "History of the United Kingdom",
+      "extract": "The history of the United Kingdom begins in 1707 with the Treaty of Union and Acts of Union. The core of the United Kingdom as a unified state came into being with the political union of the kingdoms of England and Scotland, into a new unitary state called Great Britain. \nThe first decades were marked by Jacobite risings which ended with defeat for the Stuart cause at the Battle of Culloden in 1746. In 1763, victory in the Seven Years' War led to the growth of the First British Empire. With defeat by the US, France and Spain in the War of American Independence, Great Britain lost its 13 American colonies and rebuilt a Second British Empire based in Asia and Africa.  Politically the central event was the French Revolution and its Napoleonic aftermath from 1793 to 1815, which British elites saw as a profound threat, and worked energetically to form multiple coalitions that finally defeated Napoleon in 1815. The Acts of Union 1800 added the Kingdom of Ireland to create the United Kingdom of Great Britain and Ireland.\nThe Tories, who came to power in 1783, remained in power until 1830. Forces of reform opened decades of political reform that broadened the ballot, and opened the economy",
+      "pageprops": {
+       "page_image_free": "Articles_of_Union.jpg",
+       "wikibase-shortdesc": "",
+       "wikibase_item": "Q113162"
+      }
+     },
+     "95391": {
+      "pageid": 95391,
+      "ns": 0,
+      "title": "London Borough of Tower Hamlets",
+      "extract": "The London Borough of Tower Hamlets is a borough in London, England. Situated on the north bank of the River Thames and immediately east of the City of London, the borough spans the traditional East End of London and much of the regenerated London Docklands area, including Canary Wharf, one of the world's largest central business districts. The 2019 mid-year population for the borough is estimated at 324,745.\nThe borough was formed in 1965 by merger of the former metropolitan boroughs of Stepney, Poplar, and Bethnal Green. 'Tower Hamlets' was originally an alternative name for the historic Tower Division; the area of south-east Middlesex, focused on (but not limited to) the area of the modern borough, which owed military service to the Tower of London, is located in the borough, adjacent to its western boundary with the City of London. Historically, Tower Hamlets is well known for the Whitechapel serial killings attributed to Jack the Ripper, which drew intense crime studies. The events later helped to push the government to pass the Housing of the Working Classes Act and the Public Health (London) Act 1891 which later improved housing and urban living conditions. \n\nCanary Wharf, t",
+      "pageprops": {
+       "defaultsort": "London Borough Of Tower Hamlets",
+       "page_image_free": "Tower_of_London_from_the_Shard_(8515883950).jpg",
+       "wikibase-shortdesc": "Borough in east London, England",
+       "wikibase_item": "Q208152"
+      }
+     }
+    }
+   },
+   "limits": {
+    "extracts": 20
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Dover",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "History of Dover",
+    "pageid": 15700237,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Earliest inhabitants",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 829,
+      "anchor": "Earliest_inhabitants",
+      "linkAnchor": "Earliest_inhabitants"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Roman Dover and after",
+      "number": "2",
+      "index": "2",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 3834,
+      "anchor": "Roman_Dover_and_after",
+      "linkAnchor": "Roman_Dover_and_after"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "The Middle Ages",
+      "number": "3",
+      "index": "3",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 5798,
+      "anchor": "The_Middle_Ages",
+      "linkAnchor": "The_Middle_Ages"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "16th to 18th centuries",
+      "number": "4",
+      "index": "4",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 9699,
+      "anchor": "16th_to_18th_centuries",
+      "linkAnchor": "16th_to_18th_centuries"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "19th century",
+      "number": "5",
+      "index": "5",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 11782,
+      "anchor": "19th_century",
+      "linkAnchor": "19th_century"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "20th century",
+      "number": "6",
+      "index": "6",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 12393,
+      "anchor": "20th_century",
+      "linkAnchor": "20th_century"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "World War II",
+      "number": "6.1",
+      "index": "7",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 13417,
+      "anchor": "World_War_II",
+      "linkAnchor": "World_War_II"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Industry",
+      "number": "6.2",
+      "index": "8",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 14699,
+      "anchor": "Industry",
+      "linkAnchor": "Industry"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "See also",
+      "number": "7",
+      "index": "9",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 18769,
+      "anchor": "See_also",
+      "linkAnchor": "See_also"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "8",
+      "index": "10",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 18833,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Further reading",
+      "number": "9",
+      "index": "11",
+      "fromtitle": "History_of_Dover",
+      "byteoffset": 18865,
+      "anchor": "Further_reading",
+      "linkAnchor": "Further_reading"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of England",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "History of England",
+    "pageid": 13485,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Prehistory",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "History_of_England",
+      "byteoffset": 8110,
+      "anchor": "Prehistory",
+      "linkAnchor": "Prehistory"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Stone Age",
+      "number": "1.1",
+      "index": "2",
+      "fromtitle": "History_of_England",
+      "byteoffset": 8201,
+      "anchor": "Stone_Age",
+      "linkAnchor": "Stone_Age"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Later Prehistory",
+      "number": "1.2",
+      "index": "3",
+      "fromtitle": "History_of_England",
+      "byteoffset": 12335,
+      "anchor": "Later_Prehistory",
+      "linkAnchor": "Later_Prehistory"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Bronze Age",
+      "number": "1.2.1",
+      "index": "4",
+      "fromtitle": "History_of_England",
+      "byteoffset": 12424,
+      "anchor": "Bronze_Age",
+      "linkAnchor": "Bronze_Age"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Iron Age",
+      "number": "1.2.2",
+      "index": "5",
+      "fromtitle": "History_of_England",
+      "byteoffset": 15054,
+      "anchor": "Iron_Age",
+      "linkAnchor": "Iron_Age"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Roman Britain",
+      "number": "2",
+      "index": "6",
+      "fromtitle": "History_of_England",
+      "byteoffset": 20234,
+      "anchor": "Roman_Britain",
+      "linkAnchor": "Roman_Britain"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Anglo-Saxon period",
+      "number": "3",
+      "index": "7",
+      "fromtitle": "History_of_England",
+      "byteoffset": 23497,
+      "anchor": "Anglo-Saxon_period",
+      "linkAnchor": "Anglo-Saxon_period"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Anglo-Saxon migrations",
+      "number": "3.1",
+      "index": "8",
+      "fromtitle": "History_of_England",
+      "byteoffset": 23561,
+      "anchor": "Anglo-Saxon_migrations",
+      "linkAnchor": "Anglo-Saxon_migrations"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Genetic markers of Anglo-Saxon migrations",
+      "number": "3.2",
+      "index": "9",
+      "fromtitle": "History_of_England",
+      "byteoffset": 33618,
+      "anchor": "Genetic_markers_of_Anglo-Saxon_migrations",
+      "linkAnchor": "Genetic_markers_of_Anglo-Saxon_migrations"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Heptarchy and Christianisation",
+      "number": "3.3",
+      "index": "10",
+      "fromtitle": "History_of_England",
+      "byteoffset": 39249,
+      "anchor": "Heptarchy_and_Christianisation",
+      "linkAnchor": "Heptarchy_and_Christianisation"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Viking challenge and the rise of Wessex",
+      "number": "3.4",
+      "index": "11",
+      "fromtitle": "History_of_England",
+      "byteoffset": 42196,
+      "anchor": "Viking_challenge_and_the_rise_of_Wessex",
+      "linkAnchor": "Viking_challenge_and_the_rise_of_Wessex"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "English unification",
+      "number": "3.5",
+      "index": "12",
+      "fromtitle": "History_of_England",
+      "byteoffset": 47600,
+      "anchor": "English_unification",
+      "linkAnchor": "English_unification"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "England under the Danes and the Norman conquest",
+      "number": "3.6",
+      "index": "13",
+      "fromtitle": "History_of_England",
+      "byteoffset": 49185,
+      "anchor": "England_under_the_Danes_and_the_Norman_conquest",
+      "linkAnchor": "England_under_the_Danes_and_the_Norman_conquest"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Norman England",
+      "number": "4",
+      "index": "14",
+      "fromtitle": "History_of_England",
+      "byteoffset": 52057,
+      "anchor": "Norman_England",
+      "linkAnchor": "Norman_England"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "England under the Plantagenets",
+      "number": "5",
+      "index": "15",
+      "fromtitle": "History_of_England",
+      "byteoffset": 57518,
+      "anchor": "England_under_the_Plantagenets",
+      "linkAnchor": "England_under_the_Plantagenets"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "The first Angevins",
+      "number": "5.1",
+      "index": "16",
+      "fromtitle": "History_of_England",
+      "byteoffset": 57587,
+      "anchor": "The_first_Angevins",
+      "linkAnchor": "The_first_Angevins"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Magna Carta",
+      "number": "5.2",
+      "index": "17",
+      "fromtitle": "History_of_England",
+      "byteoffset": 62103,
+      "anchor": "Magna_Carta",
+      "linkAnchor": "Magna_Carta"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Henry III",
+      "number": "5.3",
+      "index": "18",
+      "fromtitle": "History_of_England",
+      "byteoffset": 63552,
+      "anchor": "Henry_III",
+      "linkAnchor": "Henry_III"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "14th century",
+      "number": "5.4",
+      "index": "19",
+      "fromtitle": "History_of_England",
+      "byteoffset": 66743,
+      "anchor": "14th_century",
+      "linkAnchor": "14th_century"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "A Time of Turmoil",
+      "number": "5.5",
+      "index": "20",
+      "fromtitle": "History_of_England",
+      "byteoffset": 75374,
+      "anchor": "A_Time_of_Turmoil",
+      "linkAnchor": "A_Time_of_Turmoil"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "15th century – Henry V and the Wars of the Roses",
+      "number": "5.6",
+      "index": "21",
+      "fromtitle": "History_of_England",
+      "byteoffset": 77349,
+      "anchor": "15th_century_–_Henry_V_and_the_Wars_of_the_Roses",
+      "linkAnchor": "15th_century_–_Henry_V_and_the_Wars_of_the_Roses"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Tudor England",
+      "number": "6",
+      "index": "22",
+      "fromtitle": "History_of_England",
+      "byteoffset": 81259,
+      "anchor": "Tudor_England",
+      "linkAnchor": "Tudor_England"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Henry VII",
+      "number": "6.1",
+      "index": "23",
+      "fromtitle": "History_of_England",
+      "byteoffset": 81354,
+      "anchor": "Henry_VII",
+      "linkAnchor": "Henry_VII"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Henry VIII",
+      "number": "6.2",
+      "index": "24",
+      "fromtitle": "History_of_England",
+      "byteoffset": 87850,
+      "anchor": "Henry_VIII",
+      "linkAnchor": "Henry_VIII"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Edward VI and Mary I",
+      "number": "6.3",
+      "index": "25",
+      "fromtitle": "History_of_England",
+      "byteoffset": 94324,
+      "anchor": "Edward_VI_and_Mary_I",
+      "linkAnchor": "Edward_VI_and_Mary_I"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Elizabeth I",
+      "number": "6.4",
+      "index": "26",
+      "fromtitle": "History_of_England",
+      "byteoffset": 97685,
+      "anchor": "Elizabeth_I",
+      "linkAnchor": "Elizabeth_I"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Elizabethan era",
+      "number": "6.4.1",
+      "index": "27",
+      "fromtitle": "History_of_England",
+      "byteoffset": 100707,
+      "anchor": "Elizabethan_era",
+      "linkAnchor": "Elizabethan_era"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Foreign affairs",
+      "number": "6.4.2",
+      "index": "28",
+      "fromtitle": "History_of_England",
+      "byteoffset": 106939,
+      "anchor": "Foreign_affairs",
+      "linkAnchor": "Foreign_affairs"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "End of Tudor era",
+      "number": "6.5",
+      "index": "29",
+      "fromtitle": "History_of_England",
+      "byteoffset": 111342,
+      "anchor": "End_of_Tudor_era",
+      "linkAnchor": "End_of_Tudor_era"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "17th century",
+      "number": "7",
+      "index": "30",
+      "fromtitle": "History_of_England",
+      "byteoffset": 112146,
+      "anchor": "17th_century",
+      "linkAnchor": "17th_century"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Union of the Crowns",
+      "number": "7.1",
+      "index": "31",
+      "fromtitle": "History_of_England",
+      "byteoffset": 112194,
+      "anchor": "Union_of_the_Crowns",
+      "linkAnchor": "Union_of_the_Crowns"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Colonies",
+      "number": "7.2",
+      "index": "32",
+      "fromtitle": "History_of_England",
+      "byteoffset": 113064,
+      "anchor": "Colonies",
+      "linkAnchor": "Colonies"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "English Civil War",
+      "number": "7.3",
+      "index": "33",
+      "fromtitle": "History_of_England",
+      "byteoffset": 114022,
+      "anchor": "English_Civil_War",
+      "linkAnchor": "English_Civil_War"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Restoration of the monarchy",
+      "number": "7.4",
+      "index": "34",
+      "fromtitle": "History_of_England",
+      "byteoffset": 116635,
+      "anchor": "Restoration_of_the_monarchy",
+      "linkAnchor": "Restoration_of_the_monarchy"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Glorious Revolution",
+      "number": "7.5",
+      "index": "35",
+      "fromtitle": "History_of_England",
+      "byteoffset": 117448,
+      "anchor": "Glorious_Revolution",
+      "linkAnchor": "Glorious_Revolution"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Formation of Great Britain and the United Kingdom",
+      "number": "8",
+      "index": "36",
+      "fromtitle": "History_of_England",
+      "byteoffset": 119934,
+      "anchor": "Formation_of_Great_Britain_and_the_United_Kingdom",
+      "linkAnchor": "Formation_of_Great_Britain_and_the_United_Kingdom"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Modern England, 18th–19th centuries",
+      "number": "9",
+      "index": "37",
+      "fromtitle": "History_of_England",
+      "byteoffset": 123695,
+      "anchor": "Modern_England,_18th–19th_centuries",
+      "linkAnchor": "Modern_England,_18th–19th_centuries"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Industrial Revolution",
+      "number": "9.1",
+      "index": "38",
+      "fromtitle": "History_of_England",
+      "byteoffset": 124084,
+      "anchor": "Industrial_Revolution",
+      "linkAnchor": "Industrial_Revolution"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Local governance",
+      "number": "9.2",
+      "index": "39",
+      "fromtitle": "History_of_England",
+      "byteoffset": 125064,
+      "anchor": "Local_governance",
+      "linkAnchor": "Local_governance"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "20th and 21st centuries",
+      "number": "10",
+      "index": "40",
+      "fromtitle": "History_of_England",
+      "byteoffset": 129037,
+      "anchor": "20th_and_21st_centuries",
+      "linkAnchor": "20th_and_21st_centuries"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "General history and political issues",
+      "number": "10.1",
+      "index": "41",
+      "fromtitle": "History_of_England",
+      "byteoffset": 129641,
+      "anchor": "General_history_and_political_issues",
+      "linkAnchor": "General_history_and_political_issues"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Political history and local government",
+      "number": "10.2",
+      "index": "42",
+      "fromtitle": "History_of_England",
+      "byteoffset": 130602,
+      "anchor": "Political_history_and_local_government",
+      "linkAnchor": "Political_history_and_local_government"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Recent changes",
+      "number": "10.3",
+      "index": "43",
+      "fromtitle": "History_of_England",
+      "byteoffset": 135441,
+      "anchor": "Recent_changes",
+      "linkAnchor": "Recent_changes"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "See also",
+      "number": "11",
+      "index": "44",
+      "fromtitle": "History_of_England",
+      "byteoffset": 139185,
+      "anchor": "See_also",
+      "linkAnchor": "See_also"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Related historical overviews",
+      "number": "11.1",
+      "index": "45",
+      "fromtitle": "History_of_England",
+      "byteoffset": 139489,
+      "anchor": "Related_historical_overviews",
+      "linkAnchor": "Related_historical_overviews"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Historical lists and timelines",
+      "number": "11.2",
+      "index": "46",
+      "fromtitle": "History_of_England",
+      "byteoffset": 140129,
+      "anchor": "Historical_lists_and_timelines",
+      "linkAnchor": "Historical_lists_and_timelines"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Overviews of significant historical eras",
+      "number": "11.3",
+      "index": "47",
+      "fromtitle": "History_of_England",
+      "byteoffset": 140416,
+      "anchor": "Overviews_of_significant_historical_eras",
+      "linkAnchor": "Overviews_of_significant_historical_eras"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Related English history topics",
+      "number": "11.4",
+      "index": "48",
+      "fromtitle": "History_of_England",
+      "byteoffset": 140732,
+      "anchor": "Related_English_history_topics",
+      "linkAnchor": "Related_English_history_topics"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Societal overviews",
+      "number": "11.4.1",
+      "index": "49",
+      "fromtitle": "History_of_England",
+      "byteoffset": 140770,
+      "anchor": "Societal_overviews",
+      "linkAnchor": "Societal_overviews"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Local government",
+      "number": "11.4.2",
+      "index": "50",
+      "fromtitle": "History_of_England",
+      "byteoffset": 141005,
+      "anchor": "Local_government",
+      "linkAnchor": "Local_government"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Historical subtopics",
+      "number": "11.4.3",
+      "index": "51",
+      "fromtitle": "History_of_England",
+      "byteoffset": 141281,
+      "anchor": "Historical_subtopics",
+      "linkAnchor": "Historical_subtopics"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "12",
+      "index": "52",
+      "fromtitle": "History_of_England",
+      "byteoffset": 141524,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Sources",
+      "number": "13",
+      "index": "53",
+      "fromtitle": "History_of_England",
+      "byteoffset": 141552,
+      "anchor": "Sources",
+      "linkAnchor": "Sources"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Further reading",
+      "number": "14",
+      "index": "54",
+      "fromtitle": "History_of_England",
+      "byteoffset": 142240,
+      "anchor": "Further_reading",
+      "linkAnchor": "Further_reading"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Historiography",
+      "number": "14.1",
+      "index": "55",
+      "fromtitle": "History_of_England",
+      "byteoffset": 144168,
+      "anchor": "Historiography",
+      "linkAnchor": "Historiography"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Primary sources",
+      "number": "14.2",
+      "index": "56",
+      "fromtitle": "History_of_England",
+      "byteoffset": 144826,
+      "anchor": "Primary_sources",
+      "linkAnchor": "Primary_sources"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "External sources",
+      "number": "14.3",
+      "index": "57",
+      "fromtitle": "History_of_England",
+      "byteoffset": 147995,
+      "anchor": "External_sources",
+      "linkAnchor": "External_sources"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Kent",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "History of Kent",
+    "pageid": 1139260,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Prehistoric Kent",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 406,
+      "anchor": "Prehistoric_Kent",
+      "linkAnchor": "Prehistoric_Kent"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Iron Age Kent",
+      "number": "2",
+      "index": "2",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 3677,
+      "anchor": "Iron_Age_Kent",
+      "linkAnchor": "Iron_Age_Kent"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Roman Kent",
+      "number": "3",
+      "index": "3",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 5458,
+      "anchor": "Roman_Kent",
+      "linkAnchor": "Roman_Kent"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Early Medieval Kent",
+      "number": "4",
+      "index": "4",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 6767,
+      "anchor": "Early_Medieval_Kent",
+      "linkAnchor": "Early_Medieval_Kent"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Medieval Kent",
+      "number": "5",
+      "index": "5",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 9715,
+      "anchor": "Medieval_Kent",
+      "linkAnchor": "Medieval_Kent"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Early Modern Kent",
+      "number": "6",
+      "index": "6",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 13995,
+      "anchor": "Early_Modern_Kent",
+      "linkAnchor": "Early_Modern_Kent"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Recent discoveries",
+      "number": "7",
+      "index": "7",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 18962,
+      "anchor": "Recent_discoveries",
+      "linkAnchor": "Recent_discoveries"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Kent and London",
+      "number": "8",
+      "index": "8",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 20036,
+      "anchor": "Kent_and_London",
+      "linkAnchor": "Kent_and_London"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Modern Kent",
+      "number": "9",
+      "index": "9",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 21847,
+      "anchor": "Modern_Kent",
+      "linkAnchor": "Modern_Kent"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Men of Kent and Kentish Men",
+      "number": "10",
+      "index": "10",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 24468,
+      "anchor": "Men_of_Kent_and_Kentish_Men",
+      "linkAnchor": "Men_of_Kent_and_Kentish_Men"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Iron Age and Roman Period",
+      "number": "10.1",
+      "index": "11",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 24981,
+      "anchor": "Iron_Age_and_Roman_Period",
+      "linkAnchor": "Iron_Age_and_Roman_Period"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Anglo-Saxon Period",
+      "number": "10.2",
+      "index": "12",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 25691,
+      "anchor": "Anglo-Saxon_Period",
+      "linkAnchor": "Anglo-Saxon_Period"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Boundaries and usage",
+      "number": "10.3",
+      "index": "13",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 30457,
+      "anchor": "Boundaries_and_usage",
+      "linkAnchor": "Boundaries_and_usage"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Nickname",
+      "number": "11",
+      "index": "14",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 34075,
+      "anchor": "Nickname",
+      "linkAnchor": "Nickname"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "12",
+      "index": "15",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 34545,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Further reading",
+      "number": "13",
+      "index": "16",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 34573,
+      "anchor": "Further_reading",
+      "linkAnchor": "Further_reading"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "External links",
+      "number": "14",
+      "index": "17",
+      "fromtitle": "History_of_Kent",
+      "byteoffset": 35021,
+      "anchor": "External_links",
+      "linkAnchor": "External_links"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Kent",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "History of Kent",
+    "pageid": 1139260,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"Prehistoric_Kent\">Prehistoric Kent</h2></div>\n<p>The discovery of stone tools at the <a href=\"/wiki/Lower_Palaeolithic\" class=\"mw-redirect\" title=\"Lower Palaeolithic\">Lower Palaeolithic</a> site of <a href=\"/wiki/Chequer%27s_Wood_and_Old_Park\" title=\"Chequer&#39;s Wood and Old Park\">Chequer's Wood and Old Park</a>, near Canterbury, provides the earliest evidence of human occupation in Kent, as early as 712,000–621,000 years ago.<sup id=\"cite&#95;ref-Hominin&#95;glacial-stage&#95;occupation&#95;71&#95;1-0\" class=\"reference\"><a href=\"#cite_note-Hominin_glacial-stage_occupation_71-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> The early human species who made these tools was likely <a href=\"/wiki/Homo_antecessor\" title=\"Homo antecessor\">Homo antecessor</a> or <a href=\"/wiki/Homo_heidelbergensis\" title=\"Homo heidelbergensis\">Homo heidelbergensis</a>. This is the earliest securely dated site with <a href=\"/wiki/Acheulean\" title=\"Acheulean\">Acheulean</a> stone tools in northern Europe.<sup id=\"cite&#95;ref-Hominin&#95;glacial-stage&#95;occupation&#95;71&#95;1-1\" class=\"reference\"><a href=\"#cite_note-Hominin_glacial-stage_occupation_71-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> The Old Park site is also important for retaining evidence of very early <a href=\"/wiki/Neanderthal\" title=\"Neanderthal\">Neanderthal</a> populations visiting Britain during the <a href=\"/wiki/Anglian_stage\" title=\"Anglian stage\">Anglian Glaciation</a>, the most severe glaciation of the last two million years. Although they likely visited during the brief, warmer <a href=\"/wiki/Interstadial\" class=\"mw-redirect\" title=\"Interstadial\">interstadial</a> periods within this broader <a href=\"/wiki/Ice_age\" title=\"Ice age\">ice age</a> period.<sup id=\"cite&#95;ref-Hominin&#95;glacial-stage&#95;occupation&#95;71&#95;1-2\" class=\"reference\"><a href=\"#cite_note-Hominin_glacial-stage_occupation_71-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Swanscombe_occipital_01.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Swanscombe_occipital_01.jpg/250px-Swanscombe_occipital_01.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"185\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Swanscombe_occipital_01.jpg/500px-Swanscombe_occipital_01.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1818\" data-file-height=\"1344\" /></a><figcaption>Swanscombe Skull</figcaption></figure>\n<p>The Swanscombe skull, uncovered at Barnfield Pit, a quarry in Swanscombe, is the oldest <a href=\"/wiki/Archaic_humans\" class=\"mw-redirect\" title=\"Archaic humans\">human</a> skull found in Britain. It is difficult to say much about the three fragments of skull from one individual, as they are all from the rear of the skull, but <a href=\"/wiki/Chris_Stringer\" title=\"Chris Stringer\">Chris Stringer</a> suggests that they come from a female, some of whose characteristics suggest she is from a population ancestral to Neanderthals.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> It dates to the <a href=\"/wiki/Hoxnian_Stage\" title=\"Hoxnian Stage\">Hoxnian Interglacial</a>, a warming period 400,000 years ago.<sup id=\"cite&#95;ref-discoveries&#95;3-0\" class=\"reference\"><a href=\"#cite_note-discoveries-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>In June 2023 researchers from UCL Archaeology Southeast over 800 stone tools, including two giant handles dating to over 300,000 years ago, were discovered on a hillside near Medway Valley in Frindsbury near Strood.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> At the time the area was a wild landscape of forests and river valleys with animals including red deer, straight-tusked elephants, lions and horses.\n</p><p>During the <a href=\"/wiki/Neolithic\" title=\"Neolithic\">Neolithic</a> the <a href=\"/wiki/Medway_megaliths\" class=\"mw-redirect\" title=\"Medway megaliths\">Medway megaliths</a> were built and there is a rich sequence of <a href=\"/wiki/Bronze_Age\" title=\"Bronze Age\">Bronze Age</a> occupation indicated by finds and features such as the <a href=\"/wiki/Ringlemere_gold_cup\" class=\"mw-redirect\" title=\"Ringlemere gold cup\">Ringlemere gold cup</a>.\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-Hominin&#95;glacial-stage&#95;occupation&#95;71-1\"><span class=\"mw-cite-backlink\">^ <a href=\"#cite_ref-Hominin_glacial-stage_occupation_71_1-0\"><sup><i><b>a</b></i></sup></a> <a href=\"#cite_ref-Hominin_glacial-stage_occupation_71_1-1\"><sup><i><b>b</b></i></sup></a> <a href=\"#cite_ref-Hominin_glacial-stage_occupation_71_1-2\"><sup><i><b>c</b></i></sup></a></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite id=\"CITEREFKeyClarkLaueral.2025\" class=\"citation journal cs1\">Key, Alastair; Clark, James; Lauer, Tobias; al., et (2025). <a rel=\"nofollow\" class=\"external text\" href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12507691\">\"Hominin glacial-stage occupation 712,000 to 424,000 years ago at Fordwich Pit, Old Park (Canterbury, UK)\"</a>. <i>Nature Ecology and Evolution</i>. <b>9</b> (10): <span class=\"nowrap\">1781–</span>1790. <a href=\"/wiki/Bibcode_(identifier)\" class=\"mw-redirect\" title=\"Bibcode (identifier)\">Bibcode</a>:<a rel=\"nofollow\" class=\"external text\" href=\"https://ui.adsabs.harvard.edu/abs/2025NatEE...9.1781K\">2025NatEE...9.1781K</a>. <a href=\"/wiki/Doi_(identifier)\" class=\"mw-redirect\" title=\"Doi (identifier)\">doi</a>:<span class=\"id-lock-free\" title=\"Freely accessible\"><a rel=\"nofollow\" class=\"external text\" href=\"https://doi.org/10.1038%2Fs41559-025-02829-x\">10.1038/s41559-025-02829-x</a></span>. <a href=\"/wiki/PMC_(identifier)\" class=\"mw-redirect\" title=\"PMC (identifier)\">PMC</a>&#160;<span class=\"id-lock-free\" title=\"Freely accessible\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12507691\">12507691</a></span>. <a href=\"/wiki/PMID_(identifier)\" class=\"mw-redirect\" title=\"PMID (identifier)\">PMID</a>&#160;<a rel=\"nofollow\" class=\"external text\" href=\"https://pubmed.ncbi.nlm.nih.gov/40890442\">40890442</a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=Nature+Ecology+and+Evolution&amp;rft.atitle=Hominin+glacial-stage+occupation+712%2C000+to+424%2C000+years+ago+at+Fordwich+Pit%2C+Old+Park+%28Canterbury%2C+UK%29&amp;rft.volume=9&amp;rft.issue=10&amp;rft.pages=1781-1790&amp;rft.date=2025&amp;rft&#95;id=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fpmc%2Farticles%2FPMC12507691%23id-name%3DPMC&amp;rft&#95;id=info%3Apmid%2F40890442&amp;rft&#95;id=info%3Adoi%2F10.1038%2Fs41559-025-02829-x&amp;rft&#95;id=info%3Abibcode%2F2025NatEE...9.1781K&amp;rft.aulast=Key&amp;rft.aufirst=Alastair&amp;rft.au=Clark%2C+James&amp;rft.au=Lauer%2C+Tobias&amp;rft.au=al.%2C+et&amp;rft&#95;id=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fpmc%2Farticles%2FPMC12507691&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Kent\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFDarvill2010\" class=\"citation book cs1\"><a href=\"/wiki/Timothy_Darvill\" title=\"Timothy Darvill\">Darvill, Timothy</a> (2010). <i>Prehistoric Britain</i> (2nd&#160;ed.). <a href=\"/wiki/Routledge\" title=\"Routledge\">Routledge</a>. <a href=\"/wiki/ISBN_(identifier)\" class=\"mw-redirect\" title=\"ISBN (identifier)\">ISBN</a>&#160;<a href=\"/wiki/Special:BookSources/978-0415490269\" title=\"Special:BookSources/978-0415490269\"><bdi>978-0415490269</bdi></a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Prehistoric+Britain&amp;rft.edition=2nd&amp;rft.pub=Routledge&amp;rft.date=2010&amp;rft.isbn=978-0415490269&amp;rft.aulast=Darvill&amp;rft.aufirst=Timothy&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Kent\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-discoveries-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-discoveries_3-0\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFPalmer2008\" class=\"citation web cs1\">Palmer, Lyn (25 January 2008). <a rel=\"nofollow\" class=\"external text\" href=\"http://webapps.kent.gov.uk/KCC.ExploringKentsPast.Web.Sites.Public/SingleResult.aspx?uid=%27tke1068%27\">\"Kent's Greatest Archaeological Discoveries\"</a>. <i>Exploring Kent's Past</i>. Kent County Council<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">16 September</span> 2015</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Exploring+Kent%27s+Past&amp;rft.atitle=Kent%27s+Greatest+Archaeological+Discoveries&amp;rft.date=2008-01-25&amp;rft.aulast=Palmer&amp;rft.aufirst=Lyn&amp;rft&#95;id=http%3A%2F%2Fwebapps.kent.gov.uk%2FKCC.ExploringKentsPast.Web.Sites.Public%2FSingleResult.aspx%3Fuid%3D%2527tke1068%2527&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Kent\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.theguardian.com/science/2023/jul/06/giant-handaxes-unearthed-kent\">\"<span class=\"cs1-kern-left\"></span>'Giant' 300,000-year-old handaxes unearthed in Kent\"</a>. <i>The Guardian</i>. 6 July 2023<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">24 March</span> 2024</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=The+Guardian&amp;rft.atitle=%27Giant%27+300%2C000-year-old+handaxes+unearthed+in+Kent&amp;rft.date=2023-07-06&amp;rft&#95;id=https%3A%2F%2Fwww.theguardian.com%2Fscience%2F2023%2Fjul%2F06%2Fgiant-handaxes-unearthed-kent&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Kent\" class=\"Z3988\"></span></span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐jsv2v\nCached time: 20261009230342\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.070 seconds\nReal time usage: 0.082 seconds\nPreprocessor visited node count: 153/1000000\nRevision size: 3273/2097152 bytes\nPost‐expand include size: 7998/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 1/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 10054/5000000 bytes\nLua time usage: 0.044/10.000 seconds\nLua memory usage: 3454351/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%   65.428      1 -total\n 85.78%   56.124      1 Template:Cite_journal\n  7.91%    5.174      2 Template:Cite_web\n  6.00%    3.923      1 Template:Cite_book\n-->\n\n<!-- Render ID abcf6a7a-c435-11f1-86c8-ed5eac56ff74 -->\n</div>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Dover",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "History of Dover",
+    "pageid": 15700237,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"Earliest_inhabitants\">Earliest inhabitants</h2></div>\n<style data-mw-deduplicate=\"TemplateStyles:r1368532237\">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+.mw-empty-elt+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main article: <a href=\"/wiki/Prehistoric_Britain\" title=\"Prehistoric Britain\">Prehistoric Britain</a></div>\n<p>The earliest archaeological evidence in the <a href=\"/wiki/River_Dour,_Kent\" class=\"mw-redirect\" title=\"River Dour, Kent\">River Dour</a> valley can be seen in finds of Neolithic flint implements and pottery, especially in the Market Square of the town;<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> and the site is considered to be one of the major areas of settlement in Kent. These settlers arrived by crossing the pre-<a href=\"/wiki/English_Channel\" title=\"English Channel\">English Channel</a> by what is termed the ‘'land bridge'’. Most such settlements occur in river valleys (see also the <a href=\"/wiki/River_Medway\" title=\"River Medway\">River Medway</a> at <a href=\"/wiki/Kit%27s_Coty_House\" title=\"Kit&#39;s Coty House\">Kit's Coty House</a>). The Neolithic occupation of the Dour Valley appears to have occurred following significant environmental change<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Once the bridge had been broken, later settlers had to arrive by sea, and their artefacts reveal the earliest evidence that Dover was becoming a place of trade with the Continent and <a href=\"/wiki/Ireland\" title=\"Ireland\">Ireland</a>. The so-called <a href=\"/wiki/Beaker_culture\" class=\"mw-redirect\" title=\"Beaker culture\">Beaker Folk</a> were here; and later <a href=\"/wiki/Bronze_Age\" title=\"Bronze Age\">Bronze Age</a> peoples traded in gold: one such find has been found near Dover. In addition two other finds of great importance in Dover's history are now displayed in <a href=\"/wiki/Dover_Museum,_England\" class=\"mw-redirect\" title=\"Dover Museum, England\">Dover Museum</a>: a <a href=\"/wiki/Dover_Bronze_Age_boat\" class=\"mw-redirect\" title=\"Dover Bronze Age boat\">boat</a> and a hoard of axes, the latter discovered in <a href=\"/wiki/Langdon_Bay,_Kent\" class=\"mw-redirect\" title=\"Langdon Bay, Kent\">Langdon Bay</a>, off Dover. A Bronze Age <a href=\"/wiki/Ring_ditch\" title=\"Ring ditch\">ring-ditch</a> has also been found at the nearby settlement of <a href=\"/wiki/Martin,_Kent\" title=\"Martin, Kent\">Martin</a>.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup> Small <a href=\"/wiki/Iron_Age\" title=\"Iron Age\">Iron Age</a> finds have also been discovered.<sup id=\"cite&#95;ref-Jessup&#95;4-0\" class=\"reference\"><a href=\"#cite_note-Jessup-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite id=\"CITEREFBatesCorkeParfittWhittaker2011\" class=\"citation journal cs1\">Bates, Martin R.; Corke, Barry; Parfitt, Keith; Whittaker, John E. (2011). <span class=\"id-lock-subscription\" title=\"Paid subscription required\"><a rel=\"nofollow\" class=\"external text\" href=\"https://doi.org/10.1016/j.pgeola.2010.10.002\">\"A geoarchaeological approach to the evolution of the town and port of Dover: Prehistoric to Saxon periods\"</a></span>. <i>Proceedings of the Geologists' Association</i>. <b>122</b> (1): <span class=\"nowrap\">157–</span>176. <a href=\"/wiki/Doi_(identifier)\" class=\"mw-redirect\" title=\"Doi (identifier)\">doi</a>:<a rel=\"nofollow\" class=\"external text\" href=\"https://doi.org/10.1016%2Fj.pgeola.2010.10.002\">10.1016/j.pgeola.2010.10.002</a>. <a href=\"/wiki/ISSN_(identifier)\" class=\"mw-redirect\" title=\"ISSN (identifier)\">ISSN</a>&#160;<a rel=\"nofollow\" class=\"external text\" href=\"https://search.worldcat.org/issn/0016-7878\">0016-7878</a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=Proceedings+of+the+Geologists%27+Association&amp;rft.atitle=A+geoarchaeological+approach+to+the+evolution+of+the+town+and+port+of+Dover%3A+Prehistoric+to+Saxon+periods&amp;rft.volume=122&amp;rft.issue=1&amp;rft.pages=157-176&amp;rft.date=2011&amp;rft&#95;id=info%3Adoi%2F10.1016%2Fj.pgeola.2010.10.002&amp;rft.issn=0016-7878&amp;rft.aulast=Bates&amp;rft.aufirst=Martin+R.&amp;rft.au=Corke%2C+Barry&amp;rft.au=Parfitt%2C+Keith&amp;rft.au=Whittaker%2C+John+E.&amp;rft&#95;id=https%3A%2F%2Fdoi.org%2F10.1016%2Fj.pgeola.2010.10.002&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Dover\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFBatesBarhamJonesParfitt2008\" class=\"citation journal cs1\">Bates, M. R.; Barham, A. J.; Jones, S.; Parfitt, K.; Parfitt, S.; Pedley, M.; Preece, R. C.; Walker, M. J. C.; Whittaker, J. E. (2008). <span class=\"id-lock-subscription\" title=\"Paid subscription required\"><a rel=\"nofollow\" class=\"external text\" href=\"https://doi.org/10.1016/S0016-7878(08)80308-2\">\"Holocene sequences and archaeology from the Crabble Paper Mill site, Dover, UK and their regional significance\"</a></span>. <i>Proceedings of the Geologists' Association</i>. <b>119</b> (<span class=\"nowrap\">3–</span>4): <span class=\"nowrap\">299–</span>327. <a href=\"/wiki/Doi_(identifier)\" class=\"mw-redirect\" title=\"Doi (identifier)\">doi</a>:<a rel=\"nofollow\" class=\"external text\" href=\"https://doi.org/10.1016%2Fs0016-7878%2808%2980308-2\">10.1016/s0016-7878(08)80308-2</a>. <a href=\"/wiki/ISSN_(identifier)\" class=\"mw-redirect\" title=\"ISSN (identifier)\">ISSN</a>&#160;<a rel=\"nofollow\" class=\"external text\" href=\"https://search.worldcat.org/issn/0016-7878\">0016-7878</a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=Proceedings+of+the+Geologists%27+Association&amp;rft.atitle=Holocene+sequences+and+archaeology+from+the+Crabble+Paper+Mill+site%2C+Dover%2C+UK+and+their+regional+significance&amp;rft.volume=119&amp;rft.issue=%3Cspan+class%3D%22nowrap%22%3E3%E2%80%93%3C%2Fspan%3E4&amp;rft.pages=299-327&amp;rft.date=2008&amp;rft&#95;id=info%3Adoi%2F10.1016%2Fs0016-7878%2808%2980308-2&amp;rft.issn=0016-7878&amp;rft.aulast=Bates&amp;rft.aufirst=M.+R.&amp;rft.au=Barham%2C+A.+J.&amp;rft.au=Jones%2C+S.&amp;rft.au=Parfitt%2C+K.&amp;rft.au=Parfitt%2C+S.&amp;rft.au=Pedley%2C+M.&amp;rft.au=Preece%2C+R.+C.&amp;rft.au=Walker%2C+M.+J.+C.&amp;rft.au=Whittaker%2C+J.+E.&amp;rft&#95;id=https%3A%2F%2Fdoi.org%2F10.1016%2FS0016-7878%2808%2980308-2&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Dover\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFParfittHoskins2017\" class=\"citation journal cs1\">Parfitt, Keith; Hoskins, Richard (2017). <a rel=\"nofollow\" class=\"external text\" href=\"https://kentarchaeology.org.uk/journal/browse/138/prehistoric-ring-ditch-martin-near-dover\">\"A Prehistoric ring-ditch at Martin, near Dover\"</a>. <i>Archaeologia Cantiana</i>. <b>138</b>: <span class=\"nowrap\">129–</span>148 &#8211; via Kent Archaeological Society.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=Archaeologia+Cantiana&amp;rft.atitle=A+Prehistoric+ring-ditch+at+Martin%2C+near+Dover&amp;rft.volume=138&amp;rft.pages=129-148&amp;rft.date=2017&amp;rft.aulast=Parfitt&amp;rft.aufirst=Keith&amp;rft.au=Hoskins%2C+Richard&amp;rft&#95;id=https%3A%2F%2Fkentarchaeology.org.uk%2Fjournal%2Fbrowse%2F138%2Fprehistoric-ring-ditch-martin-near-dover&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Dover\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-Jessup-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-Jessup_4-0\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFJessup1966\" class=\"citation book cs1\">Jessup, Frank W. (1966). <i>Kent History Illustrated</i>. Kent County Council. <a href=\"/wiki/ISBN_(identifier)\" class=\"mw-redirect\" title=\"ISBN (identifier)\">ISBN</a>&#160;<a href=\"/wiki/Special:BookSources/978-0-900947-06-3\" title=\"Special:BookSources/978-0-900947-06-3\"><bdi>978-0-900947-06-3</bdi></a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Kent+History+Illustrated&amp;rft.pub=Kent+County+Council&amp;rft.date=1966&amp;rft.isbn=978-0-900947-06-3&amp;rft.aulast=Jessup&amp;rft.aufirst=Frank+W.&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Dover\" class=\"Z3988\"></span></span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐np9g7\nCached time: 20261009230342\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.076 seconds\nReal time usage: 0.098 seconds\nPreprocessor visited node count: 201/1000000\nRevision size: 3013/2097152 bytes\nPost‐expand include size: 9414/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 2/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 9873/5000000 bytes\nLua time usage: 0.054/10.000 seconds\nLua memory usage: 3864799/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%   88.683      1 -total\n 65.07%   57.706      3 Template:Cite_journal\n 27.78%   24.637      1 Template:Main\n  3.76%    3.337      1 Template:Cite_book\n-->\n\n<!-- Render ID abcf6aea-c435-11f1-b968-8f4c4c4e24a1 -->\n</div>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of England",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "History of England",
+    "pageid": 13485,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\">\n<div class=\"mw-heading mw-heading2\"><h2 id=\"Prehistory\">Prehistory</h2></div>\n<style data-mw-deduplicate=\"TemplateStyles:r1368532237\">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+.mw-empty-elt+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main article: <a href=\"/wiki/Prehistoric_Britain\" title=\"Prehistoric Britain\">Prehistoric Britain</a></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">For a chronological guide, see <a href=\"/wiki/Timeline_of_English_history\" title=\"Timeline of English history\">Timeline of English history</a>.</div>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Stone_Age\">Stone Age</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main article: <a href=\"/wiki/Neolithic_British_Isles\" title=\"Neolithic British Isles\">Neolithic British Isles</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Stonehenge_Closeup.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Stonehenge_Closeup.jpg/250px-Stonehenge_Closeup.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"188\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Stonehenge_Closeup.jpg/500px-Stonehenge_Closeup.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1280\" data-file-height=\"960\" /></a><figcaption><a href=\"/wiki/Stonehenge\" title=\"Stonehenge\">Stonehenge</a>, erected in several stages from c.3000–2500 BC</figcaption></figure>\n<p>The time from Britain's first inhabitation until the <a href=\"/wiki/Last_Glacial_Maximum\" title=\"Last Glacial Maximum\">Last Glacial Maximum</a> is known as the Old Stone Age, or <a href=\"/wiki/Paleolithic\" title=\"Paleolithic\">Paleolithic era</a>. Archaeological evidence indicates that what was to become England was colonised by humans long before the rest of the British Isles because of its more hospitable climate between and during the various <a href=\"/wiki/Glacial_period\" title=\"Glacial period\">glacial periods</a> of the distant past. This earliest evidence, from Happisburgh in Norfolk, includes the oldest hominid artefacts found in Britain, and points to dates of more than 800,000 <a href=\"/wiki/Before_Present\" title=\"Before Present\">RCYBP</a>.<sup id=\"cite&#95;ref-alexburg&#95;1-0\" class=\"reference\"><a href=\"#cite_note-alexburg-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> These earliest inhabitants were <a href=\"/wiki/Hunter-gatherer\" title=\"Hunter-gatherer\">hunter-gatherers</a>. Low sea-levels meant that Britain was attached to the continent for much of this earliest period of history, and varying temperatures over tens of thousands of years meant that it was not always inhabited.<sup id=\"cite&#95;ref-Francis&#95;Pryor&#95;2003&#95;2-0\" class=\"reference\"><a href=\"#cite_note-Francis_Pryor_2003-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Silbury_1.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Silbury_1.jpg/250px-Silbury_1.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"160\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Silbury_1.jpg/500px-Silbury_1.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1175\" data-file-height=\"753\" /></a><figcaption><a href=\"/wiki/Silbury_Hill\" title=\"Silbury Hill\">Silbury Hill</a>, c. 2400 BC</figcaption></figure>\n<p>England has been continuously inhabited since the last Ice Age ended around 9000&#160;BC, the beginning of the Middle Stone Age, or <a href=\"/wiki/Mesolithic\" title=\"Mesolithic\">Mesolithic era</a>. Rising sea-levels cut off Britain from the continent for the last time around 6500&#160;BC. The population by then, as in the rest of the world, was exclusively <a href=\"/wiki/Anatomically_modern_humans\" class=\"mw-redirect\" title=\"Anatomically modern humans\">anatomically modern humans</a>, and the evidence suggests that their societies were increasingly complex and they were manipulating their environment and prey in new ways, possibly selective burning of then-omnipresent woodland to create clearings for herds to gather and hunt. Hunting was mainly done with simple projectile weapons such as the <a href=\"/wiki/Javelin\" title=\"Javelin\">javelin</a> and possibly the <a href=\"/wiki/Sling_(weapon)\" title=\"Sling (weapon)\">sling</a>. The <a href=\"/wiki/Bow_and_arrow\" title=\"Bow and arrow\">bow and arrow</a> was known in Western Europe since at least 9000&#160;BC. The climate continued to warm and the population probably rose.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>The New Stone Age, or <a href=\"/wiki/Neolithic_British_Isles\" title=\"Neolithic British Isles\">Neolithic era</a>, began with the introduction of farming, ultimately from the Middle East, around 4000&#160;BC. A 2019 study found that the <a href=\"/wiki/Early_European_Farmers\" title=\"Early European Farmers\">Neolithic farmers of the British Isles</a> had entered the region through a <a href=\"/wiki/Pre-modern_human_migration\" title=\"Pre-modern human migration\">mass migration</a> c. 4100 BC. They were closely related to Neolithic peoples of Iberia.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> People began to lead a more settled lifestyle. Monumental collective tombs were built for the dead in the form of chambered cairns and long barrows. Towards the end of this period, other kinds of monumental stone alignments begin to appear, such as <a href=\"/wiki/Stonehenge\" title=\"Stonehenge\">Stonehenge</a>; their cosmic alignments show a preoccupation with the sky and planets. Flint technology produced a number of highly artistic pieces as well as purely practical. More extensive woodland clearance was done for fields and pastures. The <a href=\"/wiki/Sweet_Track\" title=\"Sweet Track\">Sweet Track</a> in the <a href=\"/wiki/Somerset_Levels\" title=\"Somerset Levels\">Somerset Levels</a> is one of the oldest <a href=\"/wiki/Timber_trackway\" class=\"mw-redirect\" title=\"Timber trackway\">timber trackways</a> known in Northern Europe and among the oldest roads in the world, dated by <a href=\"/wiki/Dendrochronology\" title=\"Dendrochronology\">dendrochronology</a> to the winter of 3807–3806&#160;BC; it is thought to have been a primarily religious structure.<sup id=\"cite&#95;ref-Francis&#95;Pryor&#95;2003&#95;2-1\" class=\"reference\"><a href=\"#cite_note-Francis_Pryor_2003-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> Archaeological evidence from <a href=\"/wiki/North_Yorkshire\" title=\"North Yorkshire\">North Yorkshire</a> indicates that salt was being manufactured there in the Neolithic.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Later_Prehistory\">Later Prehistory</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main articles: <a href=\"/wiki/Bell_Beaker_culture\" title=\"Bell Beaker culture\">Bell Beaker culture</a>, <a href=\"/wiki/Bronze_Age_Britain\" title=\"Bronze Age Britain\">Bronze Age Britain</a>, and <a href=\"/wiki/British_Iron_Age\" title=\"British Iron Age\">British Iron Age</a></div>\n<div class=\"mw-heading mw-heading4\"><h4 id=\"Bronze_Age\">Bronze Age</h4></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Bush_Barrow.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Bush_Barrow.jpg/250px-Bush_Barrow.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"250\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Bush_Barrow.jpg/500px-Bush_Barrow.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"3456\" data-file-height=\"3456\" /></a><figcaption>Artefacts from <a href=\"/wiki/Bush_Barrow\" title=\"Bush Barrow\">Bush Barrow</a> at Stonehenge. <a href=\"/wiki/Wessex_culture\" title=\"Wessex culture\">Wessex culture</a>, <a href=\"/wiki/Bronze_Age_Britain\" title=\"Bronze Age Britain\">Early Bronze Age</a>, <abbr title=\"circa\">c.</abbr><span style=\"white-space:nowrap;\">&#8201;1900 BC</span></figcaption></figure>\n<p>The <a href=\"/wiki/Bronze_Age_Britain\" title=\"Bronze Age Britain\">Bronze Age</a> began around 2500&#160;BC with the appearance of bronze objects. This coincides with the appearance of the characteristic <a href=\"/wiki/Bell_Beaker_culture\" title=\"Bell Beaker culture\">Bell Beaker culture</a>, following migration of new people from the continent. According to Olalde et al. (2018), after 2500&#160;BC Britain's Neolithic population was largely replaced by this new Bell Beaker population, that was genetically related to the <a href=\"/wiki/Corded_Ware_culture\" title=\"Corded Ware culture\">Corded Ware culture</a> of central and eastern Europe and the <a href=\"/wiki/Yamnaya_culture\" title=\"Yamnaya culture\">Yamnaya culture</a> of the eastern European <a href=\"/wiki/Pontic-Caspian_Steppe\" class=\"mw-redirect\" title=\"Pontic-Caspian Steppe\">Pontic-Caspian Steppe</a>.<sup id=\"cite&#95;ref-6\" class=\"reference\"><a href=\"#cite_note-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-7\" class=\"reference\"><a href=\"#cite_note-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup> While the migration of these Beaker peoples must have been accompanied by a language shift, the Celtic languages were probably introduced by later Celtic migrations.<sup id=\"cite&#95;ref-8\" class=\"reference\"><a href=\"#cite_note-8\"><span class=\"cite-bracket\">&#91;</span>8<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>The Bronze Age saw a shift of emphasis from the communal to the individual, and the rise of increasingly powerful elites whose power came from their prowess as hunters and warriors and their controlling the flow of precious resources to manipulate tin and copper into high-status bronze objects such as swords and axes. Settlement became increasingly permanent and intensive. Towards the end of the Bronze Age, many examples of very fine metalwork began to be deposited in rivers, presumably for ritual reasons and perhaps reflecting a progressive change in emphasis from the sky to the earth, as a rising population put increasing pressure on the land. England largely became bound up with the <a href=\"/wiki/Atlantic_Bronze_Age\" title=\"Atlantic Bronze Age\">Atlantic trade system</a>, which created a cultural continuum over a large part of Western Europe.<sup id=\"cite&#95;ref-ReferenceA&#95;9-0\" class=\"reference\"><a href=\"#cite_note-ReferenceA-9\"><span class=\"cite-bracket\">&#91;</span>9<span class=\"cite-bracket\">&#93;</span></a></sup> It is possible that the <a href=\"/wiki/Celtic_languages\" title=\"Celtic languages\">Celtic languages</a> developed or spread to England as part of this system; by the end of the Iron Age there is much evidence that they were spoken across all England and western parts of Britain.<sup id=\"cite&#95;ref-10\" class=\"reference\"><a href=\"#cite_note-10\"><span class=\"cite-bracket\">&#91;</span>10<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-heading mw-heading4\"><h4 id=\"Iron_Age\">Iron Age</h4></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Maiden_Castle,_Dorchester..jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Maiden_Castle%2C_Dorchester..jpg/250px-Maiden_Castle%2C_Dorchester..jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"188\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Maiden_Castle%2C_Dorchester..jpg/500px-Maiden_Castle%2C_Dorchester..jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"640\" data-file-height=\"480\" /></a><figcaption>View of the ramparts of the hillfort of <a href=\"/wiki/Maiden_Castle,_Dorset\" title=\"Maiden Castle, Dorset\">Maiden Castle</a> (450 BC), as they look today</figcaption></figure>\n<figure class=\"mw-halign-left\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:London_-_British_Museum_-_2453.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/London_-_British_Museum_-_2453.jpg/250px-London_-_British_Museum_-_2453.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"158\" height=\"255\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/London_-_British_Museum_-_2453.jpg/330px-London_-_British_Museum_-_2453.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"2700\" data-file-height=\"4355\" /></a><figcaption>The <a href=\"/wiki/Battersea_Shield\" title=\"Battersea Shield\">Battersea Shield</a> (detail), 350 BC.<sup id=\"cite&#95;ref-11\" class=\"reference\"><a href=\"#cite_note-11\"><span class=\"cite-bracket\">&#91;</span>11<span class=\"cite-bracket\">&#93;</span></a></sup></figcaption></figure>\n<p>The <a href=\"/wiki/British_Iron_Age\" title=\"British Iron Age\">Iron Age</a> is conventionally said to begin around 800&#160;BC. At this time, the <a href=\"/wiki/British_people\" title=\"British people\">Britons</a> or Celtic Britons were settled in England. The Celtic people of early England were the majority of the population, beside other smaller ethnic groups in Great Britain. After some time, the <a href=\"/wiki/Celtic_Britons\" title=\"Celtic Britons\">Celtic Britons</a> diverged into the multiple distinct ethnic groups such as Welsh, Cornish and Breton, but they were still tied by language, religion and culture. They spoke the Brittonic language, a Celtic language which is the ancestor of the modern Brittonic languages. The Atlantic trade system had by this time effectively collapsed, although England maintained contacts across the channel with France, as the <a href=\"/wiki/Hallstatt_culture\" title=\"Hallstatt culture\">Hallstatt culture</a> became widespread across the country. Its continuity suggests it was not accompanied by substantial movement of population; crucially, only a single Hallstatt burial is known from Britain, and even here the evidence is inconclusive. On the whole, burials largely disappear across England, and the dead were disposed of in a way which is archaeologically invisible: <a href=\"/wiki/Excarnation\" title=\"Excarnation\">excarnation</a> is a widely cited possibility. <a href=\"/wiki/Hillfort\" title=\"Hillfort\">Hillforts</a> were known since the Late Bronze Age, but a huge number were constructed during 600–400&#160;BC, particularly in the South, while after about 400&#160;BC new forts were rarely built and many ceased to be regularly inhabited, while a few forts become more and more intensively occupied, suggesting a degree of regional centralisation.\n</p>\n<figure typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:The_Great_Torc_-_Snettisham_Hoard_-_geograph.org.uk_-_2395380.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/68/The_Great_Torc_-_Snettisham_Hoard_-_geograph.org.uk_-_2395380.jpg/250px-The_Great_Torc_-_Snettisham_Hoard_-_geograph.org.uk_-_2395380.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"220\" height=\"138\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/68/The_Great_Torc_-_Snettisham_Hoard_-_geograph.org.uk_-_2395380.jpg/500px-The_Great_Torc_-_Snettisham_Hoard_-_geograph.org.uk_-_2395380.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"800\" data-file-height=\"501\" /></a><figcaption>Gold <a href=\"/wiki/Torc\" title=\"Torc\">torc</a> from <a href=\"/wiki/Snettisham_Hoard\" title=\"Snettisham Hoard\">Snettisham</a>, 70 BC</figcaption></figure>\n<p>Around this time the earliest mentions of Britain appear in the annals of history. The first historical mention of the region is from the <a href=\"/wiki/Massaliote_Periplus\" title=\"Massaliote Periplus\">Massaliote Periplus</a>, a sailing manual for merchants thought to date to the 6th century&#160;BC, and <a href=\"/wiki/Pytheas\" title=\"Pytheas\">Pytheas</a> of <a href=\"/wiki/Massilia\" class=\"mw-redirect\" title=\"Massilia\">Massilia</a> wrote of his voyage of discovery to the island around 325&#160;BC. Both of these texts are now lost; although quoted by later writers, not enough survives to inform the archaeological interpretation to any significant degree.\n</p>\n<style data-mw-deduplicate=\"TemplateStyles:r1244412712\">.mw-parser-output .templatequote{overflow:hidden;margin:1em 0;padding:0 32px}.mw-parser-output .templatequotecite{line-height:1.5em;text-align:left;margin-top:0}@media(min-width:500px){.mw-parser-output .templatequotecite{padding-left:1.6em}}</style><blockquote class=\"templatequote\"><p><i>Britain, we are told, is inhabited by tribes which are autochthonous and preserve in their ways of living the ancient manner of life. They use chariots, for instance, in their wars, even as tradition tells us the old Greek heroes did in the Trojan War.</i></p>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of the United Kingdom",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "History of the United Kingdom",
+    "pageid": 31723,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "18th century",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 6977,
+      "anchor": "18th_century",
+      "linkAnchor": "18th_century"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Birth of the Union",
+      "number": "1.1",
+      "index": "2",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 7038,
+      "anchor": "Birth_of_the_Union",
+      "linkAnchor": "Birth_of_the_Union"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Hanoverian kings",
+      "number": "1.2",
+      "index": "3",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 8810,
+      "anchor": "Hanoverian_kings",
+      "linkAnchor": "Hanoverian_kings"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "South Sea Bubble",
+      "number": "1.3",
+      "index": "4",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 12638,
+      "anchor": "South_Sea_Bubble",
+      "linkAnchor": "South_Sea_Bubble"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Robert Walpole",
+      "number": "1.4",
+      "index": "5",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 13805,
+      "anchor": "Robert_Walpole",
+      "linkAnchor": "Robert_Walpole"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Moralism and hypocrisy",
+      "number": "1.5",
+      "index": "6",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 14800,
+      "anchor": "Moralism_and_hypocrisy",
+      "linkAnchor": "Moralism_and_hypocrisy"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Warfare and finance",
+      "number": "1.6",
+      "index": "7",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 19631,
+      "anchor": "Warfare_and_finance",
+      "linkAnchor": "Warfare_and_finance"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "British Empire",
+      "number": "1.7",
+      "index": "8",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 22144,
+      "anchor": "British_Empire",
+      "linkAnchor": "British_Empire"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "American Revolution",
+      "number": "1.7.1",
+      "index": "9",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 23451,
+      "anchor": "American_Revolution",
+      "linkAnchor": "American_Revolution"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Second British Empire",
+      "number": "1.7.2",
+      "index": "10",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 25707,
+      "anchor": "Second_British_Empire",
+      "linkAnchor": "Second_British_Empire"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "1800 to 1837",
+      "number": "2",
+      "index": "11",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 28475,
+      "anchor": "1800_to_1837",
+      "linkAnchor": "1800_to_1837"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Union with Ireland",
+      "number": "2.1",
+      "index": "12",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 28660,
+      "anchor": "Union_with_Ireland",
+      "linkAnchor": "Union_with_Ireland"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Napoleonic wars",
+      "number": "2.2",
+      "index": "13",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 31003,
+      "anchor": "Napoleonic_wars",
+      "linkAnchor": "Napoleonic_wars"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Financing the war",
+      "number": "2.2.1",
+      "index": "14",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 35385,
+      "anchor": "Financing_the_war",
+      "linkAnchor": "Financing_the_war"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "War of 1812 with United States",
+      "number": "2.2.2",
+      "index": "15",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 37168,
+      "anchor": "War_of_1812_with_United_States",
+      "linkAnchor": "War_of_1812_with_United_States"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Postwar repression by reactionary landed elites",
+      "number": "2.3",
+      "index": "16",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 38935,
+      "anchor": "Postwar_repression_by_reactionary_landed_elites",
+      "linkAnchor": "Postwar_repression_by_reactionary_landed_elites"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Weak monarchs",
+      "number": "2.4",
+      "index": "17",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 40999,
+      "anchor": "Weak_monarchs",
+      "linkAnchor": "Weak_monarchs"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Foreign affairs",
+      "number": "2.5",
+      "index": "18",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 42209,
+      "anchor": "Foreign_affairs",
+      "linkAnchor": "Foreign_affairs"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Whig reforms of the 1830s",
+      "number": "2.6",
+      "index": "19",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 43623,
+      "anchor": "Whig_reforms_of_the_1830s",
+      "linkAnchor": "Whig_reforms_of_the_1830s"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Victorian era",
+      "number": "3",
+      "index": "20",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 45689,
+      "anchor": "Victorian_era",
+      "linkAnchor": "Victorian_era"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Foreign policy",
+      "number": "3.1",
+      "index": "21",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 51340,
+      "anchor": "Foreign_policy",
+      "linkAnchor": "Foreign_policy"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Ireland and Home Rule",
+      "number": "3.2",
+      "index": "22",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 53600,
+      "anchor": "Ireland_and_Home_Rule",
+      "linkAnchor": "Ireland_and_Home_Rule"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Leadership",
+      "number": "3.3",
+      "index": "23",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 56191,
+      "anchor": "Leadership",
+      "linkAnchor": "Leadership"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Early 20th century (1901–1918)",
+      "number": "4",
+      "index": "24",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 57974,
+      "anchor": "Early_20th_century_(1901–1918)",
+      "linkAnchor": "Early_20th_century_(1901–1918)"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Edwardian era 1901–1914",
+      "number": "4.1",
+      "index": "25",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 60352,
+      "anchor": "Edwardian_era_1901–1914",
+      "linkAnchor": "Edwardian_era_1901–1914"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "First World War",
+      "number": "4.2",
+      "index": "26",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 63156,
+      "anchor": "First_World_War",
+      "linkAnchor": "First_World_War"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Postwar settlement",
+      "number": "4.3",
+      "index": "27",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 72540,
+      "anchor": "Postwar_settlement",
+      "linkAnchor": "Postwar_settlement"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Irish independence and partition",
+      "number": "4.4",
+      "index": "28",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 74079,
+      "anchor": "Irish_independence_and_partition",
+      "linkAnchor": "Irish_independence_and_partition"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Interwar era 1918–1939",
+      "number": "5",
+      "index": "29",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 76321,
+      "anchor": "Interwar_era_1918–1939",
+      "linkAnchor": "Interwar_era_1918–1939"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Popular culture",
+      "number": "5.1",
+      "index": "30",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 77432,
+      "anchor": "Popular_culture",
+      "linkAnchor": "Popular_culture"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Cinema and radio",
+      "number": "5.1.1",
+      "index": "31",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 79550,
+      "anchor": "Cinema_and_radio",
+      "linkAnchor": "Cinema_and_radio"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Sports",
+      "number": "5.1.2",
+      "index": "32",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 82105,
+      "anchor": "Sports",
+      "linkAnchor": "Sports"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Reading",
+      "number": "5.1.3",
+      "index": "33",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 83406,
+      "anchor": "Reading",
+      "linkAnchor": "Reading"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Politics and economics of the 1920s",
+      "number": "5.2",
+      "index": "34",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 86286,
+      "anchor": "Politics_and_economics_of_the_1920s",
+      "linkAnchor": "Politics_and_economics_of_the_1920s"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Expanding the welfare state",
+      "number": "5.2.1",
+      "index": "35",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 86329,
+      "anchor": "Expanding_the_welfare_state",
+      "linkAnchor": "Expanding_the_welfare_state"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Conservative control",
+      "number": "5.3",
+      "index": "36",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 87708,
+      "anchor": "Conservative_control",
+      "linkAnchor": "Conservative_control"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Economics",
+      "number": "5.4",
+      "index": "37",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 90255,
+      "anchor": "Economics",
+      "linkAnchor": "Economics"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Labour",
+      "number": "5.4.1",
+      "index": "38",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 93698,
+      "anchor": "Labour",
+      "linkAnchor": "Labour"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Great Depression",
+      "number": "5.5",
+      "index": "39",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 96706,
+      "anchor": "Great_Depression",
+      "linkAnchor": "Great_Depression"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Appeasement",
+      "number": "5.6",
+      "index": "40",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 99718,
+      "anchor": "Appeasement",
+      "linkAnchor": "Appeasement"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "World War II (1939–1945)",
+      "number": "6",
+      "index": "41",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 101858,
+      "anchor": "World_War_II_(1939–1945)",
+      "linkAnchor": "World_War_II_(1939–1945)"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Mobilisation of women",
+      "number": "6.1",
+      "index": "42",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 106008,
+      "anchor": "Mobilisation_of_women",
+      "linkAnchor": "Mobilisation_of_women"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Welfare state",
+      "number": "6.2",
+      "index": "43",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 107994,
+      "anchor": "Welfare_state",
+      "linkAnchor": "Welfare_state"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Postwar",
+      "number": "7",
+      "index": "44",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 110003,
+      "anchor": "Postwar",
+      "linkAnchor": "Postwar"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Austerity, 1945–1950",
+      "number": "7.1",
+      "index": "45",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 110809,
+      "anchor": "Austerity,_1945–1950",
+      "linkAnchor": "Austerity,_1945–1950"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Nationalisation",
+      "number": "7.1.1",
+      "index": "46",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 112255,
+      "anchor": "Nationalisation",
+      "linkAnchor": "Nationalisation"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Prosperity of the postwar years",
+      "number": "7.2",
+      "index": "47",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 114756,
+      "anchor": "Prosperity_of_the_postwar_years",
+      "linkAnchor": "Prosperity_of_the_postwar_years"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Empire to Commonwealth",
+      "number": "7.3",
+      "index": "48",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 126374,
+      "anchor": "Empire_to_Commonwealth",
+      "linkAnchor": "Empire_to_Commonwealth"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "From the Troubles to the Belfast Agreement",
+      "number": "7.4",
+      "index": "49",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 127490,
+      "anchor": "From_the_Troubles_to_the_Belfast_Agreement",
+      "linkAnchor": "From_the_Troubles_to_the_Belfast_Agreement"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "The economy in the late 20th century",
+      "number": "7.5",
+      "index": "50",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 129412,
+      "anchor": "The_economy_in_the_late_20th_century",
+      "linkAnchor": "The_economy_in_the_late_20th_century"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Common Market (EEC), then EU, membership",
+      "number": "7.6",
+      "index": "51",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 134491,
+      "anchor": "Common_Market_(EEC),_then_EU,_membership",
+      "linkAnchor": "Common_Market_(EEC),_then_EU,_membership"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Devolution for Scotland and Wales",
+      "number": "7.7",
+      "index": "52",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 138468,
+      "anchor": "Devolution_for_Scotland_and_Wales",
+      "linkAnchor": "Devolution_for_Scotland_and_Wales"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Since 2000",
+      "number": "8",
+      "index": "53",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 139934,
+      "anchor": "Since_2000",
+      "linkAnchor": "Since_2000"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "War in Afghanistan and Iraq",
+      "number": "8.1",
+      "index": "54",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 139949,
+      "anchor": "War_in_Afghanistan_and_Iraq",
+      "linkAnchor": "War_in_Afghanistan_and_Iraq"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2008 economic crisis",
+      "number": "8.2",
+      "index": "55",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 141901,
+      "anchor": "2008_economic_crisis",
+      "linkAnchor": "2008_economic_crisis"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Scottish independence",
+      "number": "8.3",
+      "index": "56",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 143839,
+      "anchor": "Scottish_independence",
+      "linkAnchor": "Scottish_independence"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2010 coalition government",
+      "number": "8.4",
+      "index": "57",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 147657,
+      "anchor": "2010_coalition_government",
+      "linkAnchor": "2010_coalition_government"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2015 election",
+      "number": "8.5",
+      "index": "58",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 150784,
+      "anchor": "2015_election",
+      "linkAnchor": "2015_election"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2016 EU membership referendum",
+      "number": "8.6",
+      "index": "59",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 152624,
+      "anchor": "2016_EU_membership_referendum",
+      "linkAnchor": "2016_EU_membership_referendum"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "COVID-19 pandemic",
+      "number": "8.7",
+      "index": "60",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 156092,
+      "anchor": "COVID-19_pandemic",
+      "linkAnchor": "COVID-19_pandemic"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2020s: Post-Covid and Post-Brexit",
+      "number": "8.8",
+      "index": "61",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 166160,
+      "anchor": "2020s:_Post-Covid_and_Post-Brexit",
+      "linkAnchor": "2020s:_Post-Covid_and_Post-Brexit"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "See also",
+      "number": "9",
+      "index": "62",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 172749,
+      "anchor": "See_also",
+      "linkAnchor": "See_also"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "By region",
+      "number": "9.1",
+      "index": "",
+      "byteoffset": null,
+      "anchor": "By_region",
+      "linkAnchor": "By_region"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "By topic",
+      "number": "9.2",
+      "index": "",
+      "byteoffset": null,
+      "anchor": "By_topic",
+      "linkAnchor": "By_topic"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Other topics",
+      "number": "9.3",
+      "index": "",
+      "byteoffset": null,
+      "anchor": "Other_topics",
+      "linkAnchor": "Other_topics"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Notes",
+      "number": "10",
+      "index": "66",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 173863,
+      "anchor": "Notes",
+      "linkAnchor": "Notes"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "11",
+      "index": "67",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 173887,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Further reading",
+      "number": "12",
+      "index": "68",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 173915,
+      "anchor": "Further_reading",
+      "linkAnchor": "Further_reading"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Historiography",
+      "number": "12.1",
+      "index": "69",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 185532,
+      "anchor": "Historiography",
+      "linkAnchor": "Historiography"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Primary sources",
+      "number": "12.2",
+      "index": "70",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 187807,
+      "anchor": "Primary_sources",
+      "linkAnchor": "Primary_sources"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "External links",
+      "number": "13",
+      "index": "71",
+      "fromtitle": "History_of_the_United_Kingdom",
+      "byteoffset": 189187,
+      "anchor": "External_links",
+      "linkAnchor": "External_links"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of the United Kingdom",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "History of the United Kingdom",
+    "pageid": 31723,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\">\n<div class=\"mw-heading mw-heading2\"><h2 id=\"18th_century\">18th century</h2></div>\n<style data-mw-deduplicate=\"TemplateStyles:r1368532237\">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+.mw-empty-elt+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main articles: <a href=\"/wiki/Early_Modern_Britain\" class=\"mw-redirect\" title=\"Early Modern Britain\">Early Modern Britain</a> and <a href=\"/wiki/Georgian_era\" title=\"Georgian era\">Georgian era</a></div>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Birth_of_the_Union\">Birth of the Union</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main articles: <a href=\"/wiki/Treaty_of_Union\" title=\"Treaty of Union\">Treaty of Union</a> and <a href=\"/wiki/Acts_of_Union_1707\" title=\"Acts of Union 1707\">Acts of Union 1707</a></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">See also: <a href=\"/wiki/Union_of_the_Crowns\" title=\"Union of the Crowns\">Union of the Crowns</a> and <a href=\"/wiki/History_of_the_formation_of_the_United_Kingdom\" class=\"mw-redirect\" title=\"History of the formation of the United Kingdom\">History of the formation of the United Kingdom</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Articles_of_Union_between_England_and_Scotland_28_Jan_1707.png\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Articles_of_Union_between_England_and_Scotland_28_Jan_1707.png/250px-Articles_of_Union_between_England_and_Scotland_28_Jan_1707.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"312\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Articles_of_Union_between_England_and_Scotland_28_Jan_1707.png/500px-Articles_of_Union_between_England_and_Scotland_28_Jan_1707.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1387\" data-file-height=\"1730\" /></a><figcaption>\"Articles of Union with Scotland\", 1707</figcaption></figure>\n<p>The <a href=\"/wiki/Kingdom_of_Great_Britain\" title=\"Kingdom of Great Britain\">Kingdom of Great Britain</a> came into being on 1 May 1707, as a result of the <a href=\"/wiki/Political_union\" title=\"Political union\">political union</a> of the <a href=\"/wiki/Kingdom_of_England\" title=\"Kingdom of England\">Kingdom of England</a> (which included <a href=\"/wiki/Wales\" title=\"Wales\">Wales</a>) and the <a href=\"/wiki/Kingdom_of_Scotland\" title=\"Kingdom of Scotland\">Kingdom of Scotland</a> under the <a href=\"/wiki/Treaty_of_Union\" title=\"Treaty of Union\">Treaty of Union</a>. This combined the two kingdoms into a single kingdom and merged the two parliaments into a single <a href=\"/wiki/Parliament_of_Great_Britain\" title=\"Parliament of Great Britain\">parliament of Great Britain</a>. <a href=\"/wiki/Anne,_Queen_of_Great_Britain\" title=\"Anne, Queen of Great Britain\">Queen Anne</a> became the first monarch of the new Great Britain. Although now a single kingdom, certain institutions of Scotland and England remained separate, such as <a href=\"/wiki/Scots_law\" title=\"Scots law\">Scottish</a> and <a href=\"/wiki/English_law\" title=\"English law\">English law</a>; and the <a href=\"/wiki/Presbyterian\" class=\"mw-redirect\" title=\"Presbyterian\">Presbyterian</a> <a href=\"/wiki/Church_of_Scotland\" title=\"Church of Scotland\">Church of Scotland</a> and the <a href=\"/wiki/Anglican\" class=\"mw-redirect\" title=\"Anglican\">Anglican</a> <a href=\"/wiki/Church_of_England\" title=\"Church of England\">Church of England</a>. England and Scotland each continued to have their own system of education.\n</p><p>\nMeanwhile, the <a href=\"/wiki/War_of_the_Spanish_Succession\" title=\"War of the Spanish Succession\">War of the Spanish Succession</a> against France was underway. It see-sawed back and forth until the treaties of <a href=\"/wiki/Peace_of_Utrecht\" title=\"Peace of Utrecht\">Utrecht</a> and <a href=\"/wiki/Treaty_of_Rastatt\" title=\"Treaty of Rastatt\">Rastadt</a> ended the war. Historian <a href=\"/wiki/G._M._Trevelyan\" title=\"G. M. Trevelyan\">G. M. Trevelyan</a> argues: <style data-mw-deduplicate=\"TemplateStyles:r1244412712\">.mw-parser-output .templatequote{overflow:hidden;margin:1em 0;padding:0 32px}.mw-parser-output .templatequotecite{line-height:1.5em;text-align:left;margin-top:0}@media(min-width:500px){.mw-parser-output .templatequotecite{padding-left:1.6em}}</style></p><blockquote class=\"templatequote\"><p>That <a href=\"/wiki/Treaty_of_Utrecht\" class=\"mw-redirect\" title=\"Treaty of Utrecht\">Treaty [of Utrecht]</a>, which ushered in the stable and characteristic period of Eighteenth-Century civilization, marked the end of danger to Europe from the old French monarchy, and it marked a change of no less significance to the world at large,—the maritime, commercial and financial supremacy of Great Britain.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup></p></blockquote>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Hanoverian_kings\">Hanoverian kings</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main article: <a href=\"/wiki/House_of_Hanover\" title=\"House of Hanover\">House of Hanover</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:George_I_Oval.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/George_I_Oval.jpg/250px-George_I_Oval.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"297\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/George_I_Oval.jpg/500px-George_I_Oval.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1777\" data-file-height=\"2112\" /></a><figcaption>George I in 1714, by Godfrey Kneller</figcaption></figure>\n<p>The Stuart line died with Anne in 1714, although a die-hard faction with French support supported pretenders. The Elector of Hanover became king as <a href=\"/wiki/George_I_of_Great_Britain\" title=\"George I of Great Britain\">George I</a>. He paid more attention to Hanover and surrounded himself with Germans, making him an unpopular king.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> He did, however, build up the army and created a more stable political system in Britain and helped bring peace to northern Europe.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup> Jacobite factions seeking a Stuart restoration remained strong; they instigated <a href=\"/wiki/Jacobite_rising_of_1715\" title=\"Jacobite rising of 1715\">a revolt in 1715–1716</a>. The son of <a href=\"/wiki/James_II_of_England\" title=\"James II of England\">James II</a> planned to invade England, but before he could do so, <a href=\"/wiki/John_Erskine,_Earl_of_Mar_(1675%E2%80%931732)\" title=\"John Erskine, Earl of Mar (1675–1732)\">John Erskine, Earl of Mar</a>, launched an invasion from Scotland, which was easily defeated.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p><a href=\"/wiki/George_II_of_Great_Britain\" title=\"George II of Great Britain\">George II</a> enhanced the stability of the constitutional system, with a government run by <a href=\"/wiki/Robert_Walpole\" title=\"Robert Walpole\">Robert Walpole</a> during the period 1730–42.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup> He built up the <a href=\"/wiki/First_British_Empire\" class=\"mw-redirect\" title=\"First British Empire\">First British Empire</a>, strengthening the colonies in the Caribbean and North America. In coalition with the rising power Prussia, the United Kingdom defeated France in the <a href=\"/wiki/Seven_Years%27_War\" title=\"Seven Years&#39; War\">Seven Years' War</a>, and won full control of Canada.<sup id=\"cite&#95;ref-6\" class=\"reference\"><a href=\"#cite_note-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p><a href=\"/wiki/George_III\" title=\"George III\">George III</a> never visited Hanover, and spoke English as his first language. Reviled by Americans as a tyrant and the instigator of the American War of Independence, he was often insane after 1788, and his eldest son served as regent.<sup id=\"cite&#95;ref-7\" class=\"reference\"><a href=\"#cite_note-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup> He was the last king to dominate government and politics, and his long reign is noted for losing the first British Empire in the <a href=\"/wiki/American_Revolutionary_War\" title=\"American Revolutionary War\">American Revolutionary War</a> (1783).<sup id=\"cite&#95;ref-8\" class=\"reference\"><a href=\"#cite_note-8\"><span class=\"cite-bracket\">&#91;</span>8<span class=\"cite-bracket\">&#93;</span></a></sup> The reign was notable for the building of a second empire based in India, Asia and Africa, the beginnings of the <a href=\"/wiki/Industrial_Revolution\" title=\"Industrial Revolution\">Industrial Revolution</a> that made Britain an economic powerhouse, and the life and death struggle with the French, in the <a href=\"/wiki/French_Revolutionary_Wars\" title=\"French Revolutionary Wars\">French Revolutionary Wars</a>, which ended inconclusively with a short truce, and the epic <a href=\"/wiki/Napoleonic_Wars\" title=\"Napoleonic Wars\">Napoleonic Wars</a>, which ended with the decisive defeat of <a href=\"/wiki/Napoleon\" title=\"Napoleon\">Napoleon</a>.<sup id=\"cite&#95;ref-9\" class=\"reference\"><a href=\"#cite_note-9\"><span class=\"cite-bracket\">&#91;</span>9<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"South_Sea_Bubble\">South Sea Bubble</h3></div>\n<p>Entrepreneurs extended the range of their business around the globe. The <a href=\"/wiki/South_Sea_Bubble\" class=\"mw-redirect\" title=\"South Sea Bubble\">South Sea Bubble</a> was a business enterprise that exploded in scandal. The South Sea Company was a joint-stock company in London. Its ostensible object was to grant trade monopolies in South America; but its actual purpose was to renegotiate previous high-interest government loans amounting to £31 million through <a href=\"/wiki/Market_manipulation\" title=\"Market manipulation\">market manipulation</a> and speculation. It raised money four times in 1720 by issuing stock, which was purchased by about 8,000 investors. The share price kept increasing, from £130 a share to £1,000, with insiders making huge paper profits. The Bubble collapsed overnight, ruining speculators. Investigations showed bribes had reached into high places—even to the king. <a href=\"/wiki/Robert_Walpole\" title=\"Robert Walpole\">Robert Walpole</a> wound it down with minimal political and economic damage.<sup id=\"cite&#95;ref-10\" class=\"reference\"><a href=\"#cite_note-10\"><span class=\"cite-bracket\">&#91;</span>10<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Robert_Walpole\">Robert Walpole</h3></div>\n<p>Robert Walpole is now generally regarded as the first Prime Minister, from, 1721–42. The term was applied to him by friends and foes alike by 1727. Historian Clayton Roberts summarizes his new functions:\n</p>"
+    }
+   }
+  }
+ }
+]

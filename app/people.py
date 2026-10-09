@@ -16,6 +16,7 @@ Text is from Wikipedia, licensed CC BY-SA 4.0. Nothing is stored except an in-me
 """
 import asyncio
 import re
+import time
 from html.parser import HTMLParser
 from urllib.parse import quote
 
@@ -45,7 +46,8 @@ BATCH = 20                  # titles per MediaWiki query (the extracts API serve
 WIKI_TIMEOUT = 8.0
 PEOPLE_TOTAL = 25.0         # cap for the whole layer
 
-MAX_PARALLEL = 3            # simultaneous Wikipedia requests (Wikimedia rate-limits bursts with HTTP 429)
+MAX_PARALLEL = 3            # simultaneous Wikipedia requests (Wikimedia rate-limits anonymous bursts with HTTP 429)
+WIKI_GAP = 0.3              # seconds between the starts of Wikipedia requests, to avoid a burst
 _article_cache = TTLCache(ttl_seconds=24 * 3600, max_items=500)  # resolved title -> section details
 _titles_cache = TTLCache(ttl_seconds=3600, max_items=200)        # tuple of titles -> MediaWiki reply
 
@@ -334,8 +336,14 @@ async def fetch_people(client, lat, lng):
             titles += [t for t, _ in candidate_titles(name, h["parent"]) if t not in titles]
     sem = asyncio.Semaphore(MAX_PARALLEL)
 
-    async def limited(coro):  # at most MAX_PARALLEL requests at once; an article's two calls share one permit
+    last_start = [0.0]
+
+    async def limited(coro):  # at most MAX_PARALLEL requests at once, started WIKI_GAP apart; an article's two calls share a permit
         async with sem:
+            wait = last_start[0] + WIKI_GAP - time.monotonic()
+            if wait > 0:
+                await asyncio.sleep(wait)
+            last_start[0] = time.monotonic()
             return await coro
     batches = await asyncio.gather(*(geo.safe(limited(fetch_titles(client, titles[i:i + BATCH]))) for i in range(0, len(titles), BATCH)))
     ok = [b for b, st in batches if st == "ok"]
