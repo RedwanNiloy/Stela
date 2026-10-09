@@ -104,6 +104,25 @@
   footer h2 { font-size: .95rem; margin-bottom: 6px; }
   footer ul { padding-left: 1.2em; margin: 0; }
   footer a { color: var(--turquoise); }
+  .tools { display: flex; gap: 10px; margin: 0 0 8px; }
+  .tools .btn-ghost { flex: 1; width: auto; padding: 10px 8px; font-size: 1rem; }
+  .btn-ghost[aria-pressed="true"] { background: var(--turquoise); color: #fff; border-color: var(--turquoise); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-ghost[aria-pressed="true"] { color: #0d1f1d; } }
+  :root[data-theme="dark"] .btn-ghost[aria-pressed="true"] { color: #0d1f1d; }
+  .walk-note { margin: 0 0 8px; font-size: .88rem; color: var(--ink-soft); text-align: center; }
+  .check { display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 0 0 6px; font-size: .95rem; }
+  .check input { width: 22px; height: 22px; accent-color: var(--turquoise); }
+  #walkstatus, #walkmsg { margin: 6px 0 0; text-align: center; min-height: 0; }
+  #walkmsg { font-weight: 600; color: var(--ochre); }
+  #walkoffer { text-align: center; margin-top: 6px; }
+  #walkoffer .btn-ghost { min-height: 48px; }
+  .stamp { margin: 10px 0 0; font-size: .92rem; color: var(--ink-soft); }
+  .stamp strong { color: var(--ochre); }
+  .pass-list { list-style: none; margin: 10px 0 0; padding: 0; }
+  .pass-list li { padding: 8px 0; border-bottom: 1px dashed var(--stone-dark); }
+  .pass-list li:last-child { border-bottom: 0; }
+  .pass-era { display: inline-block; margin-right: 6px; padding: 0 9px; border-radius: 999px; border: 1.5px solid var(--turquoise); background: var(--turquoise-bg); font-size: .85rem; font-weight: 600; }
+  .pass-sum { font-size: 1.15rem; font-weight: 600; margin: 0; }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -117,9 +136,25 @@
 
   <main>
     <button class="btn" id="locate" type="button">Use my location</button>
+    <div class="tools">
+      <button class="btn btn-ghost" id="walk" type="button" aria-pressed="false">Walk mode: off</button>
+      <button class="btn btn-ghost" id="passport-btn" type="button" aria-expanded="false" aria-controls="passport">Passport (0)</button>
+    </div>
+    <p class="walk-note">Walk mode keeps your GPS on, so it uses more battery. It only watches while this page is open and visible, and asks for a new story after you move about 300 m.</p>
+    <label class="check" id="autoread-row" hidden><input type="checkbox" id="autoread"> Read each new story aloud automatically</label>
+    <p id="walkstatus" role="status" aria-live="polite" class="small"></p>
     <p class="hint">Or tap anywhere on the map to drop a pin and explore that place.</p>
     <div id="map" role="application" aria-label="Map. Tap to drop a pin."></div>
     <p id="msg" role="status" aria-live="polite"></p>
+    <p id="walkmsg" role="status" aria-live="polite"></p>
+    <div id="walkoffer" hidden><button class="btn btn-ghost" id="walk-listen" type="button">&#9654; Listen to the new story</button></div>
+
+    <section id="passport" class="card" hidden>
+      <h2>Passport</h2>
+      <div id="passport-body"></div>
+      <div class="actions"><button class="btn btn-ghost" id="passport-clear" type="button">Clear my passport</button></div>
+      <p class="small">Your passport lives only in this browser. It is never sent to the server.</p>
+    </section>
 
     <section id="results" hidden>
       <article class="card narration" id="card-story">
@@ -129,6 +164,7 @@
           <button class="btn btn-ghost" id="listen" type="button">&#9654; Listen</button>
           <span class="badge" id="mode"></span>
         </div>
+        <p class="stamp" id="stamp" hidden></p>
       </article>
 
       <article class="card" id="card-rock">
@@ -179,6 +215,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="stela-logic.js"></script>
 <script>
 "use strict";
 const $ = (sel) => document.querySelector(sel);
@@ -243,7 +280,7 @@ $("#locate").addEventListener("click", () => {
       const { latitude: lat, longitude: lng } = pos.coords;
       placePin(lat, lng);
       map.setView([lat, lng], 12);
-      explore(lat, lng);
+      explore(lat, lng, { real: true });
     },
     () => say("No problem. Location is switched off or was declined. Tap anywhere on the map to drop a pin and explore that place instead.", true),
     { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 }
@@ -254,11 +291,12 @@ $("#locate").addEventListener("click", () => {
 const listenBtn = $("#listen");
 function setListenLabel() { listenBtn.textContent = Voice.speaking ? "■ Stop" : "▶ Listen"; }
 if (!Voice.supported) listenBtn.hidden = true;
-listenBtn.addEventListener("click", () => {
+function listen() {  // the one Listen function: the story card button and walk mode both call it
   if (Voice.speaking) { Voice.stop(); setListenLabel(); return; }
   Voice.speak(storyText, setListenLabel);
   setListenLabel();
-});
+}
+listenBtn.addEventListener("click", listen);
 
 /* ---------- Fetch helpers ---------- */
 async function api(path, lat, lng) {
@@ -268,37 +306,44 @@ async function api(path, lat, lng) {
   return r.json();
 }
 
-async function explore(lat, lng) {
+/* Looks up one spot. opts.real = the spot is where the user actually is (location button or walk mode):
+ * only those lookups are stamped in the passport. opts.walk = quiet refresh: keep the old cards on screen and do not scroll.
+ * Returns { data } on success or { error } so walk mode can back off. */
+let lastRock = null;  // the most recent mapped rock, to notice when a walker crosses into another unit
+async function explore(lat, lng, opts = {}) {
   const me = ++run;
-  Voice.stop(); setListenLabel();
-  storyText = "";
-  $("#results").hidden = true;
-  say("Reading the stone... this takes a few seconds.");
+  if (!opts.walk) {
+    Voice.stop(); setListenLabel();
+    storyText = "";
+    $("#results").hidden = true;
+    say("Reading the stone... this takes a few seconds.");
+  }
+  $("#stamp").hidden = true;
   let data;
   try {
     data = await api("/api/where", lat, lng);
   } catch (e) {
-    if (me !== run) return;
-    say(e.message === "slow-down"
-      ? "Easy there. Please wait a minute before exploring another spot."
+    if (me !== run) return { error: "stale" };
+    const slow = e.message === "slow-down";
+    if (!opts.walk) say(slow ? "Easy there. Please wait a minute before exploring another spot."
       : "The stone is quiet right now. Check your connection and try again.", true);
-    return;
+    return { error: slow ? "slow-down" : "network" };
   }
-  if (me !== run) return;
-  say("");
+  if (me !== run) return { error: "stale" };
+  if (opts.walk) { Voice.stop(); setListenLabel(); } else say("");
   renderWhere(data);
   $("#results").hidden = false;
-  $("#card-story").scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!opts.walk) $("#card-story").scrollIntoView({ behavior: "smooth", block: "start" });
+  if (opts.real) stampPassport(lat, lng, data.facts.rock);
+  if (data.facts.rock) lastRock = data.facts.rock;
 
   // Fossils come from a slower source, so they arrive after everything else is already on screen.
-  try {
-    const f = await api("/api/fossils", lat, lng);
-    if (me !== run) return;
-    renderFossils(f);
-  } catch (e) {
-    if (me !== run) return;
-    setContent($("#fossils"), empty("The fossil database could not be reached right now."));
-  }
+  api("/api/fossils", lat, lng).then((f) => {
+    if (me === run) renderFossils(f);
+  }).catch(() => {
+    if (me === run) setContent($("#fossils"), empty("The fossil database could not be reached right now."));
+  });
+  return { data };
 }
 
 /* ---------- Rendering ---------- */
@@ -423,6 +468,155 @@ function renderSources(list, pbdb) {
     h("li", {}, h("a", { href: s.url, target: "_blank", rel: "noopener" }, s.name),
       ` – ${s.license}`, s.status.startsWith("failed") ? " (could not be reached)" : (label[s.status] || ""))));
 }
+
+/* ---------- Passport (browser only: see stela-logic.js) ---------- */
+const passport = StelaLogic.createPassport(() => window.localStorage);  // looked up inside try/catch, so blocked storage is fine
+const todayLocal = () => { const d = new Date(), p = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`; };
+const passportBtn = $("#passport-btn"), clearBtn = $("#passport-clear");
+let clearArmed = false;
+
+function stampPassport(lat, lng, rock) {
+  const res = passport.add(lat, lng, rock, todayLocal());
+  updatePassport();
+  const note = $("#stamp");
+  if (res.added) {
+    const era = rock.b_int_name || rock.t_int_name || "Unknown era";
+    setContent(note, "Stamped in your passport. ", res.newEra ? h("strong", {}, `New era: ${era}!`) : null);
+    note.hidden = false;
+  }
+}
+
+function ageRange(e) {
+  return e.b_age == null ? "age not recorded" : `${fmtMa(e.b_age)} to ${fmtMa(e.t_age ?? 0)} million years ago`;
+}
+
+function updatePassport() {
+  passportBtn.textContent = `Passport (${passport.stats().places})`;
+  if (!$("#passport").hidden) renderPassport();
+}
+
+function renderPassport() {
+  const list = passport.list().reverse(), st = passport.stats();
+  setContent($("#passport-body"),
+    h("p", { class: "pass-sum" }, `${st.places} place${st.places === 1 ? "" : "s"} visited, ${st.eras} era${st.eras === 1 ? "" : "s"} collected`),
+    passport.persisted ? null : h("p", { class: "scope scope-wider_area" }, "Your browser is blocking storage, so this passport only lasts until you close the page."),
+    list.length === 0 ? empty("No stamps yet. Use your location (or Walk mode) outdoors to collect your first one. Pins dropped on the map do not count as visits.")
+      : h("ul", { class: "pass-list" }, list.map((e) => h("li", {},
+          h("span", { class: "pass-era" }, e.era), e.rock,
+          h("div", { class: "small" }, `${ageRange(e)} · ${e.date} · ${e.lat.toFixed(3)}, ${e.lng.toFixed(3)}`)))));
+  clearBtn.hidden = list.length === 0;
+  clearBtn.textContent = clearArmed ? "Tap again to clear everything" : "Clear my passport";
+}
+
+function resetClear() { clearArmed = false; clearBtn.textContent = "Clear my passport"; }
+passportBtn.addEventListener("click", () => {
+  const box = $("#passport");
+  box.hidden = !box.hidden;
+  passportBtn.setAttribute("aria-expanded", String(!box.hidden));
+  resetClear();
+  if (!box.hidden) { renderPassport(); box.scrollIntoView({ behavior: "smooth", block: "start" }); }
+});
+clearBtn.addEventListener("click", () => {  // two taps, so a stray touch cannot wipe it
+  if (!clearArmed) { clearArmed = true; clearBtn.textContent = "Tap again to clear everything"; return; }
+  passport.clear();
+  resetClear();
+  updatePassport();
+  $("#stamp").hidden = true;
+});
+updatePassport();
+
+/* ---------- Walk mode ----------
+ * Uses watchPosition (the browser tells us when the position changes), never a timer. A new story is requested
+ * only when a fix is more than ~300 m from the last request. Watching stops when the toggle is off or the page is hidden. */
+const walk = { on: false, watchId: null, last: null, inflight: false, pausedUntil: 0 };
+const walkBtn = $("#walk"), walkStatus = $("#walkstatus"), walkMsg = $("#walkmsg"), walkOffer = $("#walkoffer");
+const autoread = $("#autoread");
+
+function startWatch() {
+  if (walk.watchId != null || !navigator.geolocation) return;
+  walk.watchId = navigator.geolocation.watchPosition(onFix, onGeoError, { enableHighAccuracy: true, maximumAge: 10000, timeout: 30000 });
+}
+function stopWatch() {
+  if (walk.watchId != null) { navigator.geolocation.clearWatch(walk.watchId); walk.watchId = null; }
+}
+function setWalkUi() {
+  walkBtn.setAttribute("aria-pressed", String(walk.on));
+  walkBtn.textContent = walk.on ? "Walk mode: on" : "Walk mode: off";
+  $("#autoread-row").hidden = !walk.on || !Voice.supported;
+}
+function walkOff(message) {
+  walk.on = false; stopWatch(); setWalkUi();
+  autoread.checked = false;  // speech must be enabled again next time
+  walkOffer.hidden = true; walkMsg.textContent = "";
+  walkStatus.textContent = message || "";
+}
+
+walkBtn.addEventListener("click", () => {
+  if (walk.on) { walkOff("Walk mode is off."); return; }
+  if (!navigator.geolocation) {
+    walkStatus.textContent = "This browser cannot share your location, so Walk mode is not available. Tap the map to drop a pin instead.";
+    return;
+  }
+  walk.on = true; setWalkUi();
+  walkStatus.textContent = "Walk mode is on. Looking for your position...";
+  startWatch();
+});
+
+function onFix(position) {
+  const c = position.coords, pos = { lat: c.latitude, lng: c.longitude, accuracy: c.accuracy };
+  if (!walk.on || walk.inflight || Date.now() < walk.pausedUntil) return;
+  if (!StelaLogic.shouldRequestStory(walk.last, pos)) {
+    if (!walk.last) walkStatus.textContent = "Waiting for a clearer GPS signal...";
+    return;  // not moved far enough: stay quiet and do nothing
+  }
+  newWalkStory(pos);
+}
+
+async function newWalkStory(pos) {
+  const before = { last: walk.last, rock: lastRock };
+  walk.last = { lat: pos.lat, lng: pos.lng };  // the 300 m rule is measured from the last request
+  walk.inflight = true;
+  walkStatus.textContent = "You moved on. Reading the new stone...";
+  placePin(pos.lat, pos.lng); map.panTo([pos.lat, pos.lng]);
+  const res = await explore(pos.lat, pos.lng, { walk: true, real: true });
+  walk.inflight = false;
+  if (!walk.on) return;
+  if (res.error) {
+    if (res.error === "stale") return;
+    walk.last = before.last;                                        // try again after the next move
+    walk.pausedUntil = Date.now() + (res.error === "slow-down" ? 60000 : 30000);  // back off; compared on the next fix, no timer
+    walkStatus.textContent = res.error === "slow-down"
+      ? "Walk mode is pausing for a minute to be kind to the servers."
+      : "Could not reach the stone just now. Walk mode will try again after your next move.";
+    return;
+  }
+  walkStatus.textContent = "Walk mode is on.";
+  const change = StelaLogic.rockChange(before.rock, res.data.facts.rock);
+  walkMsg.textContent = change
+    ? "You've moved into a new rock unit" + (change.eraChanged ? ` – a new era: ${change.era}` : "")
+    : "";  // same rock: stay quiet
+  // Reading aloud only ever starts if the user switched it on; otherwise it is just offered.
+  if (autoread.checked && Voice.supported) { listen(); walkOffer.hidden = true; }
+  else walkOffer.hidden = !Voice.supported;
+}
+$("#walk-listen").addEventListener("click", () => { listen(); walkOffer.hidden = true; });
+
+function onGeoError(err) {
+  if (err.code === 1) {  // permission denied
+    walkOff("Walk mode needs permission to use your location. You can allow it in your browser settings, or tap the map to drop a pin instead.");
+  } else if (err.code === 3) {
+    walkStatus.textContent = "Still waiting for a GPS signal. Walk mode keeps listening.";
+  } else {
+    walkStatus.textContent = "Your position is not available right now (poor signal?). Walk mode keeps listening.";
+  }
+}
+
+// Stop watching when the page is hidden (screen off, other tab) to save battery; resume when it is visible again.
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) stopWatch();
+  else if (walk.on) { startWatch(); walkStatus.textContent = "Walk mode is on."; }
+});
+window.addEventListener("pagehide", stopWatch);
 
 /* ---------- Strata graphic: top = today, bottom = deep time. The rock is a band; all of human history is a sliver. ---------- */
 function strata(rock) {
