@@ -87,7 +87,7 @@ On a slow CPU a local reply can take longer than the 30 s limit, and Stela then 
 
 ```bash
 python -m pytest -q          # no network needed (also runs the browser-logic tests if Node.js is installed)
-node --test tests/           # the browser-logic tests on their own: walk-mode distance rule and passport storage
+node --test tests/logic.test.js   # the browser-logic tests on their own: walk-mode distance rule and passport storage
 python tests/capture_samples.py   # optional: re-record the sample API responses
 ```
 
