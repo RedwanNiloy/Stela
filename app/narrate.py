@@ -1,0 +1,158 @@
+"""Turn collected facts into a spoken-style story.
+
+The LLM only ever sees the facts that geo.py collected. If the LLM fails for any
+reason, we return a plain templated summary built in code (mode "facts-only"),
+so the user never sees an error screen.
+"""
+import json
+import os
+
+import httpx
+
+LLM_TIMEOUT = float(os.environ.get("LLM_TIMEOUT", "30"))  # seconds; raise it only for slow local CPUs
+TEMPERATURE = 0.3
+MAX_TOKENS = 400
+
+# The grounding rules come first and are the same for every voice.
+GROUNDING_RULES = """STRICT RULES (these override everything else):
+1. Use ONLY the facts in the JSON below. Never add species, dates, places, people, cultures or events that are not in it.
+2. If a section is an empty list or empty, say plainly "nothing recorded nearby". Never fill the gap.
+3. If a section is null, that data source could not be reached. Say it could not be checked right now. Do not guess.
+4. Fossils show only what has been FOUND near here, not everything that lived here. Say so.
+5. The setting (sea, land, swamp) is inferred from the rock type. Always say "probably".
+6. Do not claim anything about any culture (Egyptian or otherwise) unless it appears in the facts.
+7. Write species names exactly as given. Never translate them into common names, and never add anything about
+   who built, used or lived at a place beyond what its summary says.
+"""
+
+VOICE = """VOICE (tone only; the rules above still apply exactly):
+You are a calm stone scribe speaking aloud to a walker standing on this spot. Begin by asking them to
+stand still, for example "Stand still. The ground remembers..." Plain, warm, easy to hear. No lists,
+no headings, no markdown."""
+
+MAIN_TASK = """TASK: In under 150 words, tell the walker: 1) the rock under their feet and how old it is
+(compare with humans using time_ruler), 2) what this place probably was then, 3) human history nearby,
+4) rare animals alive today (mention the caveat briefly). Do not mention fossils; they are shown separately."""
+
+FOSSIL_TASK = """TASK: In 2 to 4 short sentences, continue the story for the same walker (do not greet them again).
+Tell what fossils have been found near here, using the classes and taxa given, and remind them this is only what
+has been found so far, not everything that lived here."""
+
+
+def llm_view(facts):
+    """A smaller copy of the facts for the model: fewer tokens, so faster and less to get wrong."""
+    view = {k: v for k, v in facts.items() if v != "pending"}
+    if isinstance(view.get("rock"), dict):
+        view["rock"] = {k: v for k, v in view["rock"].items() if v not in (None, "") and k != "descrip"}
+    if view.get("human_history_nearby"):
+        view["human_history_nearby"] = [{**h, "summary": h["summary"][:240]} for h in view["human_history_nearby"]]
+    if view.get("rare_animals_alive_today"):
+        view["rare_animals_alive_today"] = [r["species"] for r in view["rare_animals_alive_today"]]
+    return view
+
+
+def build_prompt(facts, part):
+    task = MAIN_TASK if part == "main" else FOSSIL_TASK
+    facts_json = json.dumps(llm_view(facts), ensure_ascii=False, separators=(",", ":"))
+    return f"{GROUNDING_RULES}\n{VOICE}\n\n{task}\n\nFACTS:\n{facts_json}\n"
+
+
+# ---------- LLM call ----------
+def llm_config():
+    base = os.environ.get("LLM_BASE_URL", "").strip()
+    if base:
+        return {"mode": "online", "base": base, "key": os.environ.get("LLM_API_KEY", ""),
+                "model": os.environ.get("LLM_MODEL", "")}
+    return {"mode": "offline", "base": os.environ.get("OLLAMA_URL", "http://localhost:11434"),
+            "model": os.environ.get("OLLAMA_MODEL", "gemma3:4b")}
+
+
+async def call_llm(client, prompt):
+    """Returns (text, mode). Raises on any failure."""
+    cfg = llm_config()
+    if not cfg["model"]:
+        raise RuntimeError("LLM_MODEL is not set")
+    messages = [{"role": "user", "content": prompt}]  # one user message: not every Gemma server accepts a system role
+    if cfg["mode"] == "online":
+        headers = {"Authorization": f"Bearer {cfg['key']}"} if cfg["key"] else {}
+        r = await client.post(cfg["base"].rstrip("/") + "/chat/completions", headers=headers,
+                              timeout=LLM_TIMEOUT,
+                              json={"model": cfg["model"], "messages": messages,
+                                    "temperature": TEMPERATURE, "max_tokens": MAX_TOKENS})
+        r.raise_for_status()
+        text = r.json()["choices"][0]["message"]["content"]
+    else:
+        r = await client.post(cfg["base"].rstrip("/") + "/api/chat", timeout=LLM_TIMEOUT,
+                              json={"model": cfg["model"], "messages": messages, "stream": False, "think": False,  # thinking models would spend the budget reasoning
+                                    "options": {"temperature": TEMPERATURE, "num_predict": MAX_TOKENS}})
+        r.raise_for_status()
+        text = r.json()["message"]["content"]
+    text = (text or "").strip()
+    if not text:
+        raise RuntimeError("empty LLM reply")
+    return text, cfg["mode"]
+
+
+# ---------- Fallback: plain text built in code ----------
+def _ma(x):
+    return f"{x:g}"
+
+
+def facts_only_text(facts, part="main"):
+    if part == "fossils":
+        f = facts.get("fossils_found_nearby")
+        if f is None:
+            return "The fossil database could not be reached or has no records for this spot."
+        if not f:
+            return "Fossils: nothing recorded nearby."
+        classes = ", ".join(c for c, _ in f["classes"][:4]) or "various groups"
+        return (f"Fossils: {f['count']} finds recorded {f['search']}, mostly {classes}. "
+                "This shows only what has been found so far, not everything that lived here.")
+    parts = []
+    rock = facts.get("rock")
+    if rock is None:
+        parts.append("No mapped rock unit was found for this spot.")
+    else:
+        what = rock.get("name") or "an unnamed rock unit"
+        sentence = f"The ground here is mapped as {what}"
+        if rock.get("lith"):
+            sentence += f" ({rock['lith']})"
+        if rock.get("b_age") is not None:
+            sentence += f", which began forming about {_ma(rock['b_age'])} million years ago"
+            if rock.get("b_int_name"):
+                sentence += f" in the {rock['b_int_name']}"
+            ruler = facts.get("time_ruler")
+            if ruler:
+                sentence += f". That is roughly {ruler['times_older_than_humans']:,} times older than our species"
+        parts.append(sentence + ".")
+        s = facts.get("ancient_setting")
+        if s and s.get("meaning"):
+            parts.append(f"From the rock type, this place was probably {s['meaning']} (an inference, not a certainty).")
+    human = facts.get("human_history_nearby")
+    if human is None:
+        parts.append("Human history could not be checked right now.")
+    elif not human:
+        parts.append("Human history: nothing recorded nearby.")
+    else:
+        parts.append("Human history nearby: " + "; ".join(f"{h['place']} ({h['distance_m']} m)" for h in human[:3]) + ".")
+    rare = facts.get("rare_animals_alive_today")
+    if rare is None:
+        parts.append("Rare animals could not be checked right now.")
+    elif not rare:
+        parts.append("Rare animals alive today: nothing recorded nearby.")
+    else:
+        parts.append("Rare animals recorded nearby today: " + ", ".join(r["species"] for r in rare[:4])
+                     + ". This may include introduced animals.")
+    return " ".join(parts)
+
+
+async def narrate(client, facts, part="main"):
+    """Returns (text, mode); mode is 'online', 'offline' or 'facts-only'. Never raises."""
+    nothing_to_say = part == "main" and facts.get("rock") is None and not facts.get("human_history_nearby") \
+        and not facts.get("rare_animals_alive_today")
+    if nothing_to_say:  # with no facts, a template is safer than asking a model to talk
+        return facts_only_text(facts, part), "facts-only"
+    try:
+        return await call_llm(client, build_prompt(facts, part))
+    except Exception:
+        return facts_only_text(facts, part), "facts-only"

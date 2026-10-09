@@ -1,0 +1,37 @@
+{
+ "success": {
+  "v": 2,
+  "license": "CC-BY 4.0",
+  "data": [
+   {
+    "map_id": 2025561,
+    "source_id": 23,
+    "name": "White Chalk Subgroup",
+    "strat_name": "White Chalk Subgroup",
+    "lith": "chalk",
+    "descrip": "",
+    "comments": "",
+    "macro_units": [],
+    "strat_names": [
+     100847
+    ],
+    "liths": [
+     92
+    ],
+    "t_int_id": 35,
+    "t_int_age": 66,
+    "t_int_name": "Maastrichtian",
+    "b_int_id": 40,
+    "b_int_age": 100.5,
+    "b_int_name": "Cenomanian",
+    "color": "#A6D84A",
+    "t_age": 66,
+    "b_age": 100.5,
+    "best_int_name": "Late Cretaceous"
+   }
+  ],
+  "refs": {
+   "23": "British Geological Survey. DiGMapGB-625. British Geological Survey ©NERC. "
+  }
+ }
+}

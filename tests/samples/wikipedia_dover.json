@@ -1,0 +1,186 @@
+{
+ "geosearch": [
+  {
+   "pageid": 500362,
+   "ns": 0,
+   "title": "Dover District",
+   "lat": 51.13,
+   "lon": 1.311,
+   "dist": 69.8,
+   "primary": ""
+  },
+  {
+   "pageid": 40419,
+   "ns": 0,
+   "title": "Dover",
+   "lat": 51.1295,
+   "lon": 1.3089,
+   "dist": 94.8,
+   "primary": ""
+  },
+  {
+   "pageid": 62991245,
+   "ns": 0,
+   "title": "Royal Victoria Hospital, Dover",
+   "lat": 51.1287,
+   "lon": 1.308,
+   "dist": 200.9,
+   "primary": ""
+  },
+  {
+   "pageid": 7488765,
+   "ns": 0,
+   "title": "Maison Dieu, Dover",
+   "lat": 51.128,
+   "lon": 1.3089,
+   "dist": 235.3,
+   "primary": ""
+  },
+  {
+   "pageid": 7488181,
+   "ns": 0,
+   "title": "St Edmund's Chapel",
+   "lat": 51.1274,
+   "lon": 1.3093,
+   "dist": 293.2,
+   "primary": ""
+  },
+  {
+   "pageid": 57948672,
+   "ns": 0,
+   "title": "St Paul's Church, Dover",
+   "lat": 51.12862,
+   "lon": 1.3137,
+   "dist": 300.4,
+   "primary": ""
+  },
+  {
+   "pageid": 845947,
+   "ns": 0,
+   "title": "Dover College",
+   "lat": 51.12722222222222,
+   "lon": 1.3066666666666666,
+   "dist": 386.7,
+   "primary": ""
+  },
+  {
+   "pageid": 79218802,
+   "ns": 0,
+   "title": "King's Hall, Dover",
+   "lat": 51.126444444444445,
+   "lon": 1.3117222222222222,
+   "dist": 413.2,
+   "primary": ""
+  },
+  {
+   "pageid": 14496557,
+   "ns": 0,
+   "title": "Dover Grammar School for Girls",
+   "lat": 51.13361111111111,
+   "lon": 1.3072222222222223,
+   "dist": 445.9,
+   "primary": ""
+  },
+  {
+   "pageid": 5434693,
+   "ns": 0,
+   "title": "Dover Priory",
+   "lat": 51.12638888888889,
+   "lon": 1.3066666666666666,
+   "dist": 464,
+   "primary": ""
+  },
+  {
+   "pageid": 45204434,
+   "ns": 0,
+   "title": "St Mary's Church, Dover",
+   "lat": 51.12589833333333,
+   "lon": 1.3128833333333334,
+   "dist": 498.5,
+   "primary": ""
+  },
+  {
+   "pageid": 1739040,
+   "ns": 0,
+   "title": "Dover Priory railway station",
+   "lat": 51.126155555555556,
+   "lon": 1.3051194444444445,
+   "dist": 546.6,
+   "primary": ""
+  }
+ ],
+ "extracts": {
+  "40419": {
+   "pageid": 40419,
+   "ns": 0,
+   "title": "Dover",
+   "extract": "Dover ( DOH-vər) is a town, major ferry port and civil parish in Kent, England. It faces France across the Strait of Dover, the narrowest part of the English Channel at 33 kilometres (21 mi) from Cap Gris-Nez in France."
+  },
+  "500362": {
+   "pageid": 500362,
+   "ns": 0,
+   "title": "Dover District",
+   "extract": "Dover is a local government district in Kent, England. It is named after its largest town, the port town of Dover."
+  },
+  "845947": {
+   "pageid": 845947,
+   "ns": 0,
+   "title": "Dover College",
+   "extract": "Dover College is an independent day and boarding school in the English public school tradition located in Dover in south east England. It was founded in 1871, and takes both day pupils and boarders from the UK and internationally."
+  },
+  "1739040": {
+   "pageid": 1739040,
+   "ns": 0,
+   "title": "Dover Priory railway station",
+   "extract": "Dover Priory railway station is the southern terminus of the South Eastern Main Line. It is the main station serving the town of Dover, in Kent, England; the other is Kearsney, on the outskirts."
+  },
+  "5434693": {
+   "pageid": 5434693,
+   "ns": 0,
+   "title": "Dover Priory",
+   "extract": "The Priory of St. Mary the Virgin and St."
+  },
+  "7488181": {
+   "pageid": 7488181,
+   "ns": 0,
+   "title": "St Edmund's Chapel",
+   "extract": "St Edmund's Chapel is a church in Dover, England, dedicated to St Edmund.  It was completed in 1262 as a wayside chapel or chapel of rest for the cemetery for the poor beside the Maison Dieu, just outside the enclosed part of the medieval town, a short distance above Biggin Gate, and for pilgrims setting off for Thomas Becket's shrine at Canterbury Cathedral."
+  },
+  "7488765": {
+   "pageid": 7488765,
+   "ns": 0,
+   "title": "Maison Dieu, Dover",
+   "extract": "The Hospital of St Mary, Domus Dei, or Maison Dieu (Latin/Norman French – house of God), is a medieval building in Dover, England which forms the oldest part of Dover Town Hall. The Town Hall and remains of medieval Maison Dieu were Grade II* listed in 1973; they were upgraded to a Grade I listing in 2017."
+  },
+  "14496557": {
+   "pageid": 14496557,
+   "ns": 0,
+   "title": "Dover Grammar School for Girls",
+   "extract": "Dover Grammar School for Girls is a community grammar school for girls, aged between 11 and 16, and a joint sixth-form with boys between the age of 16 and 18, in Dover, England."
+  },
+  "45204434": {
+   "pageid": 45204434,
+   "ns": 0,
+   "title": "St Mary's Church, Dover",
+   "extract": "The Church of St Mary the Virgin is a Grade II* listed Anglican church, a parish church in Dover, Kent, and is situated on Cannon Street in the town centre. There was a church on this site in Saxon times."
+  },
+  "57948672": {
+   "pageid": 57948672,
+   "ns": 0,
+   "title": "St Paul's Church, Dover",
+   "extract": "St Paul's Church is a Roman Catholic church in Dover, Kent, England. It was built from 1867 to 1868."
+  },
+  "62991245": {
+   "pageid": 62991245,
+   "ns": 0,
+   "title": "Royal Victoria Hospital, Dover",
+   "extract": "The Royal Victoria Hospital was a health facility in the High Street in Dover, Kent, England. The original hospital is a Grade II listed building."
+  },
+  "79218802": {
+   "pageid": 79218802,
+   "ns": 0,
+   "title": "King's Hall, Dover",
+   "extract": "King's Hall is a former cinema, now a bingo club, in Dover, Kent, England. Dating from 1911, it was later called the Gaumont and remained a cinema until 1960."
+  }
+ }
+}
