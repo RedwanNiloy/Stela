@@ -13,6 +13,7 @@ import httpx
 from fastapi import FastAPI, Query, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.gzip import GZipMiddleware
 
 from . import geo, narrate
 from .cache import RateLimiter, TTLCache, cache_key
@@ -38,6 +39,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="Stela", lifespan=lifespan)
+app.add_middleware(GZipMiddleware, minimum_size=1000)  # keep the page and JSON small on phones and the free tier
 
 
 @app.middleware("http")

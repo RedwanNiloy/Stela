@@ -9,130 +9,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<style>
-  /* Palette: sand, ochre, deep brown, muted turquoise. Text stays high-contrast for outdoor use. */
-  :root {
-    --bg: #efe0bf; --card: #f9efd6; --card-edge: #7a5a2e; --ink: #241608; --ink-soft: #4a3418;
-    --ochre: #a85a12; --turquoise: #17605c; --turquoise-bg: #d3ebe6; --stone: #c9a56b; --stone-dark: #8c6a35;
-    --shadow: rgba(60, 35, 10, .28); --grain: rgba(120, 80, 30, .07);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #1a130b; --card: #2a2016; --card-edge: #a9814a; --ink: #f6ead0; --ink-soft: #dcc9a0;
-      --ochre: #f0b05a; --turquoise: #6fd0c4; --turquoise-bg: #16403d; --stone: #8a6a3b; --stone-dark: #c9a56b;
-      --shadow: rgba(0, 0, 0, .55); --grain: rgba(255, 220, 160, .05);
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #1a130b; --card: #2a2016; --card-edge: #a9814a; --ink: #f6ead0; --ink-soft: #dcc9a0;
-    --ochre: #f0b05a; --turquoise: #6fd0c4; --turquoise-bg: #16403d; --stone: #8a6a3b; --stone-dark: #c9a56b;
-    --shadow: rgba(0, 0, 0, .55); --grain: rgba(255, 220, 160, .05);
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font: 18px/1.55 "Source Serif 4", Georgia, serif;
-    background-image: repeating-linear-gradient(0deg, transparent 0 7px, var(--grain) 7px 8px);
-  }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 16px 48px; }
-  header { text-align: center; padding: 28px 0 12px; }
-  h1, h2 { font-family: "Cinzel", "Trajan Pro", Georgia, serif; letter-spacing: .08em; margin: 0; }
-  h1 { font-size: 2.6rem; font-weight: 800; color: var(--ochre); text-shadow: 1px 1px 0 var(--shadow); }
-  .tagline { margin: 4px 0 0; font-style: italic; color: var(--ink-soft); }
-  .rule { height: 10px; margin: 14px auto 0; max-width: 220px; border-top: 3px double var(--stone-dark); }
-
-  button { font: inherit; cursor: pointer; }
-  .btn {
-    display: block; width: 100%; min-height: 56px; padding: 12px 20px; border-radius: 10px;
-    border: 2px solid var(--card-edge); background: var(--turquoise); color: #fff; font-weight: 600; font-size: 1.1rem;
-    box-shadow: 0 3px 0 var(--shadow);
-  }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #0d1f1d; } }
-  :root[data-theme="dark"] .btn { color: #0d1f1d; }
-  .btn:active { transform: translateY(2px); box-shadow: none; }
-  .btn:focus-visible, .btn-ghost:focus-visible { outline: 3px solid var(--ochre); outline-offset: 2px; }
-  .btn-ghost { background: transparent; color: var(--ink); min-height: 52px; width: auto; padding: 10px 18px; }
-  .hint { text-align: center; margin: 10px 0 12px; color: var(--ink-soft); font-size: .95rem; }
-
-  #map { height: 300px; border-radius: 12px; border: 3px solid var(--card-edge); box-shadow: 0 4px 0 var(--shadow); z-index: 0; }
-  #msg { margin: 14px 0 0; min-height: 1.5em; text-align: center; color: var(--ink); font-weight: 600; }
-  #msg.warn { background: var(--turquoise-bg); border: 2px solid var(--turquoise); border-radius: 10px; padding: 12px; font-weight: 400; }
-
-  /* Stone-tablet cards: arched top, chiselled edge, faint grain */
-  .card {
-    position: relative; margin-top: 18px; padding: 20px 18px 18px; background: var(--card);
-    border: 3px solid var(--card-edge); border-radius: 34px 34px 10px 10px;
-    box-shadow: inset 0 0 0 4px var(--card), inset 0 0 0 5px var(--stone-dark), 0 5px 0 var(--shadow);
-    background-image: repeating-linear-gradient(0deg, transparent 0 9px, var(--grain) 9px 10px);
-  }
-  .card h2 { font-size: 1.05rem; color: var(--ochre); text-transform: uppercase; margin-bottom: 10px; }
-  .card p { margin: 0 0 10px; }
-  .card ul { margin: 0; padding-left: 1.2em; }
-  .card li { margin-bottom: 6px; }
-  .big { font-size: 1.3rem; font-weight: 600; }
-  .small { font-size: .9rem; color: var(--ink-soft); }
-  .empty { font-style: italic; color: var(--ink-soft); }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; padding: 0; list-style: none; }
-  .chips li { margin: 0; padding: 3px 10px; border-radius: 999px; border: 1.5px solid var(--turquoise); background: var(--turquoise-bg); color: var(--ink); font-size: .9rem; }
-  .records { list-style: none; padding: 0; margin: 0 0 8px; }
-  .records li { margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px dashed var(--stone-dark); }
-  .records li:last-child { border-bottom: 0; }
-  .dead { color: var(--ochre); }
-  .scope { margin: 0 0 10px; padding: 6px 10px; border-left: 4px solid var(--turquoise); background: var(--turquoise-bg); border-radius: 0 8px 8px 0; font-size: .92rem; }
-  .scope-wider_area, .scope-nearest_place, .scope-region { border-left-color: var(--ochre); background: transparent; border-top: 1px dashed var(--ochre); border-bottom: 1px dashed var(--ochre); }
-  .scope-none { border-left-color: var(--stone-dark); background: transparent; font-style: italic; color: var(--ink-soft); }
-  .scope-tag { display: inline-block; margin-right: 6px; padding: 0 8px; border-radius: 999px; border: 1.5px solid currentColor; font-size: .75rem; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; font-style: normal; }
-  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .8rem; border: 1.5px solid var(--stone-dark); color: var(--ink-soft); }
-  .narration p { font-size: 1.12rem; }
-  .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
-  .scribe-add { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--stone-dark); }
-
-  .digging { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-style: italic; }
-  .spinner { width: 20px; height: 20px; border-radius: 50%; border: 3px solid var(--stone); border-top-color: var(--turquoise); animation: spin 1s linear infinite; flex: none; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
-
-  .strata-row { display: flex; gap: 16px; align-items: flex-start; margin-top: 8px; }
-  #strata { flex: none; width: 112px; height: auto; }
-  #strata text { fill: var(--ink); font: 11px "Source Serif 4", Georgia, serif; }
-  .strata-row .small { margin: 0; }
-
-  .notes { margin-top: 26px; padding: 14px 16px; border-left: 4px solid var(--turquoise); background: var(--turquoise-bg); border-radius: 0 10px 10px 0; font-size: .95rem; }
-  .notes p { margin: 0 0 8px; }
-  .notes p:last-child { margin: 0; }
-  footer { margin-top: 22px; font-size: .9rem; color: var(--ink-soft); }
-  footer h2 { font-size: .95rem; margin-bottom: 6px; }
-  footer ul { padding-left: 1.2em; margin: 0; }
-  footer a { color: var(--turquoise); }
-  .tools { display: flex; gap: 10px; margin: 0 0 8px; }
-  .tools .btn-ghost { flex: 1; width: auto; padding: 10px 8px; font-size: 1rem; }
-  .btn-ghost[aria-pressed="true"] { background: var(--turquoise); color: #fff; border-color: var(--turquoise); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-ghost[aria-pressed="true"] { color: #0d1f1d; } }
-  :root[data-theme="dark"] .btn-ghost[aria-pressed="true"] { color: #0d1f1d; }
-  .walk-note { margin: 0 0 8px; font-size: .88rem; color: var(--ink-soft); text-align: center; }
-  .check { display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 0 0 6px; font-size: .95rem; }
-  .check input { width: 22px; height: 22px; accent-color: var(--turquoise); }
-  #walkstatus, #walkmsg { margin: 6px 0 0; text-align: center; min-height: 0; }
-  #walkmsg { font-weight: 600; color: var(--ochre); }
-  #walkoffer { text-align: center; margin-top: 6px; }
-  #walkoffer .btn-ghost { min-height: 48px; }
-  .stamp { margin: 10px 0 0; font-size: .92rem; color: var(--ink-soft); }
-  .stamp strong { color: var(--ochre); }
-  .pass-list { list-style: none; margin: 10px 0 0; padding: 0; }
-  .pass-list li { padding: 8px 0; border-bottom: 1px dashed var(--stone-dark); }
-  .pass-list li:last-child { border-bottom: 0; }
-  .pass-era { display: inline-block; margin-right: 6px; padding: 0 9px; border-radius: 999px; border: 1.5px solid var(--turquoise); background: var(--turquoise-bg); font-size: .85rem; font-weight: 600; }
-  .pass-sum { font-size: 1.15rem; font-weight: 600; margin: 0; }
-  [hidden] { display: none !important; }
-</style>
+<link rel="stylesheet" href="stela.css">
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>STELA</h1>
+    <div class="brand">
+      <svg viewBox="0 0 44 52" aria-hidden="true">
+        <path d="M5 49V21a17 17 0 0 1 34 0v28z" fill="var(--card)" stroke="var(--card-edge)" stroke-width="3"/>
+        <path d="M13 25h18M13 32h18M13 39h12" stroke="var(--ochre)" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h1>STELA</h1>
+    </div>
     <p class="tagline">Every place is a stone with a story carved in it.</p>
     <div class="rule" aria-hidden="true"></div>
   </header>
+
+  <noscript><p class="scope scope-wider_area">Stela needs JavaScript to look up the ground under your feet.</p></noscript>
 
   <main>
     <button class="btn" id="locate" type="button">Use my location</button>
@@ -157,40 +50,61 @@
     </section>
 
     <section id="results" hidden>
-      <article class="card narration" id="card-story">
-        <h2>The scribe speaks</h2>
-        <div id="story"></div>
-        <div class="actions">
-          <button class="btn btn-ghost" id="listen" type="button">&#9654; Listen</button>
-          <span class="badge" id="mode"></span>
+      <!-- The scribe: simple original SVG figure, with the narration and Listen in a speech panel -->
+      <article class="scribe" id="card-story">
+        <div class="scribe-fig" aria-hidden="true">
+          <svg viewBox="0 0 120 150">
+            <path d="M14 150c0-48 20-66 46-66s46 18 46 66z" fill="var(--robe)" stroke="var(--ink)" stroke-width="2.5"/>
+            <path d="M44 86q16 14 32 0" fill="none" stroke="var(--on-turq)" stroke-width="3" opacity=".8"/>
+            <circle cx="60" cy="56" r="22" fill="var(--skin)" stroke="var(--ink)" stroke-width="2.5"/>
+            <path d="M37 54q0-26 23-26t23 26q-23-10-46 0z" fill="var(--ochre)" stroke="var(--ink)" stroke-width="2.5"/>
+            <path d="M38 47q22-9 44 0" fill="none" stroke="var(--turquoise)" stroke-width="4"/>
+            <circle cx="52" cy="61" r="2.6" fill="var(--ink)"/><circle cx="68" cy="61" r="2.6" fill="var(--ink)"/>
+            <path d="M52 71q8 5 16 0" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="30" y="102" width="56" height="42" rx="7" fill="var(--card)" stroke="var(--card-edge)" stroke-width="3"/>
+            <path d="M39 114h38M39 123h38M39 132h24" stroke="var(--stone-dark)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M92 94l-18 20" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="92" cy="94" r="6" fill="var(--skin)" stroke="var(--ink)" stroke-width="2.5"/>
+          </svg>
         </div>
-        <p class="stamp" id="stamp" hidden></p>
+        <div class="speech">
+          <h2>The scribe speaks</h2>
+          <div id="story"></div>
+          <button class="btn btn-listen" id="listen" type="button">&#9654; Listen</button>
+          <div class="actions"><span class="badge" id="mode"></span></div>
+          <p class="stamp" id="stamp" hidden></p>
+        </div>
       </article>
 
-      <article class="card" id="card-rock">
-        <h2>Under your feet</h2>
-        <div id="rock"></div>
-      </article>
+      <div class="dig-bar"><button class="btn btn-dig" id="dig-btn" type="button" aria-expanded="false" aria-controls="dig">Dig down &#9660;</button></div>
+      <section class="dig" id="dig" hidden aria-label="Dig down through the layers"></section>
 
-      <article class="card" id="card-setting">
-        <h2>What this place probably was</h2>
-        <div id="setting"></div>
-      </article>
+      <div class="cards">
+        <article class="card" id="card-rock">
+          <h2>Under your feet</h2>
+          <div id="rock"></div>
+        </article>
 
-      <article class="card" id="card-fossils">
-        <h2>Ancient animals found nearby</h2>
-        <div id="fossils"></div>
-      </article>
+        <article class="card" id="card-setting">
+          <h2>What this place probably was</h2>
+          <div id="setting"></div>
+        </article>
 
-      <article class="card" id="card-rare">
-        <h2>Rare animals recorded nearby</h2>
-        <div id="rare"></div>
-      </article>
+        <article class="card" id="card-fossils">
+          <h2>Ancient animals found nearby</h2>
+          <div id="fossils"></div>
+        </article>
 
-      <article class="card" id="card-human">
-        <h2>Human history nearby</h2>
-        <div id="human"></div>
-      </article>
+        <article class="card" id="card-rare">
+          <h2>Rare animals recorded nearby</h2>
+          <div id="rare"></div>
+        </article>
+
+        <article class="card" id="card-human">
+          <h2>Human history nearby</h2>
+          <div id="human"></div>
+        </article>
+      </div>
     </section>
 
     <div class="notes">
@@ -198,6 +112,7 @@
       <p>Whether a place was sea, land or swamp is <em>inferred from the rock type</em>, so it is only ever "probably".</p>
       <p>Animal records show where an animal was observed, not necessarily where it lives.</p>
       <p>The narration is written by an open-weight AI model that is only given the facts shown on this page. Check the cards below it.</p>
+      <p>The scribe, the stone tablets and the layers are original decoration. They are not a picture of any real culture or period, and the layers are for orientation, not to scale.</p>
     </div>
   </main>
 
@@ -231,6 +146,20 @@ const setContent = (el, ...kids) => el.replaceChildren(...kids.flat().filter((k)
 const empty = (text) => h("p", { class: "empty" }, text);
 const fmtMa = (x) => (x >= 10 ? Math.round(x * 10) / 10 : Math.round(x * 100) / 100).toLocaleString();
 
+/* ---------- Motion helpers: every animation is optional and skipped for prefers-reduced-motion ---------- */
+const reduceMotion = () => !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+const scrollOpts = (block = "start") => ({ behavior: reduceMotion() ? "auto" : "smooth", block });
+function carve(el, delayMs = 0) {  // chisel a card in; the card is fully visible without this
+  if (!el || reduceMotion()) return;
+  el.style.setProperty("--d", delayMs + "ms");
+  el.classList.remove("carve");
+  void el.offsetWidth;  // restart the animation
+  el.classList.add("carve");
+}
+const carveAll = () => ["#card-story", "#dig-btn", "#card-rock", "#card-setting", "#card-fossils", "#card-human", "#card-rare"]
+  .forEach((sel, i) => carve($(sel), i * 80));
+const sand = () => h("span", { class: "sand", "aria-hidden": "true" });  // drifting sand: the themed loading indicator
+
 /* ---------- Voice: the ONLY place that knows how speech works. Swap this object for ElevenLabs later. ---------- */
 const Voice = {
   supported: "speechSynthesis" in window,
@@ -251,6 +180,7 @@ const Voice = {
 let run = 0;                 // incremented on every new lookup so stale replies are ignored
 let storyText = "";          // what "Listen" reads
 let marker = null;
+let quiet = false;           // true while a Walk-mode refresh is in progress: no flashy animation
 
 const map = L.map("map", { worldCopyJump: true }).setView([20, 10], 2);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -262,10 +192,10 @@ function placePin(lat, lng) {
   if (marker) marker.setLatLng([lat, lng]); else marker = L.marker([lat, lng]).addTo(map);
 }
 
-function say(text, warn) {
+function say(text, warn, loading) {
   const m = $("#msg");
-  m.textContent = text || "";
   m.className = warn ? "warn" : "";
+  setContent(m, text || "", loading ? sand() : null);
 }
 
 /* ---------- Location button ---------- */
@@ -274,7 +204,7 @@ $("#locate").addEventListener("click", () => {
     say("This browser cannot share your location. Tap the map to drop a pin instead.", true);
     return;
   }
-  say("Finding you...");
+  say("Finding you...", false, true);
   navigator.geolocation.getCurrentPosition(
     (pos) => {
       const { latitude: lat, longitude: lng } = pos.coords;
@@ -312,11 +242,13 @@ async function api(path, lat, lng) {
 let lastRock = null;  // the most recent mapped rock, to notice when a walker crosses into another unit
 async function explore(lat, lng, opts = {}) {
   const me = ++run;
+  quiet = !!opts.walk;
   if (!opts.walk) {
     Voice.stop(); setListenLabel();
     storyText = "";
     $("#results").hidden = true;
-    say("Reading the stone... this takes a few seconds.");
+    closeDig();
+    say("Reading the stone... this takes a few seconds.", false, true);
   }
   $("#stamp").hidden = true;
   let data;
@@ -333,15 +265,19 @@ async function explore(lat, lng, opts = {}) {
   if (opts.walk) { Voice.stop(); setListenLabel(); } else say("");
   renderWhere(data);
   $("#results").hidden = false;
-  if (!opts.walk) $("#card-story").scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!opts.walk) { carveAll(); $("#card-story").scrollIntoView(scrollOpts("start")); }
   if (opts.real) stampPassport(lat, lng, data.facts.rock);
   if (data.facts.rock) lastRock = data.facts.rock;
 
   // Fossils come from a slower source, so they arrive after everything else is already on screen.
   api("/api/fossils", lat, lng).then((f) => {
-    if (me === run) renderFossils(f);
+    if (me !== run) return;
+    renderFossils(f);
+    if (!quiet) carve($("#fossils"));
   }).catch(() => {
-    if (me === run) setContent($("#fossils"), empty("The fossil database could not be reached right now."));
+    if (me !== run) return;
+    setContent($("#fossils"), empty("The fossil database could not be reached right now."));
+    digData.fossils = null; digData.fossilScope = null; renderDig();
   });
   return { data };
 }
@@ -357,6 +293,8 @@ function scopeLine(scope) {
   return scope ? h("p", { class: `scope scope-${scope.level}` }, h("span", { class: "scope-tag" }, SCOPE_TAG[scope.level] || ""), scope.note) : null;
 }
 
+const diggingNote = (text) => h("div", { class: "digging" }, sand(), text);
+
 function renderWhere(d) {
   const f = d.facts;
   storyText = d.narration;
@@ -370,17 +308,14 @@ function renderWhere(d) {
     setContent($("#rock"), sc.rock ? scopeLine(sc.rock) : empty("The rock map could not be checked right now."));
     setContent($("#setting"), empty("Nothing recorded nearby."));
   } else {
-    const ageLine = rock.b_age != null
-      ? `${fmtMa(rock.b_age)} to ${fmtMa(rock.t_age ?? 0)} million years ago` + (rock.b_int_name ? ` (${rock.b_int_name}${rock.t_int_name && rock.t_int_name !== rock.b_int_name ? " to " + rock.t_int_name : ""})` : "")
-      : "Age not recorded";
     const ruler = f.time_ruler;
     setContent($("#rock"),
       scopeLine(sc.rock),
       h("p", { class: "big" }, rock.name || "Unnamed rock unit"),
       rock.lith ? h("p", {}, "Rock type: " + rock.lith) : null,
-      h("p", {}, ageLine),
+      h("p", {}, rockAge(rock)),
       ruler ? h("p", { class: "small" }, `That is about ${ruler.times_older_than_humans.toLocaleString()} times older than our species (about 0.3 million years).`) : null,
-      ruler ? strata(rock) : null);
+      ruler ? eraStrip(rock) : null);
 
     const s = f.ancient_setting;
     setContent($("#setting"),
@@ -391,7 +326,7 @@ function renderWhere(d) {
   }
 
   // Fossils: placeholder until /api/fossils answers
-  setContent($("#fossils"), h("div", { class: "digging" }, h("span", { class: "spinner" }), "Digging through the fossil records. This source is slow, so everything else is already here."));
+  setContent($("#fossils"), diggingNote("Digging through the fossil records. This source is slow, so everything else is already here."));
 
   // Rare animals: these are RECORDS (sightings, specimens, ...), never a claim that the animal lives here
   const rare = f.rare_animals_recorded_nearby;
@@ -410,7 +345,15 @@ function renderWhere(d) {
       : [scopeLine(sc.human), h("ul", {}, hh.map((p) => h("li", {}, h("strong", {}, p.place),
           p.distance_m != null && sc.human.level === "exact_area" ? ` (${p.distance_m.toLocaleString()} m away). ` : ". ", p.summary)))]);
 
+  digData = { rock, ruler: f.time_ruler, scopes: sc, human: hh, fossils: undefined, fossilScope: null };  // fossils: undefined = still loading
+  renderDig();
   renderSources(d.sources);
+}
+
+function rockAge(rock) {
+  return rock.b_age != null
+    ? `${fmtMa(rock.b_age)} to ${fmtMa(rock.t_age ?? 0)} million years ago` + (rock.b_int_name ? ` (${rock.b_int_name}${rock.t_int_name && rock.t_int_name !== rock.b_int_name ? " to " + rock.t_int_name : ""})` : "")
+    : "Age not recorded";
 }
 
 /* One rare-animal entry: name, record count, which dataset(s) the records come from, and what the records say about alive/dead. */
@@ -455,6 +398,8 @@ function renderFossils(d) {
     box.append(h("div", { class: "scribe-add" }, paragraphs(d.narration)));
     storyText = (storyText + " " + d.narration).trim();
   }
+  digData.fossils = f; digData.fossilScope = d.scope;
+  renderDig();
   renderSources(null, d.source);
 }
 
@@ -469,11 +414,99 @@ function renderSources(list, pbdb) {
       ` – ${s.license}`, s.status.startsWith("failed") ? " (could not be reached)" : (label[s.status] || ""))));
 }
 
+/* ---------- Dig down ----------
+ * Layers are drawn ONLY from what the data supports: the surface (you, today), human history if any was found,
+ * the mapped rock with its age, and fossils. Fossils sit in the rock's layer only when the fossil search says they are of
+ * this rock's age; otherwise they go in a separate "found nearby, age not matched" layer. Nothing else is invented,
+ * and the layers are not to scale. */
+let digData = { rock: null, ruler: null, scopes: {}, human: undefined, fossils: undefined, fossilScope: null };
+const digBtn = $("#dig-btn"), digBox = $("#dig");
+
+function layer(cls, title, ...kids) {
+  return h("div", { class: `layer ${cls}` }, h("div", { class: "swatch", "aria-hidden": "true" }),
+    h("div", { class: "layer-body" }, h("p", { class: "layer-title" }, title), ...kids));
+}
+// The fossil search wording says whether finds are of this rock's age (see FOSSIL_STEPS in geo.py). Anything unclear counts as NOT matched.
+const fossilsAgeMatched = (scope) => !!scope && /same age as this rock|nothing of this age/i.test(scope.note) && !/not matched/i.test(scope.note);
+
+function fossilChips(f) {
+  return [h("p", {}, `${f.count} fossil finds recorded.`),
+    h("ul", { class: "chips" }, f.classes.map(([name, n]) => h("li", {}, `${name} (${n})`))),
+    h("p", { class: "small" }, "This shows what has been found so far, not everything that lived there.")];
+}
+
+function renderDig() {
+  const { rock, ruler, scopes: s, human, fossils, fossilScope } = digData;
+  const loaded = fossils !== undefined, hasFinds = !!(fossils && fossils.count), matched = fossilsAgeMatched(fossilScope);
+  const layers = [];
+
+  layers.push(layer("l-surface", "Surface · today", h("p", {}, "You are standing here, today.")));
+
+  layers.push(layer("l-human", "Human history",
+    human == null ? empty("Could not be checked right now.")
+      : human.length === 0 ? (scopeLine(s.human) || empty("Nothing recorded nearby."))
+      : [scopeLine(s.human), h("p", {}, human.slice(0, 3).map((p) => p.place).join("; ")),
+         h("p", { class: "small" }, "Our species is only about 0.3 million years old, so everything human lives in this thin top layer.")]));
+
+  if (rock) {
+    layers.push(layer("l-gap", "Down through time",
+      h("p", {}, ruler ? `This rock is about ${ruler.times_older_than_humans.toLocaleString()} times older than our species.` : "Further back in time."),
+      h("p", { class: "small" }, "Not to scale: the gap is far bigger than it looks.")));
+  }
+
+  // The rock's own layer, with fossils only if they are of this rock's age
+  const rockKids = rock
+    ? [scopeLine(s.rock), h("p", { class: "big" }, rock.name || "Unnamed rock unit"), rock.lith ? h("p", {}, "Rock type: " + rock.lith) : null, h("p", {}, rockAge(rock))]
+    : [s.rock ? scopeLine(s.rock) : empty("The rock map could not be checked right now.")];
+  if (rock) {
+    rockKids.push(h("p", { class: "layer-title" }, "Fossils of this age"));
+    if (!loaded) rockKids.push(diggingNote("Fossil records still loading..."));
+    else if (fossils === null) rockKids.push(empty("The fossil database could not be reached right now."));
+    else if (!hasFinds) rockKids.push(scopeLine(fossilScope) || empty("Nothing recorded nearby."));
+    else if (matched) rockKids.push(scopeLine(fossilScope), ...fossilChips(fossils));
+    else rockKids.push(empty("No fossils matched to this rock's age were recorded. See the layer below."));
+  }
+  layers.push(layer("l-rock", rock ? "The rock" : "No mapped rock", ...rockKids));
+
+  // Fossils whose age is NOT matched to the rock: a general "found nearby" layer
+  if (loaded && hasFinds && !matched) {
+    layers.push(layer("l-near", "Found nearby · age not matched", scopeLine(fossilScope), ...fossilChips(fossils),
+      h("p", { class: "small" }, "These were found near here, but not shown to be the same age as this rock.")));
+  }
+
+  layers.forEach((el, i) => el.style.setProperty("--i", i));
+  setContent(digBox, layers);
+}
+
+function closeDig() {
+  digBox.hidden = true; digBox.classList.remove("play");
+  digBtn.setAttribute("aria-expanded", "false"); digBtn.innerHTML = "Dig down &#9660;";
+}
+digBtn.addEventListener("click", () => {
+  if (!digBox.hidden) { closeDig(); return; }
+  renderDig();
+  digBox.hidden = false;
+  digBtn.setAttribute("aria-expanded", "true"); digBtn.innerHTML = "Hide the dig &#9650;";
+  digBox.classList.remove("play");
+  if (!reduceMotion()) { void digBox.offsetWidth; digBox.classList.add("play"); }
+  digBox.scrollIntoView(scrollOpts("start"));
+});
+
 /* ---------- Passport (browser only: see stela-logic.js) ---------- */
 const passport = StelaLogic.createPassport(() => window.localStorage);  // looked up inside try/catch, so blocked storage is fine
 const todayLocal = () => { const d = new Date(), p = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`; };
 const passportBtn = $("#passport-btn"), clearBtn = $("#passport-clear");
 let clearArmed = false;
+
+/* "Era unlocked": a small medallion that turns in once (CSS, under a second; none under reduced motion) */
+function unlockBadge(era) {
+  const wrap = h("div", { class: "unlock", role: "status" });
+  wrap.innerHTML = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23" fill="var(--turquoise)" stroke="var(--ochre)" stroke-width="3"/>' +
+    '<circle cx="26" cy="26" r="13" fill="none" stroke="var(--on-turq)" stroke-width="2.5" stroke-dasharray="4 3"/>' +
+    '<path d="M26 5v8M26 39v8M5 26h8M39 26h8M11 11l6 6M35 35l6 6M41 11l-6 6M17 35l-6 6" stroke="var(--on-turq)" stroke-width="2.5" stroke-linecap="round"/></svg>';
+  wrap.append(h("div", {}, h("b", {}, "Era unlocked"), h("span", {}, era)));
+  return wrap;
+}
 
 function stampPassport(lat, lng, rock) {
   const res = passport.add(lat, lng, rock, todayLocal());
@@ -481,7 +514,7 @@ function stampPassport(lat, lng, rock) {
   const note = $("#stamp");
   if (res.added) {
     const era = rock.b_int_name || rock.t_int_name || "Unknown era";
-    setContent(note, "Stamped in your passport. ", res.newEra ? h("strong", {}, `New era: ${era}!`) : null);
+    setContent(note, "Stamped in your passport.", res.newEra ? unlockBadge(era) : null);
     note.hidden = false;
   }
 }
@@ -514,7 +547,7 @@ passportBtn.addEventListener("click", () => {
   box.hidden = !box.hidden;
   passportBtn.setAttribute("aria-expanded", String(!box.hidden));
   resetClear();
-  if (!box.hidden) { renderPassport(); box.scrollIntoView({ behavior: "smooth", block: "start" }); }
+  if (!box.hidden) { renderPassport(); carve(box); box.scrollIntoView(scrollOpts("start")); }
 });
 clearBtn.addEventListener("click", () => {  // two taps, so a stray touch cannot wipe it
   if (!clearArmed) { clearArmed = true; clearBtn.textContent = "Tap again to clear everything"; return; }
@@ -618,27 +651,32 @@ document.addEventListener("visibilitychange", () => {
 });
 window.addEventListener("pagehide", stopWatch);
 
-/* ---------- Strata graphic: top = today, bottom = deep time. The rock is a band; all of human history is a sliver. ---------- */
-function strata(rock) {
-  const H = 220, top = 18, maxMa = Math.max(541, Math.ceil(rock.b_age / 100) * 100);
-  const y = (ma) => top + (ma / maxMa) * H;
-  const y0 = y(rock.t_age ?? 0), y1 = y(rock.b_age);
-  const band = Math.max(y1 - y0, 3);
-  const humanH = Math.max((0.3 / maxMa) * H, 2);
-  let layers = "";
-  for (let ly = y0 + 5; ly < y0 + band - 2; ly += 7) layers += `<line x1="26" x2="66" y1="${ly.toFixed(1)}" y2="${ly.toFixed(1)}" stroke="var(--stone-dark)" stroke-width="1" opacity=".55"/>`;
-  const ticks = [0, 100, 200, 300, 400, 500].filter((m) => m <= maxMa).map((m) =>
-    `<line x1="20" x2="26" y1="${y(m)}" y2="${y(m)}" stroke="var(--ink-soft)"/><text x="72" y="${y(m) + 4}">${m ? m + " Ma" : "today"}</text>`).join("");
-  const wrap = h("div", { class: "strata-row" });
-  wrap.innerHTML = `<svg id="strata" viewBox="0 0 112 ${top + H + 8}" role="img" aria-label="Rock age against human history">
-      <rect x="26" y="${top}" width="40" height="${H}" fill="var(--bg)" stroke="var(--card-edge)"/>
-      <rect x="26" y="${y0.toFixed(1)}" width="40" height="${band.toFixed(1)}" fill="var(--stone)" stroke="var(--stone-dark)"/>
-      ${layers}
-      <rect x="26" y="${top}" width="40" height="${humanH.toFixed(1)}" fill="var(--turquoise)"/>
+/* ---------- Era strip: today on the left, deep time on the right. The rock is a band; human history is a marked sliver. ---------- */
+function eraStrip(rock) {
+  const x0 = 12, x1 = 308, top = 30, hgt = 22;
+  const maxMa = Math.max(100, Math.ceil(rock.b_age / 100) * 100);
+  const x = (ma) => x0 + (ma / maxMa) * (x1 - x0);
+  const bandX = x(rock.t_age ?? 0), bandW = Math.max(x(rock.b_age) - bandX, 3);
+  const humanW = Math.max(x(0.3) - x0, 3);
+  const step = maxMa <= 200 ? 50 : 100;
+  let ticks = "";
+  for (let m = 0; m <= maxMa; m += step) {
+    ticks += `<line x1="${x(m).toFixed(1)}" x2="${x(m).toFixed(1)}" y1="${top + hgt}" y2="${top + hgt + 6}" stroke="var(--ink-soft)" stroke-width="1.5"/>` +
+      `<text x="${x(m).toFixed(1)}" y="${top + hgt + 19}" text-anchor="${m === 0 ? "start" : m === maxMa ? "end" : "middle"}">${m ? m + " Ma" : "today"}</text>`;
+  }
+  const fig = h("div", { class: "era" });
+  fig.innerHTML = `<svg viewBox="0 0 320 84" role="img" aria-label="Rock age against today. Human history is marked at the left edge.">
+      <rect x="${x0}" y="${top}" width="${x1 - x0}" height="${hgt}" fill="var(--bg2)" stroke="var(--card-edge)" stroke-width="2"/>
+      <rect x="${bandX.toFixed(1)}" y="${top}" width="${bandW.toFixed(1)}" height="${hgt}" fill="var(--stone)" stroke="var(--stone-dark)" stroke-width="1.5"/>
+      <rect x="${x0}" y="${top}" width="${humanW.toFixed(1)}" height="${hgt}" fill="var(--turquoise)"/>
+      <path d="M${x0 - 4} 6h12l-6 14z" fill="var(--turquoise)" stroke="var(--ink)" stroke-width="1.2"/>
+      <text x="${x0 + 12}" y="17">Human history</text>
       ${ticks}</svg>`;
-  wrap.append(h("p", { class: "small" },
-    "Top is today; going down is further back in time. The tan band is when this rock formed. The thin turquoise line at the top is all of human history, so small it barely shows."));
-  return wrap;
+  fig.append(h("ul", { class: "legend" },
+    h("li", {}, h("i", { class: "k-rock" }), `When this rock formed: ${rockAge(rock)}`),
+    h("li", {}, h("i", { class: "k-human" }), "All of human history (about 0.3 million years): marked at the left edge, too thin to show to scale")),
+    h("p", { class: "small" }, "Left is today; further right is further back in time."));
+  return fig;
 }
 </script>
 </body>

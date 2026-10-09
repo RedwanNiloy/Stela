@@ -40,9 +40,19 @@ app/geo.py       the four data layers (fetch_* talks to the API, parse_* is a pu
 app/narrate.py   grounding rules + LLM call + plain-text fallback
 app/cache.py     TTL cache and per-IP rate limiter (in memory)
 static/index.html  one mobile-first page, vanilla JS, Leaflet map, no build step
+static/stela.css   the look: sandstone palette, stone-tablet cards, dig layers, animations (all optional)
 static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tested in Node)
 tests/           parsing and fallback tests on saved real API responses, plus tests of the browser logic
 ```
+
+## The look
+
+An ancient-discovery feel in original CSS/SVG only: sandstone, papyrus and deep brown with a muted turquoise accent, carved-style headings (Cinzel from Google Fonts, falling back to a system serif), stone-tablet result cards that carve in as they arrive, a simple scribe figure whose speech panel holds the narration with **Listen** as the main control, an era strip (rock age against today, with human history marked), and **Dig down**, which opens layered bands: surface, human history, the rock with its age, and fossils. The styling is decoration and does not claim to depict any real culture.
+
+- **Dig down only draws what the data supports.** Fossils sit in the rock's layer only when the fossil search says they are of that rock's age; otherwise they go in a separate "found nearby, age not matched" layer. The layers are not to scale, and the page says so. Every scope label and honesty note stays visible.
+- **Motion is optional.** Animations are short (under about a second, plus a looping sand-drift while the slow fossil source runs). With `prefers-reduced-motion` nothing animates. Content is never hidden waiting for an animation or a font, so if either fails the page still works.
+- **Light and dark mode** both keep text contrast at 5:1 or better (most pairs are above 10:1) for reading outdoors. Buttons are at least 56 px tall.
+- **Light on the wire.** No images; the page is HTML, one CSS file and one small JS file (about 19 KB gzipped from our server), plus Leaflet from a CDN. The server gzips responses.
 
 ## Passport and Walk mode
 
