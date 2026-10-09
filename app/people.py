@@ -315,7 +315,7 @@ async def fetch_details(client, title, kind):
 
 
 def empty_facts():
-    return {"early_history": [], "traditions": [], "license": LICENSE}
+    return {"early_history": [], "traditions": [], "license": LICENSE, "incomplete": False}
 
 
 async def fetch_people(client, lat, lng):
@@ -324,7 +324,7 @@ async def fetch_people(client, lat, lng):
     address, s_geo = await geo.safe(geo.reverse_address(client, lat, lng))
     statuses = {"nominatim": geo.source_status(address, s_geo)}
     if s_geo != "ok":
-        return {"early_history": None, "traditions": [], "license": LICENSE}, {**statuses, "wikipedia": "not needed"}
+        return {"early_history": None, "traditions": [], "license": LICENSE, "incomplete": True}, {**statuses, "wikipedia": "not needed"}
     hierarchy = parse_hierarchy(address)
     if not hierarchy:
         return empty_facts(), {**statuses, "wikipedia": "not needed"}
@@ -348,7 +348,7 @@ async def fetch_people(client, lat, lng):
     batches = await asyncio.gather(*(geo.safe(limited(fetch_titles(client, titles[i:i + BATCH]))) for i in range(0, len(titles), BATCH)))
     ok = [b for b, st in batches if st == "ok"]
     if not ok:
-        return {"early_history": None, "traditions": [], "license": LICENSE}, {**statuses, "wikipedia": batches[0][1]}
+        return {"early_history": None, "traditions": [], "license": LICENSE, "incomplete": True}, {**statuses, "wikipedia": batches[0][1]}
     lookups = [index_pages((b or {}).get("query")) for b in ok]
     lookup = lambda title: next((p for p in (f(title) for f in lookups) if p), None)
 
@@ -367,7 +367,10 @@ async def fetch_people(client, lat, lng):
             excerpts.append(ex)
         traditions += tr
     failed_batches = len(batches) - len(ok)
+    # incomplete = some lookups failed (typically HTTP 429), so levels or early-period sections may be missing.
+    # An incomplete result is shown with a note and never cached, so the next lookup can fill the gaps.
+    incomplete = bool(failed_batches) or any(st != "ok" for _, st in details)
     statuses["wikipedia"] = "ok" if excerpts else "empty"
-    if failed_batches:
-        statuses["wikipedia"] = "ok" if excerpts else batches[0][1]
-    return {"early_history": excerpts, "traditions": traditions[:6], "license": LICENSE}, statuses
+    if failed_batches and not excerpts:
+        statuses["wikipedia"] = batches[0][1]
+    return {"early_history": excerpts, "traditions": traditions[:6], "license": LICENSE, "incomplete": incomplete}, statuses

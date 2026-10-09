@@ -26,9 +26,9 @@ def cassette(name):
 class Replay:
     """A fake internet that answers only what was recorded."""
 
-    def __init__(self, entries, edit=None):
+    def __init__(self, entries, edit=None, fail=None):
         self.table = {(e["host"], tuple(sorted(e["params"].items()))): e for e in entries}
-        self.calls, self.misses, self.edit = [], [], edit
+        self.calls, self.misses, self.edit, self.fail = [], [], edit, fail
 
     def client(self):
         def handler(request):
@@ -38,6 +38,8 @@ class Replay:
             if not e:
                 self.misses.append((request.url.host, params))
                 return httpx.Response(404, json={"error": "not recorded"})
+            if self.fail and self.fail(request.url.host, params):  # e.g. Wikipedia answering HTTP 429
+                return httpx.Response(429, json={"error": "too many requests"})
             body = e.get("json")
             if self.edit:
                 body = self.edit(request.url.host, params, json.loads(json.dumps(body)))
@@ -282,6 +284,18 @@ def test_madison_place_without_a_history_article_falls_back_to_its_own_article()
     assert all("Madison" != e["article"]["title"] for e in facts["early_history"])   # never the disambiguation page
 
 
+def test_a_rate_limited_section_makes_the_result_incomplete_but_keeps_the_rest():
+    """Real life: Wikipedia answered HTTP 429 for some Dhaka section requests. The rest must still be shown."""
+    net = Replay(cassette("dover"), fail=lambda host, p: p.get("action") == "parse" and p.get("page") == "History of Kent" and "section" in p)
+    facts, statuses = run(_fetch(net, DOVER))
+    assert net.misses == [] and statuses["wikipedia"] == "ok"
+    assert facts["incomplete"] is True
+    by = {e["scope"]["level"]: e for e in facts["early_history"]}
+    assert by["district"]["early"] is None and by["district"]["intro"]          # intro kept, early-period text missing
+    assert by["city"]["early"] and by["region"]["early"]                        # the other levels are complete
+    assert fetch("dover", DOVER)[0]["incomplete"] is False
+
+
 def test_a_failed_wikipedia_lookup_is_reported_not_raised():
     net = Replay([e for e in cassette("dover") if e["host"] == "nominatim.openstreetmap.org"])
     facts, statuses = run(_fetch(net, DOVER))
@@ -411,6 +425,8 @@ def test_grounded_story_is_kept_and_invented_history_is_replaced(monkeypatch):
     for bad in ("According to Wikipedia, a Roman kingdom ruled Dover.",                  # invents a people and a kingdom
                 "According to Wikipedia, the city was founded in 1262 by a king.",       # invents a date and a ruler
                 "According to Wikipedia, you are standing right here where it began.",   # exact-spot claim, scope is "city"
+                "According to Wikipedia, Stone Age people lived here long ago.",         # "lived here" is also an exact-spot claim
+                "According to Wikipedia, people crossed a land bridge here.",            # any "here" is, whatever the verb (seen in a real run)
                 "Stone Age people crossed a land bridge near Dover."):                   # no attribution
         text, mode = with_reply(bad)
         assert mode == "facts-only" and text != bad and text.startswith("According to Wikipedia")
@@ -462,6 +478,18 @@ def test_api_people_returns_excerpts_sources_and_caches(api):
     assert {s["id"]: s["status"] for s in d["sources"]} == {"wikipedia": "ok", "nominatim": "ok"}
     assert api.get("/api/people", params={"lat": 51.1301, "lng": 1.3099}).json()["cached"] is True
     assert len(api.calls) == 1
+
+
+def test_api_does_not_cache_an_incomplete_result(api, monkeypatch):
+    calls = []
+
+    async def gappy(client, lat, lng):
+        calls.append(1)
+        return {**FACTS, "incomplete": True}, {"nominatim": "ok", "wikipedia": "ok"}
+    monkeypatch.setattr(people, "fetch_people", gappy)
+    assert api.get("/api/people", params={"lat": 5, "lng": 6}).json()["people"]["incomplete"] is True
+    assert api.get("/api/people", params={"lat": 5, "lng": 6}).json()["cached"] is False
+    assert len(calls) == 2
 
 
 def test_api_people_failure_is_not_an_error_screen(api, monkeypatch):

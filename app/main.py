@@ -141,12 +141,13 @@ async def people_facts(request, lat, lng):
     try:
         facts, statuses = await asyncio.wait_for(people.fetch_people(client, lat, lng), people.PEOPLE_TOTAL)
     except Exception as e:  # a slow or broken layer must not break the page
-        facts, statuses = {"early_history": None, "traditions": [], "license": people.LICENSE}, {"wikipedia": f"failed: {type(e).__name__}"}
+        facts = {"early_history": None, "traditions": [], "license": people.LICENSE, "incomplete": True}
+        statuses = {"wikipedia": f"failed: {type(e).__name__}"}
     failed = [k for k, v in statuses.items() if v.startswith("failed")]
     # only statuses and counts are logged: never coordinates, place names or the text itself
     log.info("people failed=%s excerpts=%s %.0fms", failed, len(facts["early_history"] or []), (time.perf_counter() - t0) * 1000)
     result = {"people": facts, "sources": people_sources(statuses)}
-    if not failed:
+    if not failed and not facts.get("incomplete"):  # never keep a result with gaps for hours
         people_cache.set(key, result)
     return result, False
 

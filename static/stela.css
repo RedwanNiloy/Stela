@@ -214,6 +214,17 @@ input[type="range"]:disabled { cursor: default; }
 .site-marker { background: none; border: 0; }
 .site-marker svg { width: 34px; height: 44px; filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); }
 
+/* ---------- People and past civilizations ---------- */
+.excerpt { margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px dashed var(--stone-dark); }
+.excerpt:last-of-type { border-bottom: 0; }
+.excerpt p { margin: 0 0 8px; }
+.excerpt a, .traditions a { color: var(--turquoise); font-weight: 600; }
+.pp-credit a { font-weight: 400; text-decoration: underline; }
+.traditions { margin: 8px 0 12px; padding: 10px 12px; border: 2px dashed var(--ochre); border-radius: 10px; }
+.traditions ul { margin: 8px 0 0; padding-left: 1.1em; }
+.traditions li { font-style: italic; margin-bottom: 8px; }
+.traditions li .small { font-style: normal; }
+
 /* ---------- Notes, footer, passport ---------- */
 .notes { margin-top: 28px; padding: 14px 16px; border-left: 5px solid var(--turquoise); background: var(--turquoise-bg); border-radius: 0 12px 12px 0; font-size: 1rem; }
 .notes p { margin: 0 0 8px; }
@@ -237,7 +248,7 @@ footer a { color: var(--turquoise); }
   .scribe-fig { width: 150px; margin: 0; align-self: end; }
   .speech::before { top: 50%; left: -12px; margin: -11px 0 0; transform: rotate(-45deg); }
   .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; align-items: start; }
-  #card-rock { order: 1; } #card-setting { order: 2; } #card-fossils { order: 3; } #card-human { order: 4; }
+  #card-rock { order: 1; } #card-setting { order: 2; } #card-fossils { order: 3; } #card-people { order: 4; grid-column: 1 / -1; }
   #card-sites { order: 5; grid-column: 1 / -1; }
   #card-rare { order: 6; grid-column: 1 / -1; }
   .tools { max-width: 520px; margin-left: auto; margin-right: auto; }

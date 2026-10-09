@@ -105,9 +105,9 @@
           <div id="rare"></div>
         </article>
 
-        <article class="card" id="card-human">
-          <h2>Human history nearby</h2>
-          <div id="human"></div>
+        <article class="card" id="card-people">
+          <h2>People and past civilizations</h2>
+          <div id="people"></div>
         </article>
 
         <article class="card" id="card-sites">
@@ -169,7 +169,7 @@ function carve(el, delayMs = 0) {  // chisel a card in; the card is fully visibl
   void el.offsetWidth;  // restart the animation
   el.classList.add("carve");
 }
-const carveAll = () => ["#card-story", "#dig-btn", "#card-rock", "#card-setting", "#card-fossils", "#card-human", "#card-rare"]
+const carveAll = () => ["#card-story", "#dig-btn", "#card-rock", "#card-setting", "#card-fossils", "#card-people", "#card-rare"]
   .forEach((sel, i) => carve($(sel), i * 80));
 const sand = () => h("span", { class: "sand", "aria-hidden": "true" });  // drifting sand: the themed loading indicator
 
@@ -287,6 +287,14 @@ async function explore(lat, lng, opts = {}) {
   if (data.facts.rock) lastRock = data.facts.rock;
 
   // Fossils come from a slower source, so they arrive after everything else is already on screen.
+  api("/api/people", lat, lng).then((d) => {
+    if (me !== run) return;
+    renderPeople(d);
+    if (!quiet) carve($("#people"));
+    return api("/api/people/story", lat, lng).then((st) => { if (me === run) renderPeopleStory(st); });
+  }).catch(() => {
+    if (me === run) setContent($("#people"), empty("The early history of this area could not be looked up right now."), peopleNote());
+  });
   api("/api/fossils", lat, lng).then((f) => {
     if (me !== run) return;
     renderFossils(f);
@@ -355,13 +363,9 @@ function renderWhere(d) {
          h("p", { class: "small" }, f.rare_animals_note),
          h("p", { class: "small" }, "Species listed by the IUCN Red List as vulnerable, endangered or critically endangered. Counts are numbers of records, not of animals.")]);
 
-  // Human history
-  const hh = f.human_history_nearby;
-  setContent($("#human"),
-    hh == null ? empty("Could not be checked right now.")
-      : hh.length === 0 ? (scopeLine(sc.human) || empty("Nothing recorded nearby."))
-      : [scopeLine(sc.human), h("ul", {}, hh.map((p) => h("li", {}, h("strong", {}, p.place),
-          p.distance_m != null && sc.human.level === "exact_area" ? ` (${p.distance_m.toLocaleString()} m away). ` : ". ", p.summary)))]);
+  // People and past civilizations: filled in by /api/people (Wikipedia history articles; several requests, so it arrives later)
+  setContent($("#people"), diggingNote("Looking up what Wikipedia says about the early history of this area..."));
+  const hh = f.human_history_nearby;  // the nearby history pages themselves are shown in "Dig sites nearby"
 
   digData = { rock, ruler: f.time_ruler, scopes: sc, human: hh, fossils: undefined, fossilScope: null };  // fossils: undefined = still loading
   renderDig();
@@ -425,6 +429,11 @@ function renderFossils(d) {
 }
 
 let lastSources = null;
+function markSourceFailed(id) {
+  if (!lastSources) return;
+  lastSources = lastSources.map((s) => (s.id === id && !s.status.startsWith("failed") ? { ...s, status: "failed: lookup" } : s));
+  renderSources();
+}
 function renderSources(list, pbdb) {
   if (list) lastSources = list;
   if (!lastSources) return;
@@ -512,6 +521,50 @@ digBtn.addEventListener("click", () => {
   if (!reduceMotion()) { void digBox.offsetWidth; digBox.classList.add("play"); }
   digBox.scrollIntoView(scrollOpts("start"));
 });
+
+/* ---------- People and past civilizations ----------
+ * Excerpts (2-3 sentences each) from Wikipedia "History of ..." articles at up to five scopes. Every excerpt shows its scope,
+ * a link to the article, and the CC BY-SA credit. Folklore is listed separately and labelled as tradition. */
+const peopleNote = (incomplete) => h("div", {},
+  h("p", { class: "small" }, "Histories of this area may be contested or incomplete."),
+  incomplete ? h("p", { class: "small" }, "Some Wikipedia lookups failed just now (it limits how fast it can be asked), so some places or early-period sections may be missing. Try again in a minute.") : null);
+const LEVEL_TAG = { your_area: "Your area", city: "City", district: "District", region: "Region", country: "Country" };
+
+function excerptBlock(e) {
+  const area = e.scope.level === "your_area";
+  const link = (href, text) => h("a", { href, target: "_blank", rel: "noopener noreferrer" }, text);
+  return h("div", { class: "excerpt" },
+    h("p", { class: `scope ${area ? "scope-exact_area" : "scope-wider_area"}` }, h("span", { class: "scope-tag" }, LEVEL_TAG[e.scope.level] || e.scope.label),
+      area ? `About ${e.scope.place_name}, your area.` : `About ${e.scope.place_name}, the ${e.scope.label}. Not your exact spot.`),
+    h("p", { class: "small" }, "According to Wikipedia: ", link(e.article.url, e.article.title)),
+    e.intro ? h("p", {}, e.intro) : null,
+    e.early ? h("p", {}, h("strong", {}, "Earliest period: "), link(e.early.url, e.early.section), ". ", e.early.text) : null,
+    h("p", { class: "small pp-credit" }, "Excerpt from Wikipedia, ", link(e.license.url, e.license.name), " \u00b7 ", link(e.article.history_url, "article authors")));
+}
+
+function traditionsBlock(list) {
+  if (!list.length) return null;
+  return h("div", { class: "traditions" },
+    h("p", { class: "layer-title" }, "Traditions"),
+    h("p", { class: "small" }, h("span", { class: "scope-tag" }, "tradition, not verified history"), "These sentences use words like legend, myth or tradition. Wikipedia reports them; Stela cannot confirm them."),
+    h("ul", {}, list.map((t) => h("li", {}, `\u201c${t.text}\u201d`,
+      h("div", { class: "small" }, `Wikipedia, ${t.article.title} \u00b7 about ${t.scope.place_name} (${t.scope.label}), not your exact spot unless that says your area`)))));
+}
+
+function renderPeople(d) {
+  const p = d.people, box = $("#people");
+  if (p.early_history == null) setContent(box, empty("The early history of this area could not be looked up right now."), peopleNote());
+  else if (!p.early_history.length && !p.traditions.length) setContent(box, h("p", { class: "empty" }, "No early history recorded for this area."), peopleNote(p.incomplete));
+  else setContent(box, p.early_history.map(excerptBlock), traditionsBlock(p.traditions), peopleNote(p.incomplete));
+  // statuses of the two services this card used
+  d.sources.forEach((src) => { if (src.status.startsWith("failed")) markSourceFailed(src.id); });
+}
+
+function renderPeopleStory(st) {
+  if (!st.narration) return;
+  $("#people").append(h("div", { class: "scribe-add" }, paragraphs(st.narration)));
+  storyText = (storyText + " " + st.narration).trim();
+}
 
 /* ---------- Passport (browser only: see stela-logic.js) ---------- */
 const passport = StelaLogic.createPassport(() => window.localStorage);  // looked up inside try/catch, so blocked storage is fine

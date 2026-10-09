@@ -59,7 +59,9 @@ HISTORY RULES (these add to the rules above):
 - Attribute them: say "According to Wikipedia" (you may name the article).
 - Say which scope each fact belongs to (your area, city, district, region or country) and describe that wider place, not
   the walker's exact spot.
-- Never claim an event happened at the walker's exact spot unless the excerpt's scope is "your area".
+- Never claim an event happened at the walker's exact spot unless the excerpt's scope is "your area". Do not write "here"
+  or "this spot" for events from the city, district, region or country excerpts.
+- Keep each fact with its own scope. Do not combine facts from different excerpts into one claim.
 - Anything under "traditions" must be called a tradition, not verified history.
 - If there are no excerpts, say only: "no early history recorded for this area." """
 
@@ -174,7 +176,10 @@ HISTORY_TERMS = re.compile(
     r"caliphates?|chiefs?|chieftains?|rulers?|civili[sz]ations?|romans?|celts?|celtic|saxons?|normans?|vikings?|mughals?|aztecs?|"
     r"mayans?|incas?|egyptians?|greeks?|persians?|britons?|mongols?|ottomans?|neanderthals?)(?!\w)", re.I)
 YEAR_TOKEN = re.compile(r"(?<![\d.,])(\d{1,4})\s*(?:BC|BCE|AD|CE)\b|(?<![\d.,])(1\d{3}|20\d{2})(?![\d,]\d)", re.I)
-EXACT_SPOT = re.compile(r"(right here|exactly here|under your feet|beneath your feet|where you(?:'re| are)? stand(?:ing)?|at your spot|on this very spot)", re.I)
+# Any "here" or "this spot" in a story about wider places points at the walker's exact spot, so it is not allowed
+# unless an excerpt really is about "your area". (A list of verbs missed "crossed a land bridge here" in testing.)
+EXACT_SPOT = re.compile(r"((?<!\w)here(?!\w)|under your feet|beneath your feet|where you(?:'re| are)? stand(?:ing)?|at your spot|"
+                        r"(?:this|your) (?:exact |very )?spot)", re.I)
 
 
 def people_violations(text, facts):
