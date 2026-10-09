@@ -51,6 +51,21 @@ feet" unless the level is exact_area), then name the classes given, and remind t
 so far, not everything that lived there. If the fossils scope level is "none", just say nothing is recorded."""
 
 
+PEOPLE_TASK = """TASK: In 3 to 6 short sentences, continue the story for the same walker (do not greet them again) with the early
+history of this area, using ONLY the excerpts in the facts.
+HISTORY RULES (these add to the rules above):
+- The only facts allowed are in the supplied excerpts. Do not add peoples, kingdoms, rulers, dates, origins or events that
+  are not written in them.
+- Attribute them: say "According to Wikipedia" (you may name the article).
+- Say which scope each fact belongs to (your area, city, district, region or country) and describe that wider place, not
+  the walker's exact spot.
+- Never claim an event happened at the walker's exact spot unless the excerpt's scope is "your area".
+- Anything under "traditions" must be called a tradition, not verified history.
+- If there are no excerpts, say only: "no early history recorded for this area." """
+
+NO_EARLY_HISTORY = "No early history recorded for this area."
+
+
 def _rare_for_llm(r):
     out = {"species": r["species"], "records": r["records"]}
     if r.get("datasets"):
@@ -72,11 +87,18 @@ def llm_view(facts):
         view["human_history_nearby"] = [{**h, "summary": h["summary"][:240]} for h in view["human_history_nearby"]]
     if view.get("rare_animals_recorded_nearby"):
         view["rare_animals_recorded_nearby"] = [_rare_for_llm(r) for r in view["rare_animals_recorded_nearby"]]
+    if "early_history" in view:  # People and past civilizations: scope labels and text only, no URLs or licence data
+        view.pop("license", None)
+        view["early_history"] = [{"scope": e["scope"]["label"], "place": e["scope"]["place_name"], "wikipedia_article": e["article"]["title"],
+                                  "intro": e["intro"], "earliest_period": e["early"] and {"section": e["early"]["section"], "text": e["early"]["text"]}}
+                                 for e in (view["early_history"] or [])]
+        view["traditions"] = [{"scope": t["scope"]["label"], "place": t["scope"]["place_name"], "text": t["text"], "label": t["label"]}
+                              for t in view.get("traditions") or []]
     return view
 
 
 def build_prompt(facts, part):
-    task = MAIN_TASK if part == "main" else FOSSIL_TASK
+    task = {"main": MAIN_TASK, "fossils": FOSSIL_TASK, "people": PEOPLE_TASK}[part]
     facts_json = json.dumps(llm_view(facts), ensure_ascii=False, separators=(",", ":"))
     return f"{GROUNDING_RULES}\n{VOICE}\n\n{task}\n\nFACTS:\n{facts_json}\n"
 
@@ -128,7 +150,55 @@ def scope_note(facts, layer):
     return sc["note"] if sc and sc["level"] != "exact_area" else ""
 
 
+def people_facts_only_text(facts):
+    """Plain, attributed summary of the excerpts. Used when there is nothing to narrate or the model fails or breaks a rule."""
+    excerpts = facts.get("early_history")
+    if excerpts is None:
+        return "The early history of this area could not be looked up right now."
+    if not excerpts and not facts.get("traditions"):
+        return NO_EARLY_HISTORY
+    parts = []
+    for e in excerpts[:3]:
+        text = (e["early"] and e["early"]["text"]) or e["intro"] or ""
+        first = (text.split(". ")[0].rstrip(".") + ".") if text else ""
+        where = "your area" if e["scope"]["level"] == "your_area" else f"the {e['scope']['label']} ({e['scope']['place_name']}), not your exact spot"
+        parts.append(f"According to Wikipedia ({e['article']['title']}), about {where}: {first}")
+    for t in (facts.get("traditions") or [])[:1]:
+        parts.append(f"Wikipedia also records a {t['label']} about the {t['scope']['label']} ({t['scope']['place_name']}): {t['text']}")
+    return " ".join(parts)
+
+
+# Code check for the history rules: a small model sometimes adds peoples, rulers, dates or "it happened right here".
+HISTORY_TERMS = re.compile(
+    r"(?<!\w)(kingdoms?|empires?|dynast(?:y|ies)|tribes?|clans?|kings?|queens?|emperors?|pharaohs?|sultans?|sultanates?|caliphs?|"
+    r"caliphates?|chiefs?|chieftains?|rulers?|civili[sz]ations?|romans?|celts?|celtic|saxons?|normans?|vikings?|mughals?|aztecs?|"
+    r"mayans?|incas?|egyptians?|greeks?|persians?|britons?|mongols?|ottomans?|neanderthals?)(?!\w)", re.I)
+YEAR_TOKEN = re.compile(r"(?<![\d.,])(\d{1,4})\s*(?:BC|BCE|AD|CE)\b|(?<![\d.,])(1\d{3}|20\d{2})(?![\d,]\d)", re.I)
+EXACT_SPOT = re.compile(r"(right here|exactly here|under your feet|beneath your feet|where you(?:'re| are)? stand(?:ing)?|at your spot|on this very spot)", re.I)
+
+
+def people_violations(text, facts):
+    """Reasons the story breaks the history rules (empty list when it is fine). Everything it names must be in the excerpts."""
+    allowed = json.dumps(llm_view(facts), ensure_ascii=False).lower().replace(",", "")
+    problems = []
+    for m in HISTORY_TERMS.finditer(text):
+        if m.group(0).lower().rstrip("s") not in allowed:
+            problems.append(f"term not in the excerpts: {m.group(0)}")
+    for m in YEAR_TOKEN.finditer(text):
+        n = m.group(1) or m.group(2)
+        if not re.search(rf"(?<!\d){int(n)}(?!\d)", allowed):
+            problems.append(f"date not in the excerpts: {m.group(0)}")
+    excerpts = facts.get("early_history") or []
+    if EXACT_SPOT.search(text) and not any(e["scope"]["level"] == "your_area" for e in excerpts):
+        problems.append("claims something about the exact spot")
+    if excerpts and "wikipedia" not in text.lower():
+        problems.append("no attribution to Wikipedia")
+    return problems
+
+
 def facts_only_text(facts, part="main"):
+    if part == "people":
+        return people_facts_only_text(facts)
     if part == "fossils":
         f = facts.get("fossils_found_nearby")
         note = ((facts.get("scope") or {}).get("fossils") or {}).get("note", "")
@@ -198,11 +268,15 @@ async def narrate(client, facts, part="main"):
     """Returns (text, mode); mode is 'online', 'offline' or 'facts-only'. Never raises."""
     nothing_to_say = part == "main" and facts.get("rock") is None and not facts.get("human_history_nearby") \
         and not facts.get("rare_animals_recorded_nearby")
+    if part == "people" and not (facts.get("early_history") or facts.get("traditions")):
+        nothing_to_say = True  # nothing found (or nothing could be looked up): never ask a model to talk
     if nothing_to_say:  # with no facts, a template is safer than asking a model to talk
         return facts_only_text(facts, part), "facts-only"
     try:
         text, mode = await call_llm(client, build_prompt(facts, part))
         if part == "main" and claims_animals_alive(text):
+            return facts_only_text(facts, part), "facts-only"
+        if part == "people" and people_violations(text, facts):
             return facts_only_text(facts, part), "facts-only"
         return text, mode
     except Exception:

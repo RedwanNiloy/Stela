@@ -174,27 +174,50 @@ def parse_place(data):
     }
 
 
-async def reverse_geocode(client, lat, lng):
-    """Nearest named place for a spot, or None. Cached, and spaced to 1 request/second. Raises on failure."""
+async def _nominatim_cached(client, cache, lat, lng, parse, **params):
+    """One throttled, cached Nominatim reverse lookup. `parse` turns the raw reply into what the caller wants.
+    All callers share one lock and one clock, so the whole app stays under 1 request/second. Raises on failure."""
     key = cache_key(lat, lng)
-    hit = _place_cache.get(key)
+    hit = cache.get(key)
     if hit:
-        return hit["place"]
+        return hit["value"]
     async with _geo_lock():
-        hit = _place_cache.get(key)  # someone may have fetched it while we waited for the lock
+        hit = cache.get(key)  # someone may have fetched it while we waited for the lock
         if hit:
-            return hit["place"]
+            return hit["value"]
         wait = _geo_state["last"] + NOMINATIM_GAP - time.monotonic()
         if wait > 0:
             await asyncio.sleep(wait)
         try:
-            data = await get_json(client, NOMINATIM, FAST_TIMEOUT, lat=lat, lon=lng, format="jsonv2", zoom=10,
-                                  addressdetails=1, extratags=1, **{"accept-language": "en"})
+            data = await get_json(client, NOMINATIM, FAST_TIMEOUT, lat=lat, lon=lng, format="jsonv2",
+                                  addressdetails=1, **params, **{"accept-language": "en"})
         finally:
             _geo_state["last"] = time.monotonic()
-        place = parse_place(data)
-        _place_cache.set(key, {"place": place})
-        return place
+        value = parse(data)
+        cache.set(key, {"value": value})
+        return value
+
+
+async def reverse_geocode(client, lat, lng):
+    """Nearest named place for a spot, or None. Cached, and spaced to 1 request/second. Raises on failure."""
+    return await _nominatim_cached(client, _place_cache, lat, lng, parse_place, zoom=10, extratags=1)
+
+
+# The place hierarchy (neighbourhood, city, county, state, country). Real `address` keys seen: neighbourhood, quarter,
+# suburb, residential, hamlet, village, town, city, municipality, county, state_district, state, region, country,
+# country_code. Which of them appear varies by place (Dover has both town and city, set to "Dover").
+_address_cache = TTLCache(ttl_seconds=24 * 3600)
+
+
+def parse_address(data):
+    if not data or data.get("error"):
+        return None
+    return data.get("address") or None
+
+
+async def reverse_address(client, lat, lng):
+    """The `address` object (place hierarchy) for a spot, or None over open water. Same throttle and cache rules."""
+    return await _nominatim_cached(client, _address_cache, lat, lng, parse_address, zoom=18)
 
 
 # ---------- Layer 2: ancient animals (Paleobiology Database) ----------

@@ -4,6 +4,7 @@ PRIVACY: this app never logs coordinates or IP addresses. It logs only the route
 name, status code, duration and error *types*. Run uvicorn with --no-access-log
 (its access log prints the full URL, including the coordinates).
 """
+import asyncio
 import logging
 import time
 from contextlib import asynccontextmanager
@@ -15,7 +16,7 @@ from fastapi.responses import JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.gzip import GZipMiddleware
 
-from . import geo, narrate
+from . import geo, narrate, people
 from .cache import RateLimiter, TTLCache, cache_key
 
 log = logging.getLogger("stela")
@@ -28,7 +29,9 @@ STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 where_cache = TTLCache()    # fast facts + narration
 fossil_cache = TTLCache()   # PBDB fossils + narration
-limiter = RateLimiter(limit=40, window=60)  # 2 calls per lookup (/where + /fossils) = about 20 lookups a minute
+people_cache = TTLCache()   # People and past civilizations: the excerpts (facts)
+story_cache = TTLCache()    # ... and the narration paragraph about them
+limiter = RateLimiter(limit=80, window=60)  # 4 calls per lookup (where, fossils, people, people/story) = about 20 lookups a minute
 
 
 @asynccontextmanager
@@ -121,6 +124,55 @@ async def fossils(request: Request, lat: float = Query(ge=-90, le=90), lng: floa
     if not status.startswith("failed") and mode != "facts-only":
         fossil_cache.set(key, result)
     return {**result, "cached": False}
+
+
+def people_sources(statuses):
+    return [{"id": k, **geo.SOURCES[k], "status": statuses.get(k, "n/a")} for k in ("wikipedia", "nominatim")]
+
+
+async def people_facts(request, lat, lng):
+    """The excerpts for a spot (cached). Returns (result dict, from_cache). Never raises."""
+    key = cache_key(lat, lng)
+    hit = people_cache.get(key)
+    if hit:
+        return hit, True
+    client = request.app.state.http
+    t0 = time.perf_counter()
+    try:
+        facts, statuses = await asyncio.wait_for(people.fetch_people(client, lat, lng), people.PEOPLE_TOTAL)
+    except Exception as e:  # a slow or broken layer must not break the page
+        facts, statuses = {"early_history": None, "traditions": [], "license": people.LICENSE}, {"wikipedia": f"failed: {type(e).__name__}"}
+    failed = [k for k, v in statuses.items() if v.startswith("failed")]
+    # only statuses and counts are logged: never coordinates, place names or the text itself
+    log.info("people failed=%s excerpts=%s %.0fms", failed, len(facts["early_history"] or []), (time.perf_counter() - t0) * 1000)
+    result = {"people": facts, "sources": people_sources(statuses)}
+    if not failed:
+        people_cache.set(key, result)
+    return result, False
+
+
+@app.get("/api/people")
+async def people_endpoint(request: Request, lat: float = Query(ge=-90, le=90), lng: float = Query(ge=-180, le=180)):
+    """People and past civilizations: excerpts from Wikipedia history articles, fast (no model involved)."""
+    result, cached = await people_facts(request, lat, lng)
+    return {**result, "cached": cached}
+
+
+@app.get("/api/people/story")
+async def people_story(request: Request, lat: float = Query(ge=-90, le=90), lng: float = Query(ge=-180, le=180)):
+    """The scribe's grounded paragraph about those excerpts (separate, so a slow model never delays the cards)."""
+    key = cache_key(lat, lng)
+    hit = story_cache.get(key)
+    if hit:
+        return {**hit, "cached": True}
+    result, _ = await people_facts(request, lat, lng)
+    t0 = time.perf_counter()
+    text, mode = await narrate.narrate(request.app.state.http, result["people"], "people")
+    log.info("people-story mode=%s %.0fms", mode, (time.perf_counter() - t0) * 1000)
+    out = {"narration": text, "mode": mode}
+    if mode != "facts-only" and result["people"]["early_history"] is not None:
+        story_cache.set(key, out)
+    return {**out, "cached": False}
 
 
 # Must come last: it catches everything that is not an API route.
