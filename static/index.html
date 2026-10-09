@@ -78,6 +78,10 @@
   .records li { margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px dashed var(--stone-dark); }
   .records li:last-child { border-bottom: 0; }
   .dead { color: var(--ochre); }
+  .scope { margin: 0 0 10px; padding: 6px 10px; border-left: 4px solid var(--turquoise); background: var(--turquoise-bg); border-radius: 0 8px 8px 0; font-size: .92rem; }
+  .scope-wider_area, .scope-nearest_place, .scope-region { border-left-color: var(--ochre); background: transparent; border-top: 1px dashed var(--ochre); border-bottom: 1px dashed var(--ochre); }
+  .scope-none { border-left-color: var(--stone-dark); background: transparent; font-style: italic; color: var(--ink-soft); }
+  .scope-tag { display: inline-block; margin-right: 6px; padding: 0 8px; border-radius: 999px; border: 1.5px solid currentColor; font-size: .75rem; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; font-style: normal; }
   .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .8rem; border: 1.5px solid var(--stone-dark); color: var(--ink-soft); }
   .narration p { font-size: 1.12rem; }
   .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
@@ -168,6 +172,7 @@
       <li><a href="https://paleobiodb.org" target="_blank" rel="noopener">Paleobiology Database</a> (fossils)</li>
       <li><a href="https://www.gbif.org" target="_blank" rel="noopener">GBIF</a> / IUCN Red List (rare animal records)</li>
       <li><a href="https://en.wikipedia.org" target="_blank" rel="noopener">Wikipedia</a> (human history)</li>
+      <li><a href="https://nominatim.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap Nominatim</a> (nearest place, used only when nothing is found within 10 km)</li>
     </ul>
     <p>Your location is used for this lookup only. Stela does not store or log it.</p>
   </footer>
@@ -301,6 +306,12 @@ function paragraphs(text) {
   return text.split(/\n{2,}/).map((p) => h("p", {}, p.trim())).filter((p) => p.textContent);
 }
 
+/* Scope: how far from the user's spot a card's facts really come from, in plain words (text comes from the server). */
+const SCOPE_TAG = { exact_area: "Your area", wider_area: "Wider area", nearest_place: "Nearest place", region: "Wider region", none: "Nothing recorded" };
+function scopeLine(scope) {
+  return scope ? h("p", { class: `scope scope-${scope.level}` }, h("span", { class: "scope-tag" }, SCOPE_TAG[scope.level] || ""), scope.note) : null;
+}
+
 function renderWhere(d) {
   const f = d.facts;
   storyText = d.narration;
@@ -309,11 +320,9 @@ function renderWhere(d) {
   setListenLabel();
 
   // Under your feet
-  const rock = f.rock;
+  const rock = f.rock, sc = f.scope || {};
   if (!rock) {
-    setContent($("#rock"), empty(statusOf(d, "macrostrat") === "empty"
-      ? "No mapped rock unit recorded here. This may be open water or an unmapped area."
-      : "The rock map could not be checked right now."));
+    setContent($("#rock"), sc.rock ? scopeLine(sc.rock) : empty("The rock map could not be checked right now."));
     setContent($("#setting"), empty("Nothing recorded nearby."));
   } else {
     const ageLine = rock.b_age != null
@@ -321,17 +330,17 @@ function renderWhere(d) {
       : "Age not recorded";
     const ruler = f.time_ruler;
     setContent($("#rock"),
+      scopeLine(sc.rock),
       h("p", { class: "big" }, rock.name || "Unnamed rock unit"),
       rock.lith ? h("p", {}, "Rock type: " + rock.lith) : null,
       h("p", {}, ageLine),
       ruler ? h("p", { class: "small" }, `That is about ${ruler.times_older_than_humans.toLocaleString()} times older than our species (about 0.3 million years).`) : null,
-      ruler ? strata(rock) : null,
-      h("p", { class: "small" }, `Rock map detail: ${rock.map_scale}.`));
+      ruler ? strata(rock) : null);
 
     const s = f.ancient_setting;
     setContent($("#setting"),
       s && s.meaning
-        ? [h("p", { class: "big" }, "Probably " + s.meaning),
+        ? [scopeLine(sc.rock), h("p", { class: "big" }, "Probably " + s.meaning),
            h("p", { class: "small" }, "This is a guess from the rock type, not a certainty. Sandstone and conglomerate can form on land or in shallow seas.")]
         : empty("The rock type did not tell us enough to guess. Nothing recorded."));
   }
@@ -343,17 +352,18 @@ function renderWhere(d) {
   const rare = f.rare_animals_recorded_nearby;
   setContent($("#rare"),
     rare == null ? empty("Could not be checked right now.")
-      : rare.length === 0 ? empty("Nothing recorded nearby.")
-      : [h("ul", { class: "records" }, rare.map(rareEntry)),
+      : rare.length === 0 ? (scopeLine(sc.rare) || empty("Nothing recorded nearby."))
+      : [scopeLine(sc.rare), h("ul", { class: "records" }, rare.map(rareEntry)),
          h("p", { class: "small" }, f.rare_animals_note),
-         h("p", { class: "small" }, "Species listed by the IUCN Red List as vulnerable, endangered or critically endangered, with records within about 30 km. Counts are numbers of records, not of animals.")]);
+         h("p", { class: "small" }, "Species listed by the IUCN Red List as vulnerable, endangered or critically endangered. Counts are numbers of records, not of animals.")]);
 
   // Human history
   const hh = f.human_history_nearby;
   setContent($("#human"),
     hh == null ? empty("Could not be checked right now.")
-      : hh.length === 0 ? empty("Nothing recorded nearby.")
-      : h("ul", {}, hh.map((p) => h("li", {}, h("strong", {}, p.place), ` (${p.distance_m.toLocaleString()} m away). `, p.summary))));
+      : hh.length === 0 ? (scopeLine(sc.human) || empty("Nothing recorded nearby."))
+      : [scopeLine(sc.human), h("ul", {}, hh.map((p) => h("li", {}, h("strong", {}, p.place),
+          p.distance_m != null && sc.human.level === "exact_area" ? ` (${p.distance_m.toLocaleString()} m away). ` : ". ", p.summary)))]);
 
   renderSources(d.sources);
 }
@@ -387,10 +397,11 @@ function renderFossils(d) {
   if (f == null) {
     setContent(box, empty("The fossil database could not be reached right now."));
   } else if (!f.count) {
-    setContent(box, empty("Nothing recorded nearby."));
+    setContent(box, scopeLine(d.scope) || empty("Nothing recorded nearby."));
   } else {
     setContent(box,
-      h("p", {}, `${f.count} fossil finds recorded ${f.search}.`),
+      scopeLine(d.scope),
+      h("p", {}, `${f.count} fossil finds recorded.`),
       h("ul", { class: "chips" }, f.classes.map(([name, n]) => h("li", {}, `${name} (${n})`))),
       f.taxa.length ? h("p", { class: "small" }, "Most often found: " + f.taxa.map(([name]) => name).join(", ") + ".") : null,
       h("p", { class: "small" }, "This shows what has been found so far, not everything that lived here."));
@@ -407,7 +418,7 @@ function renderSources(list, pbdb) {
   if (list) lastSources = list;
   if (!lastSources) return;
   if (pbdb) lastSources = lastSources.map((s) => (s.id === "pbdb" ? pbdb : s));
-  const label = { ok: "", empty: " (nothing found here)", pending: " (loading)", "n/a": "" };
+  const label = { ok: "", empty: " (nothing found here)", pending: " (loading)", "n/a": "", "not needed": " (only used when needed)" };
   setContent($("#sources"), lastSources.map((s) =>
     h("li", {}, h("a", { href: s.url, target: "_blank", rel: "noopener" }, s.name),
       ` – ${s.license}`, s.status.startsWith("failed") ? " (could not be reached)" : (label[s.status] || ""))));

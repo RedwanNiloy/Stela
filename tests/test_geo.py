@@ -2,6 +2,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from app import geo
 
 SAMPLES = Path(__file__).parent / "samples"
@@ -38,16 +40,25 @@ def test_time_ruler():
 
 def test_parse_fossils_counts_and_hides_unclassified():
     data = load("pbdb_dover.json")
-    f = geo.parse_fossils(data, 0.5, True)
+    f = geo.parse_fossils(data, 51.13, 1.31)
     assert f["count"] == len(data["records"])
-    assert "same age as the rock" in f["search"]
     assert all(name != "NO_CLASS_SPECIFIED" for name, _ in f["classes"])
-    assert geo.parse_fossils({"records": []}, 0.5, True) is None
+    assert geo.parse_fossils({"records": []}, 51.13, 1.31) is None
 
 
-def test_parse_fossils_says_when_age_was_not_matched():
-    f = geo.parse_fossils(load("pbdb_dover.json"), 2.0, False)
-    assert "ANY age" in f["search"]
+def test_parse_fossils_gives_the_real_distance_to_the_nearest_find():
+    f = geo.parse_fossils(load("pbdb_dover.json"), 51.13, 1.31)
+    assert 0 < f["nearest_km"] < 100
+    far = geo.parse_fossils({"records": [{"tna": "X", "cll": "Y", "lat": "0", "lng": "0"}]}, 51.13, 1.31)
+    assert far["nearest_km"] > 5000
+    assert geo.parse_fossils({"records": [{"tna": "X"}]}, 51.13, 1.31)["nearest_km"] is None  # no coordinates
+
+
+def test_haversine_and_distance_wording():
+    assert geo.haversine_km(51.13, 1.31, 51.13, 1.31) == 0
+    assert geo.haversine_km(0, 0, 0, 1) == pytest.approx(111.2, abs=0.5)
+    assert geo._km(0.594653) == "0.6" and geo._km(4.2) == "4.2" and geo._km(106.7) == "107"
+    assert geo.make_scope("none", "x", 12.34)["distance_km"] == 12
 
 
 def test_parse_rare_gives_name_and_count():

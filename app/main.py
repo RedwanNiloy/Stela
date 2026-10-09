@@ -105,15 +105,16 @@ async def fossils(request: Request, lat: float = Query(ge=-90, le=90), lng: floa
     else:
         unit, _ = await geo.safe(geo.fetch_rock(client, lat, lng))
 
-    found, status = await geo.slow_fossils(client, lat, lng, unit)
+    found, scope, status = await geo.slow_fossils(client, lat, lng, unit)
     # None = source unreachable, {} = reachable but nothing recorded (the narrator treats these differently)
     fossil_fact = None if status.startswith("failed") else (found or {})
-    facts = {"rock": unit and unit.get("name"), "rock_age_Ma": unit and unit.get("b_age"),
-             "ancient_setting": geo.setting(unit) if unit else None, "fossils_found_nearby": fossil_fact}
+    facts = {"rock": unit and unit.get("name"), "rock_began_forming": unit and unit.get("b_age") is not None and f"{unit['b_age']:g} million years ago",
+             "ancient_setting": geo.setting(unit) if unit else None, "fossils_found_nearby": fossil_fact,
+             "scope": {"fossils": scope}}
     text, mode = await narrate.narrate(client, facts, "fossils")
     log.info("fossils status=%s mode=%s %.0fms", status.split(":")[0], mode, (time.perf_counter() - t0) * 1000)
 
-    result = {"fossils": fossil_fact, "narration": text, "mode": mode,
+    result = {"fossils": fossil_fact, "scope": scope, "narration": text, "mode": mode,
               "source": {"id": "pbdb", **geo.SOURCES["pbdb"], "status": status}}
     if not status.startswith("failed") and mode != "facts-only":
         fossil_cache.set(key, result)

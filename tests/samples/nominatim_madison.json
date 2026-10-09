@@ -1,0 +1,41 @@
+{
+ "place_id": 373347806,
+ "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+ "osm_type": "relation",
+ "osm_id": 3352040,
+ "lat": "43.0746900",
+ "lon": "-89.3841663",
+ "category": "boundary",
+ "type": "administrative",
+ "place_rank": 16,
+ "importance": 0.6485158885266581,
+ "addresstype": "city",
+ "name": "Madison",
+ "display_name": "Madison, Dane County, Wisconsin, United States",
+ "address": {
+  "city": "Madison",
+  "county": "Dane County",
+  "state": "Wisconsin",
+  "ISO3166-2-lvl4": "US-WI",
+  "country": "United States",
+  "country_code": "us"
+ },
+ "extratags": {
+  "capital": "4",
+  "website": "https://www.cityofmadison.com/",
+  "wikidata": "Q43788",
+  "wikipedia": "en:Madison, Wisconsin",
+  "population": "248951",
+  "border_type": "city",
+  "place:US:WI": "city",
+  "linked_place": "city",
+  "state_capital": "yes",
+  "admin_level": "8"
+ },
+ "boundingbox": [
+  "42.9981494",
+  "43.1719160",
+  "-89.5716610",
+  "-89.2320848"
+ ]
+}

@@ -24,7 +24,7 @@ save("macrostrat_dover.json", get("https://macrostrat.org/api/v2/geologic_units/
                                   lat=51.13, lng=1.31, scale="medium", response="long"))
 save("pbdb_dover.json", get("https://paleobiodb.org/data1.2/occs/list.json", lngmin=.81, lngmax=1.81,
                             latmin=50.63, latmax=51.63, max_ma=100.5, min_ma=66, timerule="overlap",
-                            show="class", limit=40))
+                            show="class,coords", limit=40))
 save("gbif_dover.json", get("https://api.gbif.org/v1/occurrence/search", decimalLatitude="50.88,51.38",
                             decimalLongitude="1.06,1.56", iucnRedListCategory=["CR", "EN", "VU"], kingdomKey=1,
                             limit=0, facet="scientificName", facetLimit=8))
@@ -44,3 +44,18 @@ area = dict(decimalLatitude="23.56,24.06", decimalLongitude="90.16,90.66", iucnR
 raw = get("https://api.gbif.org/v1/occurrence/search", **area, limit=300)["results"]
 save("gbif_dhaka_records.json", [{k: r.get(k) for k in KEEP} for r in raw])
 print("saved dhaka records:", len(raw))
+
+
+# Scope fallbacks: Nominatim (a city, a region, open ocean), a Wikipedia intro, and PBDB at country level.
+import time
+
+NOMINATIM = "https://nominatim.openstreetmap.org/reverse"
+for name, (la, ln) in {"madison": (43.07, -89.40), "uluru": (-25.34, 131.04), "ocean": (0, -30)}.items():
+    save(f"nominatim_{name}.json", get(NOMINATIM, lat=la, lon=ln, format="jsonv2", zoom=10, addressdetails=1,
+                                      extratags=1, **{"accept-language": "en"}))
+    time.sleep(1.1)  # Nominatim policy: at most 1 request per second
+save("wikipedia_intro_madison.json", get(WIKI, action="query", prop="extracts", exintro=1, explaintext=1,
+                                         exsentences=3, titles="Madison, Wisconsin", redirects=1, format="json"))
+save("pbdb_country_us.json", get("https://paleobiodb.org/data1.2/occs/list.json", cc="US", max_ma=497.5, min_ma=493.575,
+                                 timerule="overlap", show="class,coords", limit=25))
+print("saved scope samples")

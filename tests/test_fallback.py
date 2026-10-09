@@ -10,12 +10,14 @@ from app import geo, main, narrate
 from app.cache import RateLimiter, TTLCache, cache_key
 
 FACTS = {
-    "rock": {"name": "White Chalk Subgroup", "lith": "chalk", "b_age": 100.5, "t_age": 66, "b_int_name": "Cenomanian"},
+    "rock": {"name": "White Chalk Subgroup", "lith": "chalk", "b_age": 100.5, "t_age": 66, "b_int_name": "Cenomanian",
+             "map_scale": "large"},
     "ancient_setting": {"type": "marine", "meaning": "a sea or ocean floor"},
     "time_ruler": {"times_older_than_humans": 335},
     "fossils_found_nearby": "pending",
     "rare_animals_recorded_nearby": [],
     "human_history_nearby": None,  # source down
+    "scope": {"rock": {"level": "exact_area", "note": "From a detailed local geological map."}},
 }
 
 
@@ -107,7 +109,7 @@ def api(monkeypatch):
         raise httpx.ReadTimeout("slow")  # one source fails
 
     async def fake_human(c, lat, lng):
-        return []
+        return [], geo.human_scope("none", geo_note="No named place was found nearby."), "empty"
 
     async def fake_llm(c, prompt):
         raise RuntimeError("no llm")
@@ -128,6 +130,9 @@ def test_where_survives_one_failed_source_and_llm_failure(api):
     assert d["mode"] == "facts-only" and d["narration"]
     assert d["facts"]["rare_animals_recorded_nearby"] is None        # failed source -> null
     assert d["facts"]["rock"]["name"] == "White Chalk Subgroup"  # the others are unaffected
+    scopes = d["facts"]["scope"]
+    assert scopes["rock"]["level"] == "exact_area" and scopes["human"]["level"] == "none"
+    assert scopes["rare"] is None                                 # a failed source has no scope
     status = {s["id"]: s["status"] for s in d["sources"]}
     assert status["gbif"].startswith("failed")
     assert status["macrostrat"] == "ok" and status["pbdb"] == "pending"
@@ -149,3 +154,37 @@ def test_fossils_failure_is_not_an_error_screen(api, monkeypatch):
 
 def test_health(api):
     assert api.get("/health").text == "ok"
+
+
+# ---------------------------------------------------------------- scope in the narration
+DHAKA_NOTE = "About Dhaka, the nearest city (about 5.5 km away), not your exact spot. Nothing relevant is recorded within about 10 km."
+SCOPED = {**FACTS, "rare_animals_recorded_nearby": [], "human_history_nearby": [
+    {"place": "Dhaka", "distance_m": 5503, "summary": "Dhaka is the capital of Bangladesh."}],
+    "scope": {"rock": {"level": "wider_area", "note": "Only a regional-scale map covers this spot, so the rock name is a broader grouping and less precise."},
+              "human": {"level": "nearest_place", "note": DHAKA_NOTE, "distance_km": 5.5, "place_name": "Dhaka"},
+              "rare": {"level": "none", "note": "Nothing recorded: no records of rare animals within about 90 km."}}}
+
+
+def test_prompt_has_the_scope_rule_and_passes_scopes_to_the_model():
+    p = narrate.build_prompt(SCOPED, "main")
+    rules, facts = p.split("FACTS:")
+    assert "NEVER claim those facts happened at, or are under, the walker's exact spot" in " ".join(rules.split())
+    assert '"scopes"' in facts and "the nearest city" in facts and "nearest_place" in facts
+    assert '"scope"' not in facts.replace('"scopes"', "")  # the raw key is not sent twice
+    assert rules.startswith("STRICT RULES")  # grounding rules are still first
+
+
+def test_fallback_text_says_the_facts_are_about_the_wider_place():
+    text = narrate.facts_only_text(SCOPED)
+    assert text.index("About Dhaka, the nearest city") < text.index("Dhaka is the capital")
+    assert "broader grouping" in text                       # coarser rock map is admitted
+    assert "no records of rare animals within about 90 km" in text
+
+
+def test_fallback_for_fossils_includes_the_distance_note():
+    facts = {"fossils_found_nearby": {"count": 99, "classes": [["Trilobita", 69]], "taxa": [], "nearest_km": 107},
+             "scope": {"fossils": {"level": "wider_area", "note": "Nothing of this age within about 55 km. Nearest finds about 107 km away."}}}
+    text = narrate.facts_only_text(facts, "fossils")
+    assert "Nearest finds about 107 km away" in text and "not everything that lived here" in text
+    none = {"fossils_found_nearby": {}, "scope": {"fossils": {"level": "none", "note": "Nothing recorded: no fossils of this rock's age were found within about 222 km."}}}
+    assert "Nothing recorded" in narrate.facts_only_text(none, "fossils")

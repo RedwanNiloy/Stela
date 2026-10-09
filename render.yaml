@@ -16,3 +16,5 @@ services:
         sync: false
       - key: LLM_MODEL
         sync: false
+      - key: STELA_CONTACT
+        sync: false

@@ -28,6 +28,12 @@ GROUNDING_RULES = """STRICT RULES (these override everything else):
    roam, wander, can be seen or inhabit the area. Say only that records or sightings exist. If some records are
    marked dead or are museum specimens, say so. Always add that a record shows where an animal was observed,
    not necessarily where it lives.
+9. The "scopes" section says how far from the walker each section's facts really come from. Whenever a scope's
+   level is not "exact_area", say so in plain words using its note (for example "these are about Dhaka, the
+   nearest city") and describe that wider place or distance. NEVER claim those facts happened at, or are under,
+   the walker's exact spot. For level "none", say "nothing recorded". For a coarser map, say the rock is a broader grouping.
+10. Copy numbers, distances and ages exactly as written in the facts (say "1,658 times", not "sixteen thousand times").
+    Never convert units or round them differently.
 """
 
 VOICE = """VOICE (tone only; the rules above still apply exactly):
@@ -36,12 +42,13 @@ stand still, for example "Stand still. The ground remembers..." Plain, warm, eas
 no headings, no markdown."""
 
 MAIN_TASK = """TASK: In under 150 words, tell the walker: 1) the rock under their feet and how old it is
-(compare with humans using time_ruler), 2) what this place probably was then, 3) human history nearby,
+(compare with humans using time_ruler), 2) what this place probably was then, 3) human history (or the wider place it is about, if the scope says so),
 4) rare animals RECORDED nearby (records only; mention the caveat). Do not mention fossils; they are shown separately."""
 
 FOSSIL_TASK = """TASK: In 2 to 4 short sentences, continue the story for the same walker (do not greet them again).
-Tell what fossils have been found near here, using the classes and taxa given, and remind them this is only what
-has been found so far, not everything that lived here."""
+Say how far away the fossils were found, using the fossils scope note (never say they were found "here" or "under your
+feet" unless the level is exact_area), then name the classes given, and remind them this is only what has been found
+so far, not everything that lived there. If the fossils scope level is "none", just say nothing is recorded."""
 
 
 def _rare_for_llm(r):
@@ -56,7 +63,9 @@ def _rare_for_llm(r):
 
 def llm_view(facts):
     """A smaller copy of the facts for the model: fewer tokens, so faster and less to get wrong."""
-    view = {k: v for k, v in facts.items() if v != "pending"}
+    view = {k: v for k, v in facts.items() if v != "pending" and k != "scope"}
+    if facts.get("scope"):  # how far from the walker each section's facts come from
+        view["scopes"] = {k: {"level": v["level"], "note": v["note"]} for k, v in facts["scope"].items() if v}
     if isinstance(view.get("rock"), dict):
         view["rock"] = {k: v for k, v in view["rock"].items() if v not in (None, "") and k != "descrip"}
     if view.get("human_history_nearby"):
@@ -113,15 +122,22 @@ def _ma(x):
     return f"{x:g}"
 
 
+def scope_note(facts, layer):
+    """The plain-words scope of a layer, or '' when it describes the walker's own area."""
+    sc = (facts.get("scope") or {}).get(layer)
+    return sc["note"] if sc and sc["level"] != "exact_area" else ""
+
+
 def facts_only_text(facts, part="main"):
     if part == "fossils":
         f = facts.get("fossils_found_nearby")
+        note = ((facts.get("scope") or {}).get("fossils") or {}).get("note", "")
         if f is None:
-            return "The fossil database could not be reached or has no records for this spot."
+            return "The fossil database could not be reached right now."
         if not f:
-            return "Fossils: nothing recorded nearby."
+            return "Fossils: " + (note or "nothing recorded nearby.")
         classes = ", ".join(c for c, _ in f["classes"][:4]) or "various groups"
-        return (f"Fossils: {f['count']} finds recorded {f['search']}, mostly {classes}. "
+        return (f"Fossils: {f['count']} finds, mostly {classes}. {note} "
                 "This shows only what has been found so far, not everything that lived here.")
     parts = []
     rock = facts.get("rock")
@@ -140,6 +156,8 @@ def facts_only_text(facts, part="main"):
             if ruler:
                 sentence += f". That is roughly {ruler['times_older_than_humans']:,} times older than our species"
         parts.append(sentence + ".")
+        if scope_note(facts, "rock"):
+            parts.append(scope_note(facts, "rock"))
         s = facts.get("ancient_setting")
         if s and s.get("meaning"):
             parts.append(f"From the rock type, this place was probably {s['meaning']} (an inference, not a certainty).")
@@ -147,18 +165,20 @@ def facts_only_text(facts, part="main"):
     if human is None:
         parts.append("Human history could not be checked right now.")
     elif not human:
-        parts.append("Human history: nothing recorded nearby.")
+        parts.append("Human history: " + (scope_note(facts, "human") or "nothing recorded nearby."))
+    elif scope_note(facts, "human"):  # a wider place, not the walker's spot: say so before the text
+        parts.append(f"{scope_note(facts, 'human')} {human[0]['summary']}")
     else:
         parts.append("Human history nearby: " + "; ".join(f"{h['place']} ({h['distance_m']} m)" for h in human[:3]) + ".")
     rare = facts.get("rare_animals_recorded_nearby")
     if rare is None:
         parts.append("Rare animal records could not be checked right now.")
     elif not rare:
-        parts.append("Rare animals recorded nearby: nothing recorded nearby.")
+        parts.append("Rare animals recorded nearby: " + (scope_note(facts, "rare") or "nothing recorded nearby."))
     else:
         parts.append("Rare animals recorded nearby: " + ", ".join(r["species"] for r in rare[:4]) + ". "
-                     + facts.get("rare_animals_note", ""))
-    return " ".join(parts)
+                     + scope_note(facts, "rare") + " " + facts.get("rare_animals_note", ""))
+    return " ".join(p.replace("  ", " ") for p in parts)
 
 
 # Safety net for rule 8: small models sometimes ignore it. If the story claims the animals are alive or live

@@ -1,0 +1,39 @@
+{
+ "place_id": 28836499,
+ "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+ "osm_type": "relation",
+ "osm_id": 2316594,
+ "lat": "-19.8516101",
+ "lon": "133.2303375",
+ "category": "boundary",
+ "type": "administrative",
+ "place_rank": 8,
+ "importance": 0.6497272974055486,
+ "addresstype": "state",
+ "name": "Northern Territory",
+ "display_name": "Northern Territory, Australia",
+ "address": {
+  "state": "Northern Territory",
+  "ISO3166-2-lvl4": "AU-NT",
+  "country": "Australia",
+  "country_code": "au"
+ },
+ "extratags": {
+  "website": "https://nt.gov.au",
+  "wikidata": "Q3235",
+  "wikipedia": "en:Northern Territory",
+  "population": "267478",
+  "state_code": "NT",
+  "linked_place": "state",
+  "population:date": "2025-12",
+  "website:tourism": "http://northernterritory.com/",
+  "def:highway=footway;access:bicycle": "yes",
+  "admin_level": "4"
+ },
+ "boundingbox": [
+  "-25.9986200",
+  "-10.8524628",
+  "129.0004464",
+  "138.0273711"
+ ]
+}
