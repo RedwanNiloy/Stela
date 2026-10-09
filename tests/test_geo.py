@@ -50,11 +50,43 @@ def test_parse_fossils_says_when_age_was_not_matched():
     assert "ANY age" in f["search"]
 
 
-def test_parse_rare_strips_authors():
+def test_parse_rare_gives_name_and_count():
     rare = geo.parse_rare(load("gbif_dover.json"))
-    assert rare[0]["species"] == "Rissa tridactyla"
-    assert rare[0]["sighting_records"] > 0
+    assert rare[0][0].startswith("Rissa tridactyla") and rare[0][1] > 0
     assert geo.parse_rare({}) == []
+
+
+def test_rare_entry_strips_authorship():
+    e = geo.build_rare_entry("Rissa tridactyla (Linnaeus, 1758)", 4773, None)
+    assert e["species"] == "Rissa tridactyla" and e["records"] == 4773
+
+
+def test_rare_records_use_only_explicit_fields():
+    """Dhaka sample: real GBIF records. Only `vitality` and `basisOfRecord` are read, remarks are not guessed from."""
+    records = load("gbif_dhaka_records.json")
+    d = geo.parse_rare_records(records)
+    assert d["records_checked"] == 260
+    assert d["marked_dead"] == sum(1 for r in records if r["vitality"] == "dead") == 15
+    assert d["marked_alive"] == sum(1 for r in records if r["vitality"] == "alive") == 14
+    assert d["specimen_records"] == 21  # PRESERVED_SPECIMEN 9 + MATERIAL_CITATION 7 + MATERIAL_SAMPLE 5
+    assert d["datasets"][0]["name"] == "iNaturalist research-grade observations"
+
+
+def test_rare_records_without_vitality_are_not_guessed():
+    # remarks say "dead" but the publisher left vitality empty: we must NOT mark it dead
+    d = geo.parse_rare_records([{"datasetKey": "k", "datasetName": "X", "vitality": None,
+                                 "basisOfRecord": "HUMAN_OBSERVATION", "occurrenceRemarks": "found dead on the beach"}])
+    assert d["marked_dead"] == 0 and d["marked_alive"] == 0 and d["specimen_records"] == 0
+
+
+def test_rare_entry_marks_unknown_details_as_none_not_zero():
+    e = geo.build_rare_entry("Sphyrna lewini (Griffith & Smith, 1834)", 48, None)
+    assert e["marked_dead"] is None and e["datasets"] is None
+
+
+def test_rare_note_is_the_agreed_wording():
+    assert geo.RARE_NOTE == ("Records show where an animal was observed, not necessarily where it lives. "
+                             "They can include dead animals, market finds and misplaced locations.")
 
 
 def test_parse_human_keeps_history_drops_schools():

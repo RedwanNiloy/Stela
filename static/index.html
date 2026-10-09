@@ -74,6 +74,10 @@
   .empty { font-style: italic; color: var(--ink-soft); }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; padding: 0; list-style: none; }
   .chips li { margin: 0; padding: 3px 10px; border-radius: 999px; border: 1.5px solid var(--turquoise); background: var(--turquoise-bg); color: var(--ink); font-size: .9rem; }
+  .records { list-style: none; padding: 0; margin: 0 0 8px; }
+  .records li { margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px dashed var(--stone-dark); }
+  .records li:last-child { border-bottom: 0; }
+  .dead { color: var(--ochre); }
   .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .8rem; border: 1.5px solid var(--stone-dark); color: var(--ink-soft); }
   .narration p { font-size: 1.12rem; }
   .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
@@ -139,7 +143,7 @@
       </article>
 
       <article class="card" id="card-rare">
-        <h2>Rare animals alive today</h2>
+        <h2>Rare animals recorded nearby</h2>
         <div id="rare"></div>
       </article>
 
@@ -152,6 +156,7 @@
     <div class="notes">
       <p><strong>Honest notes.</strong> Fossil records show what has been <em>found</em> near here, not everything that lived here.</p>
       <p>Whether a place was sea, land or swamp is <em>inferred from the rock type</em>, so it is only ever "probably".</p>
+      <p>Animal records show where an animal was observed, not necessarily where it lives.</p>
       <p>The narration is written by an open-weight AI model that is only given the facts shown on this page. Check the cards below it.</p>
     </div>
   </main>
@@ -161,7 +166,7 @@
     <ul id="sources">
       <li><a href="https://macrostrat.org" target="_blank" rel="noopener">Macrostrat</a> (rock units and ages)</li>
       <li><a href="https://paleobiodb.org" target="_blank" rel="noopener">Paleobiology Database</a> (fossils)</li>
-      <li><a href="https://www.gbif.org" target="_blank" rel="noopener">GBIF</a> / IUCN Red List (rare animals today)</li>
+      <li><a href="https://www.gbif.org" target="_blank" rel="noopener">GBIF</a> / IUCN Red List (rare animal records)</li>
       <li><a href="https://en.wikipedia.org" target="_blank" rel="noopener">Wikipedia</a> (human history)</li>
     </ul>
     <p>Your location is used for this lookup only. Stela does not store or log it.</p>
@@ -334,13 +339,14 @@ function renderWhere(d) {
   // Fossils: placeholder until /api/fossils answers
   setContent($("#fossils"), h("div", { class: "digging" }, h("span", { class: "spinner" }), "Digging through the fossil records. This source is slow, so everything else is already here."));
 
-  // Rare animals
-  const rare = f.rare_animals_alive_today;
+  // Rare animals: these are RECORDS (sightings, specimens, ...), never a claim that the animal lives here
+  const rare = f.rare_animals_recorded_nearby;
   setContent($("#rare"),
     rare == null ? empty("Could not be checked right now.")
       : rare.length === 0 ? empty("Nothing recorded nearby.")
-      : [h("ul", { class: "chips" }, rare.map((r) => h("li", {}, `${r.species} (${r.sighting_records.toLocaleString()} sightings)`))),
-         h("p", { class: "small" }, "Species listed as vulnerable, endangered or critically endangered, with sightings recorded within about 30 km. These are sighting records, not population sizes, and may include introduced or feral animals.")]);
+      : [h("ul", { class: "records" }, rare.map(rareEntry)),
+         h("p", { class: "small" }, f.rare_animals_note),
+         h("p", { class: "small" }, "Species listed by the IUCN Red List as vulnerable, endangered or critically endangered, with records within about 30 km. Counts are numbers of records, not of animals.")]);
 
   // Human history
   const hh = f.human_history_nearby;
@@ -350,6 +356,27 @@ function renderWhere(d) {
       : h("ul", {}, hh.map((p) => h("li", {}, h("strong", {}, p.place), ` (${p.distance_m.toLocaleString()} m away). `, p.summary))));
 
   renderSources(d.sources);
+}
+
+/* One rare-animal entry: name, record count, which dataset(s) the records come from, and what the records say about alive/dead. */
+function rareEntry(r) {
+  const flags = [];
+  if (r.records_checked == null) {
+    flags.push(h("span", {}, "Record details could not be checked right now."));
+  } else {
+    const unmarked = r.records_checked - r.marked_dead - r.marked_alive;
+    const scope = r.records_checked < r.records ? `the first ${r.records_checked} records checked` : `${r.records_checked} records checked`;
+    const bits = [];
+    if (r.marked_dead) bits.push(h("strong", { class: "dead" }, `${r.marked_dead} marked dead`));
+    if (r.marked_alive) bits.push(`${r.marked_alive} marked alive by the recorder`);
+    if (r.specimen_records) bits.push(`${r.specimen_records} museum or collection specimens or samples`);
+    bits.push(`${unmarked} do not say`);
+    flags.push(`Of ${scope}: `, ...bits.flatMap((b, i) => (i ? [", ", b] : [b])), ".");
+  }
+  return h("li", {},
+    h("strong", {}, h("em", {}, r.species)), ` – ${r.records.toLocaleString()} records`,
+    h("div", { class: "small" }, r.datasets && r.datasets.length ? "Dataset: " + r.datasets.join("; ") : "Dataset: not available"),
+    h("div", { class: "small" }, ...flags));
 }
 
 const statusOf = (d, id) => (d.sources.find((s) => s.id === id) || {}).status;

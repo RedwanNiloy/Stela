@@ -2,7 +2,7 @@
  "offset": 0,
  "limit": 0,
  "endOfRecords": false,
- "count": 15057,
+ "count": 15116,
  "results": [],
  "facets": [
   {
@@ -10,7 +10,7 @@
    "counts": [
     {
      "name": "Rissa tridactyla (Linnaeus, 1758)",
-     "count": 4773
+     "count": 4778
     },
     {
      "name": "Oryctolagus cuniculus (Linnaeus, 1758)",
@@ -18,15 +18,15 @@
     },
     {
      "name": "Streptopelia turtur (Linnaeus, 1758)",
-     "count": 1568
+     "count": 1575
     },
     {
      "name": "Pluvialis squatarola (Linnaeus, 1758)",
-     "count": 1269
+     "count": 1288
     },
     {
      "name": "Aythya ferina (Linnaeus, 1758)",
-     "count": 1252
+     "count": 1278
     },
     {
      "name": "Equus ferus Boddaert, 1785",

@@ -14,7 +14,7 @@ FACTS = {
     "ancient_setting": {"type": "marine", "meaning": "a sea or ocean floor"},
     "time_ruler": {"times_older_than_humans": 335},
     "fossils_found_nearby": "pending",
-    "rare_animals_alive_today": [],
+    "rare_animals_recorded_nearby": [],
     "human_history_nearby": None,  # source down
 }
 
@@ -32,6 +32,45 @@ def test_narrate_falls_back_when_llm_fails(monkeypatch):
     monkeypatch.setattr(narrate, "call_llm", boom)
     text, mode = asyncio.run(narrate.narrate(None, FACTS))
     assert mode == "facts-only" and "White Chalk Subgroup" in text
+
+
+RARE_FACTS = {**FACTS, "human_history_nearby": [], "rare_animals_note": geo.RARE_NOTE,
+              "rare_animals_recorded_nearby": [{"species": "Sphyrna lewini", "records": 48, "datasets": ["iNaturalist research-grade observations"],
+                                                "records_checked": 48, "marked_dead": 5, "marked_alive": 0, "specimen_records": 0}]}
+
+
+def test_fallback_text_says_recorded_never_alive():
+    text = narrate.facts_only_text(RARE_FACTS)
+    assert "Rare animals recorded nearby" in text and "not necessarily where it lives" in text
+    assert not narrate.claims_animals_alive(text)
+
+
+def test_prompt_forbids_alive_claims_and_gives_dataset_and_dead_counts():
+    p = narrate.build_prompt(RARE_FACTS, "main")
+    assert "NOT proof that an animal lives or is alive" in p.split("FACTS:")[0]
+    assert "alive today" not in p
+    facts = p.split("FACTS:")[1]
+    assert "iNaturalist" in facts and '"marked_dead":5' in facts
+
+
+@pytest.mark.parametrize("story", ["Rare animals still wander these hills.", "These sharks are alive today.",
+                                   "The hammerhead lives nearby."])
+def test_story_claiming_animals_are_alive_is_replaced_by_facts(monkeypatch, story):
+    async def bad_llm(client, prompt):
+        return story, "online"
+    monkeypatch.setattr(narrate, "call_llm", bad_llm)
+    text, mode = asyncio.run(narrate.narrate(None, RARE_FACTS))
+    assert mode == "facts-only" and text != story
+
+
+def test_story_about_records_is_kept(monkeypatch):
+    good = ("Stand still. Records exist of the scalloped hammerhead nearby; five are marked dead. "
+            "A record shows where an animal was observed, not necessarily where it lives.")
+
+    async def ok_llm(client, prompt):
+        return good, "online"
+    monkeypatch.setattr(narrate, "call_llm", ok_llm)
+    assert asyncio.run(narrate.narrate(None, RARE_FACTS)) == (good, "online")
 
 
 def test_prompt_puts_rules_first_and_hides_pending():
@@ -87,7 +126,7 @@ def test_where_survives_one_failed_source_and_llm_failure(api):
     d = r.json()
     assert set(d) == {"facts", "narration", "mode", "sources", "cached"}
     assert d["mode"] == "facts-only" and d["narration"]
-    assert d["facts"]["rare_animals_alive_today"] is None        # failed source -> null
+    assert d["facts"]["rare_animals_recorded_nearby"] is None        # failed source -> null
     assert d["facts"]["rock"]["name"] == "White Chalk Subgroup"  # the others are unaffected
     status = {s["id"]: s["status"] for s in d["sources"]}
     assert status["gbif"].startswith("failed")

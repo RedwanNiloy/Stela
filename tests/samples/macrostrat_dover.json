@@ -27,7 +27,8 @@
     "color": "#A6D84A",
     "t_age": 66,
     "b_age": 100.5,
-    "best_int_name": "Late Cretaceous"
+    "best_int_name": "Late Cretaceous",
+    "scale": "medium"
    }
   ],
   "refs": {

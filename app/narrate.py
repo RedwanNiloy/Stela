@@ -6,6 +6,7 @@ so the user never sees an error screen.
 """
 import json
 import os
+import re
 
 import httpx
 
@@ -23,6 +24,10 @@ GROUNDING_RULES = """STRICT RULES (these override everything else):
 6. Do not claim anything about any culture (Egyptian or otherwise) unless it appears in the facts.
 7. Write species names exactly as given. Never translate them into common names, and never add anything about
    who built, used or lived at a place beyond what its summary says.
+8. Animal records are NOT proof that an animal lives or is alive. Never say the animals are alive, live here,
+   roam, wander, can be seen or inhabit the area. Say only that records or sightings exist. If some records are
+   marked dead or are museum specimens, say so. Always add that a record shows where an animal was observed,
+   not necessarily where it lives.
 """
 
 VOICE = """VOICE (tone only; the rules above still apply exactly):
@@ -32,11 +37,21 @@ no headings, no markdown."""
 
 MAIN_TASK = """TASK: In under 150 words, tell the walker: 1) the rock under their feet and how old it is
 (compare with humans using time_ruler), 2) what this place probably was then, 3) human history nearby,
-4) rare animals alive today (mention the caveat briefly). Do not mention fossils; they are shown separately."""
+4) rare animals RECORDED nearby (records only; mention the caveat). Do not mention fossils; they are shown separately."""
 
 FOSSIL_TASK = """TASK: In 2 to 4 short sentences, continue the story for the same walker (do not greet them again).
 Tell what fossils have been found near here, using the classes and taxa given, and remind them this is only what
 has been found so far, not everything that lived here."""
+
+
+def _rare_for_llm(r):
+    out = {"species": r["species"], "records": r["records"]}
+    if r.get("datasets"):
+        out["dataset"] = r["datasets"][0]
+    for k in ("marked_dead", "specimen_records"):
+        if r.get(k):
+            out[k] = r[k]
+    return out
 
 
 def llm_view(facts):
@@ -46,8 +61,8 @@ def llm_view(facts):
         view["rock"] = {k: v for k, v in view["rock"].items() if v not in (None, "") and k != "descrip"}
     if view.get("human_history_nearby"):
         view["human_history_nearby"] = [{**h, "summary": h["summary"][:240]} for h in view["human_history_nearby"]]
-    if view.get("rare_animals_alive_today"):
-        view["rare_animals_alive_today"] = [r["species"] for r in view["rare_animals_alive_today"]]
+    if view.get("rare_animals_recorded_nearby"):
+        view["rare_animals_recorded_nearby"] = [_rare_for_llm(r) for r in view["rare_animals_recorded_nearby"]]
     return view
 
 
@@ -135,24 +150,40 @@ def facts_only_text(facts, part="main"):
         parts.append("Human history: nothing recorded nearby.")
     else:
         parts.append("Human history nearby: " + "; ".join(f"{h['place']} ({h['distance_m']} m)" for h in human[:3]) + ".")
-    rare = facts.get("rare_animals_alive_today")
+    rare = facts.get("rare_animals_recorded_nearby")
     if rare is None:
-        parts.append("Rare animals could not be checked right now.")
+        parts.append("Rare animal records could not be checked right now.")
     elif not rare:
-        parts.append("Rare animals alive today: nothing recorded nearby.")
+        parts.append("Rare animals recorded nearby: nothing recorded nearby.")
     else:
-        parts.append("Rare animals recorded nearby today: " + ", ".join(r["species"] for r in rare[:4])
-                     + ". This may include introduced animals.")
+        parts.append("Rare animals recorded nearby: " + ", ".join(r["species"] for r in rare[:4]) + ". "
+                     + facts.get("rare_animals_note", ""))
     return " ".join(parts)
+
+
+# Safety net for rule 8: small models sometimes ignore it. If the story claims the animals are alive or live
+# here, we drop it and use the plain facts summary instead. (Fossil text is exempt: "everything that lived here".)
+ALIVE_CLAIM = re.compile(r"(?<!\w)(alive|living|lives|roam\w*|wander\w*|inhabit\w*|dwell\w*|still here)(?!\w)", re.I)
+
+
+# The required caveat itself says "...not necessarily where it lives", so that phrase must not trip the check.
+CAVEAT_PHRASE = re.compile(r"where (?:it|they|an animal|the animal|the animals|animals) (?:lives?|may live|might live)", re.I)
+
+
+def claims_animals_alive(text):
+    return bool(ALIVE_CLAIM.search(CAVEAT_PHRASE.sub("", text)))
 
 
 async def narrate(client, facts, part="main"):
     """Returns (text, mode); mode is 'online', 'offline' or 'facts-only'. Never raises."""
     nothing_to_say = part == "main" and facts.get("rock") is None and not facts.get("human_history_nearby") \
-        and not facts.get("rare_animals_alive_today")
+        and not facts.get("rare_animals_recorded_nearby")
     if nothing_to_say:  # with no facts, a template is safer than asking a model to talk
         return facts_only_text(facts, part), "facts-only"
     try:
-        return await call_llm(client, build_prompt(facts, part))
+        text, mode = await call_llm(client, build_prompt(facts, part))
+        if part == "main" and claims_animals_alive(text):
+            return facts_only_text(facts, part), "facts-only"
+        return text, mode
     except Exception:
         return facts_only_text(facts, part), "facts-only"

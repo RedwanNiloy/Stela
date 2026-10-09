@@ -127,31 +127,89 @@ async def fetch_fossils(client, lat, lng, unit):
     return None
 
 
-# ---------- Layer 3: rare animals living nearby today (GBIF + IUCN) ----------
-INTRODUCED_NOTE = ("Counts are GBIF sighting records, not population sizes. The list may include "
-                   "introduced, feral or domestic animals (for example rabbits or feral horses), "
-                   "because GBIF does not say which records are native.")
+# ---------- Layer 3: rare animals RECORDED nearby (GBIF + IUCN) ----------
+# GBIF holds observations, museum specimens, market finds and more. A record says where an animal
+# was recorded, NOT that it lives there, so nothing in here (or in the narration) may say "alive".
+RARE_NOTE = ("Records show where an animal was observed, not necessarily where it lives. "
+             "They can include dead animals, market finds and misplaced locations.")
+GBIF = "https://api.gbif.org/v1"
+DETAIL_TIMEOUT = 5.0 
+DETAIL_LIMIT = 50   # records inspected per species (the exact record count comes from the facet)
+# basisOfRecord values that mean "a specimen or sample", not a field sighting
+SPECIMEN_BASES = {"PRESERVED_SPECIMEN", "MATERIAL_SAMPLE", "MATERIAL_CITATION", "LIVING_SPECIMEN", "FOSSIL_SPECIMEN"}
+_dataset_titles = {}  # dataset key -> title (public dataset metadata, not user data)
 
 
 def parse_rare(data):
+    """From the facet response: [(full scientific name, record count)], most-recorded first."""
     facets = (data or {}).get("facets") or []
     counts = facets[0]["counts"] if facets else []
-    merged = {}
-    for c in counts:
-        species = " ".join(c["name"].split()[:2])  # drop author and year: "Rissa tridactyla (Linnaeus, 1758)"
-        merged[species] = merged.get(species, 0) + c["count"]
-    return [{"species": s, "sighting_records": n} for s, n in merged.items()]
+    return [(c["name"], c["count"]) for c in counts]
+
+
+def parse_rare_records(records):
+    """Summarise what the raw GBIF records themselves say. Only explicit fields are used, nothing is guessed:
+    `vitality` (alive/dead, when the publisher filled it in) and `basisOfRecord` (specimen vs observation).
+    Free-text remarks are not interpreted."""
+    datasets, names = {}, {}
+    vitality, specimens = {"dead": 0, "alive": 0}, 0
+    for r in records:
+        key = r.get("datasetKey")
+        datasets[key] = datasets.get(key, 0) + 1
+        if r.get("datasetName"):
+            names[key] = r["datasetName"]
+        v = str(r.get("vitality") or "").lower()
+        if v in vitality:
+            vitality[v] += 1
+        if r.get("basisOfRecord") in SPECIMEN_BASES:
+            specimens += 1
+    top = sorted(datasets.items(), key=lambda kv: -kv[1])[:3]
+    return {"records_checked": len(records),
+            "datasets": [{"key": k, "name": names.get(k), "records": n} for k, n in top],
+            "marked_dead": vitality["dead"], "marked_alive": vitality["alive"], "specimen_records": specimens}
+
+
+def build_rare_entry(full_name, count, details):
+    entry = {"species": " ".join(full_name.split()[:2]),  # "Rissa tridactyla (Linnaeus, 1758)" -> "Rissa tridactyla"
+             "records": count}
+    if details:
+        entry.update(records_checked=details["records_checked"],
+                     datasets=[d["name"] or "Unnamed dataset" for d in details["datasets"]],
+                     marked_dead=details["marked_dead"], marked_alive=details["marked_alive"],
+                     specimen_records=details["specimen_records"])
+    else:  # the detail call failed: say we don't know, don't pretend zero
+        entry.update(records_checked=None, datasets=None, marked_dead=None, marked_alive=None, specimen_records=None)
+    return entry
+
+
+async def dataset_title(client, key):
+    if key not in _dataset_titles:
+        data = await get_json(client, f"{GBIF}/dataset/{key}", DETAIL_TIMEOUT)
+        _dataset_titles[key] = data.get("title")
+    return _dataset_titles[key]
+
+
+async def fetch_rare_details(client, area, full_name):
+    data = await get_json(client, f"{GBIF}/occurrence/search", DETAIL_TIMEOUT, **area,
+                          scientificName=full_name, limit=DETAIL_LIMIT)
+    details = parse_rare_records(data.get("results") or [])
+    for d in details["datasets"]:  # some records carry only the dataset key, so look the name up
+        if not d["name"] and d["key"]:
+            d["name"] = (await safe(dataset_title(client, d["key"])))[0]
+    return details
 
 
 async def fetch_rare(client, lat, lng, box=0.25):
     # facet=scientificName counts species across ALL matches. The first 100 raw
     # records were dominated by whichever species happened to be listed first.
-    data = await get_json(client, "https://api.gbif.org/v1/occurrence/search", FAST_TIMEOUT,
-                          decimalLatitude=f"{lat - box},{lat + box}",
-                          decimalLongitude=f"{lng - box},{lng + box}",
-                          iucnRedListCategory=["CR", "EN", "VU"], kingdomKey=1, limit=0,
+    area = dict(decimalLatitude=f"{lat - box},{lat + box}", decimalLongitude=f"{lng - box},{lng + box}",
+                iucnRedListCategory=["CR", "EN", "VU"], kingdomKey=1)
+    data = await get_json(client, f"{GBIF}/occurrence/search", FAST_TIMEOUT, **area, limit=0,
                           facet="scientificName", facetLimit=8)
-    return parse_rare(data)
+    species = parse_rare(data)
+    # one detail call per species, in parallel; a failed one only loses that species' extra detail
+    results = await asyncio.gather(*(safe(fetch_rare_details(client, area, name)) for name, _ in species))
+    return [build_rare_entry(name, n, details) for (name, n), (details, _) in zip(species, results)]
 
 
 # ---------- Layer 4: human history (Wikipedia geosearch) ----------
@@ -213,8 +271,8 @@ async def fast_facts(client, lat, lng):
         "ancient_setting": setting(unit) if unit else None,
         "time_ruler": time_ruler(unit) if unit else None,
         "fossils_found_nearby": "pending",  # filled in by /api/fossils
-        "rare_animals_alive_today": rare,
-        "rare_animals_note": INTRODUCED_NOTE,
+        "rare_animals_recorded_nearby": rare,
+        "rare_animals_note": RARE_NOTE,
         "human_history_nearby": human,
     }
     statuses = {"macrostrat": source_status(unit, s_rock),

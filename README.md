@@ -2,7 +2,7 @@
 
 > Every place is a stone with a story carved in it.
 
-Open Stela on your phone, tap **Use my location** (or drop a pin on the map), and put the phone away. A calm "stone scribe" tells you about the ground under your feet: the rock and its age, what the place probably was (sea, land, swamp), the fossils found nearby, rare animals alive today, and human history close by. It can read the story aloud.
+Open Stela on your phone, tap **Use my location** (or drop a pin on the map), and put the phone away. A calm "stone scribe" tells you about the ground under your feet: the rock and its age, what the place probably was (sea, land, swamp), the fossils found nearby, rare animals recorded nearby, and human history close by. It can read the story aloud.
 
 Built for the Hacktoberfest Open-Source AI Challenge, Week 1 "Touch Grass".
 
@@ -97,7 +97,7 @@ Stela does not store or log your location or IP address. Logs contain only the r
 |---|---|---|
 | [Macrostrat](https://macrostrat.org) | rock unit, age | CC-BY 4.0 |
 | [Paleobiology Database](https://paleobiodb.org) | fossil finds | CC-BY 4.0 |
-| [GBIF](https://www.gbif.org) with IUCN Red List categories | rare animals today | CC0 / CC-BY per dataset |
+| [GBIF](https://www.gbif.org) with IUCN Red List categories | rare animal records | CC0 / CC-BY per dataset |
 | [Wikipedia](https://en.wikipedia.org) | human history nearby | CC-BY-SA 4.0 |
 | [OpenStreetMap](https://www.openstreetmap.org/copyright) tiles, [Leaflet](https://leafletjs.com) | map | ODbL, BSD-2 |
 
@@ -108,10 +108,12 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - **Fossils show what has been found, not everything that lived there.** Many places have few or no records.
 - **Sea, land or swamp is a guess from the rock type**, using a short keyword list. Sandstone in particular can be either.
 - **Rock maps vary in detail.** The unit shown is the best match at the map scale available, and ages are ranges.
-- **Rare animals may include introduced or feral animals** (rabbits and feral horses show up), because GBIF does not say which records are native. Counts are sighting records, not populations.
+- **Rare-animal records are not proof an animal lives nearby.** A GBIF record says where an animal was recorded. It can be a dead animal, a market or fish-landing find, a museum specimen, or a misplaced location. In Dhaka, the results were mostly marine sharks and rays, with some records marked dead. Stela therefore says "recorded nearby", never "alive" or "lives here".
+- **Alive/dead is only shown when the record says so.** It reads GBIF's `vitality` field and `basisOfRecord` (specimen or sample). Most records leave `vitality` empty, so most entries say "do not say". Free-text remarks are not interpreted, and nothing is guessed. The check covers up to 50 records per species.
+- **Records may include introduced or feral animals** (rabbits and feral horses show up), because GBIF does not say which records are native. Counts are numbers of records, not of animals.
 - **Human history is whatever has a Wikipedia page within 10 km** and matches a list of history keywords. Many rich places show nothing, and the page says so rather than guessing.
 - **Fossil searches can be wide.** If nothing matches nearby, the search widens up to about 220 km, and the page says how far it looked. The age match can also be dropped, and then it says "ANY age".
-- **Small language models can slip.** Strict prompts reduce invented details but cannot guarantee zero. In testing, a 4B local model sometimes turned scientific names into common names. That is why the plain fact cards are always shown under the story.
+- **Small language models can slip.** Strict prompts reduce invented details but cannot guarantee zero. In testing, a 4B local model sometimes turned scientific names into common names, and once said rare animals "wander" the area. A code check now discards any story that calls the animals alive or living here and shows the plain facts instead. That is why the plain fact cards are always shown under the story.
 - PBDB can take 30 seconds or more for sparse regions.
 
 ## Out of scope for v1
