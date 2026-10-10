@@ -125,13 +125,14 @@ async def fossils(request: Request, lat: float = Query(ge=-90, le=90), lng: floa
     log.info("fossils status=%s mode=%s %.0fms", status.split(":")[0], mode, (time.perf_counter() - t0) * 1000)
 
     # Illustrations for the groups shown (never part of the facts the model sees). A failure only means placeholders.
-    images = {}
+    images, images_ok = {}, True
     if fossil_fact and fossil_fact.get("classes"):
-        images, _ = await geo.safe(asyncio.wait_for(geo.fossil_images(client, [n for n, _ in fossil_fact["classes"]]), 9.0))
+        res, st = await geo.safe(asyncio.wait_for(geo.fossil_images(client, [n for n, _ in fossil_fact["classes"]]), 9.0))
+        images, images_ok = (res if st == "ok" else ({}, False))
     result = {"fossils": fossil_fact, "scope": scope, "narration": text, "mode": mode,
               "images": images or {}, "images_note": geo.FOSSIL_IMAGE_NOTE,
               "source": {"id": "pbdb", **geo.SOURCES["pbdb"], "status": status}}
-    if not status.startswith("failed") and mode != "facts-only":
+    if not status.startswith("failed") and mode != "facts-only" and images_ok:  # a failed picture lookup is retried next time
         fossil_cache.set(key, result)
     return {**result, "cached": False}
 
@@ -157,7 +158,7 @@ async def people_facts(request, lat, lng):
     # only statuses and counts are logged: never coordinates, place names or the text itself
     log.info("people failed=%s excerpts=%s %.0fms", failed, len(facts["early_history"] or []), (time.perf_counter() - t0) * 1000)
     result = {"people": facts, "sources": people_sources(statuses)}
-    if not failed and not facts.get("incomplete"):  # never keep a result with gaps for hours
+    if not failed and not facts.get("incomplete") and not facts.get("images_failed"):  # never keep a result with gaps for hours
         people_cache.set(key, result)
     return result, False
 

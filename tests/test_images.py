@@ -219,7 +219,7 @@ def phylopic_net(fail=False, calls=None):
 def fossils(names, **kw):
     async def go():
         async with phylopic_net(**kw) as c:
-            return await geo.fossil_images(c, names)
+            return (await geo.fossil_images(c, names))[0]
     return run(go())
 
 
@@ -255,7 +255,8 @@ def test_a_failed_phylopic_lookup_gives_placeholders_not_errors_and_is_not_cache
     async def go():
         async with phylopic_net(fail=True) as c:
             return await geo.fossil_images(c, names)
-    got = run(go())
+    got, complete = run(go())
+    assert complete is False
     assert set(got) == set(names) and all(v is None or v["source"] == "Wikimedia Commons" for v in got.values())
     assert geo._fossil_image_cache.get("Cephalopoda") is None   # a retry later can still find it
     assert fossils(names)["Cephalopoda"]["source"] == "PhyloPic"
@@ -265,14 +266,14 @@ def test_at_most_six_groups_are_looked_up_and_results_are_cached():
     calls = []
     async def go():
         async with phylopic_net(calls=calls) as c:
-            return await geo.fossil_images(c, ["Cephalopoda"] + [f"Group{i}" for i in range(8)])
+            return (await geo.fossil_images(c, ["Cephalopoda"] + [f"Group{i}" for i in range(8)]))[0]
     got = run(go())
     assert len(got) == geo.MAX_FOSSIL_IMAGES == 6 and got["Cephalopoda"]
     calls.clear()
     async def again():
         async with phylopic_net(calls=calls) as c:
             return await geo.fossil_images(c, ["Cephalopoda"])
-    run(again())
+    assert run(again())[1] is True
     assert calls == []                                       # served from the cache
 
 

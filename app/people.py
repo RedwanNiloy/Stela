@@ -364,7 +364,7 @@ async def fetch_people(client, lat, lng):
 
     # The article's lead image (already in the titles reply) plus its licence from Commons: one extra call, and a failure
     # only means the excerpts show no picture.
-    images, _ = await geo.safe(asyncio.wait_for(geo.images_for_pages(client, [page for _, _, page, _ in chosen]), IMAGE_TOTAL))
+    images, img_status = await geo.safe(asyncio.wait_for(geo.images_for_pages(client, [page for _, _, page, _ in chosen]), IMAGE_TOTAL))
     images = images or [None] * len(chosen)
 
     excerpts, traditions = [], []
@@ -381,4 +381,6 @@ async def fetch_people(client, lat, lng):
     statuses["wikipedia"] = "ok" if excerpts else "empty"
     if failed_batches and not excerpts:
         statuses["wikipedia"] = batches[0][1]
-    return {"early_history": excerpts, "traditions": traditions[:6], "license": LICENSE, "incomplete": incomplete}, statuses
+    # images_failed: the picture lookup failed, so the page shows placeholders and the answer is not kept for hours
+    return {"early_history": excerpts, "traditions": traditions[:6], "license": LICENSE, "incomplete": incomplete,
+            "images_failed": img_status != "ok"}, statuses

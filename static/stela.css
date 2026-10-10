@@ -170,7 +170,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .scene { display: block; flex: none; width: 120px; height: 90px; border-radius: var(--r); }
 .was { display: flex; gap: var(--s3); align-items: flex-start; }
 #rock { position: relative; }
-.strata { position: absolute; right: 0; top: var(--s3); width: 36px; height: 36px; color: var(--ochre); opacity: .35; }
+.strata { position: absolute; right: 0; bottom: 2px; width: 36px; height: 36px; color: var(--ochre); opacity: .35; }
 .local-name span { font-weight: 600; color: var(--ink); }
 .dead { color: var(--ochre); font-weight: 600; }
 .excerpt { padding: var(--s3) 0; border-top: 1px solid var(--line); }

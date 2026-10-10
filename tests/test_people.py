@@ -565,3 +565,4 @@ def test_failed_image_lookup_keeps_the_excerpts_and_is_not_an_incomplete_result(
     facts, statuses = run(_fetch(net, DOVER))
     assert facts["early_history"] and all(e["image"] is None for e in facts["early_history"])
     assert facts["incomplete"] is False and statuses["wikipedia"] == "ok"
+    assert facts["images_failed"] is True                  # so the API does not cache this answer for hours

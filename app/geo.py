@@ -53,9 +53,19 @@ async def get_json(client, url, timeout, **params):
     return r.json()
 
 
+_image_slot = {"next": 0.0}
+IMAGE_GAP = 0.5   # seconds between picture lookups to Wikimedia (a page load fires several at once; bursts get HTTP 429)
+
+
 async def get_json_retry(client, url, timeout, **params):
     """get_json, but HTTP 429 (Wikimedia answers "Retry-After: 1" to short bursts) is retried up to twice, after that pause
-    (1 s, then 2 s at most). Used for the optional picture lookups only; the data layers keep their own pacing."""
+    (a pause of up to 3 s; a longer Retry-After is not waited for). Used for the optional picture lookups only; the data layers keep their own pacing."""
+    if "wikipedia.org" in url or "wikimedia.org" in url:   # picture lookups queue up behind each other, 0.5 s apart
+        now = time.monotonic()
+        slot = max(now, _image_slot["next"])
+        _image_slot["next"] = slot + IMAGE_GAP
+        if slot > now:
+            await asyncio.sleep(slot - now)
     for attempt in range(3):
         try:
             return await get_json(client, url, timeout, **params)
@@ -66,7 +76,9 @@ async def get_json_retry(client, url, timeout, **params):
                 pause = float(err.response.headers.get("retry-after", "1"))
             except ValueError:
                 pause = 1.0
-            await asyncio.sleep(min(max(pause, 0.5), 2.0) * (attempt + 1))
+            if pause > 3:   # a long penalty (seen: 40+ s): give up now, the card shows placeholders and the next visit retries
+                raise
+            await asyncio.sleep(max(pause, 0.5) * (attempt + 1))
 
 
 def haversine_km(lat1, lng1, lat2, lng2):
@@ -531,8 +543,9 @@ async def phylopic_image(client, name):
 
 
 async def fossil_images(client, names):
-    """{group name: image dict or None} for up to MAX_FOSSIL_IMAGES names. PhyloPic first; names it has no usable picture
-    for are tried on Wikipedia/Commons. A lookup that fails leaves None for that name and is not cached."""
+    """({group name: image dict or None}, complete) for up to MAX_FOSSIL_IMAGES names. PhyloPic first; names it has no usable
+    picture for are tried on Wikipedia/Commons. A lookup that fails leaves None for that name, is not cached, and makes
+    `complete` False (so the caller does not keep the answer for long)."""
     names = list(dict.fromkeys(names))[:MAX_FOSSIL_IMAGES]
     out, todo = {}, []
     for n in names:
@@ -542,7 +555,7 @@ async def fossil_images(client, names):
         else:
             out[n] = hit["image"]
     if not todo:
-        return out
+        return out, True
     results = await asyncio.gather(*(safe(phylopic_image(client, n)) for n in todo))
     settled, missing = {}, []   # settled[n]: every lookup for n worked, so "no picture" may be cached
     for n, (img, status) in zip(todo, results):
@@ -560,7 +573,7 @@ async def fossil_images(client, names):
     for n in todo:
         if settled[n]:
             _fossil_image_cache.set(n, {"image": out[n]})
-    return out
+    return out, all(settled.values())
 
 
 def images_status(rare):
