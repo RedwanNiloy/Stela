@@ -340,6 +340,7 @@ async def add_local_names(client, entries, lang):
 IMAGE_NOTE = "Photos show the species in general, not the animal recorded nearby."
 IMAGE_THUMB_PX = 240          # shown at about 120 px wide, so this is sharp on high-density screens
 IMAGE_TIMEOUT = 4.0
+IMAGE_TOTAL_TIMEOUT = 7.0     # both calls and the one retry; the card never waits longer for photos
 IMAGE_HOSTS = ("https://upload.wikimedia.org/", "https://thumb.wikimedia.org/")  # pageimages thumbnails live on thumb.
 _image_cache = TTLCache(ttl_seconds=24 * 3600, max_items=2000)  # scientific name -> image dict or None (found nothing usable)
 # Licences that allow showing the photo with credit. "NC" and "ND" variants and non-free files are not on this list.
@@ -413,7 +414,17 @@ async def add_images(client, entries):
             todo.append(e)
     if not todo:
         return
-    got, status = await safe(lookup_images(client, sorted({e["species"] for e in todo})[:MAX_NAME_LOOKUPS]))
+    names = sorted({e["species"] for e in todo})[:MAX_NAME_LOOKUPS]
+
+    async def attempt():  # Wikipedia sometimes answers 429 when the history lookups run at the same moment: one quick retry
+        try:
+            return await lookup_images(client, names)
+        except httpx.HTTPStatusError as err:
+            if err.response.status_code != 429:
+                raise
+            await asyncio.sleep(1.0)
+            return await lookup_images(client, names)
+    got, status = await safe(asyncio.wait_for(attempt(), IMAGE_TOTAL_TIMEOUT))
     if status != "ok":
         for e in todo:
             e["image_status"] = status   # "failed: HTTPStatusError": the card shows the placeholder; this is for the sources list

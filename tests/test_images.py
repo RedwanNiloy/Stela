@@ -159,3 +159,21 @@ def test_the_llm_never_sees_the_image_fields():
     for word in ("thumb.wikimedia", "A. Person", "commons.wikimedia", "Photos show", "photo"):
         assert word not in prompt.split("FACTS:")[1], word
     assert "photo" not in narrate.facts_only_text(facts).lower()
+
+
+def test_one_429_is_retried_once():
+    geo._image_cache = geo.TTLCache()
+    rec, hits = sample("dover"), {"n": 0}
+    def handler(request):
+        if "wikipedia" in request.url.host:
+            hits["n"] += 1
+            if hits["n"] == 1:
+                return httpx.Response(429, json={})
+            return httpx.Response(200, json=rec["wikipedia"])
+        return httpx.Response(200, json=rec["commons"])
+    es = entries(*rec["species"])
+    async def go():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as c:
+            await geo.add_images(c, es)
+    run(go())
+    assert hits["n"] == 2 and all(e["image"] for e in es)
