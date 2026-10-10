@@ -869,6 +869,8 @@ async def safe(coro):
     """Run one layer. Returns (value, status). A failure gives (None, 'failed: ErrorType'), never an exception."""
     try:
         return await coro, "ok"
+    except httpx.HTTPStatusError as e:   # the HTTP code says why (429 rate-limited, 403 blocked, 5xx down); it holds no user data
+        return None, f"failed: HTTP {e.response.status_code}"
     except Exception as e:
         return None, f"failed: {type(e).__name__}"
 
