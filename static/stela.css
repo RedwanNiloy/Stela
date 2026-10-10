@@ -154,6 +154,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .records li { padding: var(--s3) 0; border-top: 1px solid var(--line); }
 .records li:first-child { border-top: 0; padding-top: 0; }
 .records em { font-weight: 600; }
+.rec { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--s3); align-items: start; }
+.rec-photo { width: 120px; height: 90px; border-radius: var(--r); overflow: hidden; background: var(--chip); color: var(--muted); }
+.rec-photo img, .rec-sil { display: block; width: 120px; height: 90px; }
+.rec-photo img { object-fit: cover; }
+.rec-sil { padding: 10px 14px; box-sizing: border-box; opacity: .7; }
+.credit a { color: var(--soft); overflow-wrap: anywhere; }
+.credit { margin-top: var(--s1); }
 .local-name span { font-weight: 600; color: var(--ink); }
 .dead { color: var(--ochre); font-weight: 600; }
 .excerpt { padding: var(--s3) 0; border-top: 1px solid var(--line); }

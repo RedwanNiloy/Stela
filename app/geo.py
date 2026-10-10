@@ -18,6 +18,7 @@ import os
 import re
 import time
 from collections import Counter
+from html import unescape
 
 import httpx
 
@@ -37,6 +38,8 @@ SOURCES = {
     "pbdb": {"name": "Paleobiology Database", "url": "https://paleobiodb.org", "license": "CC-BY 4.0"},
     "gbif": {"name": "GBIF / IUCN Red List", "url": "https://www.gbif.org", "license": "CC0 / CC-BY, per dataset"},
     "wikipedia": {"name": "Wikipedia", "url": "https://en.wikipedia.org", "license": "CC-BY-SA 4.0"},
+    "commons": {"name": "Wikimedia Commons (species photos)", "url": "https://commons.wikimedia.org",
+                "license": "per photo, credited beside each one"},
     "nominatim": {"name": "OpenStreetMap Nominatim (nearest place)", "url": "https://nominatim.openstreetmap.org",
                   "license": "ODbL"},
 }
@@ -306,6 +309,7 @@ async def fetch_fossils(client, lat, lng, unit):
 RARE_NOTE = ("Records show where an animal was observed, not necessarily where it lives. "
              "They can include dead animals, market finds and misplaced locations.")
 GBIF = "https://api.gbif.org/v1"
+COMMONS = "https://commons.wikimedia.org/w/api.php"
 DETAIL_TIMEOUT = 5.0
 SPECIMEN_BASES = {"PRESERVED_SPECIMEN", "MATERIAL_SAMPLE", "MATERIAL_CITATION", "LIVING_SPECIMEN", "FOSSIL_SPECIMEN"}
 # The ladder: about 30 km first; if that holds nothing, ONE wider step with tighter caps (fewer species, fewer
@@ -325,6 +329,108 @@ async def add_local_names(client, entries, lang):
     for e, (names, status) in zip(todo, results):
         if status == "ok" and names:
             e["local_names"] = choose_names(names, prefer_langs(lang, e.get("country_code")))
+
+
+# ---- Species thumbnails: the species' own Wikipedia page image, then its licence and author from Wikimedia Commons ----
+# Real responses (checked): en.wikipedia.org/w/api.php?action=query&prop=pageimages&piprop=thumbnail|name&pithumbsize=240
+# &redirects=1&titles=A|B gives pages[].{title, pageimage (file name), thumbnail{source,width,height}}; a page with no image has
+# neither field. commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&titles=File:X gives
+# imageinfo[0].{descriptionurl, extmetadata{LicenseShortName, LicenseUrl, Artist (HTML), AttributionRequired}}.
+# Never GBIF occurrence photos: those show the individual record, which can be a dead animal at a market.
+IMAGE_NOTE = "Photos show the species in general, not the animal recorded nearby."
+IMAGE_THUMB_PX = 240          # shown at about 120 px wide, so this is sharp on high-density screens
+IMAGE_TIMEOUT = 4.0
+IMAGE_HOSTS = ("https://upload.wikimedia.org/", "https://thumb.wikimedia.org/")  # pageimages thumbnails live on thumb.
+_image_cache = TTLCache(ttl_seconds=24 * 3600, max_items=2000)  # scientific name -> image dict or None (found nothing usable)
+# Licences that allow showing the photo with credit. "NC" and "ND" variants and non-free files are not on this list.
+_ALLOWED_LICENCE = re.compile(r"^(cc[ -]by(-sa)?[ -]\d(\.\d)?( \w+)?|cc0( 1\.0)?|public domain.*|pd[ -].*|gfdl.*|"
+                              r"attribution.*|no restrictions.*)$", re.I)
+_BAD_AUTHOR = re.compile(r"(unknown|anonymous|see (file|source|description)|^\W*$)", re.I)
+
+
+def clean_html(text):
+    return " ".join(re.sub(r"<[^>]+>", " ", unescape(text or "")).split())
+
+
+def image_from_pages(page, info):
+    """One species: its Wikipedia page object and the Commons imageinfo object -> image dict, or None when it cannot be
+    shown with credit (no picture, no licence, licence not on the allow-list, no author, or an unexpected URL)."""
+    thumb = (page or {}).get("thumbnail") or {}
+    src, ii = thumb.get("source"), ((info or {}).get("imageinfo") or [{}])[0]
+    meta = ii.get("extmetadata") or {}
+    licence = ((meta.get("LicenseShortName") or {}).get("value") or "").strip()
+    author = re.sub(r"^no machine-readable author provided\.?\s*", "", clean_html((meta.get("Artist") or {}).get("value")), flags=re.I)
+    file_page = ii.get("descriptionurl") or ""
+    if not (src and src.startswith(IMAGE_HOSTS) and file_page.startswith("https://commons.wikimedia.org/")):
+        return None
+    if not licence or "nc" in re.split(r"[\s-]+", licence.lower()) or "nd" in re.split(r"[\s-]+", licence.lower()):
+        return None
+    if not _ALLOWED_LICENCE.match(licence) or not author or _BAD_AUTHOR.search(author):
+        return None
+    lic_url = (meta.get("LicenseUrl") or {}).get("value") or ""
+    return {"url": src, "width": thumb.get("width"), "height": thumb.get("height"),
+            "author": author[:90], "license": licence, "license_url": re.sub(r"^http://", "https://", lic_url) if lic_url.startswith(("http://", "https://")) else None,
+            "file_page": file_page}
+
+
+async def lookup_images(client, names):
+    """{scientific name: image dict or None} for the names, using two API calls in total. Raises on a failed call."""
+    wiki = await get_json(client, WIKI, IMAGE_TIMEOUT, action="query", format="json", prop="pageimages",
+                          piprop="thumbnail|name", pithumbsize=IMAGE_THUMB_PX, redirects=1, titles="|".join(names))
+    q = wiki.get("query") or {}
+    moved = {x["from"]: x["to"] for x in q.get("normalized") or []}
+    moved.update({x["from"]: x["to"] for x in q.get("redirects") or []})
+    # a normalised title may also be redirected, so follow the chain once more
+    final = lambda n: moved.get(moved.get(n, n), moved.get(n, n))
+    pages = {p.get("title"): p for p in (q.get("pages") or {}).values() if "missing" not in p}
+    wanted = {n: pages.get(final(n)) for n in names}
+    files = sorted({p["pageimage"] for p in wanted.values() if p and p.get("pageimage")})
+    infos = {}
+    if files:
+        com = await get_json(client, COMMONS, IMAGE_TIMEOUT, action="query", format="json", prop="imageinfo",
+                             iiprop="extmetadata|url", iiextmetadatafilter="LicenseShortName|LicenseUrl|Artist",
+                             titles="|".join("File:" + f for f in files))
+        cq = com.get("query") or {}
+        cmoved = {x["from"]: x["to"] for x in cq.get("normalized") or []}
+        by_title = {p.get("title"): p for p in (cq.get("pages") or {}).values() if "missing" not in p}
+        for f in files:
+            t = "File:" + f.replace("_", " ")
+            infos[f] = by_title.get(cmoved.get("File:" + f, t)) or by_title.get(t)
+    return {n: (image_from_pages(p, infos.get(p["pageimage"])) if p and p.get("pageimage") else None)
+            for n, p in wanted.items()}
+
+
+async def add_images(client, entries):
+    """Fill `image` (dict or None) on each entry. Cached by scientific name; a failed lookup leaves None and is not cached,
+    so the card shows a placeholder now and tries again next time."""
+    todo = []
+    for e in entries:
+        e["image"] = None
+        hit = _image_cache.get(e["species"])
+        if hit is not None:
+            e["image"] = hit["image"]
+        else:
+            todo.append(e)
+    if not todo:
+        return
+    got, status = await safe(lookup_images(client, sorted({e["species"] for e in todo})[:MAX_NAME_LOOKUPS]))
+    if status != "ok":
+        for e in todo:
+            e["image_status"] = status   # "failed: HTTPStatusError": the card shows the placeholder; this is for the sources list
+        return
+    for e in todo:
+        if e["species"] in got:
+            e["image"] = got[e["species"]]
+            _image_cache.set(e["species"], {"image": e["image"]})
+
+
+def images_status(rare):
+    if not rare:
+        return "not needed"
+    if any(r.get("image") for r in rare):
+        return "ok"
+    failed = next((r["image_status"] for r in rare if r.get("image_status")), None)
+    return failed or "empty"
 
 
 def rare_scope(step, found):
@@ -514,7 +620,7 @@ async def fetch_rare(client, lat, lng, lang=None):
         results = await asyncio.gather(*(safe(fetch_rare_details(client, area, name, step["detail_limit"]))
                                          for name, _ in species))
         entries = [build_rare_entry(name, n, details) for (name, n), (details, _) in zip(species, results)]
-        await add_local_names(client, entries, lang)
+        await asyncio.gather(add_local_names(client, entries, lang), add_images(client, entries))
         return entries, rare_scope(step, entries)
     return [], rare_scope(None, None)
 
@@ -638,6 +744,7 @@ async def fast_facts(client, lat, lng, lang=None):
         "rare_animals_recorded_nearby": rare,
         "rare_animals_note": RARE_NOTE,
         "rare_names_note": RARE_NAMES_NOTE,
+        "rare_images_note": IMAGE_NOTE,
         "human_history_nearby": human,
         # how far from the user each layer's facts really come from (None = that source failed)
         "scope": {"rock": rock_scope(unit) if s_rock == "ok" else None,
@@ -646,6 +753,7 @@ async def fast_facts(client, lat, lng, lang=None):
     statuses = {"macrostrat": source_status(unit, s_rock),
                 "gbif": source_status(rare, s_rare),
                 "wikipedia": source_status(human, s_human),
+                "commons": images_status(rare),
                 "nominatim": geo_status or "not needed"}
     return facts, statuses
 

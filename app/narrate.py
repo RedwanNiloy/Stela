@@ -87,7 +87,7 @@ def _rare_for_llm(r):
 
 def llm_view(facts):
     """A smaller copy of the facts for the model: fewer tokens, so faster and less to get wrong."""
-    view = {k: v for k, v in facts.items() if v != "pending" and k != "scope"}
+    view = {k: v for k, v in facts.items() if v != "pending" and k not in ("scope", "rare_images_note")}
     if facts.get("scope"):  # how far from the walker each section's facts come from
         view["scopes"] = {k: {"level": v["level"], "note": v["note"]} for k, v in facts["scope"].items() if v}
     if isinstance(view.get("rock"), dict):
