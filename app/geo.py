@@ -25,8 +25,9 @@ import httpx
 from .cache import TTLCache, cache_key
 
 # Nominatim's usage policy asks for an identifying User-Agent. Set STELA_CONTACT (a URL or email) in production.
-_contact = os.environ.get("STELA_CONTACT", "").strip()
-UA = {"User-Agent": "stela/0.1 (hacktoberfest open-source project" + (f"; {_contact}" if _contact else "") + ")"}
+# Without STELA_CONTACT the project's public repository is the contact, so the agent always carries a URL (Wikimedia's policy).
+_contact = os.environ.get("STELA_CONTACT", "").strip() or "https://github.com/RedwanNiloy/Stela"
+UA = {"User-Agent": f"stela/0.1 (hacktoberfest open-source project; {_contact})"}
 HUMAN_MA = 0.3  # Homo sapiens, roughly 300,000 years
 
 FAST_TIMEOUT = 6.0    # Macrostrat, GBIF, Wikipedia, Nominatim usually answer in about 1 second
