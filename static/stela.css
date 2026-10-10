@@ -237,3 +237,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* header actions and the sound toggle: the slash shows OFF, the waves show ON */
+.top-actions { display: flex; gap: var(--s2); align-items: center; }
+#sound .snd-on { display: none; }
+#sound.is-on .snd-on { display: inline; }
+#sound.is-on .snd-off { display: none; }
+#sound.is-on { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }

@@ -99,6 +99,10 @@ The same rules apply everywhere: a picture is shown only with an author and a li
 - **What this place probably was.** An original inline SVG scene (sea floor, swamp, dry salt flats, river and floodplain, volcanic land) drawn for Stela and chosen from the inferred setting type. No photos. If the setting is unknown there is no picture.
 - **Rock.** No photos; only a small original strata icon.
 
+## Sound effects
+
+Optional and off by default. A speaker button in the header turns them on; the choice is remembered in your browser (and the page works the same if storage is blocked). The sounds are synthesized in your browser with the Web Audio API (oscillators and filtered noise): there are no audio files and no libraries, and nothing is sent anywhere. They are a soft stone tap on buttons and sections, a short low chime when results arrive, a quiet low tone for empty or error states, and a two-note sound for "Era unlocked". Each is under 0.5 s and quiet. Audio starts only after your first tap, never while the Listen voice is speaking, and never as the only feedback: each sound goes with a visible change. All of it lives in `static/stela-sound.js`, so it is easy to remove.
+
 ## Passport and Walk mode
 
 **Passport.** When you look up where you actually are (the "Use my location" button or Walk mode), Stela stamps the place in a passport: rounded coordinates (3 decimals), rock name, rock age range, era and the date. The Passport view lists your places and counts the distinct eras you have collected, and "Clear my passport" (two taps) wipes it. **The passport lives only in your browser (localStorage) and is never sent to the server.** There are no accounts. Pins dropped on the map do not count as visits. If your browser blocks storage, the app works as normal and the passport only lasts until you close the page (it tells you so).
@@ -142,7 +146,7 @@ On a slow CPU a local reply can take longer than the 30 s limit, and Stela then 
 
 ```bash
 python -m pytest -q          # no network needed (also runs the browser-logic tests if Node.js is installed)
-node --test tests/logic.test.js   # the browser-logic tests on their own: walk-mode distance rule and passport storage
+node --test tests/logic.test.js tests/sound.test.js   # the browser-logic tests on their own: walk-mode distance rule, passport storage, sound rules
 python tests/capture_samples.py   # optional: re-record the sample API responses
 ```
 

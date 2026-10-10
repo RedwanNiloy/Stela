@@ -43,10 +43,15 @@
         <p class="tagline">Every place is a stone with a story carved in it.</p>
       </div>
     </div>
+    <div class="top-actions">
+    <button class="icon-btn" id="sound" type="button" aria-pressed="false" aria-label="Sound effects off. Turn on" title="Sound effects: off" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><g class="snd-on"><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g><path class="snd-off" d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
     <button class="icon-btn" id="theme" type="button" aria-label="Switch to dark theme">
       <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
     </button>
+    </div>
   </div>
 </header>
 
@@ -181,6 +186,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="stela-logic.js"></script>
+<script src="stela-sound.js"></script>
 <script>
 "use strict";
 const $ = (sel) => document.querySelector(sel);
@@ -210,6 +216,7 @@ const diggingNote = skeleton;
 function retryRow(text, onRetry) {
   const b = h("button", { class: "link-btn", type: "button" }, "Try again");
   b.addEventListener("click", onRetry);
+  play("low");                       // an error state: a quiet low tone (the message and button are the visual change)
   return h("div", {}, empty(text), b);
 }
 
@@ -238,6 +245,7 @@ const Voice = {
   speak(text, onEnd) {
     if (!this.supported || !text) return;
     this.stop();
+    if (window.StelaSound) StelaSound.stopAll();   // sound effects never run over the voice
     const u = new SpeechSynthesisUtterance(text);
     u.rate = 0.92;
     u.onend = u.onerror = () => { this.speaking = false; onEnd && onEnd(); };
@@ -246,6 +254,33 @@ const Voice = {
   },
   stop() { if (this.supported) speechSynthesis.cancel(); this.speaking = false; },
 };
+
+/* ---------- Sound effects (optional, off by default; all of it lives in stela-sound.js) ---------- */
+const play = (name) => { if (window.StelaSound) StelaSound.play(name); };
+(function setupSound() {
+  const btn = $("#sound");
+  if (!window.StelaSound || !StelaSound.supported) return;   // no audio API: no button, no sound
+  StelaSound.init({ isSpeaking: () => Voice.speaking });
+  btn.hidden = false;
+  const show = () => {
+    const on = StelaSound.enabled();
+    btn.setAttribute("aria-pressed", String(on));
+    btn.setAttribute("aria-label", on ? "Sound effects on. Turn off" : "Sound effects off. Turn on");
+    btn.title = "Sound effects: " + (on ? "on" : "off");
+    btn.classList.toggle("is-on", on);
+  };
+  show();
+  btn.addEventListener("click", () => {
+    StelaSound.setEnabled(!StelaSound.enabled());
+    show();
+    play("tap");                     // a confirmation only when turning ON (silent when off)
+  });
+  // a soft tap on buttons and on opening or closing a section (the speaker button itself is handled above)
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("#sound")) return;
+    if (e.target.closest("button, summary")) play("tap");
+  });
+})();
 
 /* ---------- State ---------- */
 let run = 0;                 // incremented on every new lookup so stale replies are ignored
@@ -369,12 +404,14 @@ async function explore(lat, lng, opts = {}) {
     const slow = e.message === "slow-down";
     if (!opts.walk) say(slow ? "Easy there. Please wait a minute before exploring another spot."
       : "The stone is quiet right now. Check your connection.", true, false, slow ? null : () => explore(lat, lng, opts));
+    play("low");
     return { error: slow ? "slow-down" : "network" };
   }
   if (me !== run) return { error: "stale" };
   if (opts.walk) { Voice.stop(); setListenLabel(); } else say("");
   renderWhere(data);
   $("#results").hidden = false;
+  if (!opts.walk) play(data.facts.rock ? "chime" : "low");   // results arrived (or the map had no rock): the cards appear
   updateReadMore();
   if (!opts.walk) { setMapCollapsed(true); mapToggle.hidden = false; $("#summary").scrollIntoView(scrollOpts("start")); }
   if (opts.real) stampPassport(lat, lng, data.facts.rock);
@@ -773,6 +810,7 @@ function unlockBadge(era) {
   const chip = h("span", { class: "unlock", role: "status" });
   chip.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-star"/></svg>';
   chip.append("Era unlocked: " + era);
+  play("era");
   return chip;
 }
 
