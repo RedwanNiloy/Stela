@@ -122,7 +122,7 @@
       <details class="sec" id="sec-animals">
         <summary>
           <span class="sec-ico"><svg aria-hidden="true"><use href="#i-animal"/></svg></span>
-          <span class="sec-head"><span class="sec-title">Animals recorded nearby</span><span class="sec-sum" id="sum-animals"></span></span>
+          <span class="sec-head"><span class="sec-title">Rare animal records</span><span class="sec-sum" id="sum-animals"></span></span>
           <svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg>
         </summary>
         <div class="sec-body"><div id="rare"></div></div>
@@ -442,7 +442,7 @@ function renderWhere(d) {
   // Ground: the rock, what the place probably was, and a timeline back to the rock (nothing about fossils or people here)
   renderGround(f, sc);
 
-  // Rare animals: these are RECORDS (sightings, specimens, ...), never a claim that the animal lives here
+  // Rare animal records: sightings, specimens, ... never a claim about where an animal lives
   const rare = f.rare_animals_recorded_nearby;
   setContent($("#rare"),
     rare == null ? retryRow("Could not be checked right now.", () => explore(lastLookup.lat, lastLookup.lng, { real: lastLookup.real }))
@@ -478,7 +478,7 @@ function rockAge(rock) {
     : "Age not recorded";
 }
 
-/* One rare-animal entry: name, record count, which dataset(s) the records come from, and what the records say about alive/dead. */
+/* One rare-animal entry: name, record count, which dataset(s) the records come from, and what the records say about the animal's condition. */
 function rareEntry(r) {
   const flags = [];
   if (r.records_checked == null) {
@@ -488,7 +488,7 @@ function rareEntry(r) {
     const scope = r.records_checked < r.records ? `the first ${r.records_checked} records checked` : `${r.records_checked} records checked`;
     const bits = [];
     if (r.marked_dead) bits.push(h("strong", { class: "dead" }, `${r.marked_dead} marked dead`));
-    if (r.marked_alive) bits.push(`${r.marked_alive} marked alive by the recorder`);
+    if (r.marked_alive) bits.push(`${r.marked_alive} marked as a live animal by the recorder`);
     if (r.specimen_records) bits.push(`${r.specimen_records} museum or collection specimens or samples`);
     bits.push(`${unmarked} do not say`);
     flags.push(`Of ${scope}: `, ...bits.flatMap((b, i) => (i ? [", ", b] : [b])), ".");

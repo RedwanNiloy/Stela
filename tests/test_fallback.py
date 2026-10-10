@@ -43,13 +43,14 @@ RARE_FACTS = {**FACTS, "human_history_nearby": [], "rare_animals_note": geo.RARE
 
 def test_fallback_text_says_recorded_never_alive():
     text = narrate.facts_only_text(RARE_FACTS)
-    assert "Rare animals recorded nearby" in text and "not necessarily where it lives" in text
+    assert "Rare animal records" in text and "not necessarily where it lives" in text
     assert not narrate.claims_animals_alive(text)
 
 
 def test_prompt_forbids_alive_claims_and_gives_dataset_and_dead_counts():
     p = narrate.build_prompt(RARE_FACTS, "main")
-    assert "NOT proof that an animal lives or is alive" in p.split("FACTS:")[0]
+    assert "NOT proof that an animal lives nearby" in p.split("FACTS:")[0]
+    assert "rare animal records" in p.split("FACTS:")[0] and "recorded sightings" in p.split("FACTS:")[0]
     assert "alive today" not in p
     facts = p.split("FACTS:")[1]
     assert "iNaturalist" in facts and '"marked_dead":5' in facts

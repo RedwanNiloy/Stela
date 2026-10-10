@@ -24,8 +24,9 @@ GROUNDING_RULES = """STRICT RULES (these override everything else):
 6. Do not claim anything about any culture (Egyptian or otherwise) unless it appears in the facts.
 7. Write species names exactly as given. Never translate them into common names, and never add anything about
    who built, used or lived at a place beyond what its summary says.
-8. Animal records are NOT proof that an animal lives or is alive. Never say the animals are alive, live here,
-   roam, wander, can be seen or inhabit the area. Say only that records or sightings exist. If some records are
+8. These are "rare animal records" (recorded sightings). They are NOT proof that an animal lives nearby. Call them
+   "rare animal records" or "recorded sightings". Never say the animals are alive, live here, roam, wander, can be
+   seen or inhabit the area, and mention only species that appear in the facts. Say only that records exist. If some records are
    marked dead or are museum specimens, say so. Always add that a record shows where an animal was observed,
    not necessarily where it lives.
 9. The "scopes" section says how far from the walker each section's facts really come from. Whenever a scope's
@@ -46,7 +47,7 @@ no headings, no markdown."""
 
 MAIN_TASK = """TASK: In under 150 words, tell the walker: 1) the rock under their feet and how old it is
 (compare with humans using time_ruler), 2) what this place probably was then, 3) human history (or the wider place it is about, if the scope says so),
-4) rare animals RECORDED nearby (records only; mention the caveat).
+4) the rare animal records (recorded sightings only; mention the caveat).
 Do not mention fossils; they are shown separately."""
 
 FOSSIL_TASK = """TASK: In 2 to 4 short sentences, continue the story for the same walker (do not greet them again).
@@ -255,11 +256,11 @@ def facts_only_text(facts, part="main"):
     if rare is None:
         parts.append("Rare animal records could not be checked right now.")
     elif not rare:
-        parts.append("Rare animals recorded nearby: " + (scope_note(facts, "rare") or "nothing recorded nearby."))
+        parts.append("Rare animal records: " + (scope_note(facts, "rare") or "nothing recorded nearby."))
     else:
         shown = [r["species"] + (f" ({r['local_names'][0]['language_name']} name: {r['local_names'][0]['name']})"
                                  if r.get("local_names") else "") for r in rare[:4]]
-        parts.append("Rare animals recorded nearby: " + ", ".join(shown) + ". "
+        parts.append("Rare animal records: " + ", ".join(shown) + ". "
                      + scope_note(facts, "rare") + " " + facts.get("rare_animals_note", ""))
     return " ".join(p.replace("  ", " ") for p in parts)
 

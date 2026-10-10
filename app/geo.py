@@ -300,9 +300,9 @@ async def fetch_fossils(client, lat, lng, unit):
     return None, fossil_scope(None, None, country, incomplete=last_error is not None)
 
 
-# ---------- Layer 3: rare animals RECORDED nearby (GBIF + IUCN) ----------
+# ---------- Layer 3: rare animal records (GBIF + IUCN) ----------
 # GBIF holds observations, museum specimens, market finds and more. A record says where an animal
-# was recorded, NOT that it lives there, so nothing in here (or in the narration) may say "alive".
+# was recorded, NOT that it lives there, so nothing in here (or in the narration) may say it lives there.
 RARE_NOTE = ("Records show where an animal was observed, not necessarily where it lives. "
              "They can include dead animals, market finds and misplaced locations.")
 GBIF = "https://api.gbif.org/v1"
