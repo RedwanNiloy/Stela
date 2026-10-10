@@ -101,6 +101,8 @@ def test_at_most_two_names_per_species():
 def test_non_latin_names_pass_through_untouched():
     out = geo.choose_names(geo.compact_names(SHARK), ["ben"])
     assert out[0]["name"] == "হাঙর" and out[0]["language_name"] == "Bengali"
+    assert out[0]["lang_tag"] == "bn"                         # the HTML lang attribute needs the 2-letter tag, not "ben"
+    assert geo.choose_names(geo.compact_names([{"vernacularName": "x", "language": "xyz", "source": "s"}]), ["xyz"])[0]["lang_tag"] is None
     assert "হাঙর" in json.dumps(out, ensure_ascii=False)
 
 

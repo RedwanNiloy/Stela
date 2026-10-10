@@ -3,132 +3,173 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Stela</title>
 <meta name="description" content="Every place is a stone with a story carved in it. Tap to hear the ancient history of the ground under your feet.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="stela.css">
 </head>
 <body>
-<div class="wrap">
-  <header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M5 10v4h3.5l5 4V6l-5 4zM17 9.5a4 4 0 0 1 0 5M19.5 7a7.5 7.5 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ground" viewBox="0 0 24 24"><path d="M3 8c3-2 6 2 9 0s6 2 9 0M3 13c3-2 6 2 9 0s6 2 9 0M3 18c3-2 6 2 9 0s6 2 9 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-fossil" viewBox="0 0 24 24"><path d="M12 12a1.5 1.5 0 0 1 3 0 4 4 0 0 1-8 0 6.5 6.5 0 0 1 13 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-animal" viewBox="0 0 24 24"><path d="M3 12c3-5 9-6 14-2l4-3v10l-4-3c-5 4-11 3-14-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.5" cy="11" r=".9" fill="currentColor"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><path d="M4 20h16M6.5 20V10.5M10.2 20V10.5M13.8 20V10.5M17.5 20V10.5M4 10.5l8-6 8 6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="wrap">
     <div class="brand">
-      <svg viewBox="0 0 44 52" aria-hidden="true">
-        <path d="M5 49V21a17 17 0 0 1 34 0v28z" fill="var(--card)" stroke="var(--card-edge)" stroke-width="3"/>
-        <path d="M13 25h18M13 32h18M13 39h12" stroke="var(--ochre)" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-      <h1>STELA</h1>
-    </div>
-    <p class="tagline">Every place is a stone with a story carved in it.</p>
-    <div class="rule" aria-hidden="true"></div>
-  </header>
-
-  <noscript><p class="scope scope-wider_area">Stela needs JavaScript to look up the ground under your feet.</p></noscript>
-
-  <main>
-    <button class="btn" id="locate" type="button">Use my location</button>
-    <div class="tools">
-      <button class="btn btn-ghost" id="walk" type="button" aria-pressed="false">Walk mode: off</button>
-      <button class="btn btn-ghost" id="passport-btn" type="button" aria-expanded="false" aria-controls="passport">Passport (0)</button>
-    </div>
-    <p class="walk-note">Walk mode keeps your GPS on, so it uses more battery. It only watches while this page is open and visible, and asks for a new story after you move about 300 m.</p>
-    <label class="check" id="autoread-row" hidden><input type="checkbox" id="autoread"> Read each new story aloud automatically</label>
-    <p id="walkstatus" role="status" aria-live="polite" class="small"></p>
-    <p class="hint">Or tap anywhere on the map to drop a pin and explore that place.</p>
-    <div id="map" role="application" aria-label="Map. Tap to drop a pin."></div>
-    <p id="msg" role="status" aria-live="polite"></p>
-    <p id="walkmsg" role="status" aria-live="polite"></p>
-    <div id="walkoffer" hidden><button class="btn btn-ghost" id="walk-listen" type="button">&#9654; Listen to the new story</button></div>
-
-    <section id="passport" class="card" hidden>
-      <h2>Passport</h2>
-      <div id="passport-body"></div>
-      <div class="actions"><button class="btn btn-ghost" id="passport-clear" type="button">Clear my passport</button></div>
-      <p class="small">Your passport lives only in this browser. It is never sent to the server.</p>
-    </section>
-
-    <section id="results" hidden>
-      <!-- The scribe: simple original SVG figure, with the narration and Listen in a speech panel -->
-      <article class="scribe" id="card-story">
-        <div class="scribe-fig" aria-hidden="true">
-          <svg viewBox="0 0 120 150">
-            <path d="M14 150c0-48 20-66 46-66s46 18 46 66z" fill="var(--robe)" stroke="var(--ink)" stroke-width="2.5"/>
-            <path d="M44 86q16 14 32 0" fill="none" stroke="var(--on-turq)" stroke-width="3" opacity=".8"/>
-            <circle cx="60" cy="56" r="22" fill="var(--skin)" stroke="var(--ink)" stroke-width="2.5"/>
-            <path d="M37 54q0-26 23-26t23 26q-23-10-46 0z" fill="var(--ochre)" stroke="var(--ink)" stroke-width="2.5"/>
-            <path d="M38 47q22-9 44 0" fill="none" stroke="var(--turquoise)" stroke-width="4"/>
-            <circle cx="52" cy="61" r="2.6" fill="var(--ink)"/><circle cx="68" cy="61" r="2.6" fill="var(--ink)"/>
-            <path d="M52 71q8 5 16 0" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
-            <rect x="30" y="102" width="56" height="42" rx="7" fill="var(--card)" stroke="var(--card-edge)" stroke-width="3"/>
-            <path d="M39 114h38M39 123h38M39 132h24" stroke="var(--stone-dark)" stroke-width="3" stroke-linecap="round"/>
-            <path d="M92 94l-18 20" stroke="var(--ink)" stroke-width="3.5" stroke-linecap="round"/>
-            <circle cx="92" cy="94" r="6" fill="var(--skin)" stroke="var(--ink)" stroke-width="2.5"/>
-          </svg>
-        </div>
-        <div class="speech">
-          <h2>The scribe speaks</h2>
-          <div id="story"></div>
-          <button class="btn btn-listen" id="listen" type="button">&#9654; Listen</button>
-          <div class="actions"><span class="badge" id="mode"></span></div>
-          <p class="stamp" id="stamp" hidden></p>
-        </div>
-      </article>
-
-      <div class="dig-bar"><button class="btn btn-dig" id="dig-btn" type="button" aria-expanded="false" aria-controls="dig">Dig down &#9660;</button></div>
-      <section class="dig" id="dig" hidden aria-label="Dig down through the layers"></section>
-
-      <div class="cards">
-        <article class="card" id="card-rock">
-          <h2>Under your feet</h2>
-          <div id="rock"></div>
-        </article>
-
-        <article class="card" id="card-setting">
-          <h2>What this place probably was</h2>
-          <div id="setting"></div>
-        </article>
-
-        <article class="card" id="card-fossils">
-          <h2>Ancient animals found nearby</h2>
-          <div id="fossils"></div>
-        </article>
-
-        <article class="card" id="card-rare">
-          <h2>Rare animals recorded nearby</h2>
-          <div id="rare"></div>
-        </article>
-
-        <article class="card" id="card-people">
-          <h2>People and past civilizations</h2>
-          <div id="people"></div>
-        </article>
-
+      <svg viewBox="0 0 22 26" aria-hidden="true"><path d="M2 25V10a9 9 0 0 1 18 0v15z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h8M7 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="brand-text">
+        <div class="wordmark">STELA</div>
+        <p class="tagline">Every place is a stone with a story carved in it.</p>
       </div>
-    </section>
-
-    <div class="notes">
-      <p><strong>Honest notes.</strong> Fossil records show what has been <em>found</em> near here, not everything that lived here.</p>
-      <p>Whether a place was sea, land or swamp is <em>inferred from the rock type</em>, so it is only ever "probably".</p>
-      <p>Animal records show where an animal was observed, not necessarily where it lives.</p>
-      <p>The narration is written by an open-weight AI model that is only given the facts shown on this page. Check the cards below it.</p>
-      <p>The scribe, the stone tablets and the layers are original decoration. They are not a picture of any real culture or period, and the layers are for orientation, not to scale.</p>
     </div>
-  </main>
+    <button class="icon-btn" id="theme" type="button" aria-label="Switch to dark theme">
+      <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</header>
 
-  <footer>
-    <h2>Sources</h2>
-    <ul id="sources">
+<noscript><p class="wrap panel">Stela needs JavaScript to look up the ground under your feet.</p></noscript>
+
+<main class="wrap">
+  <section class="mapcard" id="mapcard" aria-label="Map">
+    <div class="mapbar">
+      <button class="btn btn-main" id="locate" type="button"><svg aria-hidden="true"><use href="#i-pin"/></svg>Use my location</button>
+      <button class="btn btn-quiet" id="map-toggle" type="button" aria-expanded="true" aria-controls="map" hidden>Hide map</button>
+    </div>
+    <div id="map" role="application" aria-label="Map. Tap to drop a pin and explore that place."></div>
+  </section>
+  <p class="hint" id="map-hint">Tap the map to drop a pin and explore any place.</p>
+  <p class="sr-only" id="map-alt" role="status" aria-live="polite">No place chosen yet.</p>
+  <p id="msg" role="status" aria-live="polite" hidden></p>
+
+  <div class="toolbar">
+    <button class="btn btn-quiet" id="walk" type="button" aria-pressed="false">Walk mode: off</button>
+    <button class="btn btn-quiet" id="passport-btn" type="button" aria-expanded="false" aria-controls="passport">Passport (0)</button>
+  </div>
+  <p class="walk-note">Walk mode keeps your GPS on, so it uses more battery. It only watches while this page is open and visible, and asks for a new story after you move about 300 m.</p>
+  <label class="check" id="autoread-row" hidden><input type="checkbox" id="autoread"> Read each new story aloud automatically</label>
+  <p id="walkstatus" role="status" aria-live="polite" class="small"></p>
+  <p id="walkmsg" role="status" aria-live="polite"></p>
+  <div id="walkoffer" hidden><button class="btn btn-quiet" id="walk-listen" type="button">Listen to the new story</button></div>
+
+  <section id="passport" class="panel" hidden aria-label="Passport">
+    <h2>Passport</h2>
+    <div id="passport-body"></div>
+    <button class="link-btn" id="passport-clear" type="button">Clear my passport</button>
+    <p class="small">Your passport lives only in this browser. It is never sent to the server.</p>
+  </section>
+
+  <section id="results" hidden aria-label="Result">
+    <article class="panel summary" id="summary">
+      <div class="sum-top"><h2 class="sum-place" id="sum-place">Your spot</h2><span class="sum-coord" id="sum-coord"></span></div>
+      <p class="sum-rock" id="sum-rock"></p>
+      <p class="sum-age" id="sum-age"></p>
+      <ul class="chips" id="sum-chips"></ul>
+      <div class="era" id="era"></div>
+    </article>
+
+    <article class="panel narration" id="card-story" aria-label="Narration">
+      <div class="story clamped" id="story"></div>
+      <div class="narration-actions">
+        <button class="btn" id="listen" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span class="lbl">Listen</span></button>
+        <button class="link-btn" id="readmore" type="button" aria-expanded="false" hidden>Read more</button>
+      </div>
+      <p class="stamp" id="stamp" hidden></p>
+    </article>
+
+    <div class="sections">
+     <div class="col">
+      <details class="sec" id="sec-ground" open>
+        <summary>
+          <span class="sec-ico"><svg aria-hidden="true"><use href="#i-ground"/></svg></span>
+          <span class="sec-head"><span class="sec-title">Ground</span><span class="sec-sum" id="sum-ground"></span></span>
+          <svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg>
+        </summary>
+        <div class="sec-body">
+          <div id="rock"></div>
+          <div id="setting"></div>
+          <h3 class="tl-title">Dig down through time</h3>
+          <ol class="timeline" id="timeline" aria-label="Today, human history and when this rock formed, from top to bottom"></ol>
+          <p class="small tl-note">Not to scale: the gap between the top and the bottom is far bigger than it looks.</p>
+        </div>
+      </details>
+     </div>
+
+     <div class="col">
+      <details class="sec" id="sec-fossils">
+        <summary>
+          <span class="sec-ico"><svg aria-hidden="true"><use href="#i-fossil"/></svg></span>
+          <span class="sec-head"><span class="sec-title">Fossils</span><span class="sec-sum" id="sum-fossils"></span></span>
+          <svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg>
+        </summary>
+        <div class="sec-body"><div id="fossils"></div></div>
+      </details>
+
+      <details class="sec" id="sec-animals">
+        <summary>
+          <span class="sec-ico"><svg aria-hidden="true"><use href="#i-animal"/></svg></span>
+          <span class="sec-head"><span class="sec-title">Animals recorded nearby</span><span class="sec-sum" id="sum-animals"></span></span>
+          <svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg>
+        </summary>
+        <div class="sec-body"><div id="rare"></div></div>
+      </details>
+
+      <details class="sec" id="sec-people">
+        <summary>
+          <span class="sec-ico"><svg aria-hidden="true"><use href="#i-people"/></svg></span>
+          <span class="sec-head"><span class="sec-title">People and history</span><span class="sec-sum" id="sum-people"></span></span>
+          <svg class="chev" aria-hidden="true"><use href="#i-chev"/></svg>
+        </summary>
+        <div class="sec-body"><div id="people"></div></div>
+      </details>
+     </div>
+    </div>
+  </section>
+
+  <details class="panel about" id="about">
+    <summary>About this data</summary>
+    <h3>How to read it</h3>
+    <ul>
+      <li>Fossil records show what has been <em>found</em> near here, not everything that lived here.</li>
+      <li>Whether a place was sea, land or swamp is <em>inferred from the rock type</em>, so it is only ever "probably".</li>
+      <li>Animal records show where an animal was observed, not necessarily where it lives. Local names come from GBIF and may be incomplete.</li>
+      <li>Histories of an area may be contested or incomplete. Folklore is listed separately as "tradition, not verified history".</li>
+      <li>The narration is written by an open-weight AI model that is only given the facts shown in the sections. Check the sections.</li>
+      <li>Each section says how far from you its facts come from (your area, a wider area, the nearest place or a region). Facts from a wider scope are not about your exact spot.</li>
+      <li>The timeline in Ground is for orientation, not to scale. The styling is original decoration and does not depict any real culture or period.</li>
+      <li>Walk mode keeps your GPS on and uses more battery.</li>
+    </ul>
+    <h3>Sources</h3>
+    <ul id="sources" class="sources">
       <li><a href="https://macrostrat.org" target="_blank" rel="noopener">Macrostrat</a> (rock units and ages)</li>
       <li><a href="https://paleobiodb.org" target="_blank" rel="noopener">Paleobiology Database</a> (fossils)</li>
       <li><a href="https://www.gbif.org" target="_blank" rel="noopener">GBIF</a> / IUCN Red List (rare animal records)</li>
       <li><a href="https://en.wikipedia.org" target="_blank" rel="noopener">Wikipedia</a> (human history)</li>
-      <li><a href="https://nominatim.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap Nominatim</a> (nearest place, used only when nothing is found within 10 km)</li>
+      <li><a href="https://nominatim.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap Nominatim</a> (place names and hierarchy)</li>
     </ul>
-    <p>Your location is used for this lookup only. Stela does not store or log it.</p>
-  </footer>
-</div>
+    <h3>Privacy</h3>
+    <ul><li>Your location is used for this lookup only. Stela does not store or log it. Your passport stays in this browser.</li></ul>
+  </details>
+</main>
+
+<nav class="bottombar" aria-label="Main actions">
+  <button class="btn" id="locate2" type="button"><svg aria-hidden="true"><use href="#i-pin"/></svg>Use my location</button>
+  <button class="btn btn-quiet" id="listen2" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span class="lbl">Listen</span></button>
+</nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="stela-logic.js"></script>
@@ -146,20 +187,41 @@ function h(tag, attrs, ...kids) {
 const setContent = (el, ...kids) => el.replaceChildren(...kids.flat().filter((k) => k != null));
 const empty = (text) => h("p", { class: "empty" }, text);
 const fmtMa = (x) => (x >= 10 ? Math.round(x * 10) / 10 : Math.round(x * 100) / 100).toLocaleString();
+const setSum = (id, text) => { $("#sum-" + id).textContent = text; };
 
-/* ---------- Motion helpers: every animation is optional and skipped for prefers-reduced-motion ---------- */
 const reduceMotion = () => !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
 const scrollOpts = (block = "start") => ({ behavior: reduceMotion() ? "auto" : "smooth", block });
-function carve(el, delayMs = 0) {  // chisel a card in; the card is fully visible without this
-  if (!el || reduceMotion()) return;
-  el.style.setProperty("--d", delayMs + "ms");
-  el.classList.remove("carve");
-  void el.offsetWidth;  // restart the animation
-  el.classList.add("carve");
+
+/* Loading skeleton: a few shimmering bars, with an optional short note */
+const skeleton = (note) => h("div", {},
+  note ? h("p", { class: "skeleton-note" }, note) : null,
+  h("div", { class: "skeleton", "aria-hidden": "true" }, h("i"), h("i"), h("i")));
+const diggingNote = skeleton;
+
+/* A failed section shows what happened and a way to try again; it never affects the others. */
+function retryRow(text, onRetry) {
+  const b = h("button", { class: "link-btn", type: "button" }, "Try again");
+  b.addEventListener("click", onRetry);
+  return h("div", {}, empty(text), b);
 }
-const carveAll = () => ["#card-story", "#dig-btn", "#card-rock", "#card-setting", "#card-fossils", "#card-people", "#card-rare"]
-  .forEach((sel, i) => carve($(sel), i * 80));
-const sand = () => h("span", { class: "sand", "aria-hidden": "true" });  // drifting sand: the themed loading indicator
+
+/* ---------- Theme: light or dark, remembered in this browser only (a per-viewer convenience) ---------- */
+const themeBtn = $("#theme");
+function applyTheme(t) {
+  document.documentElement.dataset.theme = t;
+  themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+}
+(function initTheme() {
+  let t = null;
+  try { t = localStorage.getItem("stela.theme"); } catch (e) { /* storage blocked: follow the system setting */ }
+  if (t !== "light" && t !== "dark") t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  applyTheme(t);
+})();
+themeBtn.addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem("stela.theme", next); } catch (e) { /* not remembered: still switched for this visit */ }
+});
 
 /* ---------- Voice: the ONLY place that knows how speech works. Swap this object for ElevenLabs later. ---------- */
 const Voice = {
@@ -181,26 +243,58 @@ const Voice = {
 let run = 0;                 // incremented on every new lookup so stale replies are ignored
 let storyText = "";          // what "Listen" reads
 let marker = null;
-let quiet = false;           // true while a Walk-mode refresh is in progress: no flashy animation
+let lastLookup = null;       // { lat, lng, real } of the current story, for coordinates in the summary and for retries
+let lastRock = null;         // the most recent mapped rock, to notice when a walker crosses into another unit
 
-const map = L.map("map", { worldCopyJump: true }).setView([20, 10], 2);
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
-map.on("click", (e) => { placePin(e.latlng.lat, e.latlng.lng); explore(e.latlng.lat, e.latlng.lng); });
+/* ---------- Map (the page still works without it) ---------- */
+const mapcard = $("#mapcard"), mapToggle = $("#map-toggle");
+let map = null;
+if (typeof L !== "undefined") {
+  try {
+    map = L.map("map", { worldCopyJump: true }).setView([20, 10], 2);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    map.on("click", (e) => { placePin(e.latlng.lat, e.latlng.lng); explore(e.latlng.lat, e.latlng.lng); });
+  } catch (e) { map = null; }
+}
+if (!map) {
+  setContent($("#map"), h("p", { class: "map-fallback" }, "The map could not be loaded. You can still use your location."));
+  $("#map-hint").hidden = true;
+}
 
 function placePin(lat, lng) {
+  $("#map-alt").textContent = `Map pin placed near ${lat.toFixed(2)}, ${lng.toFixed(2)}.`;
+  if (!map) return;
   if (marker) marker.setLatLng([lat, lng]); else marker = L.marker([lat, lng]).addTo(map);
 }
 
-function say(text, warn, loading) {
+function setMapCollapsed(collapsed) {
+  mapcard.classList.toggle("collapsed", collapsed);
+  mapToggle.textContent = collapsed ? "Show map" : "Hide map";
+  mapToggle.setAttribute("aria-expanded", String(!collapsed));
+  $("#map-hint").hidden = collapsed || !map;
+  if (!collapsed && map) setTimeout(() => map.invalidateSize(), 0);
+}
+mapToggle.addEventListener("click", () => setMapCollapsed(!mapcard.classList.contains("collapsed")));
+
+/* A short message under the map; `retry` adds a "Try again" button. */
+function say(text, warn, loading, retry) {
   const m = $("#msg");
   m.className = warn ? "warn" : "";
-  setContent(m, text || "", loading ? sand() : null);
+  m.hidden = !text && !loading && !retry;   // no empty gap under the map
+  const kids = [text || ""];
+  if (loading) kids.push(h("div", { class: "skeleton", "aria-hidden": "true" }, h("i"), h("i")));
+  if (retry) {
+    const b = h("button", { class: "link-btn", type: "button" }, "Try again");
+    b.addEventListener("click", retry);
+    kids.push(b);
+  }
+  setContent(m, kids);
 }
 
-/* ---------- Location button ---------- */
-$("#locate").addEventListener("click", () => {
+/* ---------- Location ---------- */
+function locateMe() {
   if (!navigator.geolocation) {
     say("This browser cannot share your location. Tap the map to drop a pin instead.", true);
     return;
@@ -209,25 +303,33 @@ $("#locate").addEventListener("click", () => {
   navigator.geolocation.getCurrentPosition(
     (pos) => {
       const { latitude: lat, longitude: lng } = pos.coords;
+      if (mapcard.classList.contains("collapsed")) setMapCollapsed(false);
       placePin(lat, lng);
-      map.setView([lat, lng], 12);
+      if (map) map.setView([lat, lng], 12);
       explore(lat, lng, { real: true });
     },
-    () => say("No problem. Location is switched off or was declined. Tap anywhere on the map to drop a pin and explore that place instead.", true),
+    () => {
+      if (mapcard.classList.contains("collapsed")) setMapCollapsed(false);
+      say("No problem. Location is switched off or was declined. Tap anywhere on the map to drop a pin and explore that place instead.", true);
+    },
     { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 }
   );
-});
+}
+$("#locate").addEventListener("click", locateMe);
+$("#locate2").addEventListener("click", locateMe);
 
 /* ---------- Listen ---------- */
-const listenBtn = $("#listen");
-function setListenLabel() { listenBtn.textContent = Voice.speaking ? "■ Stop" : "▶ Listen"; }
-if (!Voice.supported) listenBtn.hidden = true;
-function listen() {  // the one Listen function: the story card button and walk mode both call it
+const listenBtns = [$("#listen"), $("#listen2")];
+function setListenLabel() {
+  listenBtns.forEach((b) => { b.querySelector(".lbl").textContent = Voice.speaking ? "Stop" : "Listen"; b.setAttribute("aria-pressed", String(Voice.speaking)); });
+}
+if (!Voice.supported) listenBtns.forEach((b) => { b.hidden = true; });
+function listen() {  // the one Listen function: the narration panel, the bottom bar and walk mode all call it
   if (Voice.speaking) { Voice.stop(); setListenLabel(); return; }
   Voice.speak(storyText, setListenLabel);
   setListenLabel();
 }
-listenBtn.addEventListener("click", listen);
+listenBtns.forEach((b) => b.addEventListener("click", listen));
 
 /* ---------- Fetch helpers ---------- */
 const BROWSER_LANG = (navigator.language || "").slice(0, 35);  // only used to choose which animal names to show
@@ -239,18 +341,16 @@ async function api(path, lat, lng) {
 }
 
 /* Looks up one spot. opts.real = the spot is where the user actually is (location button or walk mode):
- * only those lookups are stamped in the passport. opts.walk = quiet refresh: keep the old cards on screen and do not scroll.
+ * only those lookups are stamped in the passport. opts.walk = quiet refresh: keep the old sections on screen and do not scroll.
  * Returns { data } on success or { error } so walk mode can back off. */
-let lastRock = null;  // the most recent mapped rock, to notice when a walker crosses into another unit
 async function explore(lat, lng, opts = {}) {
   const me = ++run;
-  quiet = !!opts.walk;
+  lastLookup = { lat, lng, real: !!opts.real };
   if (!opts.walk) {
     Voice.stop(); setListenLabel();
     storyText = "";
     $("#results").hidden = true;
-    closeDig();
-    say("Reading the stone... this takes a few seconds.", false, true);
+    say("Reading the stone...", false, true);
   }
   $("#stamp").hidden = true;
   let data;
@@ -260,36 +360,46 @@ async function explore(lat, lng, opts = {}) {
     if (me !== run) return { error: "stale" };
     const slow = e.message === "slow-down";
     if (!opts.walk) say(slow ? "Easy there. Please wait a minute before exploring another spot."
-      : "The stone is quiet right now. Check your connection and try again.", true);
+      : "The stone is quiet right now. Check your connection.", true, false, slow ? null : () => explore(lat, lng, opts));
     return { error: slow ? "slow-down" : "network" };
   }
   if (me !== run) return { error: "stale" };
   if (opts.walk) { Voice.stop(); setListenLabel(); } else say("");
   renderWhere(data);
   $("#results").hidden = false;
-  if (!opts.walk) { carveAll(); $("#card-story").scrollIntoView(scrollOpts("start")); }
+  updateReadMore();
+  if (!opts.walk) { setMapCollapsed(true); mapToggle.hidden = false; $("#summary").scrollIntoView(scrollOpts("start")); }
   if (opts.real) stampPassport(lat, lng, data.facts.rock);
   if (data.facts.rock) lastRock = data.facts.rock;
+  loadPeople(me, lat, lng);
+  loadFossils(me, lat, lng);
+  return { data };
+}
 
-  // Fossils come from a slower source, so they arrive after everything else is already on screen.
+/* The two slow sections load in the background; each has its own skeleton, retry and failure state. */
+function loadFossils(me, lat, lng) {
+  setContent($("#fossils"), skeleton("Searching the strata..."));
+  setSum("fossils", "Searching the strata...");
+  api("/api/fossils", lat, lng).then((f) => {
+    if (me === run) renderFossils(f);
+  }).catch(() => {
+    if (me !== run) return;
+    setContent($("#fossils"), retryRow("The fossil database could not be reached right now.", () => loadFossils(me, lat, lng)));
+    setSum("fossils", "Could not be reached right now");
+  });
+}
+function loadPeople(me, lat, lng) {
+  setContent($("#people"), skeleton());
+  setSum("people", "Looking up Wikipedia history articles...");
   api("/api/people", lat, lng).then((d) => {
     if (me !== run) return;
     renderPeople(d);
-    if (!quiet) carve($("#people"));
     return api("/api/people/story", lat, lng).then((st) => { if (me === run) renderPeopleStory(st); });
   }).catch(() => {
-    if (me === run) setContent($("#people"), empty("The early history of this area could not be looked up right now."), peopleNote());
-  });
-  api("/api/fossils", lat, lng).then((f) => {
     if (me !== run) return;
-    renderFossils(f);
-    if (!quiet) carve($("#fossils"));
-  }).catch(() => {
-    if (me !== run) return;
-    setContent($("#fossils"), empty("The fossil database could not be reached right now."));
-    digData.fossils = null; digData.fossilScope = null; renderDig();
+    setContent($("#people"), retryRow("The early history of this area could not be looked up right now.", () => loadPeople(me, lat, lng)), peopleNote());
+    setSum("people", "Could not be looked up right now");
   });
-  return { data };
 }
 
 /* ---------- Rendering ---------- */
@@ -297,65 +407,70 @@ function paragraphs(text) {
   return text.split(/\n{2,}/).map((p) => h("p", {}, p.trim())).filter((p) => p.textContent);
 }
 
-/* Scope: how far from the user's spot a card's facts really come from, in plain words (text comes from the server). */
+/* Scope: how far from the user's spot a section's facts really come from, in plain words (text comes from the server). */
 const SCOPE_TAG = { exact_area: "Your area", wider_area: "Wider area", nearest_place: "Nearest place", region: "Wider region", none: "Nothing recorded" };
 function scopeLine(scope) {
   return scope ? h("p", { class: `scope scope-${scope.level}` }, h("span", { class: "scope-tag" }, SCOPE_TAG[scope.level] || ""), scope.note) : null;
 }
+const SCOPE_CHIP = { exact_area: "Exact area", wider_area: "Wider area", nearest_place: "Nearest place", region: "Wider region", none: "No rock map" };
 
-const diggingNote = (text) => h("div", { class: "digging" }, sand(), text);
+const coordText = (lat, lng) => `${Math.abs(lat).toFixed(2)}° ${lat >= 0 ? "N" : "S"}, ${Math.abs(lng).toFixed(2)}° ${lng >= 0 ? "E" : "W"}`;
+const ageShort = (rock) => rock.b_age != null ? `${fmtMa(rock.b_age)}–${fmtMa(rock.t_age ?? 0)} Ma` : "age not recorded";
 
 function renderWhere(d) {
-  const f = d.facts;
+  const f = d.facts, rock = f.rock, sc = f.scope || {};
+
+  // Summary header: rounded coordinates, rock and age on one line each, scope and mode chips
+  setContent($("#sum-place"), lastLookup && lastLookup.real ? "Your spot" : "Selected spot");
+  $("#sum-coord").textContent = lastLookup ? coordText(lastLookup.lat, lastLookup.lng) : "";
+  $("#sum-rock").textContent = rock ? (rock.name || "Unnamed rock unit") : "No mapped rock here";
+  $("#sum-age").textContent = rock ? rockAge(rock) : (sc.rock ? sc.rock.note : "The rock map could not be checked right now.");
+  const chips = [];
+  if (sc.rock) chips.push(h("li", { class: "chip " + (sc.rock.level === "exact_area" ? "chip-accent" : "chip-ochre") }, SCOPE_CHIP[sc.rock.level] || "Scope"));
+  chips.push(h("li", { class: "chip" + (d.mode === "facts-only" ? "" : " chip-accent"), id: "mode" }, d.mode === "facts-only" ? "Facts only" : "AI narration"));
+  setContent($("#sum-chips"), chips);
+  setContent($("#era"), rock && f.time_ruler ? eraStrip(rock) : null);
+
+  // Narration: compact, with "Read more"
   storyText = d.narration;
   setContent($("#story"), paragraphs(d.narration));
-  $("#mode").textContent = d.mode === "facts-only" ? "Plain facts summary (narrator unavailable)" : "Told by an open-weight AI, from the facts below";
+  $("#story").classList.add("clamped");
+  $("#readmore").textContent = "Read more";
+  $("#readmore").setAttribute("aria-expanded", "false");
   setListenLabel();
 
-  // Under your feet
-  const rock = f.rock, sc = f.scope || {};
-  if (!rock) {
-    setContent($("#rock"), sc.rock ? scopeLine(sc.rock) : empty("The rock map could not be checked right now."));
-    setContent($("#setting"), empty("Nothing recorded nearby."));
-  } else {
-    const ruler = f.time_ruler;
-    setContent($("#rock"),
-      scopeLine(sc.rock),
-      h("p", { class: "big" }, rock.name || "Unnamed rock unit"),
-      rock.lith ? h("p", {}, "Rock type: " + rock.lith) : null,
-      h("p", {}, rockAge(rock)),
-      ruler ? h("p", { class: "small" }, `That is about ${ruler.times_older_than_humans.toLocaleString()} times older than our species (about 0.3 million years).`) : null,
-      ruler ? eraStrip(rock) : null);
-
-    const s = f.ancient_setting;
-    setContent($("#setting"),
-      s && s.meaning
-        ? [scopeLine(sc.rock), h("p", { class: "big" }, "Probably " + s.meaning),
-           h("p", { class: "small" }, "This is a guess from the rock type, not a certainty. Sandstone and conglomerate can form on land or in shallow seas.")]
-        : empty("The rock type did not tell us enough to guess. Nothing recorded."));
-  }
-
-  // Fossils: placeholder until /api/fossils answers
-  setContent($("#fossils"), diggingNote("Digging through the fossil records. This source is slow, so everything else is already here."));
+  // Ground: the rock, what the place probably was, and a timeline back to the rock (nothing about fossils or people here)
+  renderGround(f, sc);
 
   // Rare animals: these are RECORDS (sightings, specimens, ...), never a claim that the animal lives here
   const rare = f.rare_animals_recorded_nearby;
   setContent($("#rare"),
-    rare == null ? empty("Could not be checked right now.")
+    rare == null ? retryRow("Could not be checked right now.", () => explore(lastLookup.lat, lastLookup.lng, { real: lastLookup.real }))
       : rare.length === 0 ? (scopeLine(sc.rare) || empty("Nothing recorded nearby."))
       : [scopeLine(sc.rare), h("ul", { class: "records" }, rare.map(rareEntry)),
          h("p", { class: "small" }, f.rare_animals_note),
          f.rare_names_note ? h("p", { class: "small" }, f.rare_names_note) : null,
          h("p", { class: "small" }, "Species listed by the IUCN Red List as vulnerable, endangered or critically endangered. Counts are numbers of records, not of animals.")]);
+  setSum("animals", rare == null ? "Could not be checked right now"
+    : rare.length === 0 ? "Nothing recorded nearby"
+    : `${rare.length} species recorded · ${rare.reduce((n, r) => n + r.records, 0).toLocaleString()} records`);
 
-  // People and past civilizations: filled in by /api/people (Wikipedia history articles; several requests, so it arrives later)
-  setContent($("#people"), diggingNote("Looking up what Wikipedia says about the early history of this area..."));
-  const hh = f.human_history_nearby;  // the nearby history pages themselves are shown in "Dig sites nearby"
-
-  digData = { rock, ruler: f.time_ruler, scopes: sc, human: hh, fossils: undefined, fossilScope: null };  // fossils: undefined = still loading
-  renderDig();
   renderSources(d.sources);
 }
+
+/* "Read more": the narration shows its first lines; the button appears only if there is more to show. */
+function updateReadMore() {
+  const story = $("#story"), btn = $("#readmore");
+  story.classList.add("clamped");
+  btn.textContent = "Read more"; btn.setAttribute("aria-expanded", "false");
+  btn.hidden = !(story.scrollHeight > story.clientHeight + 2);
+}
+$("#readmore").addEventListener("click", () => {
+  const story = $("#story"), btn = $("#readmore");
+  const open = story.classList.toggle("clamped") === false;
+  btn.textContent = open ? "Show less" : "Read more";
+  btn.setAttribute("aria-expanded", String(open));
+});
 
 function rockAge(rock) {
   return rock.b_age != null
@@ -380,7 +495,7 @@ function rareEntry(r) {
   }
   // Local names: only ones GBIF returned, each labelled with its language and source. Never translated or written by us.
   const names = (r.local_names || []).map((n) => h("div", { class: "small local-name" }, `${n.language_name} name: `,
-    h("span", { lang: n.language }, n.name), ` (GBIF${n.dataset ? " · " + n.dataset : ""})`));
+    h("span", n.lang_tag ? { lang: n.lang_tag } : {}, n.name), ` (GBIF${n.dataset ? " · " + n.dataset : ""})`));
   return h("li", {},
     h("strong", {}, h("em", {}, r.species)), ` – ${r.records.toLocaleString()} records`,
     ...names,
@@ -394,23 +509,25 @@ function renderFossils(d) {
   const f = d.fossils;
   const box = $("#fossils");
   if (f == null) {
-    setContent(box, empty("The fossil database could not be reached right now."));
+    setContent(box, retryRow("The fossil database could not be reached right now.", () => loadFossils(run, lastLookup.lat, lastLookup.lng)));
+    setSum("fossils", "Could not be reached right now");
   } else if (!f.count) {
     setContent(box, scopeLine(d.scope) || empty("Nothing recorded nearby."));
+    setSum("fossils", "Nothing recorded nearby");
   } else {
     setContent(box,
       scopeLine(d.scope),
       h("p", {}, `${f.count} fossil finds recorded.`),
-      h("ul", { class: "chips" }, f.classes.map(([name, n]) => h("li", {}, `${name} (${n})`))),
+      h("ul", { class: "chips chips-fossil" }, f.classes.map(([name, n]) => h("li", {}, `${name} (${n})`))),
       f.taxa.length ? h("p", { class: "small" }, "Most often found: " + f.taxa.map(([name]) => name).join(", ") + ".") : null,
       h("p", { class: "small" }, "This shows what has been found so far, not everything that lived here."));
+    const top = f.classes.slice(0, 2).map(([name]) => name).join(", ");
+    setSum("fossils", `${f.count} finds${top ? " · " + top : ""}` + (d.scope && d.scope.level !== "exact_area" ? " · wider area" : ""));
   }
   if (d.narration) {
     box.append(h("div", { class: "scribe-add" }, paragraphs(d.narration)));
     storyText = (storyText + " " + d.narration).trim();
   }
-  digData.fossils = f; digData.fossilScope = d.scope;
-  renderDig();
   renderSources(null, d.source);
 }
 
@@ -430,83 +547,67 @@ function renderSources(list, pbdb) {
       ` – ${s.license}`, s.status.startsWith("failed") ? " (could not be reached)" : (label[s.status] || ""))));
 }
 
-/* ---------- Dig down ----------
- * Layers are drawn ONLY from what the data supports: the surface (you, today), human history if any was found,
- * the mapped rock with its age, and fossils. Fossils sit in the rock's layer only when the fossil search says they are of
- * this rock's age; otherwise they go in a separate "found nearby, age not matched" layer. Nothing else is invented,
- * and the layers are not to scale. */
-let digData = { rock: null, ruler: null, scopes: {}, human: undefined, fossils: undefined, fossilScope: null };
-const digBtn = $("#dig-btn"), digBox = $("#dig");
-
-function layer(cls, title, ...kids) {
-  return h("div", { class: `layer ${cls}` }, h("div", { class: "swatch", "aria-hidden": "true" }),
-    h("div", { class: "layer-body" }, h("p", { class: "layer-title" }, title), ...kids));
-}
-// The fossil search wording says whether finds are of this rock's age (see FOSSIL_STEPS in geo.py). Anything unclear counts as NOT matched.
-const fossilsAgeMatched = (scope) => !!scope && /same age as this rock|nothing of this age/i.test(scope.note) && !/not matched/i.test(scope.note);
-
-function fossilChips(f) {
-  return [h("p", {}, `${f.count} fossil finds recorded.`),
-    h("ul", { class: "chips" }, f.classes.map(([name, n]) => h("li", {}, `${name} (${n})`))),
-    h("p", { class: "small" }, "This shows what has been found so far, not everything that lived there.")];
+/* ---------- Ground: the rock, what it was, and a timeline ----------
+ * Only rock facts are used here (name, type, age range, the inferred setting). Fossils and human history have their own sections. */
+function plainDuration(minutes) {   // "if all of human history were one minute ..." in the unit people feel
+  if (minutes < 90) return `${Math.round(minutes)} minutes`;
+  const hours = minutes / 60;
+  if (hours < 48) return `${Math.round(hours * 10) / 10} hours`;
+  const days = hours / 24;
+  return days < 60 ? `${Math.round(days * 10) / 10} days` : `${Math.round(days / 30.4)} months`;
 }
 
-function renderDig() {
-  const { rock, ruler, scopes: s, human, fossils, fossilScope } = digData;
-  const loaded = fossils !== undefined, hasFinds = !!(fossils && fossils.count), matched = fossilsAgeMatched(fossilScope);
-  const layers = [];
+function tlItem(cls, title, ...kids) {
+  return h("li", { class: `tl ${cls}` }, h("span", { class: "tl-dot", "aria-hidden": "true" }),
+    h("div", { class: "tl-body" }, h("p", { class: "tl-head" }, title), ...kids));
+}
 
-  layers.push(layer("l-surface", "Surface · today", h("p", {}, "You are standing here, today.")));
-
-  layers.push(layer("l-human", "Human history",
-    human == null ? empty("Could not be checked right now.")
-      : human.length === 0 ? (scopeLine(s.human) || empty("Nothing recorded nearby."))
-      : [scopeLine(s.human), h("p", {}, human.slice(0, 3).map((p) => p.place).join("; ")),
-         h("p", { class: "small" }, "Our species is only about 0.3 million years old, so everything human lives in this thin top layer.")]));
-
-  if (rock) {
-    layers.push(layer("l-gap", "Down through time",
-      h("p", {}, ruler ? `This rock is about ${ruler.times_older_than_humans.toLocaleString()} times older than our species.` : "Further back in time."),
-      h("p", { class: "small" }, "Not to scale: the gap is far bigger than it looks.")));
+function renderGround(f, sc) {
+  const rock = f.rock, ruler = f.time_ruler, s = f.ancient_setting;
+  if (!rock) {
+    setContent($("#rock"), sc.rock ? scopeLine(sc.rock) : empty("The rock map could not be checked right now."));
+    setContent($("#setting"), empty("Nothing recorded nearby."));
+    setContent($("#timeline"), null);
+    $("#timeline").closest(".sec-body").classList.add("no-rock");
+    setSum("ground", sc.rock ? "No mapped rock here" : "Could not be checked right now");
+    return;
   }
+  $("#timeline").closest(".sec-body").classList.remove("no-rock");
+  const interval = rock.b_int_name
+    ? rock.b_int_name + (rock.t_int_name && rock.t_int_name !== rock.b_int_name ? " to " + rock.t_int_name : "") : null;
+  setContent($("#rock"),
+    scopeLine(sc.rock),
+    h("p", { class: "big" }, rock.name || "Unnamed rock unit"),
+    h("ul", { class: "chips" },
+      rock.lith ? h("li", { class: "chip" }, rock.lith) : null,
+      interval ? h("li", { class: "chip" }, interval) : null));
 
-  // The rock's own layer, with fossils only if they are of this rock's age
-  const rockKids = rock
-    ? [scopeLine(s.rock), h("p", { class: "big" }, rock.name || "Unnamed rock unit"), rock.lith ? h("p", {}, "Rock type: " + rock.lith) : null, h("p", {}, rockAge(rock))]
-    : [s.rock ? scopeLine(s.rock) : empty("The rock map could not be checked right now.")];
-  if (rock) {
-    rockKids.push(h("p", { class: "layer-title" }, "Fossils of this age"));
-    if (!loaded) rockKids.push(diggingNote("Fossil records still loading..."));
-    else if (fossils === null) rockKids.push(empty("The fossil database could not be reached right now."));
-    else if (!hasFinds) rockKids.push(scopeLine(fossilScope) || empty("Nothing recorded nearby."));
-    else if (matched) rockKids.push(scopeLine(fossilScope), ...fossilChips(fossils));
-    else rockKids.push(empty("No fossils matched to this rock's age were recorded. See the layer below."));
+  setContent($("#setting"),
+    s && s.meaning
+      ? h("div", { class: "was" },
+          h("p", { class: "was-label" }, "What this place probably was"),
+          h("p", { class: "big" }, s.meaning.charAt(0).toUpperCase() + s.meaning.slice(1)),
+          h("p", { class: "small" }, "This is a guess from the rock type, not a certainty. Sandstone and conglomerate can form on land or in shallow seas."))
+      : empty("The rock type did not tell us enough to guess what this place was."));
+
+  // The timeline, top to bottom: today, human history, the rock. Every number comes from the rock facts.
+  const items = [tlItem("tl-today", "Today", h("p", {}, "You are here."))];
+  if (ruler) {
+    items.push(tlItem("tl-human", "Human history",
+      h("p", {}, "Our species is only about 0.3 million years old. Everything human happened in this thin top layer.")));
+    const minutes = ruler.times_older_than_humans;  // one "minute" of human history = 0.3 million years
+    items.push(tlItem("tl-gap", `${ruler.times_older_than_humans.toLocaleString()} times longer`,
+      h("p", {}, `Digging down to this rock goes back about ${ruler.times_older_than_humans.toLocaleString()} times further than all of human history.`),
+      h("p", { class: "small" }, `If all of human history were one minute, this rock began forming about ${plainDuration(minutes)} ago.`)));
   }
-  layers.push(layer("l-rock", rock ? "The rock" : "No mapped rock", ...rockKids));
+  items.push(tlItem("tl-rock", "The rock forms",
+    h("p", { class: "big" }, rockAge(rock)),
+    h("p", {}, `${rock.name || "This rock"}${rock.lith ? ", " + rock.lith : ""}.`)));
+  setContent($("#timeline"), items);
+  items.forEach((el, i) => el.style.setProperty("--i", i));
 
-  // Fossils whose age is NOT matched to the rock: a general "found nearby" layer
-  if (loaded && hasFinds && !matched) {
-    layers.push(layer("l-near", "Found nearby · age not matched", scopeLine(fossilScope), ...fossilChips(fossils),
-      h("p", { class: "small" }, "These were found near here, but not shown to be the same age as this rock.")));
-  }
-
-  layers.forEach((el, i) => el.style.setProperty("--i", i));
-  setContent(digBox, layers);
+  setSum("ground", `${rock.name || "Unnamed rock"} \u00b7 ${ageShort(rock)}` + (s && s.meaning ? ` \u00b7 probably ${s.meaning}` : ""));
 }
-
-function closeDig() {
-  digBox.hidden = true; digBox.classList.remove("play");
-  digBtn.setAttribute("aria-expanded", "false"); digBtn.innerHTML = "Dig down &#9660;";
-}
-digBtn.addEventListener("click", () => {
-  if (!digBox.hidden) { closeDig(); return; }
-  renderDig();
-  digBox.hidden = false;
-  digBtn.setAttribute("aria-expanded", "true"); digBtn.innerHTML = "Hide the dig &#9650;";
-  digBox.classList.remove("play");
-  if (!reduceMotion()) { void digBox.offsetWidth; digBox.classList.add("play"); }
-  digBox.scrollIntoView(scrollOpts("start"));
-});
 
 /* ---------- People and past civilizations ----------
  * Excerpts (2-3 sentences each) from Wikipedia "History of ..." articles at up to five scopes. Every excerpt shows its scope,
@@ -525,7 +626,7 @@ function excerptBlock(e) {
     h("p", { class: "small" }, "According to Wikipedia: ", link(e.article.url, e.article.title)),
     e.intro ? h("p", {}, e.intro) : null,
     e.early ? h("p", {}, h("strong", {}, "Earliest period: "), link(e.early.url, e.early.section), ". ", e.early.text) : null,
-    h("p", { class: "small pp-credit" }, "Excerpt from Wikipedia, ", link(e.license.url, e.license.name), " \u00b7 ", link(e.article.history_url, "article authors")));
+    h("p", { class: "small pp-credit" }, "Excerpt from Wikipedia, ", link(e.license.url, e.license.name), " · ", link(e.article.history_url, "article authors")));
 }
 
 function traditionsBlock(list) {
@@ -533,23 +634,34 @@ function traditionsBlock(list) {
   return h("div", { class: "traditions" },
     h("p", { class: "layer-title" }, "Traditions"),
     h("p", { class: "small" }, h("span", { class: "scope-tag" }, "tradition, not verified history"), "These sentences use words like legend, myth or tradition. Wikipedia reports them; Stela cannot confirm them."),
-    h("ul", {}, list.map((t) => h("li", {}, `\u201c${t.text}\u201d`,
-      h("div", { class: "small" }, `Wikipedia, ${t.article.title} \u00b7 about ${t.scope.place_name} (${t.scope.label}), not your exact spot unless that says your area`)))));
+    h("ul", {}, list.map((t) => h("li", {}, `“${t.text}”`,
+      h("div", { class: "small" }, `Wikipedia, ${t.article.title} · about ${t.scope.place_name} (${t.scope.label}), not your exact spot unless that says your area`)))));
 }
 
 let peopleHasExcerpts = false;  // the story paragraph only adds something when there are excerpts to narrate
 function renderPeople(d) {
   const p = d.people, box = $("#people");
   peopleHasExcerpts = !!(p.early_history && p.early_history.length);
-  if (p.early_history == null) setContent(box, empty("The early history of this area could not be looked up right now."), peopleNote());
-  else if (!p.early_history.length && !p.traditions.length) setContent(box, h("p", { class: "empty" }, "No early history recorded for this area."), peopleNote(p.incomplete));
-  else setContent(box, p.early_history.map(excerptBlock), traditionsBlock(p.traditions), peopleNote(p.incomplete));
-  // statuses of the two services this card used
+  if (p.early_history == null) {
+    setContent(box, retryRow("The early history of this area could not be looked up right now.", () => loadPeople(run, lastLookup.lat, lastLookup.lng)), peopleNote());
+    setSum("people", "Could not be looked up right now");
+  } else if (!p.early_history.length && !p.traditions.length) {
+    setContent(box, h("p", { class: "empty" }, "No early history recorded for this area."), peopleNote(p.incomplete));
+    setSum("people", "No early history recorded for this area");
+  } else {
+    setContent(box, p.early_history.map(excerptBlock), traditionsBlock(p.traditions), peopleNote(p.incomplete));
+    const levels = p.early_history.map((e) => e.scope.label).join(", ");
+    setSum("people", `${p.early_history.length} Wikipedia history article${p.early_history.length === 1 ? "" : "s"} · ${levels}`
+      + (p.traditions.length ? ` · ${p.traditions.length} tradition${p.traditions.length === 1 ? "" : "s"}` : ""));
+    const city = p.early_history.find((e) => e.scope.level === "your_area") || p.early_history.find((e) => e.scope.level === "city");
+    if (city) $("#sum-place").textContent = "Near " + city.scope.place_name;
+  }
+  // statuses of the two services this section used
   d.sources.forEach((src) => { if (src.status.startsWith("failed")) markSourceFailed(src.id); });
 }
 
 function renderPeopleStory(st) {
-  if (!st.narration || !peopleHasExcerpts) return;  // nothing found or lookup failed: the card already says so
+  if (!st.narration || !peopleHasExcerpts) return;  // nothing found or lookup failed: the section already says so
   $("#people").append(h("div", { class: "scribe-add" }, paragraphs(st.narration)));
   storyText = (storyText + " " + st.narration).trim();
 }
@@ -560,14 +672,12 @@ const todayLocal = () => { const d = new Date(), p = (n) => String(n).padStart(2
 const passportBtn = $("#passport-btn"), clearBtn = $("#passport-clear");
 let clearArmed = false;
 
-/* "Era unlocked": a small medallion that turns in once (CSS, under a second; none under reduced motion) */
+/* "Era unlocked": a small chip that pops in once (under 250 ms; none under reduced motion) */
 function unlockBadge(era) {
-  const wrap = h("div", { class: "unlock", role: "status" });
-  wrap.innerHTML = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23" fill="var(--turquoise)" stroke="var(--ochre)" stroke-width="3"/>' +
-    '<circle cx="26" cy="26" r="13" fill="none" stroke="var(--on-turq)" stroke-width="2.5" stroke-dasharray="4 3"/>' +
-    '<path d="M26 5v8M26 39v8M5 26h8M39 26h8M11 11l6 6M35 35l6 6M41 11l-6 6M17 35l-6 6" stroke="var(--on-turq)" stroke-width="2.5" stroke-linecap="round"/></svg>';
-  wrap.append(h("div", {}, h("b", {}, "Era unlocked"), h("span", {}, era)));
-  return wrap;
+  const chip = h("span", { class: "unlock", role: "status" });
+  chip.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><use href="#i-star"/></svg>';
+  chip.append("Era unlocked: " + era);
+  return chip;
 }
 
 function stampPassport(lat, lng, rock) {
@@ -609,7 +719,7 @@ passportBtn.addEventListener("click", () => {
   box.hidden = !box.hidden;
   passportBtn.setAttribute("aria-expanded", String(!box.hidden));
   resetClear();
-  if (!box.hidden) { renderPassport(); carve(box); box.scrollIntoView(scrollOpts("start")); }
+  if (!box.hidden) { renderPassport(); box.scrollIntoView(scrollOpts("nearest")); }
 });
 clearBtn.addEventListener("click", () => {  // two taps, so a stray touch cannot wipe it
   if (!clearArmed) { clearArmed = true; clearBtn.textContent = "Tap again to clear everything"; return; }
@@ -672,7 +782,8 @@ async function newWalkStory(pos) {
   walk.last = { lat: pos.lat, lng: pos.lng };  // the 300 m rule is measured from the last request
   walk.inflight = true;
   walkStatus.textContent = "You moved on. Reading the new stone...";
-  placePin(pos.lat, pos.lng); map.panTo([pos.lat, pos.lng]);
+  placePin(pos.lat, pos.lng);
+  if (map) map.panTo([pos.lat, pos.lng]);
   const res = await explore(pos.lat, pos.lng, { walk: true, real: true });
   walk.inflight = false;
   if (!walk.on) return;
@@ -713,32 +824,18 @@ document.addEventListener("visibilitychange", () => {
 });
 window.addEventListener("pagehide", stopWatch);
 
-/* ---------- Era strip: today on the left, deep time on the right. The rock is a band; human history is a marked sliver. ---------- */
+/* ---------- Era strip: slim (44px). Today on the left with humans marked, deep time on the right. ---------- */
 function eraStrip(rock) {
-  const x0 = 12, x1 = 308, top = 30, hgt = 22;
   const maxMa = Math.max(100, Math.ceil(rock.b_age / 100) * 100);
-  const x = (ma) => x0 + (ma / maxMa) * (x1 - x0);
-  const bandX = x(rock.t_age ?? 0), bandW = Math.max(x(rock.b_age) - bandX, 3);
-  const humanW = Math.max(x(0.3) - x0, 3);
-  const step = maxMa <= 200 ? 50 : 100;
-  let ticks = "";
-  for (let m = 0; m <= maxMa; m += step) {
-    ticks += `<line x1="${x(m).toFixed(1)}" x2="${x(m).toFixed(1)}" y1="${top + hgt}" y2="${top + hgt + 6}" stroke="var(--ink-soft)" stroke-width="1.5"/>` +
-      `<text x="${x(m).toFixed(1)}" y="${top + hgt + 19}" text-anchor="${m === 0 ? "start" : m === maxMa ? "end" : "middle"}">${m ? m + " Ma" : "today"}</text>`;
-  }
-  const fig = h("div", { class: "era" });
-  fig.innerHTML = `<svg viewBox="0 0 320 84" role="img" aria-label="Rock age against today. Human history is marked at the left edge.">
-      <rect x="${x0}" y="${top}" width="${x1 - x0}" height="${hgt}" fill="var(--bg2)" stroke="var(--card-edge)" stroke-width="2"/>
-      <rect x="${bandX.toFixed(1)}" y="${top}" width="${bandW.toFixed(1)}" height="${hgt}" fill="var(--stone)" stroke="var(--stone-dark)" stroke-width="1.5"/>
-      <rect x="${x0}" y="${top}" width="${humanW.toFixed(1)}" height="${hgt}" fill="var(--turquoise)"/>
-      <path d="M${x0 - 4} 6h12l-6 14z" fill="var(--turquoise)" stroke="var(--ink)" stroke-width="1.2"/>
-      <text x="${x0 + 12}" y="17">Human history</text>
-      ${ticks}</svg>`;
-  fig.append(h("ul", { class: "legend" },
-    h("li", {}, h("i", { class: "k-rock" }), `When this rock formed: ${rockAge(rock)}`),
-    h("li", {}, h("i", { class: "k-human" }), "All of human history (about 0.3 million years): marked at the left edge, too thin to show to scale")),
-    h("p", { class: "small" }, "Left is today; further right is further back in time."));
-  return fig;
+  const pct = (ma) => (ma / maxMa) * 100;
+  const left = pct(rock.t_age ?? 0), width = Math.max(pct(rock.b_age) - left, 1.2);
+  const humanW = Math.max(pct(0.3), 0.9);
+  const label = `Rock formed ${rockAge(rock)}, shown against today. Human history, about 0.3 million years, is marked at the left, today end.`;
+  const bar = h("div", { class: "era-bar", role: "img", "aria-label": label },
+    h("span", { class: "era-band", style: `left:${left.toFixed(2)}%;width:${width.toFixed(2)}%` }),
+    h("span", { class: "era-human", style: `width:${humanW.toFixed(2)}%` }));
+  return h("div", {}, bar,
+    h("div", { class: "era-labels", "aria-hidden": "true" }, h("span", {}, "today · humans marked"), h("span", {}, `${fmtMa(rock.b_age)} Ma`)));
 }
 </script>
 </body>

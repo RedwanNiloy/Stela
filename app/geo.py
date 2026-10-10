@@ -423,6 +423,7 @@ LANG_2_TO_3 = {"en": "eng", "bn": "ben", "hi": "hin", "ur": "urd", "ne": "nep", 
                "it": "ita", "nl": "nld", "ru": "rus", "zh": "zho", "ja": "jpn", "ko": "kor", "ar": "ara", "tr": "tur", "pl": "pol",
                "uk": "ukr", "id": "ind", "ms": "msa", "th": "tha", "vi": "vie", "sv": "swe", "da": "dan", "nb": "nor", "no": "nor",
                "fi": "fin", "ta": "tam", "si": "sin", "el": "ell", "he": "heb", "fa": "fas", "cs": "ces", "hu": "hun", "ro": "ron"}
+LANG_3_TO_2 = {v: k for k, v in LANG_2_TO_3.items()}  # for the HTML lang attribute (browsers want the 2-letter tag where there is one)
 COUNTRY_LANGUAGE = {  # ISO 3166 alpha-2 -> the country's main language (a rough, short list; unknown countries are skipped)
     "BD": "ben", "IN": "hin", "PK": "urd", "NP": "nep", "LK": "sin", "GB": "eng", "US": "eng", "AU": "eng", "CA": "eng", "NZ": "eng",
     "IE": "eng", "ZA": "eng", "FR": "fra", "DE": "deu", "AT": "deu", "ES": "spa", "MX": "spa", "AR": "spa", "CO": "spa", "CL": "spa",
@@ -469,7 +470,8 @@ def choose_names(names, languages, limit=MAX_NAMES):
             if key in seen:
                 continue
             seen.add(key)
-            chosen.append({"name": n["name"], "language": lang, "language_name": LANGUAGE_NAMES.get(lang, f"language code {lang}"),
+            chosen.append({"name": n["name"], "language": lang, "lang_tag": LANG_3_TO_2.get(lang),
+                           "language_name": LANGUAGE_NAMES.get(lang, f"language code {lang}"),
                            "source": "GBIF", "dataset": n["dataset"]})
             if len(chosen) == limit:
                 return chosen
