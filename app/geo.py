@@ -317,6 +317,16 @@ RARE_STEPS = [
 _dataset_titles = {}  # dataset key -> title (public dataset metadata, not user data)
 
 
+async def add_local_names(client, entries, lang):
+    """Fill `local_names` for up to MAX_NAME_LOOKUPS species, in parallel. A failed lookup leaves that species with
+    only its scientific name; it never breaks the list."""
+    todo = [e for e in entries if e.get("species_key")][:MAX_NAME_LOOKUPS]
+    results = await asyncio.gather(*(safe(fetch_vernacular(client, e["species_key"])) for e in todo))
+    for e, (names, status) in zip(todo, results):
+        if status == "ok" and names:
+            e["local_names"] = choose_names(names, prefer_langs(lang, e.get("country_code")))
+
+
 def rare_scope(step, found):
     if found is None:  # every step was empty
         return make_scope("none", f"Nothing recorded: no records of rare animals within about {RARE_STEPS[-1]['km']} km.")
@@ -351,7 +361,11 @@ def parse_rare_records(records):
         if r.get("basisOfRecord") in SPECIMEN_BASES:
             specimens += 1
     top = sorted(datasets.items(), key=lambda kv: -kv[1])[:3]
-    return {"records_checked": len(records),
+    keys = Counter(r["speciesKey"] for r in records if r.get("speciesKey"))
+    countries = Counter(r["countryCode"] for r in records if r.get("countryCode"))
+    return {"species_key": keys.most_common(1)[0][0] if keys else None,
+            "country_code": countries.most_common(1)[0][0] if countries else None,
+            "records_checked": len(records),
             "datasets": [{"key": k, "name": names.get(k), "records": n} for k, n in top],
             "marked_dead": vitality["dead"], "marked_alive": vitality["alive"], "specimen_records": specimens}
 
@@ -359,13 +373,16 @@ def parse_rare_records(records):
 def build_rare_entry(full_name, count, details):
     entry = {"species": " ".join(full_name.split()[:2]),  # "Rissa tridactyla (Linnaeus, 1758)" -> "Rissa tridactyla"
              "records": count}
+    entry["local_names"] = []  # filled in by fetch_rare when GBIF returns names; never written by us or by the model
     if details:
-        entry.update(records_checked=details["records_checked"],
+        entry.update(species_key=details["species_key"], country_code=details["country_code"],
+                     records_checked=details["records_checked"],
                      datasets=[d["name"] or "Unnamed dataset" for d in details["datasets"]],
                      marked_dead=details["marked_dead"], marked_alive=details["marked_alive"],
                      specimen_records=details["specimen_records"])
     else:  # the detail call failed: say we don't know, don't pretend zero
-        entry.update(records_checked=None, datasets=None, marked_dead=None, marked_alive=None, specimen_records=None)
+        entry.update(species_key=None, country_code=None, records_checked=None, datasets=None, marked_dead=None,
+                     marked_alive=None, specimen_records=None)
     return entry
 
 
@@ -386,6 +403,90 @@ async def fetch_rare_details(client, area, full_name, limit):
     return details
 
 
+# ---- Local (vernacular) names, from GBIF's species vernacular-names endpoint only ----
+# Real response (checked): {"results": [{"vernacularName", "language" (ISO 639-3 such as "eng", sometimes ""), "source" (the
+# underlying dataset), "preferred" (sometimes), "taxonKey", "sourceTaxonKey"}], "endOfRecords"}. There is no country field.
+# We never translate, guess or generate a name: a name is shown only if GBIF returned it, labelled with language and source.
+RARE_NAMES_NOTE = "Local names come from GBIF and may be incomplete."
+MAX_NAME_LOOKUPS = 8       # species looked up per place
+MAX_NAMES = 2              # names shown per species
+NAMES_TIMEOUT = 4.0
+_vernacular_cache = TTLCache(ttl_seconds=24 * 3600, max_items=2000)  # species key -> compact list of names
+
+LANGUAGE_NAMES = {  # ISO 639-3 -> English name, for the label "Bengali name: ..."
+    "eng": "English", "ben": "Bengali", "hin": "Hindi", "urd": "Urdu", "nep": "Nepali", "spa": "Spanish", "fra": "French",
+    "deu": "German", "por": "Portuguese", "ita": "Italian", "nld": "Dutch", "rus": "Russian", "zho": "Chinese", "jpn": "Japanese",
+    "kor": "Korean", "ara": "Arabic", "tur": "Turkish", "pol": "Polish", "ukr": "Ukrainian", "ind": "Indonesian", "msa": "Malay",
+    "tha": "Thai", "vie": "Vietnamese", "swe": "Swedish", "dan": "Danish", "nor": "Norwegian", "fin": "Finnish", "tam": "Tamil",
+    "sin": "Sinhala", "ell": "Greek", "heb": "Hebrew", "fas": "Persian", "ces": "Czech", "hun": "Hungarian", "ron": "Romanian"}
+LANG_2_TO_3 = {"en": "eng", "bn": "ben", "hi": "hin", "ur": "urd", "ne": "nep", "es": "spa", "fr": "fra", "de": "deu", "pt": "por",
+               "it": "ita", "nl": "nld", "ru": "rus", "zh": "zho", "ja": "jpn", "ko": "kor", "ar": "ara", "tr": "tur", "pl": "pol",
+               "uk": "ukr", "id": "ind", "ms": "msa", "th": "tha", "vi": "vie", "sv": "swe", "da": "dan", "nb": "nor", "no": "nor",
+               "fi": "fin", "ta": "tam", "si": "sin", "el": "ell", "he": "heb", "fa": "fas", "cs": "ces", "hu": "hun", "ro": "ron"}
+COUNTRY_LANGUAGE = {  # ISO 3166 alpha-2 -> the country's main language (a rough, short list; unknown countries are skipped)
+    "BD": "ben", "IN": "hin", "PK": "urd", "NP": "nep", "LK": "sin", "GB": "eng", "US": "eng", "AU": "eng", "CA": "eng", "NZ": "eng",
+    "IE": "eng", "ZA": "eng", "FR": "fra", "DE": "deu", "AT": "deu", "ES": "spa", "MX": "spa", "AR": "spa", "CO": "spa", "CL": "spa",
+    "PE": "spa", "PT": "por", "BR": "por", "IT": "ita", "NL": "nld", "RU": "rus", "UA": "ukr", "PL": "pol", "TR": "tur", "CN": "zho",
+    "TW": "zho", "JP": "jpn", "KR": "kor", "SA": "ara", "EG": "ara", "AE": "ara", "ID": "ind", "MY": "msa", "TH": "tha", "VN": "vie",
+    "SE": "swe", "DK": "dan", "NO": "nor", "FI": "fin", "GR": "ell", "IL": "heb", "IR": "fas", "CZ": "ces", "HU": "hun", "RO": "ron"}
+# Many datasets give a name; these are the most trustworthy ones, tried first. (Some datasets mislabel languages.)
+SOURCE_RANK = ["The IUCN Red List of Threatened Species", "Catalogue of Life", "Integrated Taxonomic Information System (ITIS)",
+               "TAXREF", "EUNIS Biodiversity Database"]
+
+
+def norm_lang(tag):
+    """A browser language tag ("bn-BD", "en", "ben") -> ISO 639-3, or None if it is not one we know."""
+    if not isinstance(tag, str):
+        return None
+    primary = tag.strip().lower().replace("_", "-").split("-")[0]
+    if primary in LANG_2_TO_3:
+        return LANG_2_TO_3[primary]
+    return primary if len(primary) == 3 and primary.isalpha() else None
+
+
+def prefer_langs(browser_lang, country_code):
+    """Language order for names: the browser's language, then the country's main language, then English."""
+    order = [norm_lang(browser_lang), COUNTRY_LANGUAGE.get((country_code or "").upper()), "eng"]
+    return [x for i, x in enumerate(order) if x and x not in order[:i]]
+
+
+def compact_names(results):
+    """GBIF reply -> the few fields we keep. Names with no language code are dropped: we could not label them."""
+    return [{"name": r["vernacularName"].strip(), "language": r["language"], "dataset": r.get("source") or "",
+             "preferred": bool(r.get("preferred"))}
+            for r in results if (r.get("vernacularName") or "").strip() and (r.get("language") or "").strip()]
+
+
+def choose_names(names, languages, limit=MAX_NAMES):
+    """Up to `limit` names, taken language by language in the preferred order; best source first within a language."""
+    def rank(n):
+        src = SOURCE_RANK.index(n["dataset"]) if n["dataset"] in SOURCE_RANK else len(SOURCE_RANK)
+        return (not n["preferred"], src)
+    chosen, seen = [], set()
+    for lang in languages:
+        for n in sorted((n for n in names if n["language"] == lang), key=rank):
+            key = " ".join(n["name"].lower().split())
+            if key in seen:
+                continue
+            seen.add(key)
+            chosen.append({"name": n["name"], "language": lang, "language_name": LANGUAGE_NAMES.get(lang, f"language code {lang}"),
+                           "source": "GBIF", "dataset": n["dataset"]})
+            if len(chosen) == limit:
+                return chosen
+    return chosen
+
+
+async def fetch_vernacular(client, species_key):
+    """All names GBIF has for a species (cached by species key). Raises on failure."""
+    hit = _vernacular_cache.get(species_key)
+    if hit is not None:
+        return hit["names"]
+    data = await get_json(client, f"{GBIF}/species/{species_key}/vernacularNames", NAMES_TIMEOUT, limit=300)
+    names = compact_names((data or {}).get("results") or [])
+    _vernacular_cache.set(species_key, {"names": names})
+    return names
+
+
 def rare_area(lat, lng, km):
     """A box around the spot that is `km` in every direction (longitude degrees shrink away from the equator)."""
     dlat = km / 111.0
@@ -395,8 +496,9 @@ def rare_area(lat, lng, km):
                 iucnRedListCategory=["CR", "EN", "VU"], kingdomKey=1)
 
 
-async def fetch_rare(client, lat, lng):
-    """Returns (entries, scope). A wider step runs only if the narrower one found no species."""
+async def fetch_rare(client, lat, lng, lang=None):
+    """Returns (entries, scope). A wider step runs only if the narrower one found no species.
+    `lang` is the browser's language tag, used only to choose which local names to show."""
     for step in RARE_STEPS:
         area = rare_area(lat, lng, step["km"])
         # facet=scientificName counts species across ALL matches. The first 100 raw
@@ -410,6 +512,7 @@ async def fetch_rare(client, lat, lng):
         results = await asyncio.gather(*(safe(fetch_rare_details(client, area, name, step["detail_limit"]))
                                          for name, _ in species))
         entries = [build_rare_entry(name, n, details) for (name, n), (details, _) in zip(species, results)]
+        await add_local_names(client, entries, lang)
         return entries, rare_scope(step, entries)
     return [], rare_scope(None, None)
 
@@ -591,11 +694,11 @@ def source_status(value, status):
     return "empty" if value in (None, [], {}) else "ok"
 
 
-async def fast_facts(client, lat, lng):
+async def fast_facts(client, lat, lng, lang=None):
     """Rock + rare animals + human history, in parallel. Fossils come later (they are slow)."""
     (unit, s_rock), (rare_res, s_rare), (human_res, s_human) = await asyncio.gather(
         safe(fetch_rock(client, lat, lng)),
-        safe(fetch_rare(client, lat, lng)),
+        safe(fetch_rare(client, lat, lng, lang)),
         safe(fetch_human(client, lat, lng)),
     )
     rare, rare_scope_ = rare_res if rare_res else (None, None)
@@ -607,6 +710,7 @@ async def fast_facts(client, lat, lng):
         "fossils_found_nearby": "pending",  # filled in by /api/fossils
         "rare_animals_recorded_nearby": rare,
         "rare_animals_note": RARE_NOTE,
+        "rare_names_note": RARE_NAMES_NOTE,
         "human_history_nearby": human,
         "places_to_visit": places,  # None = the Wikipedia search failed; [] = nothing recorded within about 10 km
         # how far from the user each layer's facts really come from (None = that source failed)

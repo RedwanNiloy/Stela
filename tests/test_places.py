@@ -225,7 +225,7 @@ def test_where_returns_places_and_survives_a_failed_history_source(monkeypatch):
     async def fake_rock(c, lat, lng):
         return None
 
-    async def fake_rare(c, lat, lng):
+    async def fake_rare(c, lat, lng, lang=None):
         return [], geo.rare_scope(None, None)
 
     async def fake_human(c, lat, lng):

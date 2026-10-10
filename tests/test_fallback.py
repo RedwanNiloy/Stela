@@ -105,7 +105,7 @@ def api(monkeypatch):
     async def fake_rock(c, lat, lng):
         return FACTS["rock"]
 
-    async def fake_rare(c, lat, lng):
+    async def fake_rare(c, lat, lng, lang=None):
         raise httpx.ReadTimeout("slow")  # one source fails
 
     async def fake_human(c, lat, lng):

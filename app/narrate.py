@@ -37,6 +37,9 @@ GROUNDING_RULES = """STRICT RULES (these override everything else):
 11. Places to visit: mention only places that are listed in places_to_visit, using the name and the "distance" text exactly as
     written there. If places_to_visit is empty, say nothing was recorded nearby and do not suggest, recommend or invent any
     place. Never say a place is open, and never give opening hours, prices or walking times.
+12. Animal names: always use the scientific name as written. You may use a local or English name only if it appears in that
+    species' "names" list, exactly as written there, and say which language it is. Never translate a name, and never make
+    up or recall a common name from memory, for any species. If a species has no names, use its scientific name.
 """
 
 VOICE = """VOICE (tone only; the rules above still apply exactly):
@@ -74,6 +77,8 @@ NO_EARLY_HISTORY = "No early history recorded for this area."
 
 def _rare_for_llm(r):
     out = {"species": r["species"], "records": r["records"]}
+    if r.get("local_names"):  # only names GBIF returned, labelled with their language
+        out["names"] = [f"{n['language_name']} name: {n['name']}" for n in r["local_names"]]
     if r.get("datasets"):
         out["dataset"] = r["datasets"][0]
     for k in ("marked_dead", "specimen_records"):
@@ -265,7 +270,9 @@ def facts_only_text(facts, part="main"):
     elif not rare:
         parts.append("Rare animals recorded nearby: " + (scope_note(facts, "rare") or "nothing recorded nearby."))
     else:
-        parts.append("Rare animals recorded nearby: " + ", ".join(r["species"] for r in rare[:4]) + ". "
+        shown = [r["species"] + (f" ({r['local_names'][0]['language_name']} name: {r['local_names'][0]['name']})"
+                                 if r.get("local_names") else "") for r in rare[:4]]
+        parts.append("Rare animals recorded nearby: " + ", ".join(shown) + ". "
                      + scope_note(facts, "rare") + " " + facts.get("rare_animals_note", ""))
     return " ".join(p.replace("  ", " ") for p in parts)
 
@@ -279,6 +286,32 @@ PLACE_TERMS = re.compile(r"(?<!\w)(museums?|castles?|forts?|fortress(?:es)?|pala
 def invented_place_terms(text, facts):
     allowed = json.dumps(llm_view(facts), ensure_ascii=False).lower()
     return [m.group(0) for m in PLACE_TERMS.finditer(text) if m.group(0).lower().rstrip("s").rstrip("e") not in allowed]
+
+
+# Safety net for rule 12: a name introduced with "known as / called / named" must be one the facts supplied. (In testing, a small
+# model wrote invented common names such as "ruff-legged tern" for scientific names.)
+NAMING_PHRASE = re.compile(
+    r"(?:known as|called|named|nicknamed)\s+(?:the\s+|a\s+|an\s+)?[\"\u201c']?"
+    r"(?!after\b|for\b|in\b|by\b|on\b|at\b|from\b|to\b|because\b)([A-Za-z][\w'\u2019-]*(?:\s+[A-Za-z][\w'\u2019-]*){0,3})", re.I)
+
+
+NAME_ENDS = {"in", "on", "at", "by", "for", "with", "and", "or", "but", "which", "that", "because", "since", "when", "where",
+             "is", "are", "was", "were", "as", "to", "from", "of"}
+
+
+def invented_common_names(text, facts):
+    allowed = json.dumps(llm_view(facts), ensure_ascii=False).lower()
+    found = []
+    for m in NAMING_PHRASE.finditer(text):
+        words = []
+        for w in m.group(1).split():
+            if w.lower() in NAME_ENDS:  # the name ends before "in English", "by locals", ...
+                break
+            words.append(w)
+        name = " ".join(words)
+        if name and name.lower() not in allowed:
+            found.append(name)
+    return found
 
 
 # Safety net for rule 8: small models sometimes ignore it. If the story claims the animals are alive or live
@@ -304,7 +337,7 @@ async def narrate(client, facts, part="main"):
         return facts_only_text(facts, part), "facts-only"
     try:
         text, mode = await call_llm(client, build_prompt(facts, part))
-        if part == "main" and (claims_animals_alive(text) or invented_place_terms(text, facts)):
+        if part == "main" and (claims_animals_alive(text) or invented_place_terms(text, facts) or invented_common_names(text, facts)):
             return facts_only_text(facts, part), "facts-only"
         if part == "people" and people_violations(text, facts):
             return facts_only_text(facts, part), "facts-only"

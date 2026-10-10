@@ -74,15 +74,18 @@ def source_list(statuses):
 
 
 @app.get("/api/where")
-async def where(request: Request, lat: float = Query(ge=-90, le=90), lng: float = Query(ge=-180, le=180)):
-    key = cache_key(lat, lng)
+async def where(request: Request, lat: float = Query(ge=-90, le=90), lng: float = Query(ge=-180, le=180),
+                lang: str = Query("", max_length=35)):
+    # `lang` is the browser's language tag. It only chooses which animal names to show, so it is part of the cache key.
+    lang3 = geo.norm_lang(lang) or ""
+    key = cache_key(lat, lng) + (lang3,)
     hit = where_cache.get(key)
     if hit:
         return {**hit, "cached": True}
 
     client = request.app.state.http
     t0 = time.perf_counter()
-    facts, statuses = await geo.fast_facts(client, lat, lng)
+    facts, statuses = await geo.fast_facts(client, lat, lng, lang3 or None)
     text, mode = await narrate.narrate(client, facts, "main")
     statuses["pbdb"] = "pending"
     failed = [k for k, v in statuses.items() if v.startswith("failed")]
@@ -95,16 +98,18 @@ async def where(request: Request, lat: float = Query(ge=-90, le=90), lng: float 
 
 
 @app.get("/api/fossils")
-async def fossils(request: Request, lat: float = Query(ge=-90, le=90), lng: float = Query(ge=-180, le=180)):
+async def fossils(request: Request, lat: float = Query(ge=-90, le=90), lng: float = Query(ge=-180, le=180),
+                  lang: str = Query("", max_length=35)):
     """The slow part (PBDB). The page calls this after showing the fast results."""
     key = cache_key(lat, lng)
+    where_key = key + (geo.norm_lang(lang) or "",)
     hit = fossil_cache.get(key)
     if hit:
         return {**hit, "cached": True}
 
     client = request.app.state.http
     t0 = time.perf_counter()
-    cached_where = where_cache.get(key)
+    cached_where = where_cache.get(where_key)
     if cached_where:
         unit = cached_where["facts"]["rock"]
     else:

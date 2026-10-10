@@ -39,7 +39,7 @@ print("saved to", OUT)
 
 # Dhaka, Bangladesh: raw GBIF records for rare animals, trimmed to the fields Stela reads.
 # (Dhaka showed marine sharks and rays, and some records are marked dead.)
-KEEP = ("species", "datasetKey", "datasetName", "vitality", "basisOfRecord", "occurrenceRemarks")
+KEEP = ("species", "speciesKey", "countryCode", "datasetKey", "datasetName", "vitality", "basisOfRecord", "occurrenceRemarks")
 area = dict(decimalLatitude="23.56,24.06", decimalLongitude="90.16,90.66", iucnRedListCategory=["CR", "EN", "VU"], kingdomKey=1)
 raw = get("https://api.gbif.org/v1/occurrence/search", **area, limit=300)["results"]
 save("gbif_dhaka_records.json", [{k: r.get(k) for k in KEEP} for r in raw])

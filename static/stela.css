@@ -34,7 +34,10 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0; color: var(--ink);
-  font: 18px/1.55 "Source Serif 4", Georgia, "Times New Roman", serif;
+  /* Latin text uses the carved-looking serif; other scripts (Bengali, Devanagari, Arabic, CJK...) fall back, glyph by glyph,
+     to a system font that has them. Without these names a phone may show empty boxes. */
+  font: 18px/1.55 "Source Serif 4", Georgia, "Times New Roman", "Nirmala UI", "Noto Serif Bengali", "Noto Sans Bengali",
+    "Noto Sans Devanagari", "Noto Sans Arabic", "Noto Sans CJK SC", "Noto Sans JP", "Noto Sans KR", "Segoe UI", system-ui, serif;
   background: var(--bg) linear-gradient(var(--bg), var(--bg2)) fixed;
   background-image: repeating-linear-gradient(0deg, transparent 0 7px, var(--grain) 7px 8px), linear-gradient(var(--bg), var(--bg2));
 }
@@ -195,6 +198,7 @@ button { font: inherit; cursor: pointer; }
 .site-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .site-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--turquoise); font-weight: 600; }
 .place-type { display: inline-block; margin-left: 8px; padding: 0 9px; border: 1.5px solid var(--stone-dark); border-radius: 999px; font-size: .78rem; color: var(--ink-soft); vertical-align: middle; }
+.local-name span { font-weight: 600; color: var(--ink); }
 .site-marker { background: none; border: 0; }
 .site-marker svg { width: 34px; height: 44px; filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); }
 

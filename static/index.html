@@ -236,8 +236,9 @@ function listen() {  // the one Listen function: the story card button and walk 
 listenBtn.addEventListener("click", listen);
 
 /* ---------- Fetch helpers ---------- */
+const BROWSER_LANG = (navigator.language || "").slice(0, 35);  // only used to choose which animal names to show
 async function api(path, lat, lng) {
-  const r = await fetch(`${path}?lat=${lat}&lng=${lng}`);
+  const r = await fetch(`${path}?lat=${lat}&lng=${lng}&lang=${encodeURIComponent(BROWSER_LANG)}`);
   if (r.status === 429) throw new Error("slow-down");
   if (!r.ok) throw new Error("http");
   return r.json();
@@ -352,6 +353,7 @@ function renderWhere(d) {
       : rare.length === 0 ? (scopeLine(sc.rare) || empty("Nothing recorded nearby."))
       : [scopeLine(sc.rare), h("ul", { class: "records" }, rare.map(rareEntry)),
          h("p", { class: "small" }, f.rare_animals_note),
+         f.rare_names_note ? h("p", { class: "small" }, f.rare_names_note) : null,
          h("p", { class: "small" }, "Species listed by the IUCN Red List as vulnerable, endangered or critically endangered. Counts are numbers of records, not of animals.")]);
 
   // People and past civilizations: filled in by /api/people (Wikipedia history articles; several requests, so it arrives later)
@@ -385,8 +387,12 @@ function rareEntry(r) {
     bits.push(`${unmarked} do not say`);
     flags.push(`Of ${scope}: `, ...bits.flatMap((b, i) => (i ? [", ", b] : [b])), ".");
   }
+  // Local names: only ones GBIF returned, each labelled with its language and source. Never translated or written by us.
+  const names = (r.local_names || []).map((n) => h("div", { class: "small local-name" }, `${n.language_name} name: `,
+    h("span", { lang: n.language }, n.name), ` (GBIF${n.dataset ? " · " + n.dataset : ""})`));
   return h("li", {},
     h("strong", {}, h("em", {}, r.species)), ` – ${r.records.toLocaleString()} records`,
+    ...names,
     h("div", { class: "small" }, r.datasets && r.datasets.length ? "Dataset: " + r.datasets.join("; ") : "Dataset: not available"),
     h("div", { class: "small" }, ...flags));
 }

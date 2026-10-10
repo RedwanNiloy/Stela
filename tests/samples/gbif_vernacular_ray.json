@@ -1,0 +1,126 @@
+{
+"offset": 0,
+"limit": 300,
+"endOfRecords": true,
+"results": [
+{
+"taxonKey": 5216217,
+"vernacularName": "Altavela codalunga",
+"language": "ita",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Langstaartvlinderrog",
+"language": "nld",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Long-tailed butterfly ray, Longtail butterfly ray",
+"language": "eng",
+"country": "GB",
+"area": "eng",
+"source": "TAXREF",
+"sourceTaxonKey": 222503326
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Longtail Butterfly Ray",
+"language": "eng",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Onagatsubakuroei",
+"language": "jpn",
+"country": "JP",
+"source": "List of Japan's all fish species. Current standard Japanese and scientific names of all fish species recorded from Japanese waters.",
+"sourceTaxonKey": 321007522
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Pagi",
+"language": "",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Raia-borboleta-de-cauda-longa",
+"language": "por",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "kirjoperhosrausku",
+"language": "fin",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "křídloun indický",
+"language": "ces",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Кольчатохвостый скат-бабочка",
+"language": "rus",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "شفنين الفراشة طويل الذيل",
+"language": "ara",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "ปลากระเบนผีเสื้อหางยาว",
+"language": "tha",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "オナガツバクロエイ",
+"language": "jpn",
+"source": "Catalogue of Life",
+"sourceTaxonKey": 299349018
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "Longtail Butterfly Ray",
+"language": "eng",
+"source": "The IUCN Red List of Threatened Species",
+"sourceTaxonKey": 176657208,
+"preferred": true
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "オナガツバクロエイ",
+"language": "jpn",
+"country": "JP",
+"source": "List of Japan's all fish species. Current standard Japanese and scientific names of all fish species recorded from Japanese waters.",
+"sourceTaxonKey": 321007522,
+"preferred": true
+},
+{
+"taxonKey": 5216217,
+"vernacularName": "オナガツバクロエイ",
+"language": "jpn",
+"source": "World Register of Marine Species",
+"sourceTaxonKey": 155383166,
+"preferred": false
+}
+]
+}
