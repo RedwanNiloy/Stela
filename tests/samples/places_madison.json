@@ -1,0 +1,756 @@
+{
+"geosearch": [
+{
+"pageid": 1685389,
+"ns": 0,
+"title": "Kohl Center",
+"lat": 43.06942,
+"lon": -89.396972,
+"dist": 254.3,
+"primary": ""
+},
+{
+"pageid": 38277032,
+"ns": 0,
+"title": "LaBahn Arena",
+"lat": 43.0694,
+"lon": -89.39697,
+"dist": 255,
+"primary": ""
+},
+{
+"pageid": 27550531,
+"ns": 0,
+"title": "School of Journalism and Mass Communication (University of Wisconsin–Madison)",
+"lat": 43.07263888888889,
+"lon": -89.39980555555556,
+"dist": 293.9,
+"primary": ""
+},
+{
+"pageid": 16818410,
+"ns": 0,
+"title": "Wisconsin School of Business",
+"lat": 43.0726,
+"lon": -89.40163,
+"dist": 318,
+"primary": ""
+},
+{
+"pageid": 15611684,
+"ns": 0,
+"title": "University Square (Madison)",
+"lat": 43.07277777777778,
+"lon": -89.39833333333334,
+"dist": 337.2,
+"primary": ""
+},
+{
+"pageid": 3180186,
+"ns": 0,
+"title": "Chazen Museum of Art",
+"lat": 43.073888888888895,
+"lon": -89.39972222222222,
+"dist": 433,
+"primary": ""
+},
+{
+"pageid": 41792069,
+"ns": 0,
+"title": "Luther Memorial Church",
+"lat": 43.07298,
+"lon": -89.40345,
+"dist": 434,
+"primary": ""
+},
+{
+"pageid": 33704390,
+"ns": 0,
+"title": "Mead Witter School of Music",
+"lat": 43.074222222222225,
+"lon": -89.39977777777779,
+"dist": 469.8,
+"primary": ""
+},
+{
+"pageid": 34608454,
+"ns": 0,
+"title": "Lathrop Hall",
+"lat": 43.07367,
+"lon": -89.40301,
+"dist": 475.7,
+"primary": ""
+},
+{
+"pageid": 42750397,
+"ns": 0,
+"title": "UnityPoint Health - Meriter",
+"lat": 43.06583333333333,
+"lon": -89.40138888888889,
+"dist": 476.9,
+"primary": ""
+},
+{
+"pageid": 57615402,
+"ns": 0,
+"title": "Wiedenbeck-Dobelin Warehouse",
+"lat": 43.06861111111112,
+"lon": -89.39444444444445,
+"dist": 477,
+"primary": ""
+},
+{
+"pageid": 57615059,
+"ns": 0,
+"title": "Madison station (Milwaukee Road)",
+"lat": 43.06805555555556,
+"lon": -89.39444444444445,
+"dist": 500.4,
+"primary": ""
+},
+{
+"pageid": 4748609,
+"ns": 0,
+"title": "UW–Madison Geology Museum",
+"lat": 43.070661,
+"lon": -89.406411,
+"dist": 525.9,
+"primary": ""
+},
+{
+"pageid": 25117833,
+"ns": 0,
+"title": "Hotel Washington (Madison, Wisconsin)",
+"lat": 43.06855555555556,
+"lon": -89.39383333333333,
+"dist": 526,
+"primary": ""
+},
+{
+"pageid": 42160257,
+"ns": 0,
+"title": "University of Wisconsin Madison Law Building",
+"lat": 43.0745,
+"lon": -89.40227777777778,
+"dist": 533.5,
+"primary": ""
+},
+{
+"pageid": 34654940,
+"ns": 0,
+"title": "University Presbyterian Church and Student Center",
+"lat": 43.07472222222223,
+"lon": -89.39861111111112,
+"dist": 537.1,
+"primary": ""
+},
+{
+"pageid": 2429663,
+"ns": 0,
+"title": "University of Wisconsin Law School",
+"lat": 43.074644,
+"lon": -89.402435,
+"dist": 553,
+"primary": ""
+},
+{
+"pageid": 11063189,
+"ns": 0,
+"title": "Cooperative Institute for Meteorological Satellite Studies",
+"lat": 43.0707,
+"lon": -89.4069,
+"dist": 565.9,
+"primary": ""
+},
+{
+"pageid": 57488007,
+"ns": 0,
+"title": "Grimm Book Bindery",
+"lat": 43.073888888888895,
+"lon": -89.39527777777778,
+"dist": 578,
+"primary": ""
+},
+{
+"pageid": 65274528,
+"ns": 0,
+"title": "Wisconsin National Primate Research Center",
+"lat": 43.06861111111112,
+"lon": -89.40694444444445,
+"dist": 584.9,
+"primary": ""
+},
+{
+"pageid": 18510076,
+"ns": 0,
+"title": "College of Letters and Science (University of Wisconsin–Madison)",
+"lat": 43.07477777777778,
+"lon": -89.40311111111112,
+"dist": 588.3,
+"primary": ""
+},
+{
+"pageid": 63231348,
+"ns": 0,
+"title": "Chamberlin Hall",
+"lat": 43.07383333333334,
+"lon": -89.40536111111112,
+"dist": 609.4,
+"primary": ""
+},
+{
+"pageid": 44657182,
+"ns": 0,
+"title": "L. R. Ingersoll Physics Museum",
+"lat": 43.0738,
+"lon": -89.4055,
+"dist": 614.9,
+"primary": ""
+},
+{
+"pageid": 19487050,
+"ns": 0,
+"title": "Longfellow School (Madison, Wisconsin)",
+"lat": 43.06472222222222,
+"lon": -89.4025,
+"dist": 621,
+"primary": ""
+},
+{
+"pageid": 81311788,
+"ns": 0,
+"title": "UW Ice Rink",
+"lat": 43.075731686129565,
+"lon": -89.39883187851883,
+"dist": 644.4,
+"primary": ""
+},
+{
+"pageid": 2699460,
+"ns": 0,
+"title": "Sterling Hall bombing",
+"lat": 43.074278,
+"lon": -89.405408,
+"dist": 647.5,
+"primary": ""
+},
+{
+"pageid": 14962529,
+"ns": 0,
+"title": "University of Wisconsin Science Hall",
+"lat": 43.075833333333335,
+"lon": -89.40111111111112,
+"dist": 654.9,
+"primary": ""
+},
+{
+"pageid": 6798538,
+"ns": 0,
+"title": "School of Education (University of Wisconsin–Madison)",
+"lat": 43.0757167,
+"lon": -89.4023,
+"dist": 662.6,
+"primary": ""
+},
+{
+"pageid": 9480113,
+"ns": 0,
+"title": "Mifflin Street Block Party",
+"lat": 43.071,
+"lon": -89.3918,
+"dist": 675.3,
+"primary": ""
+},
+{
+"pageid": 14961862,
+"ns": 0,
+"title": "North Hall (University of Wisconsin)",
+"lat": 43.07568055555556,
+"lon": -89.40295833333334,
+"dist": 675.8,
+"primary": ""
+},
+{
+"pageid": 3935173,
+"ns": 0,
+"title": "Bascom Hill",
+"lat": 43.075342,
+"lon": -89.404078,
+"dist": 680.1,
+"primary": ""
+},
+{
+"pageid": 23536538,
+"ns": 0,
+"title": "University of Wisconsin–Madison",
+"lat": 43.0753,
+"lon": -89.4042,
+"dist": 681,
+"primary": ""
+},
+{
+"pageid": 14962152,
+"ns": 0,
+"title": "University of Wisconsin Armory and Gymnasium",
+"lat": 43.076233333333334,
+"lon": -89.3986888888889,
+"dist": 701.2,
+"primary": ""
+},
+{
+"pageid": 57490596,
+"ns": 0,
+"title": "Fire Station No. 4 (Madison, Wisconsin)",
+"lat": 43.07083333333334,
+"lon": -89.40861111111111,
+"dist": 705.6,
+"primary": ""
+},
+{
+"pageid": 1831112,
+"ns": 0,
+"title": "Memorial Union (University of Wisconsin–Madison)",
+"lat": 43.07638888888889,
+"lon": -89.4,
+"dist": 710.4,
+"primary": ""
+},
+{
+"pageid": 17083390,
+"ns": 0,
+"title": "Wisconsin Union Theater",
+"lat": 43.07638888888889,
+"lon": -89.4,
+"dist": 710.4,
+"primary": ""
+},
+{
+"pageid": 25400388,
+"ns": 0,
+"title": "Wisconsin Institutes for Discovery",
+"lat": 43.072916,
+"lon": -89.408095,
+"dist": 733.1,
+"primary": ""
+},
+{
+"pageid": 34594306,
+"ns": 0,
+"title": "James B. Bowen House",
+"lat": 43.06388888888888,
+"lon": -89.40416666666667,
+"dist": 759.2,
+"primary": ""
+},
+{
+"pageid": 2473910,
+"ns": 0,
+"title": "Camp Randall",
+"lat": 43.069722222222225,
+"lon": -89.40944444444445,
+"dist": 767.8,
+"primary": ""
+},
+{
+"pageid": 83357347,
+"ns": 0,
+"title": "Camp Randall Memorial Arch",
+"lat": 43.0711,
+"lon": -89.4094,
+"dist": 773.3,
+"primary": ""
+},
+{
+"pageid": 24726566,
+"ns": 0,
+"title": "State Street Halloween Party",
+"lat": 43.07483333333334,
+"lon": -89.39277777777778,
+"dist": 795.6,
+"primary": ""
+},
+{
+"pageid": 1401256,
+"ns": 0,
+"title": "State Street (Madison)",
+"lat": 43.07483333333334,
+"lon": -89.39277777777778,
+"dist": 795.6,
+"primary": ""
+},
+{
+"pageid": 57279610,
+"ns": 0,
+"title": "American Tobacco Company Warehouses Complex",
+"lat": 43.06583333333333,
+"lon": -89.39166666666668,
+"dist": 820.3,
+"primary": ""
+},
+{
+"pageid": 44361842,
+"ns": 0,
+"title": "State Innovation Exchange",
+"lat": 43.0763,
+"lon": -89.4053,
+"dist": 822.2,
+"primary": ""
+},
+{
+"pageid": 21706230,
+"ns": 0,
+"title": "High Road Strategy Center",
+"lat": 43.0763,
+"lon": -89.4053,
+"dist": 822.2,
+"primary": ""
+},
+{
+"pageid": 11004023,
+"ns": 0,
+"title": "College of Engineering (University of Wisconsin–Madison)",
+"lat": 43.07177777777778,
+"lon": -89.41027777777778,
+"dist": 857.9,
+"primary": ""
+},
+{
+"pageid": 14155184,
+"ns": 0,
+"title": "La Follette School of Public Affairs",
+"lat": 43.07622222222223,
+"lon": -89.4076388888889,
+"dist": 929.3,
+"primary": ""
+},
+{
+"pageid": 34594492,
+"ns": 0,
+"title": "Judge Arthur B. Braley House",
+"lat": 43.07579,
+"lon": -89.39161,
+"dist": 937.5,
+"primary": ""
+},
+{
+"pageid": 44499962,
+"ns": 0,
+"title": "DeLuca Biochemistry Building",
+"lat": 43.073888888888895,
+"lon": -89.41055555555556,
+"dist": 960.3,
+"primary": ""
+},
+{
+"pageid": 57537535,
+"ns": 0,
+"title": "Old U.S. Forest Products Laboratory",
+"lat": 43.073055555555555,
+"lon": -89.41111111111111,
+"dist": 964.4,
+"primary": ""
+}
+],
+"extracts": {
+"1685389": {
+"pageid": 1685389,
+"ns": 0,
+"title": "Kohl Center",
+"extract": "The Kohl Center is a multi-purpose arena located at the University of Wisconsin–Madison, United States. The arena opened in 1998 and is the home of the university's men's basketball and ice hockey teams, and the women's basketball team."
+},
+"2429663": {
+"pageid": 2429663,
+"ns": 0,
+"title": "University of Wisconsin Law School",
+"extract": "The University of Wisconsin Law School is the law school of the University of Wisconsin–Madison, a public research university in Madison, Wisconsin. Founded in 1868, the school is guided by a \"law in action\" legal philosophy which emphasizes the role of the law in practice and society."
+},
+"3180186": {
+"pageid": 3180186,
+"ns": 0,
+"title": "Chazen Museum of Art",
+"extract": "The Chazen Museum of Art is an art museum located on the campus of the University of Wisconsin–Madison in Madison, Wisconsin.\nFounded as the Elvehjem Art Center (later Elvehjem Museum of Art) in 1970, the museum moved into a brutalist building designed by Illinois architect Harry Weese to house the university's collection of 1,600 artworks."
+},
+"4748609": {
+"pageid": 4748609,
+"ns": 0,
+"title": "UW–Madison Geology Museum",
+"extract": "The UW–Madison Geology Museum (UWGM) is a geology and paleontology museum housed in Weeks Hall, in the southwest part of the University of Wisconsin–Madison campus. The museum's main undertakings are exhibits, outreach to the public, and research."
+},
+"11063189": {
+"pageid": 11063189,
+"ns": 0,
+"title": "Cooperative Institute for Meteorological Satellite Studies",
+"extract": "The Cooperative Institute for Meteorological Satellite Studies (CIMSS) is a research institute where scientists study the use of data from geostationary and polar orbit weather satellites to improve forecasts of weather (including tropical cyclones and severe storms. CIMSS was formed through a Memorandum of Understanding between the University of Wisconsin–Madison, the National Oceanic and Atmospheric Administration (NOAA) and the National Aeronautics and Space Administration (NASA)."
+},
+"15611684": {
+"pageid": 15611684,
+"ns": 0,
+"title": "University Square (Madison)",
+"extract": "University Square Madison is a 1,100,000-square-foot (100,000 m2) urban infill development in the City of Madison, Wisconsin.\nThe planning for the University Square Project was started in 1999 by Greg Rice, owner of Executive Management, Inc."
+},
+"16818410": {
+"pageid": 16818410,
+"ns": 0,
+"title": "Wisconsin School of Business",
+"extract": "The Wisconsin School of Business (WSB) is the business school of the University of Wisconsin–Madison, a public research university in Madison, Wisconsin. Founded in 1900, it has more than 49,000 living alumni across nearly 90 countries."
+},
+"25117833": {
+"pageid": 25117833,
+"ns": 0,
+"title": "Hotel Washington (Madison, Wisconsin)",
+"extract": "The Hotel Washington was a building in Madison, Wisconsin, built at the end of the 19th century. It housed several businesses during the 1970 through 1990s."
+},
+"27550531": {
+"pageid": 27550531,
+"ns": 0,
+"title": "School of Journalism and Mass Communication (University of Wisconsin–Madison)",
+"extract": "The School of Journalism and Mass Communication (SJMC) is an academic unit of the University of Wisconsin–Madison, part of the university’s College of Letters and Science. It is located in Vilas Communication Hall."
+},
+"33704390": {
+"pageid": 33704390,
+"ns": 0,
+"title": "Mead Witter School of Music",
+"extract": "The Mead Witter School of Music is the collegiate music school of the University of Wisconsin–Madison. Established in 1895, the institution consists of a 60-member faculty."
+},
+"34608454": {
+"pageid": 34608454,
+"ns": 0,
+"title": "Lathrop Hall",
+"extract": "Lathrop Hall was built in 1908 as a women's gym and union of the University of Wisconsin-Madison in Madison, Wisconsin. In 1985 it was added to the National Register of Historic Places, significant because it is the site of founding of the Athletic Conference of American College Women in 1917, and the site of courses for the first dance major in the U.S. in 1926."
+},
+"34654940": {
+"pageid": 34654940,
+"ns": 0,
+"title": "University Presbyterian Church and Student Center",
+"extract": "The University Presbyterian Church and Student Center, nicknamed Pres House, is a historic church on State Street in Madison, Wisconsin, United States. Designed in 1931 by local architect Edward Tough in a Gothic Revival style, and after a delay occasioned by the Great Depression it was completed four years later."
+},
+"38277032": {
+"pageid": 38277032,
+"ns": 0,
+"title": "LaBahn Arena",
+"extract": "LaBahn Arena is the home ice of the Wisconsin Badgers women's ice hockey team.  It was the second arena to be purpose-built for a women's collegiate hockey team; the first was Minnesota's Ridder Arena."
+},
+"41792069": {
+"pageid": 41792069,
+"ns": 0,
+"title": "Luther Memorial Church",
+"extract": "Luther Memorial Church is a Lutheran congregation at 1021 University Avenue in Madison, Wisconsin in the United States. A member of the Evangelical Lutheran Church in America (ELCA), it is known for its worship, music, education, social ministry and preschool programs."
+},
+"42160257": {
+"pageid": 42160257,
+"ns": 0,
+"title": "University of Wisconsin Madison Law Building",
+"extract": "The law building is located on Bascom Hill on the University of Wisconsin–Madison campus, at 975 Bascom Mall, Madison, Wisconsin.\nThe University of Wisconsin Law School offers two major programs and one doctorate program to the almost 800 students that make up the student body."
+},
+"42750397": {
+"pageid": 42750397,
+"ns": 0,
+"title": "UnityPoint Health - Meriter",
+"extract": "Meriter Hospital Inc, doing business as UnityPoint Health - Meriter, is a non-profit hospital campus in Madison, Wisconsin, United States that is owned by UnityPoint Health. The medical facility is a tertiary, psychiatric hospital and teaching hospital that has multiple specialties."
+},
+"57488007": {
+"pageid": 57488007,
+"ns": 0,
+"title": "Grimm Book Bindery",
+"extract": "The Grimm Book Bindery is a small Georgian Revival-styled shop built in 1926 in Madison, Wisconsin for the only dedicated book-binding business in town, run by the Grimm family for 60 years. In 1986 it was added to the National Register of Historic Places."
+},
+"57615059": {
+"pageid": 57615059,
+"ns": 0,
+"title": "Madison station (Milwaukee Road)",
+"extract": "The Milwaukee Road Depot in Madison, Wisconsin is a former railroad depot. It was built in 1903 and operated by the Chicago, Milwaukee, St."
+},
+"57615402": {
+"pageid": 57615402,
+"ns": 0,
+"title": "Wiedenbeck-Dobelin Warehouse",
+"extract": "The Wiedenbeck-Dobelin Warehouse is located in Madison, Wisconsin."
+},
+"65274528": {
+"pageid": 65274528,
+"ns": 0,
+"title": "Wisconsin National Primate Research Center",
+"extract": "The Wisconsin National Primate Research Center (WNPRC) is a federally funded biomedical research facility located at the University of Wisconsin-Madison. The WNPRC is part of a network of seven National Primate Research Centers which conduct biomedical research on primates."
+},
+"1831112": {
+"pageid": 1831112,
+"ns": 0,
+"title": "Memorial Union (University of Wisconsin–Madison)",
+"extract": "Memorial Union is an Italianate Renaissance Revival-style complex built in 1926–28 at the University of Wisconsin–Madison on the south shore of Lake Mendota as a social and recreational gathering place for all students, designed partly to break down socioeconomic barriers. Before Memorial Union, the UW had no union; at its opening in 1928, then-President Glenn Frank said, \"The Union is a living room, which converts the university from a house of learning to a home of learning.\"\nOn the building's north side is the Terrace, a popular outdoor space overlooking the lake."
+},
+"2473910": {
+"pageid": 2473910,
+"ns": 0,
+"title": "Camp Randall",
+"extract": "Camp Randall was a United States Army base in Madison, Wisconsin, the largest staging point for Wisconsin troops entering the American Civil War. At this camp, fresh volunteers received quick training before heading off to join the Union Army."
+},
+"2699460": {
+"pageid": 2699460,
+"ns": 0,
+"title": "Sterling Hall bombing",
+"extract": "The Sterling Hall bombing occurred on the University of Wisconsin–Madison campus on August 24, 1970, and was committed by four men as an action against the university's research connections with the U.S. military during the Vietnam War. It resulted in the death of a university physics researcher and injuries to three others."
+},
+"3935173": {
+"pageid": 3935173,
+"ns": 0,
+"title": "Bascom Hill",
+"extract": "Bascom Hill is the iconic main quadrangle that forms the historic core of the University of Wisconsin–Madison campus. It is located on the opposite end of State Street from the Wisconsin State Capitol, and is named after John Bascom, former president of the University of Wisconsin."
+},
+"6798538": {
+"pageid": 6798538,
+"ns": 0,
+"title": "School of Education (University of Wisconsin–Madison)",
+"extract": "The University of Wisconsin–Madison School of Education is a school within the University of Wisconsin–Madison. Although teacher education was offered at the university's founding in 1848, the School was officially started in 1930 and today is composed of 10 academic departments."
+},
+"9480113": {
+"pageid": 9480113,
+"ns": 0,
+"title": "Mifflin Street Block Party",
+"extract": "The Mifflin Street Block Party is an annual block party celebration held on Mifflin Street in Madison, Wisconsin. The party is held on the last Saturday of April and attended predominantly by students attending the University of Wisconsin–Madison."
+},
+"14961862": {
+"pageid": 14961862,
+"ns": 0,
+"title": "North Hall (University of Wisconsin)",
+"extract": "North Hall was the University of Wisconsin–Madison's first building. Built in 1851 in the woods and brush that would become Bascom Hill, this one building was the UW for its first four years, housing both dorm rooms and lecture halls."
+},
+"14962152": {
+"pageid": 14962152,
+"ns": 0,
+"title": "University of Wisconsin Armory and Gymnasium",
+"extract": "The University of Wisconsin Armory and Gymnasium, also called the Red Gym, is a building on the campus of University of Wisconsin–Madison. It was originally used as a combination gymnasium and armory beginning in 1894."
+},
+"14962529": {
+"pageid": 14962529,
+"ns": 0,
+"title": "University of Wisconsin Science Hall",
+"extract": "University of Wisconsin Science Hall is a building on the campus of the University of Wisconsin–Madison. It is significant for its association with Charles R. Van Hise, \"who led the Department of Mineralogy and Geology to national prominence\" and then served as president of the university."
+},
+"17083390": {
+"pageid": 17083390,
+"ns": 0,
+"title": "Wisconsin Union Theater",
+"extract": "The Wisconsin Union Theater is a performing arts center in Madison, Wisconsin, located in the University of Wisconsin–Madison's Memorial Union. Wisconsin Union Theater performances include world stage, concerts, dance, jazz and other special events."
+},
+"18510076": {
+"pageid": 18510076,
+"ns": 0,
+"title": "College of Letters and Science (University of Wisconsin–Madison)",
+"extract": "The College of Letters and Science is the college of arts and sciences at the University of Wisconsin–Madison. It is located at Madison, Wisconsin."
+},
+"19487050": {
+"pageid": 19487050,
+"ns": 0,
+"title": "Longfellow School (Madison, Wisconsin)",
+"extract": "Longfellow School is a two-story grade school building in the Greenbush neighborhood of Madison, Wisconsin, built in 1917 and expanded in 1924 and 1938. It ceased operation as a school in 1980."
+},
+"23536538": {
+"pageid": 23536538,
+"ns": 0,
+"title": "University of Wisconsin–Madison",
+"extract": "The University of Wisconsin–Madison (University of Wisconsin, Wisconsin, UW, UW–Madison, or simply Madison) is a public land-grant research university in Madison, Wisconsin, United States. It was founded in 1848 when Wisconsin achieved statehood and is the flagship campus of the University of Wisconsin System."
+},
+"25400388": {
+"pageid": 25400388,
+"ns": 0,
+"title": "Wisconsin Institutes for Discovery",
+"extract": "The Wisconsin Institutes for Discovery is a public-private research and outreach partnership that is located in the Discovery Building on the University of Wisconsin–Madison campus. It consists of two institutions: the privately funded Morgridge Institute for Research, and the publicly funded Wisconsin Institute for Discovery (WID)."
+},
+"34594306": {
+"pageid": 34594306,
+"ns": 0,
+"title": "James B. Bowen House",
+"extract": "The James B. Bowen House (also known as the Seth Van Bergen House) is an early Italianate-styled house clad in cut sandstone, built in 1855 on what was then a farm on the outskirts of Madison, Wisconsin. In 1982 it was added to the National Register of Historic Places."
+},
+"44657182": {
+"pageid": 44657182,
+"ns": 0,
+"title": "L. R. Ingersoll Physics Museum",
+"extract": "The L.R. Ingersoll Physics Museum is located on the second floor of Chamberlin Hall on the University of Wisconsin-Madison campus. It is one of several museums on the University of Wisconsin-Madison campus that focus on hands-on exhibits and public outreach."
+},
+"57490596": {
+"pageid": 57490596,
+"ns": 0,
+"title": "Fire Station No. 4 (Madison, Wisconsin)",
+"extract": "The Fire Station No. 4 was built in 1904 a mile west of the capitol in Madison, Wisconsin, when fire engines were still pulled by horses."
+},
+"63231348": {
+"pageid": 63231348,
+"ns": 0,
+"title": "Chamberlin Hall",
+"extract": "Chamberlin Hall is home of the University of Wisconsin-Madison Physics Department, located on the main campus in Madison, Wisconsin. The L.R. Ingersoll Physics Museum is hosted on the second floor."
+},
+"81311788": {
+"pageid": 81311788,
+"ns": 0,
+"title": "UW Ice Rink",
+"extract": "The UW Ice Rink was a temporary outdoor ice rink that was constructed each year on the campus of the University of Wisconsin–Madison. The structure was placed on the library mall, southwest of the college's Red Gym on the opposite side of the street."
+},
+"83357347": {
+"pageid": 83357347,
+"ns": 0,
+"title": "Camp Randall Memorial Arch",
+"extract": "The Camp Randall Memorial Arch is a commemorative triumphal arch designed by Madison-based architect Lew F. Porter and manufactured by the Woodbury Granite Company. The arch was dedicated in June of 1912 as a tribute to the 70,000+ soldiers from the state of Wisconsin who received military training at Camp Randall between 1861 and 1865 during the American Civil War."
+},
+"1401256": {
+"pageid": 1401256,
+"ns": 0,
+"title": "State Street (Madison)",
+"extract": "State Street is a pedestrian zone located in downtown Madison, Wisconsin, United States, near the State Capitol. The road proper extends from the west corner of land comprising the Capitol (on the southwestern edge of the Madison Isthmus, at the corners of Carroll and Mifflin Streets) westward to Lake Street, adjoining the campus of the University of Wisconsin–Madison at Library Mall."
+},
+"11004023": {
+"pageid": 11004023,
+"ns": 0,
+"title": "College of Engineering (University of Wisconsin–Madison)",
+"extract": "The College of Engineering (often referred to as COE) is the engineering school of the University of Wisconsin–Madison. The college comprises 8 academic departments."
+},
+"14155184": {
+"pageid": 14155184,
+"ns": 0,
+"title": "La Follette School of Public Affairs",
+"extract": "The La Follette School of Public Affairs is a public graduate public policy school at the University of Wisconsin–Madison. It offers master's degrees in public affairs and international public affairs, joint graduate degrees with other departments, and undergraduate certificates in public policy and health policy."
+},
+"21706230": {
+"pageid": 21706230,
+"ns": 0,
+"title": "High Road Strategy Center",
+"extract": "The High Road Strategy Center, formerly the Center on Wisconsin Strategy (COWS), is a progressive policy institute housed on the campus of the University of Wisconsin–Madison. It was founded in 1991 by UW Professor Joel Rogers."
+},
+"24726566": {
+"pageid": 24726566,
+"ns": 0,
+"title": "State Street Halloween Party",
+"extract": "The State Street Halloween Party was an annual Halloween festival located in Madison, Wisconsin. \nTens of thousands of party-goers, many dressed in Halloween costumes, attended the event on State Street in the downtown area of Madison."
+},
+"34594492": {
+"pageid": 34594492,
+"ns": 0,
+"title": "Judge Arthur B. Braley House",
+"extract": "The Judge Arthur B. Braley House is a Gothic Revival-style house built in 1875 in Madison, Wisconsin by a long-respected jurist, writer and a supporter of other writers, including Ella Wheeler Wilcox. In 1980 the house was added to the National Register of Historic Places."
+},
+"44361842": {
+"pageid": 44361842,
+"ns": 0,
+"title": "State Innovation Exchange",
+"extract": "The State Innovation Exchange (SIX), formerly American Legislative and Issue Campaign Exchange (ALICE), is a nonprofit organization established in September 2012 by the Center on Wisconsin Strategy (COWS) at the University of Wisconsin–Madison. The organization provides an online database of state-level legislation that has been passed in a state for politicians and activists to replicate and enact in state legislatures."
+},
+"44499962": {
+"pageid": 44499962,
+"ns": 0,
+"title": "DeLuca Biochemistry Building",
+"extract": "The Hector F. DeLuca Biochemistry Building, originally known as the Agricultural Chemistry Building, is a historic structure on the campus of the University of Wisconsin–Madison. It was the site of the discovery of vitamins A and B, as well as the development of vitamin D processing."
+},
+"57279610": {
+"pageid": 57279610,
+"ns": 0,
+"title": "American Tobacco Company Warehouses Complex",
+"extract": "The American Tobacco Company Warehouses Complex is a pair of brick warehouses built around 1900 in Madison, Wisconsin. They are now the two most intact remnants of Madison's tobacco industry, and were added to the National Register of Historic Places in 2003."
+},
+"57537535": {
+"pageid": 57537535,
+"ns": 0,
+"title": "Old U.S. Forest Products Laboratory",
+"extract": "The Old U.S. Forest Products Laboratory, built in 1910 in Madison, Wisconsin, housed a new national lab, and the first institution in the world created specifically to research wood and wood products. Research in this building produced breakthroughs in wood preservation, laminates, and paper production."
+}
+}
+}

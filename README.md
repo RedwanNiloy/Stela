@@ -43,7 +43,7 @@ app/cache.py     TTL cache and per-IP rate limiter (in memory)
 static/index.html  one mobile-first page, vanilla JS, Leaflet map, no build step
 static/stela.css   the look: sandstone palette, stone-tablet cards, dig layers, animations (all optional)
 static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tested in Node)
-static/stela-game.js   Guess the past and Dig sites nearby (pure logic, tested in Node)
+static/stela-game.js   Guess the past (pure logic, tested in Node)
 tests/           parsing and fallback tests on saved real API responses, plus tests of the browser logic
 ```
 
@@ -58,7 +58,7 @@ An ancient-discovery feel in original CSS/SVG only: sandstone, papyrus and deep 
 
 ## People and past civilizations
 
-A card with what Wikipedia says about the early history of your place at up to five scopes: **your area, city, district, region, country**. It replaces the old "Human history nearby" card; the nearby history pages themselves are still listed in "Dig sites nearby".
+A card with what Wikipedia says about the early history of your place at up to five scopes: **your area, city, district, region, country**. It replaces the old "Human history nearby" card; the museums and historic sites themselves are listed in "Places to visit".
 
 How it works (`app/people.py`, endpoints `/api/people` for the excerpts and `/api/people/story` for the scribe's paragraph):
 
@@ -70,7 +70,7 @@ How it works (`app/people.py`, endpoints `/api/people` for the excerpts and `/ap
 
 The card always says "Histories of this area may be contested or incomplete." No indigenous-territory dataset or any other new source was added.
 
-## Guess the past and Dig sites nearby
+## Guess the past
 
 **Guess the past** is an optional game under the story. A pure function (`possibleQuestionTypes`) looks at the facts and says which questions are possible; one or two are picked at random:
 
@@ -84,7 +84,16 @@ The card always says "Histories of this area may be contested or incomplete." No
 
 Questions and answers are computed only from the facts, never from the language model. The wrong options for the fossil and species questions ("decoys") come from fixed lists, are removed if they are in the real data, and are never shown as facts; the reveal says that "not in the records" does not prove something never lived there. After a guess the page reveals the real answer with its supporting facts. If a layer used a wider scope (a regional rock map, the nearest city, a wider fossil search), the question and the reveal say so and show the scope label. If no question is possible the card says: "The scribe has no tablets for this spot. Try walking somewhere new or dropping a pin elsewhere." There is a Skip button, nothing is spoken, and animations respect `prefers-reduced-motion`.
 
-**Dig sites nearby** reuses the human-history pages already fetched from the Wikipedia geosearch (no new data source; the layer now also keeps each page's coordinates and id). Up to 5 are listed with the distance ("about 3 km away, straight line"), the compass direction from you, a one-line summary, a Wikipedia link and an "Open in map" link (a plain OpenStreetMap URL; no routing service). It does not promise walking times, opening hours, prices or that a site is open: it says "Check access and opening times before you go." Sites over about 10 km are labelled far and not presented as a walk. If the human-history layer fell back to the nearest city or region, no individual sites are shown and it says "No individual sites recorded near you. This area's history is about [place]." The nearest site is marked on the map with an original SVG marker.
+## Places to visit
+
+Museums and historic sites within about 10 km, nearest first, up to 5 entries (this replaces the earlier "Dig sites nearby" card). It reuses the Wikipedia geosearch the app already runs: no new request, no reverse geocoding, no widening to a city, district or division.
+
+- **What counts.** A Wikipedia page is kept when its title or its first sentence says it is a museum, castle or fort, palace, place of worship (temple, mosque, abbey, cathedral, monastery), ruins or archaeological site, or a historic site (for example "Grade II* listed", "medieval", "is a historic church", war memorial). Pages that only mention a museum in a later sentence, such as a university hall that houses one, are not kept. The rules are in `VISIT_RULES` in `app/geo.py`.
+- **Each entry** shows the name, the type, the straight-line distance and compass direction ("about 3 km north-east"), the first sentence of the Wikipedia introduction, the source name, a Wikipedia link, and an "Open in map" link (a plain OpenStreetMap URL with the place's coordinates; no routing service). The entries are marked on the Leaflet map with an original SVG marker.
+- **No promises.** The card says "Distances are straight-line. Check access and opening times before you go." It never states opening hours, prices or that a place is open to visitors.
+- **Empty state.** If nothing is found it shows exactly "No museums or historic sites recorded near you. Try dropping a pin in a city." and nothing else is put in the list.
+- **Narration.** The model sees only each place's name, type and distance text, and may mention only those, exactly as written. With an empty list it must say nothing was recorded nearby. A code check discards a story that names a kind of place (museum, castle, temple...) that is not in the facts.
+- **Overpass was tried and left out.** OpenStreetMap's Overpass API (`tourism=museum`, `historic=*`) was too slow and flaky in testing (timeouts and a 504 from three places, one answer after 12 s) and its results were mostly memorial plaques, so it is not used. No coordinates are sent to it.
 
 ## Passport and Walk mode
 
@@ -162,7 +171,7 @@ Stela does not store or log your location or IP address. The passport is stored 
 | [Macrostrat](https://macrostrat.org) | rock unit, age | CC-BY 4.0 |
 | [Paleobiology Database](https://paleobiodb.org) | fossil finds | CC-BY 4.0 |
 | [GBIF](https://www.gbif.org) with IUCN Red List categories | rare animal records | CC0 / CC-BY per dataset |
-| [Wikipedia](https://en.wikipedia.org) / MediaWiki API | nearby history pages; history excerpts for "People and past civilizations" | text under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): excerpts are shortened and attributed on the page, with links to the article and its authors |
+| [Wikipedia](https://en.wikipedia.org) / MediaWiki API | nearby pages for "Places to visit" (museums and historic sites); history excerpts for "People and past civilizations" | text under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): excerpts are shortened and attributed on the page, with links to the article and its authors |
 | [OpenStreetMap Nominatim](https://nominatim.org) | place hierarchy (neighbourhood to country), nearest city/town and country | ODbL |
 | [OpenStreetMap](https://www.openstreetmap.org/copyright) tiles, [Leaflet](https://leafletjs.com) | map | ODbL, BSD-2 |
 
@@ -192,12 +201,19 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - PBDB can take 30 seconds or more for sparse regions.
 - **"Oldest nearby site" uses dates read from text.** Wikipedia introductions have no structured dates, so Stela only reads a date that follows a construction or founding cue ("completed in 1262", "dates to 1575-1520 BC", "founded in the 11th century"). Bare years ("listed in 1973") are ignored, and the question is dropped unless one place is clearly older than the others. The dates may be when a place was built, not when it was first used, and many pages simply have no date, so this question is often unavailable.
 - **The game's decoys are not proof of absence.** "Not in the records" only means not in the records Stela fetched (the most-recorded species, and the fossil groups of one search).
-- **Dig sites are not visit advice.** They are Wikipedia pages that mention history, so many are buildings, rivers or monuments you cannot enter. Directions and distances are straight lines from the point you looked up, and Wikipedia's coordinates for a place can be approximate.
+- **Places to visit are not visit advice.** They are Wikipedia pages, so some are buildings or monuments you cannot enter or that no longer exist. The type comes from keywords in the first sentence, so it can be wrong or missing. Directions and distances are straight lines from the point you looked up, and Wikipedia's coordinates for a place can be approximate.
 - **A one-line summary is the first sentence of the introduction**, which Wikipedia sometimes cuts short (for example after "St.").
 - **The passport is per browser and per device.** Clearing site data, using a private window, or switching phones starts a new one. There is no sync, by design.
 - **Walk mode needs the page open and visible.** Browsers pause GPS for hidden pages and locked screens, so it cannot track you in the background. GPS can be slow or inaccurate indoors, under tree cover and in cities; weak fixes are ignored rather than guessed from.
 - **"New rock unit" is best effort.** Names differ between map scales for the same ground, so a change of unit is only reported when both lookups used the same map scale; a change of era (time interval) is always reported. Geological maps are coarse, so boundaries you walk across may not match what is on the ground.
 - **Walk mode and the rate limit.** Each new story is four requests (where, fossils, people, people/story; about 20 stories a minute are allowed). If the server says slow down, Walk mode pauses for a minute.
+
+- **Dense cities hide sites.** The geosearch returns only the 50 nearest Wikipedia pages. In a dense modern district they can all be within about 2 km (in the Dhaka test they were), so older sites farther out, still inside 10 km, are never looked at. A place can therefore show few or no entries even when there are sites in the wider city.
+
+## Planned next steps
+
+- Widening "Places to visit" to the city, district and division when nothing is found nearby (with clear scope labels, like the other cards).
+- A way past the 50-page cap in dense cities, if it can be done without many more requests.
 
 ## Out of scope for v1
 

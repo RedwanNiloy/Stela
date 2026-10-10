@@ -1,4 +1,4 @@
-/* Stela: "Guess the past" and "Dig sites nearby" logic. Pure functions, no page access, tested in Node.
+/* Stela: "Guess the past" logic. Pure functions, no page access, tested in Node.
  *
  * GROUNDING: every question and every answer is computed from the facts the server collected (rock, setting, fossils,
  * rare-animal records, human-history pages). Nothing here comes from a language model. The only invented things are
@@ -7,8 +7,6 @@
   "use strict";
 
   const NO_TABLETS = "The scribe has no tablets for this spot. Try walking somewhere new or dropping a pin elsewhere.";
-  const FAR_M = 10000;  // beyond this a site is "far": not presented as a walk
-  const DIG_NOTE = "Check access and opening times before you go.";
 
   /* ---------- small helpers ---------- */
   function shuffle(list, rng = Math.random) {
@@ -17,36 +15,6 @@
     return a;
   }
   const pick = (list, rng) => list[Math.floor(rng() * list.length)];
-
-  /* ---------- distance wording and compass direction ---------- */
-  const COMPASS = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"];
-
-  function bearingDegrees(lat1, lng1, lat2, lng2) {  // initial bearing from point 1 to point 2, 0-360, 0 = north
-    const rad = (d) => (d * Math.PI) / 180, deg = (r) => (r * 180) / Math.PI;
-    const dLng = rad(lng2 - lng1);
-    const y = Math.sin(dLng) * Math.cos(rad(lat2));
-    const x = Math.cos(rad(lat1)) * Math.sin(rad(lat2)) - Math.sin(rad(lat1)) * Math.cos(rad(lat2)) * Math.cos(dLng);
-    return (deg(Math.atan2(y, x)) + 360) % 360;
-  }
-
-  function compassDirection(lat1, lng1, lat2, lng2) {
-    if (![lat1, lng1, lat2, lng2].every(Number.isFinite)) return null;
-    const bearing = bearingDegrees(lat1, lng1, lat2, lng2);
-    return { bearing: Math.round(bearing), name: COMPASS[Math.round(bearing / 45) % 8] };
-  }
-
-  /* Honest distance: always "straight line", never a walking time. Over about 10 km it says it is far. */
-  function describeDistance(meters) {
-    if (!Number.isFinite(meters) || meters < 0) return { text: "distance not known", far: false };
-    if (meters < 1000) {
-      const m = meters < 100 ? Math.round(meters) : Math.round(meters / 10) * 10;
-      return { text: `about ${m} m away, straight line`, far: false };
-    }
-    const km = meters / 1000;
-    const shown = km < 10 ? String(Math.round(km * 10) / 10) : String(Math.round(km));
-    if (meters > FAR_M) return { text: `about ${shown} km away, straight line. That is far: plan transport rather than a walk`, far: true };
-    return { text: `about ${shown} km away, straight line`, far: false };
-  }
 
   /* One-line summary: the first sentence of the Wikipedia introduction (not splitting after "St." and similar). */
   const ABBREVIATION = /(?:^|\s)(?:St|Mt|Dr|Mr|Mrs|Ms|Jr|Sr|vs|c|ca|No|Fr|Rd)\.$/i;
@@ -236,36 +204,9 @@
     return { verdict: diff <= 0.25 * b ? "close" : "far", diff };
   }
 
-  /* ---------- Dig sites nearby ----------
-   * Reuses the human-history results. Individual sites only when that layer searched the user's own area; if it fell
-   * back to a nearest city or region there are no individual sites, and we say what the history is about instead. */
-  const mapUrl = (lat, lng) => `https://www.openstreetmap.org/?mlat=${lat.toFixed(5)}&mlon=${lng.toFixed(5)}#map=17/${lat.toFixed(5)}/${lng.toFixed(5)}`;
-  const wikiUrl = (e) => finite(e.pageid) ? `https://en.wikipedia.org/?curid=${e.pageid}`
-    : `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(e.place)}`;
-
-  function digSites(facts, user) {
-    const entries = facts && facts.human_history_nearby;
-    if (entries == null) return { mode: "unavailable", sites: [], scope: null };
-    const scope = (facts.scope && facts.scope.human) || null;
-    if (scope && (scope.level === "nearest_place" || scope.level === "region")) {
-      return { mode: "wider", sites: [], scope, placeName: scope.place_name || (entries[0] && entries[0].place) || null };
-    }
-    const sites = entries
-      .filter((e) => finite(e.lat) && finite(e.lng))
-      .map((e) => {
-        const dist = describeDistance(e.distance_m);
-        return { name: e.place, distance_m: e.distance_m, distanceText: dist.text, far: dist.far, lat: e.lat, lng: e.lng,
-          direction: user && finite(user.lat) && finite(user.lng) ? compassDirection(user.lat, user.lng, e.lat, e.lng) : null,
-          summary: firstSentence(e.summary, 180), wikiUrl: wikiUrl(e), mapUrl: mapUrl(e.lat, e.lng) };
-      })
-      .sort((a, b) => (a.distance_m ?? Infinity) - (b.distance_m ?? Infinity))
-      .slice(0, 5);
-    return { mode: sites.length ? "sites" : "none", sites, scope };
-  }
-
-  const api = { NO_TABLETS, FAR_M, DIG_NOTE, SETTING_CHOICES, SETTING_ANSWER, FOSSIL_DECOYS, SPECIES_DECOYS, SLIDER_MAX_MA,
-    shuffle, bearingDegrees, compassDirection, describeDistance, firstSentence, extractDate,
-    possibleQuestionTypes, buildQuestion, pickQuestion, pickQuestions, sliderToMa, maToSlider, gradeAge, digSites, mapUrl, wikiUrl };
+  const api = { NO_TABLETS, SETTING_CHOICES, SETTING_ANSWER, FOSSIL_DECOYS, SPECIES_DECOYS, SLIDER_MAX_MA,
+    shuffle, firstSentence, extractDate,
+    possibleQuestionTypes, buildQuestion, pickQuestion, pickQuestions, sliderToMa, maToSlider, gradeAge };
   root.StelaGame = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);

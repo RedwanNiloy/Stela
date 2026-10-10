@@ -247,14 +247,14 @@ def human_net(geocoder="madison", **wiki):
 
 def test_human_exact_area_never_calls_the_geocoder():
     net = human_net(history=True)
-    entries, scope, geo_status = run(geo.fetch_human(net.client(), *DOVER))
+    entries, scope, geo_status, _places = run(geo.fetch_human(net.client(), *DOVER))
     assert scope["level"] == "exact_area" and entries and geo_status is None
     assert not net.to("nominatim.openstreetmap.org")
 
 
 def test_human_falls_back_to_the_nearest_city_and_its_intro():
     net = human_net()
-    entries, scope, geo_status = run(geo.fetch_human(net.client(), *MADISON))
+    entries, scope, geo_status, _places = run(geo.fetch_human(net.client(), *MADISON))
     assert scope["level"] == "nearest_place" and scope["place_name"] == "Madison"
     assert 0 < scope["distance_km"] < 10
     assert "not your exact spot" in scope["note"] and "the nearest city" in scope["note"]
@@ -269,7 +269,7 @@ def test_human_falls_back_to_the_nearest_city_and_its_intro():
 
 def test_human_region_level_when_the_nearest_place_is_a_state():
     net = human_net(geocoder="uluru")
-    entries, scope, _ = run(geo.fetch_human(net.client(), -25.34, 131.04))
+    entries, scope, _, _places = run(geo.fetch_human(net.client(), -25.34, 131.04))
     assert scope["level"] == "region" and scope["place_name"] == "Northern Territory"
     assert scope["distance_km"] is None and entries[0]["distance_m"] is None
     assert "the wider region" in scope["note"]
@@ -278,21 +278,21 @@ def test_human_region_level_when_the_nearest_place_is_a_state():
 
 def test_human_cap_nothing_recorded_in_open_water():
     net = human_net(geocoder="ocean")
-    entries, scope, geo_status = run(geo.fetch_human(net.client(), 0, -30))
+    entries, scope, geo_status, _places = run(geo.fetch_human(net.client(), 0, -30))
     assert entries == [] and scope["level"] == "none" and "Nothing recorded" in scope["note"]
     assert "open water" in scope["note"] and geo_status == "empty"
 
 
 def test_human_cap_when_the_geocoder_is_down():
     net = human_net(geocoder="fail")
-    entries, scope, geo_status = run(geo.fetch_human(net.client(), *MADISON))
+    entries, scope, geo_status, _places = run(geo.fetch_human(net.client(), *MADISON))
     assert entries == [] and scope["level"] == "none" and "could not be reached" in scope["note"]
     assert geo_status.startswith("failed")
 
 
 def test_human_cap_when_the_place_has_no_wikipedia_page():
     net = human_net(intro=False)
-    entries, scope, _ = run(geo.fetch_human(net.client(), *MADISON))
+    entries, scope, _, _places = run(geo.fetch_human(net.client(), *MADISON))
     assert entries == [] and scope["level"] == "none"
 
 

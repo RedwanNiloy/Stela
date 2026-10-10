@@ -437,6 +437,79 @@ def parse_human(pages, extracts):
     return out[:5]
 
 
+# ---------- Places to visit: museums and historic sites from the SAME Wikipedia geosearch (no extra request) ----------
+# The history keywords above are too broad for this (they kept "River Dour") and have no "museum". These rules look only at
+# the page title and the FIRST sentence, so a hall that merely houses a museum, or a prison "in the historic citadel",
+# is not kept. The first rule that matches also gives the entry's type.
+VISIT_RULES = [(label, re.compile(r"(?<!\w)(?:" + pattern + r")(?!\w)", re.I)) for label, pattern in [
+    ("Museum", r"museums?"),
+    ("Castle or fort", r"castles?|forts?|fortress(?:es)?|fortifications?"),
+    ("Palace", r"palaces?"),
+    ("Place of worship", r"temples?|mosques?|abbeys?|cathedrals?|monasteries|monastery"),
+    ("Archaeological site or ruins", r"ruins?|ruined|archaeological|archaeology|prehistoric|neolithic|bronze age|iron age|"
+                                     r"hillforts?|megalith\w*|burial mounds?|effigy mounds?"),
+    ("Historic site", r"war memorial|monuments?|heritage|grade (?:i|ii\*?|iii) listed|listed building|medieval|ancient|"
+                      r"(?:is|was) an? historic|historic (?:site|building|house|church|district|landmark)"),
+]]
+PLACES_MAX = 5
+COMPASS_NAMES = ("north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west")
+_ABBREVIATION = re.compile(r"(?:^|\s)(?:St|Mt|Dr|Mr|Mrs|Ms|Jr|Sr|vs|c|ca|No|Fr|Rd)\.$|(?:^|\s)[A-Z]\.$")
+
+
+def compass_name(lat1, lng1, lat2, lng2):
+    """Which of the 8 compass points is point 2 from point 1? North is +latitude and east is +longitude."""
+    p1, p2, dl = math.radians(lat1), math.radians(lat2), math.radians(lng2 - lng1)
+    y = math.sin(dl) * math.cos(p2)
+    x = math.cos(p1) * math.sin(p2) - math.sin(p1) * math.cos(p2) * math.cos(dl)
+    bearing = (math.degrees(math.atan2(y, x)) + 360) % 360
+    return COMPASS_NAMES[round(bearing / 45) % 8]
+
+
+def distance_label(meters, direction):
+    """'about 240 m south-east' / 'about 3 km north-east': a straight line, never a walking time."""
+    if meters < 1000:
+        shown = f"{round(meters)} m" if meters < 100 else f"{round(meters / 10) * 10} m"
+    else:
+        km = meters / 1000
+        shown = f"{round(km, 1):g} km" if km < 10 else f"{round(km)} km"
+    return f"about {shown} {direction}"
+
+
+def first_sentence(text, max_chars=180):
+    t = re.sub(r"\s+", " ", text or "").strip()
+    for m in re.finditer(r"[.!?](?=\s+[A-Z(\"'])", t):
+        if not _ABBREVIATION.search(t[:m.end()]):
+            t = t[:m.end()]
+            break
+    return t if len(t) <= max_chars else t[:max_chars - 1].rsplit(" ", 1)[0] + "\u2026"
+
+
+def visit_type(title, first):
+    """The type of a museum or historic site, or None if this page is not one."""
+    text = f"{title}. {first}"
+    return next((label for label, rx in VISIT_RULES if rx.search(text)), None)
+
+
+def parse_places(pages, extracts, lat, lng):
+    """Museums and historic sites among the geosearch pages: nearest first, at most PLACES_MAX."""
+    out = []
+    for p in pages:
+        summary = first_sentence((extracts.get(str(p["pageid"])) or {}).get("extract", ""))
+        kind = visit_type(p["title"], summary)
+        if len(summary) < 25:  # Wikipedia's extract is sometimes cut at an abbreviation ("The L.R."): no summary beats a fragment
+            summary = ""
+        if not kind or p.get("lat") is None or p.get("lon") is None:
+            continue
+        direction = compass_name(lat, lng, p["lat"], p["lon"])
+        out.append({"name": p["title"], "type": kind, "distance_m": round(p["dist"]),
+                    "label": distance_label(p["dist"], direction), "lat": p["lat"], "lng": p["lon"], "pageid": p["pageid"],
+                    "summary": summary, "source": "Wikipedia",
+                    "url": f"https://en.wikipedia.org/?curid={p['pageid']}",
+                    "map_url": f"https://www.openstreetmap.org/?mlat={p['lat']:.5f}&mlon={p['lon']:.5f}#map=17/{p['lat']:.5f}/{p['lon']:.5f}"})
+    out.sort(key=lambda e: e["distance_m"])
+    return out[:PLACES_MAX]
+
+
 def parse_intro(data):
     """Wikipedia extract response (titles=...) -> intro text, or None if the page does not exist."""
     for page in ((data or {}).get("query") or {}).get("pages", {}).values():
@@ -460,7 +533,8 @@ def human_scope(kind, place=None, dist_km=None, geo_note=None):
 
 
 async def fetch_human(client, lat, lng):
-    """Returns (entries, scope, geocoder_status). Raises if the Wikipedia search itself fails."""
+    """Returns (entries, scope, geocoder_status, places). Raises if the Wikipedia search itself fails.
+    `places` (museums and historic sites within 10 km) comes from the same pages, so it costs no extra request."""
     g = await get_json(client, WIKI, FAST_TIMEOUT, action="query", list="geosearch",
                        gscoord=f"{lat}|{lng}", gsradius=HUMAN_RADIUS_KM * 1000, gslimit=50, format="json")
     pages = ((g or {}).get("query") or {}).get("geosearch") or []
@@ -471,20 +545,21 @@ async def fetch_human(client, lat, lng):
                            explaintext=1, exsentences=2, exlimit=20, pageids=ids, format="json")
         extracts.update(((e or {}).get("query") or {}).get("pages") or {})
     entries = parse_human(pages, extracts)
+    places = parse_places(pages, extracts, lat, lng)
     if entries:
-        return entries, human_scope("exact_area"), None
+        return entries, human_scope("exact_area"), None, places
 
     # Nothing relevant nearby: fall back to the nearest named place and its Wikipedia introduction.
     place, geo_status = await safe(reverse_geocode(client, lat, lng))
     if geo_status != "ok":
-        return [], human_scope("none", geo_note="The nearest-place lookup could not be reached."), geo_status
+        return [], human_scope("none", geo_note="The nearest-place lookup could not be reached."), geo_status, places
     if not place:
-        return [], human_scope("none", geo_note="No named place was found nearby (this may be open water)."), "empty"
+        return [], human_scope("none", geo_note="No named place was found nearby (this may be open water)."), "empty", places
     intro, intro_status = await safe(fetch_intro(client, place["wiki_title"]))
     if not intro:
         note = ("The nearest-place Wikipedia page could not be reached." if intro_status != "ok"
                 else f"{place['name']} has no Wikipedia introduction to use.")
-        return [], human_scope("none", geo_note=note), "ok" if intro_status == "ok" else intro_status
+        return [], human_scope("none", geo_note=note), "ok" if intro_status == "ok" else intro_status, places
     dist = haversine_km(lat, lng, place["lat"], place["lng"])
     if place["is_place"]:
         scope, distance_m = human_scope("nearest_place", place, dist), round(dist * 1000)
@@ -492,7 +567,7 @@ async def fetch_human(client, lat, lng):
         scope, distance_m = human_scope("region", place), None
     # lat/lng/pageid stay None: this is an introduction to a whole city or region, not an individual site
     return [{"place": place["name"], "distance_m": distance_m, "summary": intro,
-             "lat": None, "lng": None, "pageid": None}], scope, "ok"
+             "lat": None, "lng": None, "pageid": None}], scope, "ok", places
 
 
 async def fetch_intro(client, title):
@@ -524,7 +599,7 @@ async def fast_facts(client, lat, lng):
         safe(fetch_human(client, lat, lng)),
     )
     rare, rare_scope_ = rare_res if rare_res else (None, None)
-    human, human_scope_, geo_status = human_res if human_res else (None, None, None)
+    human, human_scope_, geo_status, places = human_res if human_res else (None, None, None, None)
     facts = {
         "rock": unit,
         "ancient_setting": setting(unit) if unit else None,
@@ -533,6 +608,7 @@ async def fast_facts(client, lat, lng):
         "rare_animals_recorded_nearby": rare,
         "rare_animals_note": RARE_NOTE,
         "human_history_nearby": human,
+        "places_to_visit": places,  # None = the Wikipedia search failed; [] = nothing recorded within about 10 km
         # how far from the user each layer's facts really come from (None = that source failed)
         "scope": {"rock": rock_scope(unit) if s_rock == "ok" else None,
                   "rare": rare_scope_, "human": human_scope_},

@@ -211,6 +211,7 @@ input[type="range"]:disabled { cursor: default; }
 .sites p { margin: 4px 0 6px; }
 .site-links { display: flex; flex-wrap: wrap; gap: 8px 18px; }
 .site-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--turquoise); font-weight: 600; }
+.place-type { display: inline-block; margin-left: 8px; padding: 0 9px; border: 1.5px solid var(--stone-dark); border-radius: 999px; font-size: .78rem; color: var(--ink-soft); vertical-align: middle; }
 .site-marker { background: none; border: 0; }
 .site-marker svg { width: 34px; height: 44px; filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); }
 

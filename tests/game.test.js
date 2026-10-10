@@ -1,4 +1,4 @@
-// Tests for static/stela-game.js: Guess the past and Dig sites nearby. Run: node --test tests/game.test.js
+// Tests for static/stela-game.js: Guess the past. Run: node --test tests/game.test.js
 // Fixtures tests/samples/api_*.json are real /api/where + /api/fossils responses (Dover, Madison, Dhaka).
 const test = require("node:test");
 const assert = require("node:assert/strict");
@@ -219,108 +219,7 @@ test("dates in the real Dover introductions", () => {
   assert.equal(dates["Maison Dieu, Dover"], null);       // "medieval", no year: not used
 });
 
-// ---------------------------------------------------------------- distance and compass helpers
-test("compass direction: eight points from the user to the site", () => {
-  const o = [51.13, 1.31];
-  const dir = (dLat, dLng) => G.compassDirection(o[0], o[1], o[0] + dLat, o[1] + dLng).name;
-  assert.equal(dir(0.01, 0), "north");
-  assert.equal(dir(0, 0.01), "east");
-  assert.equal(dir(-0.01, 0), "south");
-  assert.equal(dir(0, -0.01), "west");
-  assert.equal(dir(0.01, 0.0159), "north-east");   // longitude degrees are shorter than latitude degrees at 51 N
-  assert.equal(dir(-0.01, 0.0159), "south-east");
-  assert.equal(dir(-0.01, -0.0159), "south-west");
-  assert.equal(dir(0.01, -0.0159), "north-west");
-  assert.equal(G.compassDirection(1, 2, NaN, 2), null);
-  const b = G.compassDirection(51.13, 1.31, 51.13, 1.40);
-  assert.equal(b.bearing, 90);
-});
-
-test("distance wording is honest: straight line, no walking time, far flagged", () => {
-  assert.equal(G.describeDistance(70).text, "about 70 m away, straight line");
-  assert.equal(G.describeDistance(235).text, "about 240 m away, straight line");
-  assert.equal(G.describeDistance(2900).text, "about 2.9 km away, straight line");
-  assert.equal(G.describeDistance(3000).text, "about 3 km away, straight line");
-  assert.equal(G.describeDistance(9990).far, false);
-  assert.equal(G.describeDistance(10000).far, false);
-  const far = G.describeDistance(12400);
-  assert.equal(far.far, true);
-  assert.match(far.text, /about 12 km away, straight line/);
-  assert.match(far.text, /far/);
-  for (const m of [70, 235, 2900, 9990, 12400]) assert.equal(/\d\s*(min|minute|hour)/i.test(G.describeDistance(m).text), false);
-  assert.equal(G.describeDistance(NaN).far, false);
-});
-
-test("one-line summary: first sentence, not cut at St. or initials, and shortened", () => {
-  assert.equal(G.firstSentence("St Edmund's Chapel is a church in Dover, England.  It was completed in 1262."), "St Edmund's Chapel is a church in Dover, England.");
-  assert.equal(G.firstSentence("The Priory of St. Mary the Virgin and St."), "The Priory of St. Mary the Virgin and St.");
-  assert.equal(G.firstSentence("The church of St. Mary is old. It is big."), "The church of St. Mary is old.");
-  assert.ok(G.firstSentence("word ".repeat(100), 60).length <= 60);
-  assert.equal(G.firstSentence(""), "");
-});
-
-// ---------------------------------------------------------------- dig sites nearby
-const USER = { lat: 51.13, lng: 1.31 };
-
-test("dig sites: up to 5, nearest first, with direction, honest distance, one-line summary and links", () => {
-  const r = G.digSites(FULL, USER);
-  assert.equal(r.mode, "sites");
-  assert.ok(r.sites.length >= 2 && r.sites.length <= 5);
-  const d = r.sites.map((s) => s.distance_m);
-  assert.deepEqual(d, [...d].sort((a, b) => a - b));
-  const chapel = r.sites.find((s) => s.name === "St Edmund's Chapel");
-  assert.match(chapel.distanceText, /^about \d+ m away, straight line$/);
-  assert.ok(["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"].includes(chapel.direction.name));
-  assert.equal(chapel.summary, "St Edmund's Chapel is a church in Dover, England, dedicated to St Edmund.");
-  assert.match(chapel.wikiUrl, /^https:\/\/en\.wikipedia\.org\/\?curid=\d+$/);
-  assert.match(chapel.mapUrl, /^https:\/\/www\.openstreetmap\.org\/\?mlat=51\.\d{5}&mlon=1\.\d{5}#map=17\/51\.\d{5}\/1\.\d{5}$/);
-  assert.equal(r.scope.level, "exact_area");
-});
-
-test("dig sites: no routing service, no walking time, no opening hours or prices anywhere in the helper output", () => {
-  const blob = JSON.stringify(G.digSites(FULL, USER));
-  assert.equal(/routing|directions|google|osrm|valhalla|graphhopper/i.test(blob), false);
-  assert.equal(/opening hours|ticket|admission|open to visitors|minutes? walk/i.test(blob), false);
-  assert.equal(G.DIG_NOTE, "Check access and opening times before you go.");
-});
-
-test("dig sites, wider scope (nearest city): no individual sites, and it says what the history is about", () => {
-  for (const place of [MADISON, DHAKA]) {
-    const r = G.digSites(place.where.facts, USER);
-    assert.equal(r.mode, "wider");
-    assert.deepEqual(r.sites, []);
-    assert.equal(r.scope.level, "nearest_place");
-    assert.equal(r.placeName, place === MADISON ? "Madison" : "Dhaka");
-  }
-});
-
-test("dig sites, region scope and the other cases", () => {
-  const region = { ...FULL, scope: { ...FULL.scope, human: { level: "region", place_name: "Northern Territory", note: "..." } },
-    human_history_nearby: [{ place: "Northern Territory", distance_m: null, summary: "x", lat: null, lng: null, pageid: null }] };
-  const r = G.digSites(region, USER);
-  assert.equal(r.mode, "wider"); assert.equal(r.placeName, "Northern Territory"); assert.deepEqual(r.sites, []);
-  assert.equal(G.digSites({ ...FULL, human_history_nearby: null }, USER).mode, "unavailable");                       // source failed
-  assert.equal(G.digSites({ ...FULL, human_history_nearby: [], scope: { human: { level: "none", note: "Nothing recorded" } } }, USER).mode, "none");
-  const noCoords = { ...FULL, human_history_nearby: FULL.human_history_nearby.map((e) => ({ ...e, lat: null, lng: null })) };
-  assert.equal(G.digSites(noCoords, USER).mode, "none");                                                             // never invent positions
-});
-
-test("dig sites: a far site is flagged and not presented as a walk; no user position means no direction", () => {
-  const far = { ...FULL, human_history_nearby: [{ place: "Far Fort", distance_m: 12400, summary: "A fort.", lat: 51.2, lng: 1.5, pageid: 5 }] };
-  const [site] = G.digSites(far, USER).sites;
-  assert.equal(site.far, true);
-  assert.match(site.distanceText, /far: plan transport rather than a walk/);
-  assert.equal(G.digSites(far, null).sites[0].direction, null);
-});
-
-test("dig sites: more than 5 results are cut to the 5 nearest", () => {
-  const many = { ...FULL, human_history_nearby: Array.from({ length: 8 }, (_, i) => ({ place: "P" + i, distance_m: 800 - i * 50, summary: "S.", lat: 51.1 + i / 1000, lng: 1.3, pageid: i + 1 })) };
-  const r = G.digSites(many, USER);
-  assert.equal(r.sites.length, 5);
-  assert.equal(r.sites[0].name, "P7");   // nearest
-});
-
-test("the pages never send anything about the game or sites to the server", () => {
+test("the game logic never sends anything to the server", () => {
   const src = fs.readFileSync(path.join(__dirname, "..", "static", "stela-game.js"), "utf8");
   assert.equal(/fetch\(|XMLHttpRequest|sendBeacon|localStorage/.test(src), false);
 });

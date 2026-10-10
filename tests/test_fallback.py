@@ -109,7 +109,7 @@ def api(monkeypatch):
         raise httpx.ReadTimeout("slow")  # one source fails
 
     async def fake_human(c, lat, lng):
-        return [], geo.human_scope("none", geo_note="No named place was found nearby."), "empty"
+        return [], geo.human_scope("none", geo_note="No named place was found nearby."), "empty", []
 
     async def fake_llm(c, prompt):
         raise RuntimeError("no llm")
