@@ -187,23 +187,6 @@ button { font: inherit; cursor: pointer; }
 .legend .k-rock { background: var(--stone); }
 .legend .k-human { background: var(--turquoise); border-color: var(--turquoise); }
 
-/* ---------- Guess the past ---------- */
-.game-count { margin: 0 0 4px; letter-spacing: .05em; text-transform: uppercase; }
-.options { display: grid; gap: 10px; margin: 12px 0 4px; }
-.opt { width: 100%; text-align: left; min-height: 58px; white-space: normal; }
-.opt:disabled { opacity: 1; cursor: default; }
-.opt-real { border-color: var(--turquoise); background: var(--turquoise-bg); font-weight: 600; }
-.age-box { margin: 10px 0 4px; }
-.age-out { margin: 0 0 6px; text-align: center; }
-input[type="range"] { width: 100%; height: 44px; accent-color: var(--turquoise); cursor: pointer; }
-input[type="range"]:disabled { cursor: default; }
-.btn:disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
-.reveal { margin-top: 14px; padding: 14px; border: 2px dashed var(--stone-dark); border-radius: 12px; background: var(--card); }
-.reveal .result { font-weight: 600; margin: 0 0 8px; }
-.reveal .records { margin: 0 0 8px; }
-.game .actions { justify-content: stretch; }
-.game .actions .btn { flex: 1; }
-
 /* ---------- Dig sites nearby ---------- */
 .sites { list-style: none; padding: 0 !important; margin: 0 0 8px; }
 .sites li { margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px dashed var(--stone-dark); }

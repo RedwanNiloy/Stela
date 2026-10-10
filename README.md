@@ -43,7 +43,6 @@ app/cache.py     TTL cache and per-IP rate limiter (in memory)
 static/index.html  one mobile-first page, vanilla JS, Leaflet map, no build step
 static/stela.css   the look: sandstone palette, stone-tablet cards, dig layers, animations (all optional)
 static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tested in Node)
-static/stela-game.js   Guess the past (pure logic, tested in Node)
 tests/           parsing and fallback tests on saved real API responses, plus tests of the browser logic
 ```
 
@@ -69,20 +68,6 @@ How it works (`app/people.py`, endpoints `/api/people` for the excerpts and `/ap
 5. **Narration.** The model may use only the supplied excerpts. The prompt requires attribution ("According to Wikipedia"), says which scope each fact belongs to, forbids adding peoples, kingdoms, rulers, dates or origins, forbids claiming an event happened at your exact spot unless the scope is "your area", and says to answer "no early history recorded for this area." when nothing was found (in that case the model is not called at all). A code check also discards a story that names a people, ruler or date that is not in the excerpts, writes "here" for a wider place, or leaves out the attribution, and shows the plain attributed excerpts instead.
 
 The card always says "Histories of this area may be contested or incomplete." No indigenous-territory dataset or any other new source was added.
-
-## Guess the past
-
-**Guess the past** is an optional game under the story. A pure function (`possibleQuestionTypes`) looks at the facts and says which questions are possible; one or two are picked at random:
-
-| Question | Needs | Answer comes from |
-|---|---|---|
-| What was this place *probably* like? (sea, swamp, desert, river) | a rock type that maps to a setting | the rock type |
-| Slide to guess the rock's age | the rock's age range | Macrostrat |
-| Which animal group appears in the fossil finds? | at least one fossil record (so it appears after the slow fossil source answers) | PBDB |
-| Which nearby place is the oldest? | 2+ human-history pages with a construction or founding date, and a clear oldest | Wikipedia introductions |
-| Which species appears in the rare-animal records? ("recorded", never "alive") | at least one rare-animal record | GBIF |
-
-Questions and answers are computed only from the facts, never from the language model. The wrong options for the fossil and species questions ("decoys") come from fixed lists, are removed if they are in the real data, and are never shown as facts; the reveal says that "not in the records" does not prove something never lived there. After a guess the page reveals the real answer with its supporting facts. If a layer used a wider scope (a regional rock map, the nearest city, a wider fossil search), the question and the reveal say so and show the scope label. If no question is possible the card says: "The scribe has no tablets for this spot. Try walking somewhere new or dropping a pin elsewhere." There is a Skip button, nothing is spoken, and animations respect `prefers-reduced-motion`.
 
 ## Places to visit
 
@@ -199,8 +184,6 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - **Wikipedia may rate-limit (HTTP 429)**, especially for anonymous or shared-IP clients. The card then says it could not be checked. Setting `STELA_CONTACT` helps.
 - **Small language models can slip.** Strict prompts reduce invented details but cannot guarantee zero. In testing, a 4B local model sometimes turned scientific names into common names, and once said rare animals "wander" the area. A code check now discards any story that calls the animals alive or living here and shows the plain facts instead. That is why the plain fact cards are always shown under the story.
 - PBDB can take 30 seconds or more for sparse regions.
-- **"Oldest nearby site" uses dates read from text.** Wikipedia introductions have no structured dates, so Stela only reads a date that follows a construction or founding cue ("completed in 1262", "dates to 1575-1520 BC", "founded in the 11th century"). Bare years ("listed in 1973") are ignored, and the question is dropped unless one place is clearly older than the others. The dates may be when a place was built, not when it was first used, and many pages simply have no date, so this question is often unavailable.
-- **The game's decoys are not proof of absence.** "Not in the records" only means not in the records Stela fetched (the most-recorded species, and the fossil groups of one search).
 - **Places to visit are not visit advice.** They are Wikipedia pages, so some are buildings or monuments you cannot enter or that no longer exist. The type comes from keywords in the first sentence, so it can be wrong or missing. Directions and distances are straight lines from the point you looked up, and Wikipedia's coordinates for a place can be approximate.
 - **A one-line summary is the first sentence of the introduction**, which Wikipedia sometimes cuts short (for example after "St.").
 - **The passport is per browser and per device.** Clearing site data, using a private window, or switching phones starts a new one. There is no sync, by design.
