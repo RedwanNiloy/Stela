@@ -69,6 +69,16 @@ How it works (`app/people.py`, endpoints `/api/people` for the excerpts and `/ap
 
 The card always says "Histories of this area may be contested or incomplete." No indigenous-territory dataset or any other new source was added.
 
+## Local animal names
+
+Under each rare-animal record the card shows the scientific name always, and a common name only when a source returned one.
+
+- **The call.** For each species (up to 8, in parallel, 4 s timeout, cached by GBIF species key for a day) Stela asks GBIF `GET api.gbif.org/v1/species/{speciesKey}/vernacularNames?limit=300`. Each result has `vernacularName`, `language` (ISO 639-3, for example `eng`, `ben`; sometimes empty), `source` (the dataset it came from), sometimes `preferred`, and no country. The species key and country come from the occurrence records the app already fetches.
+- **Which names.** In this order: the browser's language (sent as `lang`, only used for this), then the main language of the record's country (a short built-in table), then English. At most 2 names per species; within a language the IUCN Red List and Catalogue of Life come first. Names with no language code are never shown.
+- **Labelling.** For example "English name: Common Rabbit (GBIF · Catalogue of Life)" or "Bengali name: ... (GBIF · <dataset>)". Names are never translated, guessed or written by the model: the model sees only the supplied names, and a code check discards a story that introduces a name ("also known as...") that was not supplied.
+- **If a lookup fails or returns nothing,** the species keeps its scientific name only, and the rest of the card is unaffected.
+- **Fossils are not covered.** PBDB's `nm2` common-name field was checked: it is English only, empty for most taxa (for example Cephalopoda, *Schloenbachia*, *Gavelinella* have none) and loose where present (Bivalvia gives "clam"), so it is not used.
+
 ## Places to visit
 
 Museums and historic sites within about 10 km, nearest first, up to 5 entries (this replaces the earlier "Dig sites nearby" card). It reuses the Wikipedia geosearch the app already runs: no new request, no reverse geocoding, no widening to a city, district or division.
@@ -147,7 +157,7 @@ python tests/capture_samples.py   # optional: re-record the sample API responses
 
 ## Privacy
 
-Stela does not store or log your location or IP address. The passport is stored only in your own browser and is never sent to the server. In Walk mode your position is sent to the server like any other lookup, but only when you have moved about 300 m. Logs contain only the route, status, timing and error types. Coordinates are rounded to 3 decimals (about 110 m) for the in-memory cache, which is lost on restart. The rate limiter keeps IPs in memory only. Your coordinates are sent to Macrostrat, PBDB, GBIF and Wikipedia to fetch the facts, as part of the request URL. They are also sent to a geocoding service, [OpenStreetMap Nominatim](https://operations.osmfoundation.org/policies/nominatim/): always for "People and past civilizations" (to get your place hierarchy: neighbourhood, city, district, region, country), and when nothing is recorded within 10 km for the nearest named place (and, for fossils, your country). Wikipedia then receives only the place names that came back (for example "Dover" or "Kent"), not your coordinates, but those names are of course close to where you are. That is one extra third party, only in that case. Stela spaces those requests to at most one per second, and caches the result in memory by rounded coordinates.
+Stela does not store or log your location or IP address. Your browser's language tag (for example `bn-BD`) is sent with each lookup only to choose which animal names to show; it is not stored or logged. The passport is stored only in your own browser and is never sent to the server. In Walk mode your position is sent to the server like any other lookup, but only when you have moved about 300 m. Logs contain only the route, status, timing and error types. Coordinates are rounded to 3 decimals (about 110 m) for the in-memory cache, which is lost on restart. The rate limiter keeps IPs in memory only. Your coordinates are sent to Macrostrat, PBDB, GBIF and Wikipedia to fetch the facts, as part of the request URL. They are also sent to a geocoding service, [OpenStreetMap Nominatim](https://operations.osmfoundation.org/policies/nominatim/): always for "People and past civilizations" (to get your place hierarchy: neighbourhood, city, district, region, country), and when nothing is recorded within 10 km for the nearest named place (and, for fossils, your country). Wikipedia then receives only the place names that came back (for example "Dover" or "Kent"), not your coordinates, but those names are of course close to where you are. That is one extra third party, only in that case. Stela spaces those requests to at most one per second, and caches the result in memory by rounded coordinates.
 
 ## Data sources and licenses
 
@@ -191,6 +201,7 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - **"New rock unit" is best effort.** Names differ between map scales for the same ground, so a change of unit is only reported when both lookups used the same map scale; a change of era (time interval) is always reported. Geological maps are coarse, so boundaries you walk across may not match what is on the ground.
 - **Walk mode and the rate limit.** Each new story is four requests (where, fossils, people, people/story; about 20 stories a minute are allowed). If the server says slow down, Walk mode pauses for a minute.
 
+- **Local names are incomplete and sometimes wrong.** GBIF aggregates many datasets, some of which label names with the wrong language (a Spanish name tagged English, for example), and many species have no name in the language you read. In testing, none of Dhaka's eight rare species had a single Bengali, Hindi or Urdu name, so Dhaka shows English names or only scientific names. The card says "Local names come from GBIF and may be incomplete." The country's main language is a rough short list, and countries not on it are skipped.
 - **Dense cities hide sites.** The geosearch returns only the 50 nearest Wikipedia pages. In a dense modern district they can all be within about 2 km (in the Dhaka test they were), so older sites farther out, still inside 10 km, are never looked at. A place can therefore show few or no entries even when there are sites in the wider city.
 
 ## Planned next steps
