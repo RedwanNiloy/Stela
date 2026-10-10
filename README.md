@@ -36,24 +36,28 @@ If every step is empty, the layer says "nothing recorded".
 
 ```
 app/main.py      FastAPI: /api/where, /api/fossils, /health, serves the page; rate limit; privacy-safe logging
-app/geo.py       the four data layers (fetch_* talks to the API, parse_* is a pure function). No LLM code
+app/geo.py       the data layers (rock, fossils, rare animal records, nearby history) and the picture lookups (fetch_* talks to the API, parse_* is a pure function). No LLM code
 app/people.py    People and past civilizations: place hierarchy, Wikipedia history articles, excerpts, traditions
 app/narrate.py   grounding rules + LLM call + plain-text fallback
 app/cache.py     TTL cache and per-IP rate limiter (in memory)
 static/index.html  one mobile-first page, vanilla JS, Leaflet map, no build step
-static/stela.css   the look: sandstone palette, stone-tablet cards, dig layers, animations (all optional)
+static/stela.css   the look: palette tokens, light/dark, accordion sections, timeline, image boxes
 static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tested in Node)
-tests/           parsing and fallback tests on saved real API responses, plus tests of the browser logic
+static/stela-sound.js  optional synthesized UI sounds (one play(name) function, easy to remove)
+tests/           parsing, scope, names, picture and fallback tests on saved real API responses (tests/samples), plus Node tests of the browser logic and sounds
 ```
 
 ## The look
 
-An ancient-discovery feel in original CSS/SVG only: sandstone, papyrus and deep brown with a muted turquoise accent, carved-style headings (Cinzel from Google Fonts, falling back to a system serif), stone-tablet result cards that carve in as they arrive, a simple scribe figure whose speech panel holds the narration with **Listen** as the main control, an era strip (rock age against today, with human history marked), and **Dig down**, which opens layered bands: surface, human history, the rock with its age, and fossils. The styling is decoration and does not claim to depict any real culture.
+A compact, calm page in original CSS/SVG: a slim sticky header (name, sound and theme buttons), a collapsible map card, a row of summary chips, a short narration with **Read more** and **Listen**, and four accordion sections: **Ground**, **Fossils**, **Rare animal records** and **People and history**. Sandstone and deep brown with a muted turquoise accent; headings use Cinzel from Google Fonts with a system serif fallback.
 
-- **Dig down only draws what the data supports.** Fossils sit in the rock's layer only when the fossil search says they are of that rock's age; otherwise they go in a separate "found nearby, age not matched" layer. The layers are not to scale, and the page says so. Every scope label and honesty note stays visible.
-- **Motion is optional.** Animations are short (under about a second, plus a looping sand-drift while the slow fossil source runs). With `prefers-reduced-motion` nothing animates. Content is never hidden waiting for an animation or a font, so if either fails the page still works.
-- **Light and dark mode** both keep text contrast at 5:1 or better (most pairs are above 10:1) for reading outdoors. Buttons are at least 56 px tall.
-- **Light on the wire.** The only images are the small species photos, loaded lazily from Wikimedia; the page is HTML, one CSS file and one small JS file (about 19 KB gzipped from our server), plus Leaflet from a CDN. The server gzips responses.
+- **Ground** shows the rock, what the place probably was (with a small original scene drawing) and a "dig down through time" timeline from today, through human history, to when the rock formed. Fossils and people have their own sections.
+- **Sections load on their own.** Each has a skeleton while loading, a clear empty state, and a retry button if its source failed; one failing never affects the others. Every scope label and honesty note stays visible.
+- **Phone first.** A fixed bottom bar holds **Use my location** and **Listen**. Tap targets are at least 44 px. The page was checked for horizontal overflow at 360, 390, 768 and 1280 px, in light and dark.
+- **Light and dark mode** follow your system and can be switched in the header (remembered in your browser only).
+- **Motion is optional.** Animations are short; with `prefers-reduced-motion` they are off. Content is never hidden waiting for an animation or a font, and the page works without Leaflet or the web fonts.
+- **Light on the wire.** The only images are small pictures (species photos, history lead images, fossil illustrations) loaded lazily from Wikimedia and PhyloPic; the page itself is one HTML file, one CSS file and two small JS files, plus Leaflet from a CDN. The server gzips responses.
+- **Accessibility.** A Lighthouse run on a result page scored 100 for accessibility (mobile and desktop) at the time of the redesign. It has not been re-run since pictures and sounds were added.
 
 ## People and past civilizations
 
@@ -147,7 +151,7 @@ On a slow CPU a local reply can take longer than the 30 s limit, and Stela then 
 ```bash
 python -m pytest -q          # no network needed (also runs the browser-logic tests if Node.js is installed)
 node --test tests/logic.test.js tests/sound.test.js   # the browser-logic tests on their own: walk-mode distance rule, passport storage, sound rules
-python tests/capture_samples.py   # optional: re-record the sample API responses
+python tests/capture_samples.py   # optional: re-record the sample API responses (also capture_people.py, capture_phylopic.py; Wikipedia rate-limits bursts, so run them one place at a time)
 ```
 
 ## Environment variables
