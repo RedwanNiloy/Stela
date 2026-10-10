@@ -11,7 +11,7 @@
   },
   "status": 200,
   "json": {
-   "place_id": 371069228,
+   "place_id": 373152585,
    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
    "osm_type": "way",
    "osm_id": 174361680,
@@ -50,65 +50,16 @@
   "host": "en.wikipedia.org",
   "params": {
    "action": "query",
-   "titles": "History of United States|United States",
-   "prop": "extracts|pageprops",
-   "exintro": "1",
-   "explaintext": "1",
-   "exlimit": "max",
-   "redirects": "1",
-   "format": "json"
-  },
-  "status": 200,
-  "json": {
-   "batchcomplete": "",
-   "query": {
-    "redirects": [
-     {
-      "from": "History of United States",
-      "to": "History of the United States"
-     }
-    ],
-    "pages": {
-     "3434750": {
-      "pageid": 3434750,
-      "ns": 0,
-      "title": "United States",
-      "extract": "The United States of America (USA), also known as the United States (U.S.) or America, is a country primarily located in North America. It is a federal republic consisting of 50 states and a federal capital district, Washington, D.C. The 48 contiguous states border Canada to the north and Mexico to the south, with the semi-exclave of Alaska in the northwest and the archipelago of Hawaii in the Pacific Ocean. The United States also asserts sovereignty over five major island territories and various uninhabited islands in Oceania and the Caribbean. It is a megadiverse country, with the world's fourth-largest total area and third-largest population, exceeding 341 million.\nPaleo-Indians migrated from North Asia to North America at least 15,000 years ago and formed various civilizations. Beginning in 1607, British colonization established the Thirteen Colonies. The 18th-century American Enlightenment spread values of republicanism and liberalism there, and clashes with the British Crown over taxation without parliamentary representation, among other denied rights, sparked the American Revolution. Independence from Great Britain was formally declared in the Lee Resolution of July 2, 1776,",
-      "pageprops": {
-       "page_image_free": "Flag_of_the_United_States_(DDD-F-416E_specifications).svg",
-       "wikibase-shortdesc": "Country primarily in North America",
-       "wikibase_item": "Q30"
-      }
-     },
-     "63876": {
-      "pageid": 63876,
-      "ns": 0,
-      "title": "History of the United States",
-      "extract": "The history of the land which became the United States spans tens of thousands of years of continuous Indigenous societies; their descendants include but may not be limited to 575 federally recognized tribes. The history of the present-day United States began in 1607 with the establishment of Jamestown in modern-day Virginia by settlers who arrived from the Kingdom of England, and the landing of the Mayflower by English pilgrims to Plymouth in 1620. In the late 15th century, European colonization began and largely decimated Indigenous societies through genocides, wars, and epidemics. By the 1760s, the Thirteen Colonies, then part of British America and by extension the Kingdom of Great Britain, were established. The Southern Colonies built an agricultural system on slave labor and enslaving millions from Africa. After the British victory over the Kingdom of France in the French and Indian Wars, Parliament imposed a series of taxes and issued the Intolerable Acts on the colonies in 1773, which were designed to end self-governance. Tensions between the colonies and British authorities subsequently intensified, leading to the Revolutionary War, which commenced with the Battles of Lexi",
-      "pageprops": {
-       "page_image_free": "Greater_coat_of_arms_of_the_United_States.svg",
-       "wikibase-shortdesc": "",
-       "wikibase_item": "Q131110"
-      }
-     }
-    }
-   },
-   "limits": {
-    "extracts": 20
-   }
-  }
- },
- {
-  "host": "en.wikipedia.org",
-  "params": {
-   "action": "query",
    "titles": "History of State-Langdon|History of State-Langdon, Madison|State-Langdon, Madison|State-Langdon|History of Downtown|History of Downtown, Madison|Downtown, Madison|Downtown|History of Madison|History of Madison, Wisconsin|Madison, Wisconsin|Madison|History of Dane County|History of Dane County, Wisconsin|Dane County, Wisconsin|Dane County|History of Wisconsin|History of Wisconsin, United States|Wisconsin, United States|Wisconsin",
-   "prop": "extracts|pageprops",
+   "prop": "extracts|pageprops|pageimages",
    "exintro": "1",
    "explaintext": "1",
    "exlimit": "max",
    "redirects": "1",
-   "format": "json"
+   "format": "json",
+   "piprop": "thumbnail|name",
+   "pithumbsize": "240",
+   "pilimit": "max"
   },
   "status": 200,
   "json": {
@@ -194,7 +145,13 @@
        "page_image_free": "Wisconsin_State_Capitol_Building_6.jpg",
        "wikibase-shortdesc": "County in Wisconsin, United States",
        "wikibase_item": "Q502200"
-      }
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Wisconsin_State_Capitol_Building_6.jpg/250px-Wisconsin_State_Capitol_Building_6.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 180
+      },
+      "pageimage": "Wisconsin_State_Capitol_Building_6.jpg"
      },
      "251024": {
       "pageid": 251024,
@@ -239,7 +196,13 @@
        "page_image_free": "Aerial_View_of_Campus,_with_Helen_C._White_Hall_in_foreground_(14070186173).jpg",
        "wikibase-shortdesc": "Capital of Wisconsin, United States",
        "wikibase_item": "Q43788"
-      }
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Aerial_View_of_Campus%2C_with_Helen_C._White_Hall_in_foreground_%2814070186173%29.jpg/250px-Aerial_View_of_Campus%2C_with_Helen_C._White_Hall_in_foreground_%2814070186173%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 160
+      },
+      "pageimage": "Aerial_View_of_Campus,_with_Helen_C._White_Hall_in_foreground_(14070186173).jpg"
      },
      "33127": {
       "pageid": 33127,
@@ -250,382 +213,87 @@
        "page_image_free": "Flag_of_Wisconsin.svg",
        "wikibase-shortdesc": "U.S. state",
        "wikibase_item": "Q1537"
-      }
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/Flag_of_Wisconsin.svg/250px-Flag_of_Wisconsin.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 160
+      },
+      "pageimage": "Flag_of_Wisconsin.svg"
      }
     }
    },
    "limits": {
-    "extracts": 20
+    "extracts": 20,
+    "pageimages": 50
    }
   }
  },
  {
   "host": "en.wikipedia.org",
   "params": {
-   "action": "parse",
-   "page": "Dane County, Wisconsin",
-   "prop": "sections",
+   "action": "query",
+   "titles": "History of United States|United States",
+   "prop": "extracts|pageprops|pageimages",
+   "exintro": "1",
+   "explaintext": "1",
+   "exlimit": "max",
    "redirects": "1",
-   "format": "json"
+   "format": "json",
+   "piprop": "thumbnail|name",
+   "pithumbsize": "240",
+   "pilimit": "max"
   },
   "status": 200,
   "json": {
-   "warnings": {
-    "main": {
-     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
-    },
-    "parse": {
-     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
-    }
-   },
-   "parse": {
-    "title": "Dane County, Wisconsin",
-    "pageid": 90983,
-    "redirects": [],
-    "sections": [
+   "batchcomplete": "",
+   "query": {
+    "redirects": [
      {
-      "toclevel": 1,
-      "level": "2",
-      "line": "History",
-      "number": "1",
-      "index": "1",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 2868,
-      "anchor": "History",
-      "linkAnchor": "History"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Geography",
-      "number": "2",
-      "index": "2",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 4446,
-      "anchor": "Geography",
-      "linkAnchor": "Geography"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Major highways",
-      "number": "2.1",
-      "index": "3",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 4938,
-      "anchor": "Major_highways",
-      "linkAnchor": "Major_highways"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Railroads",
-      "number": "2.2",
-      "index": "4",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 6088,
-      "anchor": "Railroads",
-      "linkAnchor": "Railroads"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Buses",
-      "number": "2.3",
-      "index": "5",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 6178,
-      "anchor": "Buses",
-      "linkAnchor": "Buses"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Airports",
-      "number": "2.4",
-      "index": "6",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 6509,
-      "anchor": "Airports",
-      "linkAnchor": "Airports"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Adjacent counties",
-      "number": "2.5",
-      "index": "7",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 6761,
-      "anchor": "Adjacent_counties",
-      "linkAnchor": "Adjacent_counties"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Demographics",
-      "number": "3",
-      "index": "8",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 7161,
-      "anchor": "Demographics",
-      "linkAnchor": "Demographics"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Racial and ethnic composition",
-      "number": "3.1",
-      "index": "9",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 10730,
-      "anchor": "Racial_and_ethnic_composition",
-      "linkAnchor": "Racial_and_ethnic_composition"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "2020 census",
-      "number": "3.2",
-      "index": "10",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 15117,
-      "anchor": "2020_census",
-      "linkAnchor": "2020_census"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "2010 census",
-      "number": "3.3",
-      "index": "11",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 18249,
-      "anchor": "2010_census",
-      "linkAnchor": "2010_census"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "2000 census",
-      "number": "3.4",
-      "index": "12",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 19881,
-      "anchor": "2000_census",
-      "linkAnchor": "2000_census"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Religion",
-      "number": "3.5",
-      "index": "13",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 21390,
-      "anchor": "Religion",
-      "linkAnchor": "Religion"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Government",
-      "number": "4",
-      "index": "14",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 22371,
-      "anchor": "Government",
-      "linkAnchor": "Government"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Economy",
-      "number": "5",
-      "index": "15",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 22811,
-      "anchor": "Economy",
-      "linkAnchor": "Economy"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Politics",
-      "number": "6",
-      "index": "16",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 22946,
-      "anchor": "Politics",
-      "linkAnchor": "Politics"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "County executives",
-      "number": "6.1",
-      "index": "17",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 27894,
-      "anchor": "County_executives",
-      "linkAnchor": "County_executives"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Recreation",
-      "number": "7",
-      "index": "18",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 28279,
-      "anchor": "Recreation",
-      "linkAnchor": "Recreation"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "County parks",
-      "number": "7.1",
-      "index": "19",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 28295,
-      "anchor": "County_parks",
-      "linkAnchor": "County_parks"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Communities",
-      "number": "8",
-      "index": "20",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 29031,
-      "anchor": "Communities",
-      "linkAnchor": "Communities"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Cities",
-      "number": "8.1",
-      "index": "21",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 29199,
-      "anchor": "Cities",
-      "linkAnchor": "Cities"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Villages",
-      "number": "8.2",
-      "index": "22",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 29770,
-      "anchor": "Villages",
-      "linkAnchor": "Villages"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Towns",
-      "number": "8.3",
-      "index": "23",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 30897,
-      "anchor": "Towns",
-      "linkAnchor": "Towns"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Unincorporated communities",
-      "number": "8.4",
-      "index": "24",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 32522,
-      "anchor": "Unincorporated_communities",
-      "linkAnchor": "Unincorporated_communities"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Neighborhoods",
-      "number": "8.5",
-      "index": "25",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 34704,
-      "anchor": "Neighborhoods",
-      "linkAnchor": "Neighborhoods"
-     },
-     {
-      "toclevel": 2,
-      "level": "3",
-      "line": "Native American community",
-      "number": "8.6",
-      "index": "26",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 35443,
-      "anchor": "Native_American_community",
-      "linkAnchor": "Native_American_community"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Education",
-      "number": "9",
-      "index": "27",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 35539,
-      "anchor": "Education",
-      "linkAnchor": "Education"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "See also",
-      "number": "10",
-      "index": "28",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 37664,
-      "anchor": "See_also",
-      "linkAnchor": "See_also"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "References",
-      "number": "11",
-      "index": "29",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 37841,
-      "anchor": "References",
-      "linkAnchor": "References"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "Further reading",
-      "number": "12",
-      "index": "30",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 37874,
-      "anchor": "Further_reading",
-      "linkAnchor": "Further_reading"
-     },
-     {
-      "toclevel": 1,
-      "level": "2",
-      "line": "External links",
-      "number": "13",
-      "index": "31",
-      "fromtitle": "Dane_County,_Wisconsin",
-      "byteoffset": 39008,
-      "anchor": "External_links",
-      "linkAnchor": "External_links"
+      "from": "History of United States",
+      "to": "History of the United States"
      }
     ],
-    "showtoc": ""
+    "pages": {
+     "3434750": {
+      "pageid": 3434750,
+      "ns": 0,
+      "title": "United States",
+      "extract": "The United States of America (USA), also known as the United States (U.S.) or America, is a country primarily located in North America. It is a federal republic consisting of 50 states and a federal capital district, Washington, D.C. The 48 contiguous states border Canada to the north and Mexico to the south, with the semi-exclave of Alaska in the northwest and the archipelago of Hawaii in the Pacific Ocean. The United States also asserts sovereignty over five major island territories and various uninhabited islands in Oceania and the Caribbean. It is a megadiverse country, with the world's fourth-largest total area and third-largest population, exceeding 341 million.\nPaleo-Indians migrated from North Asia to North America at least 15,000 years ago and formed various civilizations. Beginning in 1607, British colonization established the Thirteen Colonies. The 18th-century American Enlightenment spread values of republicanism and liberalism there, and clashes with the British Crown over taxation without parliamentary representation, among other denied rights, sparked the American Revolution. Independence from Great Britain was formally declared in the Lee Resolution of July 2, 1776,",
+      "pageprops": {
+       "page_image_free": "Flag_of_the_United_States_(DDD-F-416E_specifications).svg",
+       "wikibase-shortdesc": "Country primarily in North America",
+       "wikibase_item": "Q30"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Flag_of_the_United_States_%28DDD-F-416E_specifications%29.svg/250px-Flag_of_the_United_States_%28DDD-F-416E_specifications%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 126
+      },
+      "pageimage": "Flag_of_the_United_States_(DDD-F-416E_specifications).svg"
+     },
+     "63876": {
+      "pageid": 63876,
+      "ns": 0,
+      "title": "History of the United States",
+      "extract": "The history of the land which became the United States spans tens of thousands of years of continuous Indigenous societies; their descendants include but may not be limited to 575 federally recognized tribes. The history of the present-day United States began in 1607 with the establishment of Jamestown in modern-day Virginia by settlers who arrived from the Kingdom of England, and the landing of the Mayflower by English pilgrims to Plymouth in 1620. In the late 15th century, European colonization began and largely decimated Indigenous societies through genocides, wars, and epidemics. By the 1760s, the Thirteen Colonies, then part of British America and by extension the Kingdom of Great Britain, were established. The Southern Colonies built an agricultural system on slave labor and enslaving millions from Africa. After the British victory over the Kingdom of France in the French and Indian Wars, Parliament imposed a series of taxes and issued the Intolerable Acts on the colonies in 1773, which were designed to end self-governance. Tensions between the colonies and British authorities subsequently intensified, leading to the Revolutionary War, which commenced with the Battles of Lexi",
+      "pageprops": {
+       "page_image_free": "Greater_coat_of_arms_of_the_United_States.svg",
+       "wikibase-shortdesc": "",
+       "wikibase_item": "Q131110"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Greater_coat_of_arms_of_the_United_States.svg/250px-Greater_coat_of_arms_of_the_United_States.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 253
+      },
+      "pageimage": "Greater_coat_of_arms_of_the_United_States.svg"
+     }
+    }
+   },
+   "limits": {
+    "extracts": 20,
+    "pageimages": 50
    }
   }
  },
@@ -1770,22 +1438,368 @@
   "params": {
    "action": "parse",
    "page": "Dane County, Wisconsin",
-   "section": "1",
-   "prop": "text",
-   "disabletoc": "1",
-   "disableeditsection": "1",
+   "prop": "sections",
    "redirects": "1",
    "format": "json"
   },
   "status": 200,
   "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
    "parse": {
     "title": "Dane County, Wisconsin",
     "pageid": 90983,
     "redirects": [],
-    "text": {
-     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"History\">History</h2></div>\n<p>Dane County was formed in 1836 as a territorial county and organized in 1839.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> It was named after <a href=\"/wiki/Nathan_Dane\" title=\"Nathan Dane\">Nathan Dane</a>, a Massachusetts delegate to the <a href=\"/wiki/Congress_of_the_Confederation\" title=\"Congress of the Confederation\">Congress of the Confederation</a> who helped carve Wisconsin out of the <a href=\"/wiki/Northwest_Territory\" title=\"Northwest Territory\">Northwest Territory</a>.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup>  Dane County was settled in the 1840s by settlers from <a href=\"/wiki/New_England\" title=\"New England\">New England</a>.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20170414132220/http://publications.newberry.org/ahcbp/documents/WI_Individual_County_Chronologies.htm\">\"Wisconsin: Individual County Chronologies\"</a>. <i>Wisconsin Atlas of Historical County Boundaries</i>. <a href=\"/wiki/Newberry_Library\" title=\"Newberry Library\">Newberry Library</a>. 2007. Archived from <a rel=\"nofollow\" class=\"external text\" href=\"http://publications.newberry.org/ahcbp/documents/WI_Individual_County_Chronologies.htm\">the original</a> on April 14, 2017<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">August 13,</span> 2015</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Wisconsin+Atlas+of+Historical+County+Boundaries&amp;rft.atitle=Wisconsin%3A+Individual+County+Chronologies&amp;rft.date=2007&amp;rft&#95;id=http%3A%2F%2Fpublications.newberry.org%2Fahcbp%2Fdocuments%2FWI&#95;Individual&#95;County&#95;Chronologies.htm&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ADane+County%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\">\"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.wisconsinhistory.org/Records/Newspaper/BA9479\">Early Wisconsin</a>\". <i>The Milwaukee Journal</i>, September 26, 1896.</span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFGannett1905\" class=\"citation book cs1\">Gannett, Henry (1905). <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/bub_gb_9V1IAAAAMAAJ\"><i>The Origin of Certain Place Names in the United States</i></a>. <a href=\"/wiki/United_States_Government_Publishing_Office\" title=\"United States Government Publishing Office\">Government Printing Office</a>. pp.&#160;<a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/bub_gb_9V1IAAAAMAAJ/page/n98\">99</a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=The+Origin+of+Certain+Place+Names+in+the+United+States&amp;rft.pages=99&amp;rft.pub=Government+Printing+Office&amp;rft.date=1905&amp;rft.aulast=Gannett&amp;rft.aufirst=Henry&amp;rft&#95;id=https%3A%2F%2Farchive.org%2Fdetails%2Fbub&#95;gb&#95;9V1IAAAAMAAJ&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ADane+County%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFStarkweather1898\" class=\"citation book cs1\">Starkweather, Charles Marcus, ed. (1898). <a rel=\"nofollow\" class=\"external text\" href=\"https://books.google.com/books?id=zGbUAAAAMAAJ&amp;q=Wisconsin+%22settled+by+immigrants+from+New+England%22&amp;pg=PT21\"><i>The Red Book of the Sun Prairie Methodist Episcopal Church</i></a>. C. M. Starkweather.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=The+Red+Book+of+the+Sun+Prairie+Methodist+Episcopal+Church&amp;rft.pub=C.+M.+Starkweather&amp;rft.date=1898&amp;rft&#95;id=https%3A%2F%2Fbooks.google.com%2Fbooks%3Fid%3DzGbUAAAAMAAJ%26q%3DWisconsin%2B%2522settled%2Bby%2Bimmigrants%2Bfrom%2BNew%2BEngland%2522%26pg%3DPT21&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ADane+County%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐frzsk\nCached time: 20261009230618\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.059 seconds\nReal time usage: 0.071 seconds\nPreprocessor visited node count: 96/1000000\nRevision size: 1576/2097152 bytes\nPost‐expand include size: 5168/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 1/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 7238/5000000 bytes\nLua time usage: 0.042/10.000 seconds\nLua memory usage: 2909827/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%   61.591      1 -total\n 89.32%   55.010      1 Template:Cite_web\n 10.45%    6.438      2 Template:Cite_book\n-->\n\n<!-- Render ID 08cb21bf-c436-11f1-9ad1-b5a70b31cd53 -->\n</div>"
-    }
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "History",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 2868,
+      "anchor": "History",
+      "linkAnchor": "History"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Geography",
+      "number": "2",
+      "index": "2",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 4446,
+      "anchor": "Geography",
+      "linkAnchor": "Geography"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Major highways",
+      "number": "2.1",
+      "index": "3",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 4938,
+      "anchor": "Major_highways",
+      "linkAnchor": "Major_highways"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Railroads",
+      "number": "2.2",
+      "index": "4",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 6088,
+      "anchor": "Railroads",
+      "linkAnchor": "Railroads"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Buses",
+      "number": "2.3",
+      "index": "5",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 6178,
+      "anchor": "Buses",
+      "linkAnchor": "Buses"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Airports",
+      "number": "2.4",
+      "index": "6",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 6509,
+      "anchor": "Airports",
+      "linkAnchor": "Airports"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Adjacent counties",
+      "number": "2.5",
+      "index": "7",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 6761,
+      "anchor": "Adjacent_counties",
+      "linkAnchor": "Adjacent_counties"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Demographics",
+      "number": "3",
+      "index": "8",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 7161,
+      "anchor": "Demographics",
+      "linkAnchor": "Demographics"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Racial and ethnic composition",
+      "number": "3.1",
+      "index": "9",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 10730,
+      "anchor": "Racial_and_ethnic_composition",
+      "linkAnchor": "Racial_and_ethnic_composition"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2020 census",
+      "number": "3.2",
+      "index": "10",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 15117,
+      "anchor": "2020_census",
+      "linkAnchor": "2020_census"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2010 census",
+      "number": "3.3",
+      "index": "11",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 18249,
+      "anchor": "2010_census",
+      "linkAnchor": "2010_census"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "2000 census",
+      "number": "3.4",
+      "index": "12",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 19881,
+      "anchor": "2000_census",
+      "linkAnchor": "2000_census"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Religion",
+      "number": "3.5",
+      "index": "13",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 21390,
+      "anchor": "Religion",
+      "linkAnchor": "Religion"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Government",
+      "number": "4",
+      "index": "14",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 22371,
+      "anchor": "Government",
+      "linkAnchor": "Government"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Economy",
+      "number": "5",
+      "index": "15",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 22811,
+      "anchor": "Economy",
+      "linkAnchor": "Economy"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Politics",
+      "number": "6",
+      "index": "16",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 22946,
+      "anchor": "Politics",
+      "linkAnchor": "Politics"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "County executives",
+      "number": "6.1",
+      "index": "17",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 27894,
+      "anchor": "County_executives",
+      "linkAnchor": "County_executives"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Recreation",
+      "number": "7",
+      "index": "18",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 28279,
+      "anchor": "Recreation",
+      "linkAnchor": "Recreation"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "County parks",
+      "number": "7.1",
+      "index": "19",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 28295,
+      "anchor": "County_parks",
+      "linkAnchor": "County_parks"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Communities",
+      "number": "8",
+      "index": "20",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 29031,
+      "anchor": "Communities",
+      "linkAnchor": "Communities"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Cities",
+      "number": "8.1",
+      "index": "21",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 29199,
+      "anchor": "Cities",
+      "linkAnchor": "Cities"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Villages",
+      "number": "8.2",
+      "index": "22",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 29770,
+      "anchor": "Villages",
+      "linkAnchor": "Villages"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Towns",
+      "number": "8.3",
+      "index": "23",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 30897,
+      "anchor": "Towns",
+      "linkAnchor": "Towns"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Unincorporated communities",
+      "number": "8.4",
+      "index": "24",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 32522,
+      "anchor": "Unincorporated_communities",
+      "linkAnchor": "Unincorporated_communities"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Neighborhoods",
+      "number": "8.5",
+      "index": "25",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 34704,
+      "anchor": "Neighborhoods",
+      "linkAnchor": "Neighborhoods"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Native American community",
+      "number": "8.6",
+      "index": "26",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 35443,
+      "anchor": "Native_American_community",
+      "linkAnchor": "Native_American_community"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Education",
+      "number": "9",
+      "index": "27",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 35539,
+      "anchor": "Education",
+      "linkAnchor": "Education"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "See also",
+      "number": "10",
+      "index": "28",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 37664,
+      "anchor": "See_also",
+      "linkAnchor": "See_also"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "11",
+      "index": "29",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 37841,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Further reading",
+      "number": "12",
+      "index": "30",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 37874,
+      "anchor": "Further_reading",
+      "linkAnchor": "Further_reading"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "External links",
+      "number": "13",
+      "index": "31",
+      "fromtitle": "Dane_County,_Wisconsin",
+      "byteoffset": 39008,
+      "anchor": "External_links",
+      "linkAnchor": "External_links"
+     }
+    ],
+    "showtoc": ""
    }
   }
  },
@@ -1808,7 +1822,55 @@
     "pageid": 57863,
     "redirects": [],
     "text": {
-     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading3\"><h3 id=\"Native_Americans\">Native Americans</h3></div>\n<p>Before Europeans, humans inhabited the area in and around Madison for about 12,000 years.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> The <a href=\"/wiki/Ho-Chunk\" title=\"Ho-Chunk\">Ho-Chunk</a> called the region <span title=\"Ho-Chunk-language text\"><span lang=\"win\">Teejop</span></span> (<style data-mw-deduplicate=\"TemplateStyles:r1177148991\">.mw-parser-output .IPA-label-small{font-size:85%}.mw-parser-output .references .IPA-label-small,.mw-parser-output .infobox .IPA-label-small,.mw-parser-output .navbox .IPA-label-small{font-size:100%}</style><span class=\"IPA-label IPA-label-small\">Ho-Chunk pronunciation:</span> <span class=\"IPA nowrap\" lang=\"win-Latn-fonipa\"><a href=\"/wiki/Help:IPA\" title=\"Help:IPA\">&#91;teːdʒop&#93;</a></span>) meaning 'land of the four lakes' (<a href=\"/wiki/Lake_Mendota\" title=\"Lake Mendota\">Mendota</a>, <a href=\"/wiki/Lake_Monona\" title=\"Lake Monona\">Monona</a>, <a href=\"/wiki/Lake_Waubesa\" title=\"Lake Waubesa\">Waubesa</a>, and <a href=\"/wiki/Lake_Kegonsa_State_Park\" title=\"Lake Kegonsa State Park\">Kegonsa</a>).<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> Numerous <a href=\"/wiki/Effigy_mounds\" class=\"mw-redirect\" title=\"Effigy mounds\">effigy mounds</a>, constructed for ceremonial and burial purposes more than 1,000 years earlier, dotted the rich prairies around the lakes.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> Dugout canoes found near many small lakes and rivers are prompting new anthropological research projects.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20181221134602/https://morgridge.wiscweb.wisc.edu/wp-content/uploads/sites/4/2017/02/History_of_Madison.pdf\">\"A History of Madison\"</a> <span class=\"cs1-format\">(PDF)</span>. <i>morgridge.wiscweb.wisc.edu</i>. Archived from <a rel=\"nofollow\" class=\"external text\" href=\"https://morgridge.wiscweb.wisc.edu/wp-content/uploads/sites/4/2017/02/History_of_Madison.pdf\">the original</a> <span class=\"cs1-format\">(PDF)</span> on December 21, 2018<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">December 20,</span> 2018</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=morgridge.wiscweb.wisc.edu&amp;rft.atitle=A+History+of+Madison&amp;rft&#95;id=https%3A%2F%2Fmorgridge.wiscweb.wisc.edu%2Fwp-content%2Fuploads%2Fsites%2F4%2F2017%2F02%2FHistory&#95;of&#95;Madison.pdf&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://tribalrelations.wisc.edu/dejope/\">\"Teejop (Dejope): significance and history\"</a>. <i>Tribal Relations</i><span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">December 4,</span> 2023</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Tribal+Relations&amp;rft.atitle=Teejop+%28Dejope%29%3A+significance+and+history&amp;rft&#95;id=https%3A%2F%2Ftribalrelations.wisc.edu%2Fdejope%2F&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.wisconsinhistory.org/Records/Article/CS2904\">\"Life in Early Madison\"</a>. <i>Wisconsin Historical Society</i>. June 27, 2012. <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20181221041537/https://www.wisconsinhistory.org/Records/Article/CS2904\">Archived</a> from the original on December 21, 2018<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">December 20,</span> 2018</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Wisconsin+Historical+Society&amp;rft.atitle=Life+in+Early+Madison&amp;rft.date=2012-06-27&amp;rft&#95;id=https%3A%2F%2Fwww.wisconsinhistory.org%2FRecords%2FArticle%2FCS2904&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFGinsberg2015\" class=\"citation web cs1\">Ginsberg, Maggie (November 19, 2015). <a rel=\"nofollow\" class=\"external text\" href=\"https://www.channel3000.com/madison-magazine/home-and-lifestyle/the-story-of-madison-s-indigenous-people/article_b0e24a81-4ddd-502e-9034-1fa1d9a0b68c.html\">\"The story of Madison's indigenous people\"</a>. <i>Channel3000.com</i>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Channel3000.com&amp;rft.atitle=The+story+of+Madison%27s+indigenous+people&amp;rft.date=2015-11-19&amp;rft.aulast=Ginsberg&amp;rft.aufirst=Maggie&amp;rft&#95;id=https%3A%2F%2Fwww.channel3000.com%2Fmadison-magazine%2Fhome-and-lifestyle%2Fthe-story-of-madison-s-indigenous-people%2Farticle&#95;b0e24a81-4ddd-502e-9034-1fa1d9a0b68c.html&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-5\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-5\">^</a></b></span> <span class=\"reference-text\">Kehoe, Jacqueline, \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.smithsonianmag.com/history/archaeologists-using-sunken-dugout-canoes-learn-indigenous-history-america-180985638/\">Archaeologists Are Finding Dugout Canoes in the American Midwest as Old as the Great Pyramids of Egypt</a>\". <i>Smithsonian</i>, January–February 2025.</span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐t2rv9\nCached time: 20261009230618\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.116 seconds\nReal time usage: 0.184 seconds\nPreprocessor visited node count: 133/1000000\nRevision size: 2141/2097152 bytes\nPost‐expand include size: 7246/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 1/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 9903/5000000 bytes\nLua time usage: 0.096/10.000 seconds\nLua memory usage: 18634274/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%  174.509      1 -total\n 49.05%   85.597      1 Template:Langr\n 37.19%   64.897      4 Template:Cite_web\n 12.37%   21.594      1 Template:IPA\n-->\n\n<!-- Render ID 08cb1bd9-c436-11f1-839f-97d662699809 -->\n</div>"
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading3\"><h3 id=\"Native_Americans\">Native Americans</h3></div>\n<p>Before Europeans, humans inhabited the area in and around Madison for about 12,000 years.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> The <a href=\"/wiki/Ho-Chunk\" title=\"Ho-Chunk\">Ho-Chunk</a> called the region <span title=\"Ho-Chunk-language text\"><span lang=\"win\">Teejop</span></span> (<style data-mw-deduplicate=\"TemplateStyles:r1177148991\">.mw-parser-output .IPA-label-small{font-size:85%}.mw-parser-output .references .IPA-label-small,.mw-parser-output .infobox .IPA-label-small,.mw-parser-output .navbox .IPA-label-small{font-size:100%}</style><span class=\"IPA-label IPA-label-small\">Ho-Chunk pronunciation:</span> <span class=\"IPA nowrap\" lang=\"win-Latn-fonipa\"><a href=\"/wiki/Help:IPA\" title=\"Help:IPA\">&#91;teːdʒop&#93;</a></span>) meaning 'land of the four lakes' (<a href=\"/wiki/Lake_Mendota\" title=\"Lake Mendota\">Mendota</a>, <a href=\"/wiki/Lake_Monona\" title=\"Lake Monona\">Monona</a>, <a href=\"/wiki/Lake_Waubesa\" title=\"Lake Waubesa\">Waubesa</a>, and <a href=\"/wiki/Lake_Kegonsa_State_Park\" title=\"Lake Kegonsa State Park\">Kegonsa</a>).<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> Numerous <a href=\"/wiki/Effigy_mounds\" class=\"mw-redirect\" title=\"Effigy mounds\">effigy mounds</a>, constructed for ceremonial and burial purposes more than 1,000 years earlier, dotted the rich prairies around the lakes.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> Dugout canoes found near many small lakes and rivers are prompting new anthropological research projects.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20181221134602/https://morgridge.wiscweb.wisc.edu/wp-content/uploads/sites/4/2017/02/History_of_Madison.pdf\">\"A History of Madison\"</a> <span class=\"cs1-format\">(PDF)</span>. <i>morgridge.wiscweb.wisc.edu</i>. Archived from <a rel=\"nofollow\" class=\"external text\" href=\"https://morgridge.wiscweb.wisc.edu/wp-content/uploads/sites/4/2017/02/History_of_Madison.pdf\">the original</a> <span class=\"cs1-format\">(PDF)</span> on December 21, 2018<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">December 20,</span> 2018</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=morgridge.wiscweb.wisc.edu&amp;rft.atitle=A+History+of+Madison&amp;rft&#95;id=https%3A%2F%2Fmorgridge.wiscweb.wisc.edu%2Fwp-content%2Fuploads%2Fsites%2F4%2F2017%2F02%2FHistory&#95;of&#95;Madison.pdf&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://tribalrelations.wisc.edu/dejope/\">\"Teejop (Dejope): significance and history\"</a>. <i>Tribal Relations</i><span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">December 4,</span> 2023</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Tribal+Relations&amp;rft.atitle=Teejop+%28Dejope%29%3A+significance+and+history&amp;rft&#95;id=https%3A%2F%2Ftribalrelations.wisc.edu%2Fdejope%2F&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.wisconsinhistory.org/Records/Article/CS2904\">\"Life in Early Madison\"</a>. <i>Wisconsin Historical Society</i>. June 27, 2012. <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20181221041537/https://www.wisconsinhistory.org/Records/Article/CS2904\">Archived</a> from the original on December 21, 2018<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">December 20,</span> 2018</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Wisconsin+Historical+Society&amp;rft.atitle=Life+in+Early+Madison&amp;rft.date=2012-06-27&amp;rft&#95;id=https%3A%2F%2Fwww.wisconsinhistory.org%2FRecords%2FArticle%2FCS2904&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFGinsberg2015\" class=\"citation web cs1\">Ginsberg, Maggie (November 19, 2015). <a rel=\"nofollow\" class=\"external text\" href=\"https://www.channel3000.com/madison-magazine/home-and-lifestyle/the-story-of-madison-s-indigenous-people/article_b0e24a81-4ddd-502e-9034-1fa1d9a0b68c.html\">\"The story of Madison's indigenous people\"</a>. <i>Channel3000.com</i>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Channel3000.com&amp;rft.atitle=The+story+of+Madison%27s+indigenous+people&amp;rft.date=2015-11-19&amp;rft.aulast=Ginsberg&amp;rft.aufirst=Maggie&amp;rft&#95;id=https%3A%2F%2Fwww.channel3000.com%2Fmadison-magazine%2Fhome-and-lifestyle%2Fthe-story-of-madison-s-indigenous-people%2Farticle&#95;b0e24a81-4ddd-502e-9034-1fa1d9a0b68c.html&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AMadison%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-5\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-5\">^</a></b></span> <span class=\"reference-text\">Kehoe, Jacqueline, \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.smithsonianmag.com/history/archaeologists-using-sunken-dugout-canoes-learn-indigenous-history-america-180985638/\">Archaeologists Are Finding Dugout Canoes in the American Midwest as Old as the Great Pyramids of Egypt</a>\". <i>Smithsonian</i>, January–February 2025.</span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐wb54l\nCached time: 20261010140805\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.121 seconds\nReal time usage: 0.155 seconds\nPreprocessor visited node count: 133/1000000\nRevision size: 2141/2097152 bytes\nPost‐expand include size: 7246/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 1/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 9903/5000000 bytes\nLua time usage: 0.098/10.000 seconds\nLua memory usage: 18634274/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%  144.964      1 -total\n 45.63%   66.150      1 Template:Langr\n 38.18%   55.353      4 Template:Cite_web\n 14.46%   20.963      1 Template:IPA\n-->\n\n<!-- Render ID 03141ae2-c4b4-11f1-a3f7-37feb214aa22 -->\n</div>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "Dane County, Wisconsin",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "Dane County, Wisconsin",
+    "pageid": 90983,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"History\">History</h2></div>\n<p>Dane County was formed in 1836 as a territorial county and organized in 1839.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> It was named after <a href=\"/wiki/Nathan_Dane\" title=\"Nathan Dane\">Nathan Dane</a>, a Massachusetts delegate to the <a href=\"/wiki/Congress_of_the_Confederation\" title=\"Congress of the Confederation\">Congress of the Confederation</a> who helped carve Wisconsin out of the <a href=\"/wiki/Northwest_Territory\" title=\"Northwest Territory\">Northwest Territory</a>.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup>  Dane County was settled in the 1840s by settlers from <a href=\"/wiki/New_England\" title=\"New England\">New England</a>.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20170414132220/http://publications.newberry.org/ahcbp/documents/WI_Individual_County_Chronologies.htm\">\"Wisconsin: Individual County Chronologies\"</a>. <i>Wisconsin Atlas of Historical County Boundaries</i>. <a href=\"/wiki/Newberry_Library\" title=\"Newberry Library\">Newberry Library</a>. 2007. Archived from <a rel=\"nofollow\" class=\"external text\" href=\"http://publications.newberry.org/ahcbp/documents/WI_Individual_County_Chronologies.htm\">the original</a> on April 14, 2017<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">August 13,</span> 2015</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=Wisconsin+Atlas+of+Historical+County+Boundaries&amp;rft.atitle=Wisconsin%3A+Individual+County+Chronologies&amp;rft.date=2007&amp;rft&#95;id=http%3A%2F%2Fpublications.newberry.org%2Fahcbp%2Fdocuments%2FWI&#95;Individual&#95;County&#95;Chronologies.htm&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ADane+County%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\">\"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.wisconsinhistory.org/Records/Newspaper/BA9479\">Early Wisconsin</a>\". <i>The Milwaukee Journal</i>, September 26, 1896.</span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFGannett1905\" class=\"citation book cs1\">Gannett, Henry (1905). <a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/bub_gb_9V1IAAAAMAAJ\"><i>The Origin of Certain Place Names in the United States</i></a>. <a href=\"/wiki/United_States_Government_Publishing_Office\" title=\"United States Government Publishing Office\">Government Printing Office</a>. pp.&#160;<a rel=\"nofollow\" class=\"external text\" href=\"https://archive.org/details/bub_gb_9V1IAAAAMAAJ/page/n98\">99</a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=The+Origin+of+Certain+Place+Names+in+the+United+States&amp;rft.pages=99&amp;rft.pub=Government+Printing+Office&amp;rft.date=1905&amp;rft.aulast=Gannett&amp;rft.aufirst=Henry&amp;rft&#95;id=https%3A%2F%2Farchive.org%2Fdetails%2Fbub&#95;gb&#95;9V1IAAAAMAAJ&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ADane+County%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite id=\"CITEREFStarkweather1898\" class=\"citation book cs1\">Starkweather, Charles Marcus, ed. (1898). <a rel=\"nofollow\" class=\"external text\" href=\"https://books.google.com/books?id=zGbUAAAAMAAJ&amp;q=Wisconsin+%22settled+by+immigrants+from+New+England%22&amp;pg=PT21\"><i>The Red Book of the Sun Prairie Methodist Episcopal Church</i></a>. C. M. Starkweather.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=The+Red+Book+of+the+Sun+Prairie+Methodist+Episcopal+Church&amp;rft.pub=C.+M.+Starkweather&amp;rft.date=1898&amp;rft&#95;id=https%3A%2F%2Fbooks.google.com%2Fbooks%3Fid%3DzGbUAAAAMAAJ%26q%3DWisconsin%2B%2522settled%2Bby%2Bimmigrants%2Bfrom%2BNew%2BEngland%2522%26pg%3DPT21&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ADane+County%2C+Wisconsin\" class=\"Z3988\"></span></span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐95zz4\nCached time: 20261010140806\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.078 seconds\nReal time usage: 0.089 seconds\nPreprocessor visited node count: 96/1000000\nRevision size: 1576/2097152 bytes\nPost‐expand include size: 5168/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 1/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 7238/5000000 bytes\nLua time usage: 0.056/10.000 seconds\nLua memory usage: 2909827/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%   75.355      1 -total\n 87.45%   65.898      1 Template:Cite_web\n 12.24%    9.222      2 Template:Cite_book\n-->\n\n<!-- Render ID 03acba6a-c4b4-11f1-858d-67f63e507e29 -->\n</div>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Wisconsin",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "History of Wisconsin",
+    "pageid": 1658936,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"Pre-Columbian_history\">Pre-Columbian history</h2></div>\n<figure typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:SimplifiedPealeMastodon.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/7/74/SimplifiedPealeMastodon.jpg/330px-SimplifiedPealeMastodon.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"300\" height=\"220\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/7/74/SimplifiedPealeMastodon.jpg/960px-SimplifiedPealeMastodon.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1366\" data-file-height=\"1002\" /></a><figcaption>Drawing of a mastodon skeleton by <a href=\"/wiki/Rembrandt_Peale\" title=\"Rembrandt Peale\">Rembrandt Peale</a></figcaption></figure>\n<p>The first known inhabitants of what is now Wisconsin were <a href=\"/wiki/Paleo-Indians\" title=\"Paleo-Indians\">Paleo-Indians</a>, who first arrived in the region in about 10,000 BC at the end of the <a href=\"/wiki/Last_glacial_period\" class=\"mw-redirect\" title=\"Last glacial period\">Ice Age</a>. The retreating glaciers left behind a tundra in Wisconsin inhabited by large animals, such as <a href=\"/wiki/Mammoth\" title=\"Mammoth\">mammoths</a>, <a href=\"/wiki/Mastodon\" title=\"Mastodon\">mastodons</a>, <a href=\"/wiki/Bison\" title=\"Bison\">bison</a>, <a href=\"/wiki/Castoroides\" title=\"Castoroides\">giant beaver</a>, and <a href=\"/wiki/Muskox\" title=\"Muskox\">muskox</a>. The <a href=\"/wiki/Boaz_mastodon\" class=\"mw-redirect\" title=\"Boaz mastodon\">Boaz mastodon</a> and the <a href=\"/wiki/Clovis_culture\" title=\"Clovis culture\">Clovis</a> artifacts discovered in <a href=\"/wiki/Boaz,_Wisconsin\" title=\"Boaz, Wisconsin\">Boaz, Wisconsin</a> show that the Paleo-Indians hunted these large animals. They also gathered plants as conifer forests grew in the glaciers' wake. With the decline and extinction of many large mammals in the Americas, the Paleo-Indian diet shifted toward smaller mammals like deer and bison.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<style data-mw-deduplicate=\"TemplateStyles:r1374427404\">.mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,.mw-parser-output .hlist li{margin:0;display:inline}.mw-parser-output .hlist.inline,.mw-parser-output .hlist.inline dl,.mw-parser-output .hlist.inline ol,.mw-parser-output .hlist.inline ul,.mw-parser-output .hlist dl dl,.mw-parser-output .hlist dl ol,.mw-parser-output .hlist dl ul,.mw-parser-output .hlist ol dl,.mw-parser-output .hlist ol ol,.mw-parser-output .hlist ol ul,.mw-parser-output .hlist ul dl,.mw-parser-output .hlist ul ol,.mw-parser-output .hlist ul ul{display:inline}.mw-parser-output .hlist .mw-empty-li{display:none}.mw-parser-output .hlist dt::after{content:\": \"}.mw-parser-output .hlist dd::after,.mw-parser-output .hlist li::after{content:\"\\a0 · \";font-weight:bold}.mw-parser-output .hlist dd:last-child::after,.mw-parser-output .hlist dt:last-child::after,.mw-parser-output .hlist li:last-child::after{content:none}.mw-parser-output .hlist dd dd:first-child::before,.mw-parser-output .hlist dd dt:first-child::before,.mw-parser-output .hlist dd li:first-child::before,.mw-parser-output .hlist dt dd:first-child::before,.mw-parser-output .hlist dt dt:first-child::before,.mw-parser-output .hlist dt li:first-child::before,.mw-parser-output .hlist li dd:first-child::before,.mw-parser-output .hlist li dt:first-child::before,.mw-parser-output .hlist li li:first-child::before{content:\" (\";font-weight:normal}.mw-parser-output .hlist dd dd:last-child::after,.mw-parser-output .hlist dd dt:last-child::after,.mw-parser-output .hlist dd li:last-child::after,.mw-parser-output .hlist dt dd:last-child::after,.mw-parser-output .hlist dt dt:last-child::after,.mw-parser-output .hlist dt li:last-child::after,.mw-parser-output .hlist li dd:last-child::after,.mw-parser-output .hlist li dt:last-child::after,.mw-parser-output .hlist li li:last-child::after{content:\")\";font-weight:normal}.mw-parser-output .hlist ol{counter-reset:listitem}.mw-parser-output .hlist ol>li{counter-increment:listitem}.mw-parser-output .hlist ol>li::before{content:\" \"counter(listitem)\"\\a0 \"}.mw-parser-output .hlist dd ol>li:first-child::before,.mw-parser-output .hlist dt ol>li:first-child::before,.mw-parser-output .hlist li ol>li:first-child::before{content:\" (\"counter(listitem)\"\\a0 \"}</style><style data-mw-deduplicate=\"TemplateStyles:r1378777972\">.mw-parser-output .sidebar{width:22em;float:right;clear:right;margin:0.5em 0 1em 1em;background:var(--background-color-neutral-subtle,#f8f9fa);border:1px solid var(--border-color-base,#a2a9b1);padding:0.2em;text-align:center;line-height:1.4em;font-size:88%;border-collapse:collapse;display:table}body.skin-minerva .mw-parser-output .sidebar{display:table!important;float:right!important;margin:0.5em 0 1em 1em!important}.mw-parser-output .sidebar-subgroup{width:100%;margin:0;border-spacing:0}.mw-parser-output .sidebar-left{float:left;clear:left;margin:0.5em 1em 1em 0}.mw-parser-output .sidebar-none{float:none;clear:both;margin:0.5em 1em 1em 0}.mw-parser-output .sidebar-outer-title{padding:0 0.4em 0.2em;font-size:125%;line-height:1.2em;font-weight:bold}.mw-parser-output .sidebar-top-image{padding:0.4em}.mw-parser-output .sidebar-top-caption,.mw-parser-output .sidebar-pretitle-with-top-image,.mw-parser-output .sidebar-caption{padding:0.2em 0.4em 0;line-height:1.2em}.mw-parser-output .sidebar-pretitle{padding:0.4em 0.4em 0;line-height:1.2em}.mw-parser-output .sidebar-title,.mw-parser-output .sidebar-title-with-pretitle{padding:0.2em 0.8em;font-size:145%;line-height:1.2em}.mw-parser-output .sidebar-title-with-pretitle{padding:0.1em 0.4em}.mw-parser-output .sidebar-image{padding:0.2em 0.4em 0.4em}.mw-parser-output .sidebar-heading{padding:0.1em 0.4em}.mw-parser-output .sidebar-content{padding:0 0.5em 0.4em}.mw-parser-output .sidebar-content-with-subgroup{padding:0.1em 0.4em 0.2em}.mw-parser-output .sidebar-above,.mw-parser-output .sidebar-below{padding:0.3em 0.8em;font-weight:bold}.mw-parser-output .sidebar-collapse .sidebar-above,.mw-parser-output .sidebar-collapse .sidebar-below{border-top:1px solid var(--border-color-base,#a2a9b1);border-bottom:1px solid var(--border-color-base,#a2a9b1)}.mw-parser-output .sidebar-navbar{text-align:right;font-size:115%;padding:0 0.4em 0.4em}.mw-parser-output .sidebar-list-title{padding:0 0.4em;text-align:left;font-weight:bold;line-height:1.6em;font-size:105%}.mw-parser-output .sidebar-list-title-c{padding:0 0.4em;text-align:center;margin:0 3.3em}@media(max-width:640px){body.mediawiki .mw-parser-output .sidebar{width:100%!important;clear:both;float:none!important;margin-left:0!important;margin-right:0!important}}body.skin--responsive .mw-parser-output .sidebar a>img{max-width:none!important}@media screen{html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-list-title,html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle{background:transparent!important}html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle a{color:var(--color-progressive)!important}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-list-title,html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle{background:transparent!important}html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle a{color:var(--color-progressive)!important}}@media print{body.ns-0 .mw-parser-output .sidebar{display:none!important}}</style><style data-mw-deduplicate=\"TemplateStyles:r1239334494\">@media screen{html.skin-theme-clientpref-night .mw-parser-output div:not(.notheme)>.tmp-color,html.skin-theme-clientpref-night .mw-parser-output p>.tmp-color,html.skin-theme-clientpref-night .mw-parser-output table:not(.notheme) .tmp-color{color:inherit!important}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output div:not(.notheme)>.tmp-color,html.skin-theme-clientpref-os .mw-parser-output p>.tmp-color,html.skin-theme-clientpref-os .mw-parser-output table:not(.notheme) .tmp-color{color:inherit!important}}</style><table class=\"sidebar nomobile nowraplinks hlist\" role=\"navigation\" style=\"width: 16em;\"><tbody><tr><td class=\"sidebar-top-image\"><span typeof=\"mw:File\"><a href=\"/wiki/File:Mound_Builder_City.jpeg\" class=\"mw-file-description\"><img alt=\"Mound builder city\" src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mound_Builder_City.jpeg/250px-Mound_Builder_City.jpeg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"200\" height=\"61\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mound_Builder_City.jpeg/500px-Mound_Builder_City.jpeg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"748\" data-file-height=\"229\" /></a></span></td></tr><tr><th class=\"sidebar-title\" style=\"background: #51D599;\"><a href=\"/wiki/Mound_Builders\" title=\"Mound Builders\"><span class=\"tmp-color\" style=\"color:#FFFFFF\">Mound Builders</span></a></th></tr><tr><th class=\"sidebar-heading\">\nPolities</th></tr><tr><td class=\"sidebar-content\">\n<ul><li><a href=\"/wiki/Apalachee_Province\" title=\"Apalachee Province\">Apalachee</a></li>\n<li><a href=\"/wiki/Apalachicola_Province\" title=\"Apalachicola Province\">Apalachicola</a></li>\n<li><a href=\"/wiki/Cahokia_polity\" title=\"Cahokia polity\">Cahokia</a></li>\n<li><a href=\"/wiki/Casqui\" title=\"Casqui\">Casqui</a></li>\n<li><a href=\"/wiki/Cofitachequi\" title=\"Cofitachequi\">Cofitachequi</a></li>\n<li><a href=\"/wiki/Coosa_chiefdom\" title=\"Coosa chiefdom\">Coosa</a></li>\n<li><a href=\"/wiki/Guale\" title=\"Guale\">Guale</a></li>\n<li><a href=\"/wiki/Jaega\" title=\"Jaega\">Jaega</a></li>\n<li><a href=\"/wiki/Mocoso\" title=\"Mocoso\">Mocoso</a></li>\n<li><a href=\"/wiki/Ocute\" title=\"Ocute\">Ocute</a></li>\n<li><a href=\"/wiki/Pacaha\" title=\"Pacaha\">Pacaha</a></li>\n<li><a href=\"/wiki/Moundville_phase\" class=\"mw-redirect\" title=\"Moundville phase\">Pafalaya</a></li>\n<li><a href=\"/wiki/Pohoy\" title=\"Pohoy\">Pohoy</a></li>\n<li><a href=\"/wiki/Quivira\" title=\"Quivira\">Quivira</a></li>\n<li><a href=\"/wiki/Saturiwa\" title=\"Saturiwa\">Saturiwa</a></li>\n<li><a href=\"/wiki/Angel_phase\" class=\"mw-redirect\" title=\"Angel phase\">Taarsite?</a></li>\n<li><a href=\"/wiki/Tacatacuru\" title=\"Tacatacuru\">Tacatacuru</a></li>\n<li><a href=\"/wiki/Tocobaga\" title=\"Tocobaga\">Tocobaga</a></li>\n<li><a href=\"/wiki/Uzita_(Florida)\" title=\"Uzita (Florida)\">Uzita</a></li></ul></td>\n</tr><tr><th class=\"sidebar-heading\">\nArchaeology</th></tr><tr><td class=\"sidebar-content\">\n<ul><li><a href=\"/wiki/Adena_culture\" title=\"Adena culture\">Adena</a></li>\n<li><a href=\"/wiki/Caloosahatchee_culture\" title=\"Caloosahatchee culture\">Calusa</a></li>\n<li><a href=\"/wiki/Fort_Ancient_culture\" class=\"mw-redirect\" title=\"Fort Ancient culture\">Fort Ancient</a></li>\n<li><a href=\"/wiki/Hopewell_tradition\" title=\"Hopewell tradition\">Hopewell</a></li>\n<li><a href=\"/wiki/Mississippian_culture\" class=\"mw-redirect\" title=\"Mississippian culture\">Mississippian</a></li>\n<li><a href=\"/wiki/Poverty_Point_culture\" title=\"Poverty Point culture\">Poverty Point</a></li>\n<li><a href=\"/wiki/Watson_Brake\" title=\"Watson Brake\">Watson Brake</a></li></ul></td>\n</tr><tr><th class=\"sidebar-heading\">\nReligion</th></tr><tr><td class=\"sidebar-content\">\n<ul><li><a href=\"/wiki/Datura_stramonium#Spiritualism_and_the_occult\" title=\"Datura stramonium\">Datura</a></li>\n<li><a href=\"/wiki/Earth_lodge\" title=\"Earth lodge\">Earth lodge</a></li>\n<li><a href=\"/wiki/Effigy_mound\" title=\"Effigy mound\">Effigy mound</a></li>\n<li><a href=\"/wiki/Horned_Serpent\" title=\"Horned Serpent\">Horned Serpent</a></li>\n<li><a href=\"/wiki/Long-nosed_god_maskette\" title=\"Long-nosed god maskette\">Masks</a></li>\n<li><a href=\"/wiki/Medicine_bag\" title=\"Medicine bag\">Medicine bag</a></li>\n<li><a href=\"/wiki/Ceremonial_pipe\" title=\"Ceremonial pipe\">Pipes</a></li>\n<li><a href=\"/wiki/Platform_mound\" title=\"Platform mound\">Platform mound</a></li>\n<li><a href=\"/wiki/Red_Horn\" title=\"Red Horn\">Red Horn</a></li>\n<li><a href=\"/wiki/Sacred_bundle\" title=\"Sacred bundle\">Sacred bundle</a></li>\n<li><a href=\"/wiki/Southeastern_Ceremonial_Complex\" title=\"Southeastern Ceremonial Complex\">SECC</a></li>\n<li><a href=\"/wiki/Shell_gorget\" title=\"Shell gorget\">Shell gorget</a></li>\n<li><a href=\"/wiki/Thunderbird_(mythology)\" title=\"Thunderbird (mythology)\">Thunderbird</a></li>\n<li><a href=\"/wiki/Underwater_panther\" title=\"Underwater panther\">Underwater panther</a></li>\n<li><a href=\"/wiki/Yaupon_tea\" title=\"Yaupon tea\">Yaupon tea</a></li></ul></td>\n</tr><tr><td class=\"sidebar-navbar\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1374427404\" /><style data-mw-deduplicate=\"TemplateStyles:r1239400231\">.mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navbar-boxtext{word-spacing:0}.mw-parser-output .navbar ul{display:inline-block;white-space:nowrap;line-height:inherit}.mw-parser-output .navbar-brackets::before{margin-right:-0.125em;content:\"[ \"}.mw-parser-output .navbar-brackets::after{margin-left:-0.125em;content:\" ]\"}.mw-parser-output .navbar li{word-spacing:-0.125em}.mw-parser-output .navbar a>span,.mw-parser-output .navbar a>abbr{text-decoration:inherit}.mw-parser-output .navbar-mini abbr{font-variant:small-caps;border-bottom:none;text-decoration:none;cursor:inherit}.mw-parser-output .navbar-ct-full{font-size:114%;margin:0 7em}.mw-parser-output .navbar-ct-mini{font-size:114%;margin:0 4em}html.skin-theme-clientpref-night .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}}@media print{.mw-parser-output .navbar{display:none!important}}</style><div class=\"navbar plainlinks hlist navbar-mini\"><ul><li class=\"nv-view\"><a href=\"/wiki/Template:Mound_Builders\" title=\"Template:Mound Builders\"><abbr title=\"View this template\">v</abbr></a></li><li class=\"nv-talk\"><a href=\"/wiki/Template_talk:Mound_Builders\" title=\"Template talk:Mound Builders\"><abbr title=\"Discuss this template\">t</abbr></a></li><li class=\"nv-edit\"><a href=\"/wiki/Special:EditPage/Template:Mound_Builders\" title=\"Special:EditPage/Template:Mound Builders\"><abbr title=\"Edit this template\">e</abbr></a></li></ul></div></td></tr></tbody></table>\n<p>During the <a href=\"/wiki/Archaic_period_in_the_Americas\" class=\"mw-redirect\" title=\"Archaic period in the Americas\">Archaic Period</a>, from 6000 to 1000 BC, mixed conifer-hardwood forests as well as mixed prairie-forests replaced Wisconsin's conifer forests. People continued to depend on hunting and gathering. Around 4000 BC they developed <a href=\"/wiki/Spear-thrower\" title=\"Spear-thrower\">spear-throwers</a> and <a href=\"/wiki/Old_Copper_Complex\" class=\"mw-redirect\" title=\"Old Copper Complex\">copper tools</a> such as axes, <a href=\"/wiki/Adze\" title=\"Adze\">adzes</a>, projectile points, knives, perforators, fishhooks and harpoons. Copper ornaments like beaded necklaces also appeared around 1500 BC. These people gathered copper ore at quarries on the <a href=\"/wiki/Keweenaw_Peninsula\" title=\"Keweenaw Peninsula\">Keweenaw Peninsula</a> in Michigan and on <a href=\"/wiki/Isle_Royale\" title=\"Isle Royale\">Isle Royale</a> in Lake Superior. They may have crafted copper artifacts by hammering and folding the metal and also by heating it to increase its malleability. However it is not certain if these people reached the level of copper <a href=\"/wiki/Smelting\" title=\"Smelting\">smelting</a>.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> Regardless, the Copper Culture of the Great Lakes region reached a level of sophistication unprecedented in North America. The Late Archaic Period also saw the emergence of cemeteries and ritual burials,<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup> such as the one in <a href=\"/wiki/Copper_Culture_State_Park\" title=\"Copper Culture State Park\">Oconto</a>.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>The Early <a href=\"/wiki/Woodland_Period\" class=\"mw-redirect\" title=\"Woodland Period\">Woodland Period</a> began in 1000 BC as plants became an increasingly important part of the people's diet. Small scale agriculture and pottery arrived in southern Wisconsin at this time. The primary crops were maize, beans and squash. Agriculture, however, could not sufficiently support these people, who also had to hunt and gather. Agriculture at this time was more akin to gardening than to farming.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup> Villages emerged along rivers, streams and lakes, and the earliest <a href=\"/wiki/Mound_Builders\" title=\"Mound Builders\">earthen burial mounds</a> were constructed.<sup id=\"cite&#95;ref-6\" class=\"reference\"><a href=\"#cite_note-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>The <a href=\"/wiki/Hopewell_tradition\" title=\"Hopewell tradition\">Havana Hopewell culture</a> arrived in Wisconsin in the Middle Woodland Period, settling along the Mississippi River. The Hopewell people connected Wisconsin to their trade practices, which stretched from Ohio to Yellowstone and from Wisconsin to the Gulf of Mexico. They constructed elaborate mounds, made elaborately decorated pottery and brought a wide range of traded minerals to the area. The Hopewell people may have influenced the other inhabitants of Wisconsin, rather than displacing them.<sup id=\"cite&#95;ref-7\" class=\"reference\"><a href=\"#cite_note-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup> The Late Woodland Period began in about 400 AD, following the disappearance of the Hopewell culture from the area. The people of Wisconsin first used the <a href=\"/wiki/Bow_and_arrow\" title=\"Bow and arrow\">bow and arrow</a> in the final centuries of the Woodland Period, and agriculture continued to be practiced in the southern part of the state. The <a href=\"/wiki/Effigy_mound\" title=\"Effigy mound\">effigy mound</a> culture dominated Southern Wisconsin during this time, building earthen burial mounds in the shapes of animals.<sup id=\"cite&#95;ref-8\" class=\"reference\"><a href=\"#cite_note-8\"><span class=\"cite-bracket\">&#91;</span>8<span class=\"cite-bracket\">&#93;</span></a></sup> Examples of effigy mounds still exist at <a href=\"/wiki/High_Cliff_State_Park\" title=\"High Cliff State Park\">High Cliff State Park</a> and at <a href=\"/wiki/Lizard_Mound_County_Park\" class=\"mw-redirect\" title=\"Lizard Mound County Park\">Lizard Mound County Park</a>. In northern Wisconsin people continued to survive on hunting and gathering, and constructed conical mounds.<sup id=\"cite&#95;ref-9\" class=\"reference\"><a href=\"#cite_note-9\"><span class=\"cite-bracket\">&#91;</span>9<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<figure class=\"mw-default-size mw-halign-left\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Ancient_Aztalan_Village_DSC_0_121.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Ancient_Aztalan_Village_DSC_0_121.jpg/250px-Ancient_Aztalan_Village_DSC_0_121.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"167\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Ancient_Aztalan_Village_DSC_0_121.jpg/500px-Ancient_Aztalan_Village_DSC_0_121.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"3872\" data-file-height=\"2592\" /></a><figcaption>The largest platform mound at <a href=\"/wiki/Aztalan_State_Park\" title=\"Aztalan State Park\">Aztalan</a>, with modern reconstructions of steps and stockade</figcaption></figure>\n<p>People of the <a href=\"/wiki/Mississippian_culture\" class=\"mw-redirect\" title=\"Mississippian culture\">Mississippian culture</a> expanded into Wisconsin around 1050 AD and established a settlement at <a href=\"/wiki/Aztalan_State_Park\" title=\"Aztalan State Park\">Aztalan</a> along the <a href=\"/wiki/Crawfish_River\" title=\"Crawfish River\">Crawfish River</a>. While begun by the Caddoan people, other cultures began to borrow &amp; adapt the Mississippian cultural structure.<sup id=\"cite&#95;ref-10\" class=\"reference\"><a href=\"#cite_note-10\"><span class=\"cite-bracket\">&#91;</span>10<span class=\"cite-bracket\">&#93;</span></a></sup> This elaborately planned site may have been the northernmost outpost of <a href=\"/wiki/Cahokia\" title=\"Cahokia\">Cahokia</a>, although it is also now known that some Siouan peoples along the Mississippi River may have taken part in the culture as well.<sup id=\"cite&#95;ref-11\" class=\"reference\"><a href=\"#cite_note-11\"><span class=\"cite-bracket\">&#91;</span>11<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-12\" class=\"reference\"><a href=\"#cite_note-12\"><span class=\"cite-bracket\">&#91;</span>12<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Both Woodland and Mississippian peoples inhabited Aztalan, which was connected to the extensive Mississippian trade network. Shells from the Gulf of Mexico, copper from Lake Superior and <a href=\"/wiki/Mill_Creek_chert\" title=\"Mill Creek chert\">Mill Creek chert</a> have been found at the site. Aztalan was abandoned around 1200 AD.<sup id=\"cite&#95;ref-13\" class=\"reference\"><a href=\"#cite_note-13\"><span class=\"cite-bracket\">&#91;</span>13<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-14\" class=\"reference\"><a href=\"#cite_note-14\"><span class=\"cite-bracket\">&#91;</span>14<span class=\"cite-bracket\">&#93;</span></a></sup> The <a href=\"/wiki/Oneota\" title=\"Oneota\">Oneota</a> people later built agriculturally based villages, similar to those of the Mississippians but without the extensive trade networks, in the state. By the time the first Europeans arrived in Wisconsin, the Oneota had disappeared.<sup id=\"cite&#95;ref-15\" class=\"reference\"><a href=\"#cite_note-15\"><span class=\"cite-bracket\">&#91;</span>15<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#paleo\">Paleo-Indians (10000 BC-8500 BC)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#paleo\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/research-collections/anthropology/online-collections-research/old-copper-culture\">Old Copper Culture</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160722015300/https://www.mpm.edu/research-collections/anthropology/online-collections-research/old-copper-culture\">Archived</a> 2016-07-22 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#late\">Early, Middle and Late Archaic (8,000 BC-1000 BC)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#late\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\">\"Copper Culture History\", Wisconsin DNR, <a rel=\"nofollow\" class=\"external free\" href=\"http://dnr.wi.gov/topic/parks/name/copperculture/history.html\">http://dnr.wi.gov/topic/parks/name/copperculture/history.html</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160731194837/http://dnr.wi.gov/topic/parks/name/copperculture/history.html\">Archived</a> 2016-07-31 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a></span>\n</li>\n<li id=\"cite&#95;note-5\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-5\">^</a></b></span> <span class=\"reference-text\">Mississippi Valley Archaeology Center. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://mvac.uwlax.edu/PreEuropeanPeople/wood_food.html\">Food: Hunting, Gathering and Gardening</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20161022054457/http://mvac.uwlax.edu/PreEuropeanPeople/wood_food.html\">Archived</a> 2016-10-22 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-6\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-6\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#ewoodland\">Early Woodland (1000 BC-300 BC)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#ewoodland\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-7\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-7\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#mwoodland\">Middle Woodland (300 BC-400 AD)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#mwoodland\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-8\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-8\">^</a></b></span> <span class=\"reference-text\">Wisconsin Historical Society. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://www.wisconsinhistory.org/turningpoints/tp-004/?action=more_essay\">Effigy Mounds Culture</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160705144702/http://www.wisconsinhistory.org/turningpoints/tp-004/?action=more_essay\">Archived</a> 2016-07-05 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\"</span>\n</li>\n<li id=\"cite&#95;note-9\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-9\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#lwoodland\">Late Woodland (400 AD-1100 AD)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#lwoodland\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-10\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-10\">^</a></b></span> <span class=\"reference-text\">Barnett, Jim. \"The Natchez Indians\". Mississippi History Now. Retrieved 1 Oct 2013.</span>\n</li>\n<li id=\"cite&#95;note-11\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-11\">^</a></b></span> <span class=\"reference-text\">\"Relation of the Conquest of Florida Presented by Luys Hernandez de Biedma in the Year 1544 to the King of Spain in Council\". Retrieved 2010-02-10.</span>\n</li>\n<li id=\"cite&#95;note-12\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-12\">^</a></b></span> <span class=\"reference-text\">George E. Sabo (2008). \"Tunica and Koroa Indians\". The Indians of Arkansas website. University of Arkansas. Retrieved 2010-02-10.</span>\n</li>\n<li id=\"cite&#95;note-13\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-13\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/research-collections/anthropology/online-collections-research/aztalan-collection\">Aztalan Collection</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160818185026/https://www.mpm.edu/research-collections/anthropology/online-collections-research/aztalan-collection\">Archived</a> 2016-08-18 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-14\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-14\">^</a></b></span> <span class=\"reference-text\">Wisconsin Historical Society. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://www.wisconsinhistory.org/turningpoints/tp-003/?action=more_essay\">Mississippian Culture and Aztalan</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160819040422/http://www.wisconsinhistory.org/turningpoints/tp-003/?action=more_essay\">Archived</a> 2016-08-19 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-15\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-15\">^</a></b></span> <span class=\"reference-text\">Mississippi Valley Archaeology Center. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://mvac.uwlax.edu/PreEuropeanPeople/miss_oneota.html\">Oneota</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160322150401/http://mvac.uwlax.edu/PreEuropeanPeople/miss_oneota.html\">Archived</a> 2016-03-22 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐lckht\nCached time: 20261010140805\nCache expiry: 2592000\nCache expiry source: Module:Webarchive (os.date *t .year)\nReduced expiry: false\nComplications: [prevent‐selective‐update]\nCPU time usage: 0.094 seconds\nReal time usage: 0.115 seconds\nPreprocessor visited node count: 224/1000000\nRevision size: 8548/2097152 bytes\nPost‐expand include size: 11861/2097152 bytes\nTemplate argument size: 86/2097152 bytes\nHighest expansion depth: 10/100\nExpensive parser function count: 0/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 12454/5000000 bytes\nLua time usage: 0.049/10.000 seconds\nLua memory usage: 1535275/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%   88.207      1 -total\n 72.09%   63.590      1 Template:Mound_Builders\n 70.52%   62.201      1 Template:Sidebar\n 14.52%   12.807     12 Template:Webarchive\n  9.15%    8.074      1 Template:Color\n  8.09%    7.140      1 Template:Ifsubst\n-->\n\n<!-- Render ID 03141d6d-c4b4-11f1-9208-ed706d51f695 -->\n</div>"
     }
    }
   }
@@ -2701,30 +2763,6 @@
   "host": "en.wikipedia.org",
   "params": {
    "action": "parse",
-   "page": "History of Wisconsin",
-   "section": "1",
-   "prop": "text",
-   "disabletoc": "1",
-   "disableeditsection": "1",
-   "redirects": "1",
-   "format": "json"
-  },
-  "status": 200,
-  "json": {
-   "parse": {
-    "title": "History of Wisconsin",
-    "pageid": 1658936,
-    "redirects": [],
-    "text": {
-     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"Pre-Columbian_history\">Pre-Columbian history</h2></div>\n<figure typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:SimplifiedPealeMastodon.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/7/74/SimplifiedPealeMastodon.jpg/330px-SimplifiedPealeMastodon.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"300\" height=\"220\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/7/74/SimplifiedPealeMastodon.jpg/960px-SimplifiedPealeMastodon.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1366\" data-file-height=\"1002\" /></a><figcaption>Drawing of a mastodon skeleton by <a href=\"/wiki/Rembrandt_Peale\" title=\"Rembrandt Peale\">Rembrandt Peale</a></figcaption></figure>\n<p>The first known inhabitants of what is now Wisconsin were <a href=\"/wiki/Paleo-Indians\" title=\"Paleo-Indians\">Paleo-Indians</a>, who first arrived in the region in about 10,000 BC at the end of the <a href=\"/wiki/Last_glacial_period\" class=\"mw-redirect\" title=\"Last glacial period\">Ice Age</a>. The retreating glaciers left behind a tundra in Wisconsin inhabited by large animals, such as <a href=\"/wiki/Mammoth\" title=\"Mammoth\">mammoths</a>, <a href=\"/wiki/Mastodon\" title=\"Mastodon\">mastodons</a>, <a href=\"/wiki/Bison\" title=\"Bison\">bison</a>, <a href=\"/wiki/Castoroides\" title=\"Castoroides\">giant beaver</a>, and <a href=\"/wiki/Muskox\" title=\"Muskox\">muskox</a>. The <a href=\"/wiki/Boaz_mastodon\" class=\"mw-redirect\" title=\"Boaz mastodon\">Boaz mastodon</a> and the <a href=\"/wiki/Clovis_culture\" title=\"Clovis culture\">Clovis</a> artifacts discovered in <a href=\"/wiki/Boaz,_Wisconsin\" title=\"Boaz, Wisconsin\">Boaz, Wisconsin</a> show that the Paleo-Indians hunted these large animals. They also gathered plants as conifer forests grew in the glaciers' wake. With the decline and extinction of many large mammals in the Americas, the Paleo-Indian diet shifted toward smaller mammals like deer and bison.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<style data-mw-deduplicate=\"TemplateStyles:r1374427404\">.mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,.mw-parser-output .hlist li{margin:0;display:inline}.mw-parser-output .hlist.inline,.mw-parser-output .hlist.inline dl,.mw-parser-output .hlist.inline ol,.mw-parser-output .hlist.inline ul,.mw-parser-output .hlist dl dl,.mw-parser-output .hlist dl ol,.mw-parser-output .hlist dl ul,.mw-parser-output .hlist ol dl,.mw-parser-output .hlist ol ol,.mw-parser-output .hlist ol ul,.mw-parser-output .hlist ul dl,.mw-parser-output .hlist ul ol,.mw-parser-output .hlist ul ul{display:inline}.mw-parser-output .hlist .mw-empty-li{display:none}.mw-parser-output .hlist dt::after{content:\": \"}.mw-parser-output .hlist dd::after,.mw-parser-output .hlist li::after{content:\"\\a0 · \";font-weight:bold}.mw-parser-output .hlist dd:last-child::after,.mw-parser-output .hlist dt:last-child::after,.mw-parser-output .hlist li:last-child::after{content:none}.mw-parser-output .hlist dd dd:first-child::before,.mw-parser-output .hlist dd dt:first-child::before,.mw-parser-output .hlist dd li:first-child::before,.mw-parser-output .hlist dt dd:first-child::before,.mw-parser-output .hlist dt dt:first-child::before,.mw-parser-output .hlist dt li:first-child::before,.mw-parser-output .hlist li dd:first-child::before,.mw-parser-output .hlist li dt:first-child::before,.mw-parser-output .hlist li li:first-child::before{content:\" (\";font-weight:normal}.mw-parser-output .hlist dd dd:last-child::after,.mw-parser-output .hlist dd dt:last-child::after,.mw-parser-output .hlist dd li:last-child::after,.mw-parser-output .hlist dt dd:last-child::after,.mw-parser-output .hlist dt dt:last-child::after,.mw-parser-output .hlist dt li:last-child::after,.mw-parser-output .hlist li dd:last-child::after,.mw-parser-output .hlist li dt:last-child::after,.mw-parser-output .hlist li li:last-child::after{content:\")\";font-weight:normal}.mw-parser-output .hlist ol{counter-reset:listitem}.mw-parser-output .hlist ol>li{counter-increment:listitem}.mw-parser-output .hlist ol>li::before{content:\" \"counter(listitem)\"\\a0 \"}.mw-parser-output .hlist dd ol>li:first-child::before,.mw-parser-output .hlist dt ol>li:first-child::before,.mw-parser-output .hlist li ol>li:first-child::before{content:\" (\"counter(listitem)\"\\a0 \"}</style><style data-mw-deduplicate=\"TemplateStyles:r1378777972\">.mw-parser-output .sidebar{width:22em;float:right;clear:right;margin:0.5em 0 1em 1em;background:var(--background-color-neutral-subtle,#f8f9fa);border:1px solid var(--border-color-base,#a2a9b1);padding:0.2em;text-align:center;line-height:1.4em;font-size:88%;border-collapse:collapse;display:table}body.skin-minerva .mw-parser-output .sidebar{display:table!important;float:right!important;margin:0.5em 0 1em 1em!important}.mw-parser-output .sidebar-subgroup{width:100%;margin:0;border-spacing:0}.mw-parser-output .sidebar-left{float:left;clear:left;margin:0.5em 1em 1em 0}.mw-parser-output .sidebar-none{float:none;clear:both;margin:0.5em 1em 1em 0}.mw-parser-output .sidebar-outer-title{padding:0 0.4em 0.2em;font-size:125%;line-height:1.2em;font-weight:bold}.mw-parser-output .sidebar-top-image{padding:0.4em}.mw-parser-output .sidebar-top-caption,.mw-parser-output .sidebar-pretitle-with-top-image,.mw-parser-output .sidebar-caption{padding:0.2em 0.4em 0;line-height:1.2em}.mw-parser-output .sidebar-pretitle{padding:0.4em 0.4em 0;line-height:1.2em}.mw-parser-output .sidebar-title,.mw-parser-output .sidebar-title-with-pretitle{padding:0.2em 0.8em;font-size:145%;line-height:1.2em}.mw-parser-output .sidebar-title-with-pretitle{padding:0.1em 0.4em}.mw-parser-output .sidebar-image{padding:0.2em 0.4em 0.4em}.mw-parser-output .sidebar-heading{padding:0.1em 0.4em}.mw-parser-output .sidebar-content{padding:0 0.5em 0.4em}.mw-parser-output .sidebar-content-with-subgroup{padding:0.1em 0.4em 0.2em}.mw-parser-output .sidebar-above,.mw-parser-output .sidebar-below{padding:0.3em 0.8em;font-weight:bold}.mw-parser-output .sidebar-collapse .sidebar-above,.mw-parser-output .sidebar-collapse .sidebar-below{border-top:1px solid var(--border-color-base,#a2a9b1);border-bottom:1px solid var(--border-color-base,#a2a9b1)}.mw-parser-output .sidebar-navbar{text-align:right;font-size:115%;padding:0 0.4em 0.4em}.mw-parser-output .sidebar-list-title{padding:0 0.4em;text-align:left;font-weight:bold;line-height:1.6em;font-size:105%}.mw-parser-output .sidebar-list-title-c{padding:0 0.4em;text-align:center;margin:0 3.3em}@media(max-width:640px){body.mediawiki .mw-parser-output .sidebar{width:100%!important;clear:both;float:none!important;margin-left:0!important;margin-right:0!important}}body.skin--responsive .mw-parser-output .sidebar a>img{max-width:none!important}@media screen{html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-list-title,html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle{background:transparent!important}html.skin-theme-clientpref-night .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle a{color:var(--color-progressive)!important}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-list-title,html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle{background:transparent!important}html.skin-theme-clientpref-os .mw-parser-output .sidebar:not(.notheme) .sidebar-title-with-pretitle a{color:var(--color-progressive)!important}}@media print{body.ns-0 .mw-parser-output .sidebar{display:none!important}}</style><style data-mw-deduplicate=\"TemplateStyles:r1239334494\">@media screen{html.skin-theme-clientpref-night .mw-parser-output div:not(.notheme)>.tmp-color,html.skin-theme-clientpref-night .mw-parser-output p>.tmp-color,html.skin-theme-clientpref-night .mw-parser-output table:not(.notheme) .tmp-color{color:inherit!important}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output div:not(.notheme)>.tmp-color,html.skin-theme-clientpref-os .mw-parser-output p>.tmp-color,html.skin-theme-clientpref-os .mw-parser-output table:not(.notheme) .tmp-color{color:inherit!important}}</style><table class=\"sidebar nomobile nowraplinks hlist\" role=\"navigation\" style=\"width: 16em;\"><tbody><tr><td class=\"sidebar-top-image\"><span typeof=\"mw:File\"><a href=\"/wiki/File:Mound_Builder_City.jpeg\" class=\"mw-file-description\"><img alt=\"Mound builder city\" src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mound_Builder_City.jpeg/250px-Mound_Builder_City.jpeg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"200\" height=\"61\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Mound_Builder_City.jpeg/500px-Mound_Builder_City.jpeg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"748\" data-file-height=\"229\" /></a></span></td></tr><tr><th class=\"sidebar-title\" style=\"background: #51D599;\"><a href=\"/wiki/Mound_Builders\" title=\"Mound Builders\"><span class=\"tmp-color\" style=\"color:#FFFFFF\">Mound Builders</span></a></th></tr><tr><th class=\"sidebar-heading\">\nPolities</th></tr><tr><td class=\"sidebar-content\">\n<ul><li><a href=\"/wiki/Apalachee_Province\" title=\"Apalachee Province\">Apalachee</a></li>\n<li><a href=\"/wiki/Apalachicola_Province\" title=\"Apalachicola Province\">Apalachicola</a></li>\n<li><a href=\"/wiki/Cahokia_polity\" title=\"Cahokia polity\">Cahokia</a></li>\n<li><a href=\"/wiki/Casqui\" title=\"Casqui\">Casqui</a></li>\n<li><a href=\"/wiki/Cofitachequi\" title=\"Cofitachequi\">Cofitachequi</a></li>\n<li><a href=\"/wiki/Coosa_chiefdom\" title=\"Coosa chiefdom\">Coosa</a></li>\n<li><a href=\"/wiki/Guale\" title=\"Guale\">Guale</a></li>\n<li><a href=\"/wiki/Jaega\" title=\"Jaega\">Jaega</a></li>\n<li><a href=\"/wiki/Mocoso\" title=\"Mocoso\">Mocoso</a></li>\n<li><a href=\"/wiki/Ocute\" title=\"Ocute\">Ocute</a></li>\n<li><a href=\"/wiki/Pacaha\" title=\"Pacaha\">Pacaha</a></li>\n<li><a href=\"/wiki/Moundville_phase\" class=\"mw-redirect\" title=\"Moundville phase\">Pafalaya</a></li>\n<li><a href=\"/wiki/Pohoy\" title=\"Pohoy\">Pohoy</a></li>\n<li><a href=\"/wiki/Quivira\" title=\"Quivira\">Quivira</a></li>\n<li><a href=\"/wiki/Saturiwa\" title=\"Saturiwa\">Saturiwa</a></li>\n<li><a href=\"/wiki/Angel_phase\" class=\"mw-redirect\" title=\"Angel phase\">Taarsite?</a></li>\n<li><a href=\"/wiki/Tacatacuru\" title=\"Tacatacuru\">Tacatacuru</a></li>\n<li><a href=\"/wiki/Tocobaga\" title=\"Tocobaga\">Tocobaga</a></li>\n<li><a href=\"/wiki/Uzita_(Florida)\" title=\"Uzita (Florida)\">Uzita</a></li></ul></td>\n</tr><tr><th class=\"sidebar-heading\">\nArchaeology</th></tr><tr><td class=\"sidebar-content\">\n<ul><li><a href=\"/wiki/Adena_culture\" title=\"Adena culture\">Adena</a></li>\n<li><a href=\"/wiki/Caloosahatchee_culture\" title=\"Caloosahatchee culture\">Calusa</a></li>\n<li><a href=\"/wiki/Fort_Ancient_culture\" class=\"mw-redirect\" title=\"Fort Ancient culture\">Fort Ancient</a></li>\n<li><a href=\"/wiki/Hopewell_tradition\" title=\"Hopewell tradition\">Hopewell</a></li>\n<li><a href=\"/wiki/Mississippian_culture\" class=\"mw-redirect\" title=\"Mississippian culture\">Mississippian</a></li>\n<li><a href=\"/wiki/Poverty_Point_culture\" title=\"Poverty Point culture\">Poverty Point</a></li>\n<li><a href=\"/wiki/Watson_Brake\" title=\"Watson Brake\">Watson Brake</a></li></ul></td>\n</tr><tr><th class=\"sidebar-heading\">\nReligion</th></tr><tr><td class=\"sidebar-content\">\n<ul><li><a href=\"/wiki/Datura_stramonium#Spiritualism_and_the_occult\" title=\"Datura stramonium\">Datura</a></li>\n<li><a href=\"/wiki/Earth_lodge\" title=\"Earth lodge\">Earth lodge</a></li>\n<li><a href=\"/wiki/Effigy_mound\" title=\"Effigy mound\">Effigy mound</a></li>\n<li><a href=\"/wiki/Horned_Serpent\" title=\"Horned Serpent\">Horned Serpent</a></li>\n<li><a href=\"/wiki/Long-nosed_god_maskette\" title=\"Long-nosed god maskette\">Masks</a></li>\n<li><a href=\"/wiki/Medicine_bag\" title=\"Medicine bag\">Medicine bag</a></li>\n<li><a href=\"/wiki/Ceremonial_pipe\" title=\"Ceremonial pipe\">Pipes</a></li>\n<li><a href=\"/wiki/Platform_mound\" title=\"Platform mound\">Platform mound</a></li>\n<li><a href=\"/wiki/Red_Horn\" title=\"Red Horn\">Red Horn</a></li>\n<li><a href=\"/wiki/Sacred_bundle\" title=\"Sacred bundle\">Sacred bundle</a></li>\n<li><a href=\"/wiki/Southeastern_Ceremonial_Complex\" title=\"Southeastern Ceremonial Complex\">SECC</a></li>\n<li><a href=\"/wiki/Shell_gorget\" title=\"Shell gorget\">Shell gorget</a></li>\n<li><a href=\"/wiki/Thunderbird_(mythology)\" title=\"Thunderbird (mythology)\">Thunderbird</a></li>\n<li><a href=\"/wiki/Underwater_panther\" title=\"Underwater panther\">Underwater panther</a></li>\n<li><a href=\"/wiki/Yaupon_tea\" title=\"Yaupon tea\">Yaupon tea</a></li></ul></td>\n</tr><tr><td class=\"sidebar-navbar\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1374427404\" /><style data-mw-deduplicate=\"TemplateStyles:r1239400231\">.mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navbar-boxtext{word-spacing:0}.mw-parser-output .navbar ul{display:inline-block;white-space:nowrap;line-height:inherit}.mw-parser-output .navbar-brackets::before{margin-right:-0.125em;content:\"[ \"}.mw-parser-output .navbar-brackets::after{margin-left:-0.125em;content:\" ]\"}.mw-parser-output .navbar li{word-spacing:-0.125em}.mw-parser-output .navbar a>span,.mw-parser-output .navbar a>abbr{text-decoration:inherit}.mw-parser-output .navbar-mini abbr{font-variant:small-caps;border-bottom:none;text-decoration:none;cursor:inherit}.mw-parser-output .navbar-ct-full{font-size:114%;margin:0 7em}.mw-parser-output .navbar-ct-mini{font-size:114%;margin:0 4em}html.skin-theme-clientpref-night .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}@media(prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .navbar li a abbr{color:var(--color-base)!important}}@media print{.mw-parser-output .navbar{display:none!important}}</style><div class=\"navbar plainlinks hlist navbar-mini\"><ul><li class=\"nv-view\"><a href=\"/wiki/Template:Mound_Builders\" title=\"Template:Mound Builders\"><abbr title=\"View this template\">v</abbr></a></li><li class=\"nv-talk\"><a href=\"/wiki/Template_talk:Mound_Builders\" title=\"Template talk:Mound Builders\"><abbr title=\"Discuss this template\">t</abbr></a></li><li class=\"nv-edit\"><a href=\"/wiki/Special:EditPage/Template:Mound_Builders\" title=\"Special:EditPage/Template:Mound Builders\"><abbr title=\"Edit this template\">e</abbr></a></li></ul></div></td></tr></tbody></table>\n<p>During the <a href=\"/wiki/Archaic_period_in_the_Americas\" class=\"mw-redirect\" title=\"Archaic period in the Americas\">Archaic Period</a>, from 6000 to 1000 BC, mixed conifer-hardwood forests as well as mixed prairie-forests replaced Wisconsin's conifer forests. People continued to depend on hunting and gathering. Around 4000 BC they developed <a href=\"/wiki/Spear-thrower\" title=\"Spear-thrower\">spear-throwers</a> and <a href=\"/wiki/Old_Copper_Complex\" class=\"mw-redirect\" title=\"Old Copper Complex\">copper tools</a> such as axes, <a href=\"/wiki/Adze\" title=\"Adze\">adzes</a>, projectile points, knives, perforators, fishhooks and harpoons. Copper ornaments like beaded necklaces also appeared around 1500 BC. These people gathered copper ore at quarries on the <a href=\"/wiki/Keweenaw_Peninsula\" title=\"Keweenaw Peninsula\">Keweenaw Peninsula</a> in Michigan and on <a href=\"/wiki/Isle_Royale\" title=\"Isle Royale\">Isle Royale</a> in Lake Superior. They may have crafted copper artifacts by hammering and folding the metal and also by heating it to increase its malleability. However it is not certain if these people reached the level of copper <a href=\"/wiki/Smelting\" title=\"Smelting\">smelting</a>.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> Regardless, the Copper Culture of the Great Lakes region reached a level of sophistication unprecedented in North America. The Late Archaic Period also saw the emergence of cemeteries and ritual burials,<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup> such as the one in <a href=\"/wiki/Copper_Culture_State_Park\" title=\"Copper Culture State Park\">Oconto</a>.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>The Early <a href=\"/wiki/Woodland_Period\" class=\"mw-redirect\" title=\"Woodland Period\">Woodland Period</a> began in 1000 BC as plants became an increasingly important part of the people's diet. Small scale agriculture and pottery arrived in southern Wisconsin at this time. The primary crops were maize, beans and squash. Agriculture, however, could not sufficiently support these people, who also had to hunt and gather. Agriculture at this time was more akin to gardening than to farming.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup> Villages emerged along rivers, streams and lakes, and the earliest <a href=\"/wiki/Mound_Builders\" title=\"Mound Builders\">earthen burial mounds</a> were constructed.<sup id=\"cite&#95;ref-6\" class=\"reference\"><a href=\"#cite_note-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>The <a href=\"/wiki/Hopewell_tradition\" title=\"Hopewell tradition\">Havana Hopewell culture</a> arrived in Wisconsin in the Middle Woodland Period, settling along the Mississippi River. The Hopewell people connected Wisconsin to their trade practices, which stretched from Ohio to Yellowstone and from Wisconsin to the Gulf of Mexico. They constructed elaborate mounds, made elaborately decorated pottery and brought a wide range of traded minerals to the area. The Hopewell people may have influenced the other inhabitants of Wisconsin, rather than displacing them.<sup id=\"cite&#95;ref-7\" class=\"reference\"><a href=\"#cite_note-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup> The Late Woodland Period began in about 400 AD, following the disappearance of the Hopewell culture from the area. The people of Wisconsin first used the <a href=\"/wiki/Bow_and_arrow\" title=\"Bow and arrow\">bow and arrow</a> in the final centuries of the Woodland Period, and agriculture continued to be practiced in the southern part of the state. The <a href=\"/wiki/Effigy_mound\" title=\"Effigy mound\">effigy mound</a> culture dominated Southern Wisconsin during this time, building earthen burial mounds in the shapes of animals.<sup id=\"cite&#95;ref-8\" class=\"reference\"><a href=\"#cite_note-8\"><span class=\"cite-bracket\">&#91;</span>8<span class=\"cite-bracket\">&#93;</span></a></sup> Examples of effigy mounds still exist at <a href=\"/wiki/High_Cliff_State_Park\" title=\"High Cliff State Park\">High Cliff State Park</a> and at <a href=\"/wiki/Lizard_Mound_County_Park\" class=\"mw-redirect\" title=\"Lizard Mound County Park\">Lizard Mound County Park</a>. In northern Wisconsin people continued to survive on hunting and gathering, and constructed conical mounds.<sup id=\"cite&#95;ref-9\" class=\"reference\"><a href=\"#cite_note-9\"><span class=\"cite-bracket\">&#91;</span>9<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<figure class=\"mw-default-size mw-halign-left\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Ancient_Aztalan_Village_DSC_0_121.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Ancient_Aztalan_Village_DSC_0_121.jpg/250px-Ancient_Aztalan_Village_DSC_0_121.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"167\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Ancient_Aztalan_Village_DSC_0_121.jpg/500px-Ancient_Aztalan_Village_DSC_0_121.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"3872\" data-file-height=\"2592\" /></a><figcaption>The largest platform mound at <a href=\"/wiki/Aztalan_State_Park\" title=\"Aztalan State Park\">Aztalan</a>, with modern reconstructions of steps and stockade</figcaption></figure>\n<p>People of the <a href=\"/wiki/Mississippian_culture\" class=\"mw-redirect\" title=\"Mississippian culture\">Mississippian culture</a> expanded into Wisconsin around 1050 AD and established a settlement at <a href=\"/wiki/Aztalan_State_Park\" title=\"Aztalan State Park\">Aztalan</a> along the <a href=\"/wiki/Crawfish_River\" title=\"Crawfish River\">Crawfish River</a>. While begun by the Caddoan people, other cultures began to borrow &amp; adapt the Mississippian cultural structure.<sup id=\"cite&#95;ref-10\" class=\"reference\"><a href=\"#cite_note-10\"><span class=\"cite-bracket\">&#91;</span>10<span class=\"cite-bracket\">&#93;</span></a></sup> This elaborately planned site may have been the northernmost outpost of <a href=\"/wiki/Cahokia\" title=\"Cahokia\">Cahokia</a>, although it is also now known that some Siouan peoples along the Mississippi River may have taken part in the culture as well.<sup id=\"cite&#95;ref-11\" class=\"reference\"><a href=\"#cite_note-11\"><span class=\"cite-bracket\">&#91;</span>11<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-12\" class=\"reference\"><a href=\"#cite_note-12\"><span class=\"cite-bracket\">&#91;</span>12<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Both Woodland and Mississippian peoples inhabited Aztalan, which was connected to the extensive Mississippian trade network. Shells from the Gulf of Mexico, copper from Lake Superior and <a href=\"/wiki/Mill_Creek_chert\" title=\"Mill Creek chert\">Mill Creek chert</a> have been found at the site. Aztalan was abandoned around 1200 AD.<sup id=\"cite&#95;ref-13\" class=\"reference\"><a href=\"#cite_note-13\"><span class=\"cite-bracket\">&#91;</span>13<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-14\" class=\"reference\"><a href=\"#cite_note-14\"><span class=\"cite-bracket\">&#91;</span>14<span class=\"cite-bracket\">&#93;</span></a></sup> The <a href=\"/wiki/Oneota\" title=\"Oneota\">Oneota</a> people later built agriculturally based villages, similar to those of the Mississippians but without the extensive trade networks, in the state. By the time the first Europeans arrived in Wisconsin, the Oneota had disappeared.<sup id=\"cite&#95;ref-15\" class=\"reference\"><a href=\"#cite_note-15\"><span class=\"cite-bracket\">&#91;</span>15<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap mw-references-columns\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#paleo\">Paleo-Indians (10000 BC-8500 BC)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#paleo\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/research-collections/anthropology/online-collections-research/old-copper-culture\">Old Copper Culture</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160722015300/https://www.mpm.edu/research-collections/anthropology/online-collections-research/old-copper-culture\">Archived</a> 2016-07-22 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#late\">Early, Middle and Late Archaic (8,000 BC-1000 BC)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#late\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\">\"Copper Culture History\", Wisconsin DNR, <a rel=\"nofollow\" class=\"external free\" href=\"http://dnr.wi.gov/topic/parks/name/copperculture/history.html\">http://dnr.wi.gov/topic/parks/name/copperculture/history.html</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160731194837/http://dnr.wi.gov/topic/parks/name/copperculture/history.html\">Archived</a> 2016-07-31 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a></span>\n</li>\n<li id=\"cite&#95;note-5\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-5\">^</a></b></span> <span class=\"reference-text\">Mississippi Valley Archaeology Center. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://mvac.uwlax.edu/PreEuropeanPeople/wood_food.html\">Food: Hunting, Gathering and Gardening</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20161022054457/http://mvac.uwlax.edu/PreEuropeanPeople/wood_food.html\">Archived</a> 2016-10-22 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-6\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-6\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#ewoodland\">Early Woodland (1000 BC-300 BC)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#ewoodland\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-7\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-7\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#mwoodland\">Middle Woodland (300 BC-400 AD)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#mwoodland\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-8\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-8\">^</a></b></span> <span class=\"reference-text\">Wisconsin Historical Society. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://www.wisconsinhistory.org/turningpoints/tp-004/?action=more_essay\">Effigy Mounds Culture</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160705144702/http://www.wisconsinhistory.org/turningpoints/tp-004/?action=more_essay\">Archived</a> 2016-07-05 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\"</span>\n</li>\n<li id=\"cite&#95;note-9\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-9\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/wirp/ICW-22.html#lwoodland\">Late Woodland (400 AD-1100 AD)</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160921101610/https://www.mpm.edu/wirp/ICW-22.html#lwoodland\">Archived</a> 2016-09-21 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-10\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-10\">^</a></b></span> <span class=\"reference-text\">Barnett, Jim. \"The Natchez Indians\". Mississippi History Now. Retrieved 1 Oct 2013.</span>\n</li>\n<li id=\"cite&#95;note-11\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-11\">^</a></b></span> <span class=\"reference-text\">\"Relation of the Conquest of Florida Presented by Luys Hernandez de Biedma in the Year 1544 to the King of Spain in Council\". Retrieved 2010-02-10.</span>\n</li>\n<li id=\"cite&#95;note-12\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-12\">^</a></b></span> <span class=\"reference-text\">George E. Sabo (2008). \"Tunica and Koroa Indians\". The Indians of Arkansas website. University of Arkansas. Retrieved 2010-02-10.</span>\n</li>\n<li id=\"cite&#95;note-13\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-13\">^</a></b></span> <span class=\"reference-text\">Milwaukee Public Museum. \"<a rel=\"nofollow\" class=\"external text\" href=\"https://www.mpm.edu/research-collections/anthropology/online-collections-research/aztalan-collection\">Aztalan Collection</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160818185026/https://www.mpm.edu/research-collections/anthropology/online-collections-research/aztalan-collection\">Archived</a> 2016-08-18 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-14\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-14\">^</a></b></span> <span class=\"reference-text\">Wisconsin Historical Society. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://www.wisconsinhistory.org/turningpoints/tp-003/?action=more_essay\">Mississippian Culture and Aztalan</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160819040422/http://www.wisconsinhistory.org/turningpoints/tp-003/?action=more_essay\">Archived</a> 2016-08-19 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n<li id=\"cite&#95;note-15\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-15\">^</a></b></span> <span class=\"reference-text\">Mississippi Valley Archaeology Center. \"<a rel=\"nofollow\" class=\"external text\" href=\"http://mvac.uwlax.edu/PreEuropeanPeople/miss_oneota.html\">Oneota</a> <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/20160322150401/http://mvac.uwlax.edu/PreEuropeanPeople/miss_oneota.html\">Archived</a> 2016-03-22 at the <a href=\"/wiki/Wayback_Machine\" title=\"Wayback Machine\">Wayback Machine</a>\".</span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐272bq\nCached time: 20261009230618\nCache expiry: 2592000\nCache expiry source: Module:Webarchive (os.date *t .year)\nReduced expiry: false\nComplications: [prevent‐selective‐update]\nCPU time usage: 0.134 seconds\nReal time usage: 0.158 seconds\nPreprocessor visited node count: 224/1000000\nRevision size: 8548/2097152 bytes\nPost‐expand include size: 11861/2097152 bytes\nTemplate argument size: 86/2097152 bytes\nHighest expansion depth: 10/100\nExpensive parser function count: 0/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 12454/5000000 bytes\nLua time usage: 0.074/10.000 seconds\nLua memory usage: 1535275/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%  130.308      1 -total\n 74.60%   97.208      1 Template:Mound_Builders\n 73.23%   95.421      1 Template:Sidebar\n 12.36%   16.110     12 Template:Webarchive\n  9.58%   12.483      1 Template:Color\n  7.98%   10.397      1 Template:Ifsubst\n-->\n\n<!-- Render ID 08cb2209-c436-11f1-b8ac-f18fda2e64d0 -->\n</div>"
-    }
-   }
-  }
- },
- {
-  "host": "en.wikipedia.org",
-  "params": {
-   "action": "parse",
    "page": "History of the United States",
    "section": "1",
    "prop": "text",
@@ -2741,6 +2779,119 @@
     "redirects": [],
     "text": {
      "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\">\n<div class=\"mw-heading mw-heading2\"><h2 id=\"Indigenous_period\">Indigenous period</h2></div>\n<style data-mw-deduplicate=\"TemplateStyles:r1368532237\">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+.mw-empty-elt+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main articles: <a href=\"/wiki/Geological_history_of_North_America\" title=\"Geological history of North America\">Geological history of North America</a>, <a href=\"/wiki/History_of_Native_Americans_in_the_United_States\" title=\"History of Native Americans in the United States\">History of Native Americans in the United States</a>, and <a href=\"/wiki/Pre-Columbian_era\" title=\"Pre-Columbian era\">Pre-Columbian era</a></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">See also: <a href=\"/wiki/Native_Americans_in_the_United_States\" title=\"Native Americans in the United States\">Native Americans in the United States</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Peopling_of_America_through_Beringia.png\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Peopling_of_America_through_Beringia.png/250px-Peopling_of_America_through_Beringia.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"199\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Peopling_of_America_through_Beringia.png/500px-Peopling_of_America_through_Beringia.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"724\" data-file-height=\"575\" /></a><figcaption>Approximate location of the ice-free corridor and specific Paleoindian sites, according to the <a href=\"/wiki/Clovis_theory\" class=\"mw-redirect\" title=\"Clovis theory\">Clovis theory</a></figcaption></figure>\n<p>It is not definitively known how or when Native Americans first <a href=\"/wiki/Settlement_of_the_Americas\" class=\"mw-redirect\" title=\"Settlement of the Americas\">settled the Americas</a>. The prevailing theory proposes that people from <a href=\"/wiki/Eurasia\" title=\"Eurasia\">Eurasia</a> followed <a href=\"/wiki/Game_(hunting)\" title=\"Game (hunting)\">game</a> across <a href=\"/wiki/Beringia\" title=\"Beringia\">Beringia</a>, a <a href=\"/wiki/Land_bridge\" title=\"Land bridge\">land bridge</a> that connected <a href=\"/wiki/Siberia\" title=\"Siberia\">Siberia</a> to present-day <a href=\"/wiki/Alaska\" title=\"Alaska\">Alaska</a> during the <a href=\"/wiki/Last_Glacial_Period\" title=\"Last Glacial Period\">Ice Age</a>, and then spread southward, perhaps as early as 30,000 years ago.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> These early inhabitants, called <a href=\"/wiki/Paleo-Indians\" title=\"Paleo-Indians\">Paleo-Indians</a>, soon diversified into hundreds of culturally distinct groups.\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Paleo-Indians\">Paleo-Indians</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main article: <a href=\"/wiki/Pre-Columbian_North_America\" class=\"mw-redirect\" title=\"Pre-Columbian North America\">Pre-Columbian North America</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:North_American_cultural_areas.png\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/0/00/North_American_cultural_areas.png/250px-North_American_cultural_areas.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"285\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/0/00/North_American_cultural_areas.png/500px-North_American_cultural_areas.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1490\" data-file-height=\"1700\" /></a><figcaption>The <a href=\"/wiki/Cultural_area\" title=\"Cultural area\">cultural areas</a> of <a href=\"/wiki/Pre-Columbian_North_America\" class=\"mw-redirect\" title=\"Pre-Columbian North America\">pre-Columbian North America</a>, according to <a href=\"/wiki/Alfred_Kroeber\" title=\"Alfred Kroeber\">Alfred Kroeber</a></figcaption></figure>\n<p>By 10,000 BCE, humans had already been well-established throughout North America. Originally, Paleo-Indians hunted Ice Age <a href=\"/wiki/Megafauna\" title=\"Megafauna\">megafauna</a> like <a href=\"/wiki/Mammoth\" title=\"Mammoth\">mammoths</a>, but as they began to go extinct, people turned instead to <a href=\"/wiki/Bison\" title=\"Bison\">bison</a> as a food source, and later foraging for berries and seeds. Paleo-Indians in central Mexico were the first in the Americas to farm, around 8,000 BCE. Eventually, the knowledge began to spread northward. By 3,000 BCE, corn was being grown in the valleys of <a href=\"/wiki/Arizona\" title=\"Arizona\">Arizona</a> and <a href=\"/wiki/New_Mexico\" title=\"New Mexico\">New Mexico</a>, followed by primitive <a href=\"/wiki/Irrigation\" title=\"Irrigation\">irrigation</a> systems and, by 300 BCE, early villages of the <a href=\"/wiki/Hohokam\" title=\"Hohokam\">Hohokam</a>.<sup id=\"cite&#95;ref-FOOTNOTEOutline&#95;of&#95;American&#95;History&#95;2-0\" class=\"reference\"><a href=\"#cite_note-FOOTNOTEOutline_of_American_History-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-FOOTNOTEChenault&#95;3-0\" class=\"reference\"><a href=\"#cite_note-FOOTNOTEChenault-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>One of the earlier cultures in the present-day United States was the <a href=\"/wiki/Clovis_culture\" title=\"Clovis culture\">Clovis culture</a> (9,100 to 8,850 BCE), who are primarily identified by the use of fluted <a href=\"/wiki/Spear\" title=\"Spear\">spear</a> points called the <a href=\"/wiki/Clovis_point\" title=\"Clovis point\">Clovis point</a>. The <a href=\"/wiki/Folsom_culture\" class=\"mw-redirect\" title=\"Folsom culture\">Folsom culture</a> was similar, but is marked by the use of the <a href=\"/wiki/Folsom_point\" title=\"Folsom point\">Folsom point</a>.\n</p><p>A later migration around 8,000 BCE included <a href=\"/wiki/Na-Dene\" class=\"mw-redirect\" title=\"Na-Dene\">Na-Dene</a>-speaking peoples, who reached the <a href=\"/wiki/Pacific_Northwest\" title=\"Pacific Northwest\">Pacific Northwest</a> by 5,000 BCE.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> From there, they migrated along the <a href=\"/wiki/West_Coast_of_the_United_States\" title=\"West Coast of the United States\">Pacific Coast</a> and into the interior.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup> Another group, the <a href=\"/wiki/Oshara_tradition\" title=\"Oshara tradition\">Oshara tradition</a> people, who lived from 5,500 BCE to 600 CE, were part of the <a href=\"/wiki/Archaic_Southwest\" title=\"Archaic Southwest\">Archaic Southwest</a>.\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Mound_builders_and_pueblos\">Mound builders and pueblos</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main articles: <a href=\"/wiki/Mound_Builders\" title=\"Mound Builders\">Mound Builders</a> and <a href=\"/wiki/Ancestral_Puebloans\" title=\"Ancestral Puebloans\">Ancestral Puebloans</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Monks_Mound_in_July.JPG\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Monks_Mound_in_July.JPG/250px-Monks_Mound_in_July.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"188\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Monks_Mound_in_July.JPG/500px-Monks_Mound_in_July.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1600\" data-file-height=\"1200\" /></a><figcaption><a href=\"/wiki/Monks_Mound\" title=\"Monks Mound\">Monks Mound</a> of <a href=\"/wiki/Cahokia\" title=\"Cahokia\">Cahokia</a>, a <a href=\"/wiki/UNESCO_World_Heritage_Site\" class=\"mw-redirect\" title=\"UNESCO World Heritage Site\">UNESCO World Heritage Site</a>, in summer</figcaption></figure>\n<p>The <a href=\"/wiki/Adena_culture\" title=\"Adena culture\">Adena</a> began constructing large <a href=\"/wiki/Earthworks_(archaeology)\" title=\"Earthworks (archaeology)\">earthwork</a> mounds around 600 BCE. They are the earliest known people to have been <a href=\"/wiki/Mound_Builders\" title=\"Mound Builders\">Mound Builders</a>, although there are <a href=\"/wiki/Mound\" title=\"Mound\">mounds</a> in the United States that predate this culture. The Adenans were absorbed into the <a href=\"/wiki/Hopewell_tradition\" title=\"Hopewell tradition\">Hopewell tradition</a>, a powerful people who traded tools and goods across a wide territory. They continued the Adena tradition of mound-building and pioneered a trading system called the Hopewell Exchange System, which at its greatest extent ran from the present-day Southeast up to the Canadian side of <a href=\"/wiki/Lake_Ontario\" title=\"Lake Ontario\">Lake Ontario</a>.<sup id=\"cite&#95;ref-OHC-2011&#95;6-0\" class=\"reference\"><a href=\"#cite_note-OHC-2011-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup> By 500 CE, the Hopewellians had been absorbed into the larger <a href=\"/wiki/Mississippian_culture\" class=\"mw-redirect\" title=\"Mississippian culture\">Mississippian culture</a>.\n</p><p>The Mississippians were a broad group of tribes. Their most important city was <a href=\"/wiki/Cahokia\" title=\"Cahokia\">Cahokia</a>, near modern-day <a href=\"/wiki/St._Louis,_Missouri\" class=\"mw-redirect\" title=\"St. Louis, Missouri\">St. Louis, Missouri</a>. At its peak in the 12th century, the city had an estimated population of 20,000, larger than the population of London at the time. The entire city was centered around the <a href=\"/wiki/Monks_Mound\" title=\"Monks Mound\">Monks Mound</a> that stood 100 feet (30&#160;m) tall. Cahokia, like many other cities and villages of the time, depended on hunting, foraging, trading, and agriculture, and developed a class system with slaves and human sacrifice that was influenced by societies to the south, like the <a href=\"/wiki/Maya_peoples\" title=\"Maya peoples\">Mayans</a>.<sup id=\"cite&#95;ref-FOOTNOTEOutline&#95;of&#95;American&#95;History&#95;2-1\" class=\"reference\"><a href=\"#cite_note-FOOTNOTEOutline_of_American_History-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>In the <a href=\"/wiki/Southwestern_United_States\" title=\"Southwestern United States\">Southwest</a>, the <a href=\"/wiki/Anasazi\" class=\"mw-redirect\" title=\"Anasazi\">Anasazi</a> began constructing stone and adobe pueblos around 900 BCE.<sup id=\"cite&#95;ref-eb&#95;7-0\" class=\"reference\"><a href=\"#cite_note-eb-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup> These apartment-like structures were often built into cliff faces, as seen in the <a href=\"/wiki/Cliff_Palace\" title=\"Cliff Palace\">Cliff Palace</a> at <a href=\"/wiki/Mesa_Verde\" class=\"mw-redirect\" title=\"Mesa Verde\">Mesa Verde</a>. Some grew to be the size of cities, with <a href=\"/wiki/Pueblo_Bonito\" title=\"Pueblo Bonito\">Pueblo Bonito</a> along the <a href=\"/wiki/Chaco_River\" title=\"Chaco River\">Chaco River</a> in New Mexico once consisting of 800 rooms.<sup id=\"cite&#95;ref-FOOTNOTEOutline&#95;of&#95;American&#95;History&#95;2-2\" class=\"reference\"><a href=\"#cite_note-FOOTNOTEOutline_of_American_History-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Northwest_and_northeast\">Northwest and northeast</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main articles: <a href=\"/wiki/Indigenous_peoples_of_the_Eastern_Woodlands\" title=\"Indigenous peoples of the Eastern Woodlands\">Indigenous peoples of the Eastern Woodlands</a> and <a href=\"/wiki/Indigenous_peoples_of_the_Pacific_Northwest_Coast\" title=\"Indigenous peoples of the Pacific Northwest Coast\">Indigenous peoples of the Pacific Northwest Coast</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Tlingit_K%27alyaan_Totem_Pole_August_2005.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Tlingit_K%27alyaan_Totem_Pole_August_2005.jpg/250px-Tlingit_K%27alyaan_Totem_Pole_August_2005.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"230\" height=\"345\" style=\"--mw-file-upright: 0.9\" class=\"mw-file-element mw-file-upright\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Tlingit_K%27alyaan_Totem_Pole_August_2005.jpg/500px-Tlingit_K%27alyaan_Totem_Pole_August_2005.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1720\" data-file-height=\"2580\" /></a><figcaption>The <i>K'alyaan</i> <a href=\"/wiki/Totem_pole\" title=\"Totem pole\">Totem pole</a> of the <a href=\"/wiki/Tlingit\" title=\"Tlingit\">Tlingit</a> Kiks.ádi Clan, erected at <a href=\"/wiki/Sitka_National_Historical_Park\" title=\"Sitka National Historical Park\">Sitka National Historical Park</a> to commemorate the lives lost in the <a href=\"/wiki/Battle_of_Sitka\" title=\"Battle of Sitka\">Battle of Sitka</a> in 1804</figcaption></figure>\n<p>The <a href=\"/wiki/Indigenous_peoples_of_the_Pacific_Northwest\" class=\"mw-redirect\" title=\"Indigenous peoples of the Pacific Northwest\">Indigenous peoples of the Pacific Northwest</a> were likely the most affluent Native Americans. Many distinct cultural groups and political entities developed there, but they all shared certain beliefs, traditions, and practices, such as the centrality of <a href=\"/wiki/Salmon\" title=\"Salmon\">salmon</a> as a resource and spiritual symbol. Permanent villages began to develop in this region as early as 1,000&#160;BCE, and these communities celebrated by the gift-giving feast of the <a href=\"/wiki/Potlatch\" title=\"Potlatch\">potlatch</a>.\n</p>"
+    }
+   }
+  }
+ },
+ {
+  "host": "commons.wikimedia.org",
+  "params": {
+   "action": "query",
+   "format": "json",
+   "prop": "imageinfo",
+   "iiprop": "extmetadata|url",
+   "iiextmetadatafilter": "LicenseShortName|LicenseUrl|Artist",
+   "titles": "File:Aerial_View_of_Campus,_with_Helen_C._White_Hall_in_foreground_(14070186173).jpg|File:Greater_coat_of_arms_of_the_United_States.svg|File:Wisconsin_State_Capitol_Building_6.jpg"
+  },
+  "status": 200,
+  "json": {
+   "batchcomplete": "",
+   "query": {
+    "normalized": [
+     {
+      "from": "File:Aerial_View_of_Campus,_with_Helen_C._White_Hall_in_foreground_(14070186173).jpg",
+      "to": "File:Aerial View of Campus, with Helen C. White Hall in foreground (14070186173).jpg"
+     },
+     {
+      "from": "File:Greater_coat_of_arms_of_the_United_States.svg",
+      "to": "File:Greater coat of arms of the United States.svg"
+     },
+     {
+      "from": "File:Wisconsin_State_Capitol_Building_6.jpg",
+      "to": "File:Wisconsin State Capitol Building 6.jpg"
+     }
+    ],
+    "pages": {
+     "78327040": {
+      "pageid": 78327040,
+      "ns": 6,
+      "title": "File:Aerial View of Campus, with Helen C. White Hall in foreground (14070186173).jpg",
+      "imagerepository": "local",
+      "imageinfo": [
+       {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Aerial_View_of_Campus%2C_with_Helen_C._White_Hall_in_foreground_%2814070186173%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aerial_View_of_Campus,_with_Helen_C._White_Hall_in_foreground_(14070186173).jpg",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=78327040",
+        "extmetadata": {
+         "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/20245378@N03\">college.library</a>",
+          "source": "commons-desc-page"
+         },
+         "LicenseShortName": {
+          "value": "CC BY 2.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+         },
+         "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/2.0",
+          "source": "commons-desc-page"
+         }
+        }
+       }
+      ]
+     },
+     "12832888": {
+      "pageid": 12832888,
+      "ns": 6,
+      "title": "File:Greater coat of arms of the United States.svg",
+      "imagerepository": "local",
+      "imageinfo": [
+       {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Greater_coat_of_arms_of_the_United_States.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:Greater_coat_of_arms_of_the_United_States.svg",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=12832888",
+        "extmetadata": {
+         "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ssolbergj\" title=\"User:Ssolbergj\">Ssolbergj</a>",
+          "source": "commons-desc-page"
+         },
+         "LicenseShortName": {
+          "value": "Public domain",
+          "source": "commons-desc-page",
+          "hidden": ""
+         }
+        }
+       }
+      ]
+     },
+     "149146209": {
+      "pageid": 149146209,
+      "ns": 6,
+      "title": "File:Wisconsin State Capitol Building 6.jpg",
+      "imagerepository": "local",
+      "imageinfo": [
+       {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Wisconsin_State_Capitol_Building_6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:Wisconsin_State_Capitol_Building_6.jpg",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=149146209",
+        "extmetadata": {
+         "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Wikideas1\" title=\"User:Wikideas1\">Wikideas1</a>",
+          "source": "commons-desc-page"
+         },
+         "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+         },
+         "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+         }
+        }
+       }
+      ]
+     }
     }
    }
   }

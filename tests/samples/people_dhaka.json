@@ -1,0 +1,1908 @@
+[
+ {
+  "host": "nominatim.openstreetmap.org",
+  "params": {
+   "lat": "23.81",
+   "lon": "90.41",
+   "format": "jsonv2",
+   "addressdetails": "1",
+   "zoom": "18",
+   "accept-language": "en"
+  },
+  "status": 200,
+  "json": {
+   "place_id": 251943931,
+   "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+   "osm_type": "way",
+   "osm_id": 1056399840,
+   "lat": "23.8102410",
+   "lon": "90.4110814",
+   "category": "leisure",
+   "type": "playground",
+   "place_rank": 30,
+   "importance": 7.101167315170547e-05,
+   "addresstype": "leisure",
+   "name": "",
+   "display_name": "DOHS Road, Baridhara DOHS, Joar Sahara, Dhaka, Dhaka Metropolitan, Dhaka District, Dhaka Division, 1206, Bangladesh",
+   "address": {
+    "road": "DOHS Road",
+    "residential": "Baridhara DOHS",
+    "quarter": "Baridhara DOHS",
+    "suburb": "Joar Sahara",
+    "city": "Dhaka",
+    "county": "Dhaka Metropolitan",
+    "state_district": "Dhaka District",
+    "ISO3166-2-lvl5": "BD-13",
+    "state": "Dhaka Division",
+    "ISO3166-2-lvl4": "BD-C",
+    "postcode": "1206",
+    "country": "Bangladesh",
+    "country_code": "bd"
+   },
+   "boundingbox": [
+    "23.8098438",
+    "23.8106381",
+    "90.4106518",
+    "90.4115110"
+   ]
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "query",
+   "titles": "History of Baridhara DOHS|History of Baridhara DOHS, Dhaka|Baridhara DOHS, Dhaka|Baridhara DOHS|History of Joar Sahara|History of Joar Sahara, Dhaka|Joar Sahara, Dhaka|Joar Sahara|History of Dhaka|History of Dhaka, Dhaka Division|Dhaka, Dhaka Division|Dhaka|History of Dhaka Metropolitan|History of Dhaka Metropolitan, Dhaka Division|Dhaka Metropolitan, Dhaka Division|Dhaka Metropolitan|History of Dhaka District|History of Dhaka District, Dhaka Division|Dhaka District, Dhaka Division|Dhaka District",
+   "prop": "extracts|pageprops|pageimages",
+   "exintro": "1",
+   "explaintext": "1",
+   "exlimit": "max",
+   "redirects": "1",
+   "format": "json",
+   "piprop": "thumbnail|name",
+   "pithumbsize": "240",
+   "pilimit": "max"
+  },
+  "status": 200,
+  "json": {
+   "batchcomplete": "",
+   "query": {
+    "pages": {
+     "-1": {
+      "ns": 0,
+      "title": "History of Baridhara DOHS",
+      "missing": ""
+     },
+     "-2": {
+      "ns": 0,
+      "title": "History of Baridhara DOHS, Dhaka",
+      "missing": ""
+     },
+     "-3": {
+      "ns": 0,
+      "title": "Baridhara DOHS, Dhaka",
+      "missing": ""
+     },
+     "-4": {
+      "ns": 0,
+      "title": "History of Joar Sahara",
+      "missing": ""
+     },
+     "-5": {
+      "ns": 0,
+      "title": "History of Joar Sahara, Dhaka",
+      "missing": ""
+     },
+     "-6": {
+      "ns": 0,
+      "title": "Joar Sahara, Dhaka",
+      "missing": ""
+     },
+     "-7": {
+      "ns": 0,
+      "title": "Joar Sahara",
+      "missing": ""
+     },
+     "-8": {
+      "ns": 0,
+      "title": "History of Dhaka, Dhaka Division",
+      "missing": ""
+     },
+     "-9": {
+      "ns": 0,
+      "title": "Dhaka, Dhaka Division",
+      "missing": ""
+     },
+     "-10": {
+      "ns": 0,
+      "title": "History of Dhaka Metropolitan",
+      "missing": ""
+     },
+     "-11": {
+      "ns": 0,
+      "title": "History of Dhaka Metropolitan, Dhaka Division",
+      "missing": ""
+     },
+     "-12": {
+      "ns": 0,
+      "title": "Dhaka Metropolitan, Dhaka Division",
+      "missing": ""
+     },
+     "-13": {
+      "ns": 0,
+      "title": "Dhaka Metropolitan",
+      "missing": ""
+     },
+     "-14": {
+      "ns": 0,
+      "title": "History of Dhaka District",
+      "missing": ""
+     },
+     "-15": {
+      "ns": 0,
+      "title": "History of Dhaka District, Dhaka Division",
+      "missing": ""
+     },
+     "-16": {
+      "ns": 0,
+      "title": "Dhaka District, Dhaka Division",
+      "missing": ""
+     },
+     "53398572": {
+      "pageid": 53398572,
+      "ns": 0,
+      "title": "Baridhara DOHS",
+      "extract": "Baridhara DOHS is a  neighborhood in Baridhara, Dhaka, Bangladesh.\n\n",
+      "pageprops": {
+       "kartographer_frames": "1",
+       "page_image_free": "DOHS_Baridhara_1.jpg",
+       "wikibase-shortdesc": "Neighborhood in Dhaka, Bangladesh",
+       "wikibase_item": "Q29026489"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/DOHS_Baridhara_1.jpg/250px-DOHS_Baridhara_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 180
+      },
+      "pageimage": "DOHS_Baridhara_1.jpg"
+     },
+     "56656": {
+      "pageid": 56656,
+      "ns": 0,
+      "title": "Dhaka",
+      "extract": "Dhaka (  DAH-kə or   DAK-ə; Bengali: ঢাকা, romanized: Ḍhākā, pronounced [ˈɖʱaka] ), formerly spelled as Dacca, is the capital and largest city of Bangladesh. With an estimated population of 36.6 million, Dhaka is the second largest city by population in the world, and is widely considered to be the most densely populated built-up urban area in the world. Dhaka is an important cultural, economic, and scientific hub of Eastern South Asia. Dhaka ranks fourth in South Asia and 55th in the world in terms of GDP. Lying on the Ganges Delta, it is bounded by the Buriganga, Turag, Dhaleshwari and Shitalakshya rivers. It is also the largest Bengali-speaking city in the world.\nThe area of Dhaka has been inhabited since the first millennium. An early modern city developed from the 17th century as a provincial capital and commercial centre of the Mughal Empire. Dhaka was the capital of a proto-industrialized Mughal Bengal for 75 years (1608–39 and 1660–1704). It was the hub of the muslin trade in Bengal and one of the most prosperous cities in the world. The Mughal city was named Jahangirnagar (The City of Jahangir) in honour of the erstwhile ruling emperor Jahangir. The city's wealthy Mughal e",
+      "pageprops": {
+       "page_image_free": "Tejgaon_Commercial_Area.jpg",
+       "wikibase-shortdesc": "Capital and largest city of Bangladesh",
+       "wikibase_item": "Q1354"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Tejgaon_Commercial_Area.jpg/250px-Tejgaon_Commercial_Area.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 135
+      },
+      "pageimage": "Tejgaon_Commercial_Area.jpg"
+     },
+     "4233263": {
+      "pageid": 4233263,
+      "ns": 0,
+      "title": "Dhaka District",
+      "extract": "Dhaka District (Bengali: ঢাকা জেলা, romanised: Ḍhākā jēlā) is a district in central Bangladesh, and is the densest district in the nation. It is a part of the Dhaka Division. Dhaka, the capital of Bangladesh, rests on the eastern banks of the Buriganga River which flows from the Turag to the southern part of the district. The former Dhaka city corporation occupied only about a fifth of the area of Dhaka district until 2011 where the municipal corporation was fractionated and rearranged in North and South corporations due to being the economic, political and cultural centre of the district and also the country. Dhaka District consists of the upazillas of Keraniganj, Nawabganj, Dohar, Savar and Dhamrai, alongside the city of Dhaka. Dhaka District is an administrative entity, and like many other cities, it does not cover the modern conurbation which is Greater Dhaka, which has spilled into neighbouring districts, nor does the conurbation cover the whole district, as there are rural areas within the district.\n\n",
+      "pageprops": {
+       "page_image_free": "Bangladesh_National_Parliament_House.jpg",
+       "wikibase-shortdesc": "District of Bangladesh in Dhaka",
+       "wikibase_item": "Q1850485"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Bangladesh_National_Parliament_House.jpg/250px-Bangladesh_National_Parliament_House.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 180
+      },
+      "pageimage": "Bangladesh_National_Parliament_House.jpg"
+     },
+     "6857127": {
+      "pageid": 6857127,
+      "ns": 0,
+      "title": "History of Dhaka",
+      "extract": "Dhaka (Dacca) is a modern megacity with origins dating from 500 BC to 200 BC. The history of Dhaka region begins with the existence of urbanised settlements that were ruled by the Gupta Empire, Gauda Kingdom,  Pala Empire, and Chandra dynasty before passing to the control of the Sena dynasty in the 10th century CE. After the reign of the Sena dynasty, the region was ruled by the Hindu Deva dynasty of Bikrampur.\nDhaka was successively ruled by the Turkic and Afghan governors descending from the Delhi Sultanate, followed by the Bengal Sultanate, before the arrival of the Mughals in 1608. The city became proto-industrialised and was declared the capital of Mughal Bengal and commercial (financial) capital of Mughal India. The Dhaka natural riverine port has a recorded existence since the 16th century CE. Dhaka's strategic riverine location in Bengal made it a hub for Eurasian traders, including Armenians, Portuguese, French, Dutch, and British. The bustling old city was known as the Venice of the East. After the Mughals, the British ruled the region for 200 years until the independence of India in 1947. After the independence of Bangladesh in 1971, Dhaka became the capital of the new s",
+      "pageprops": {
+       "page_image_free": "DhakaCity1861.png",
+       "wikibase-shortdesc": "History of the capital city of Bangladesh",
+       "wikibase_item": "Q12390446"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/DhakaCity1861.png/250px-DhakaCity1861.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 151
+      },
+      "pageimage": "DhakaCity1861.png"
+     }
+    }
+   },
+   "limits": {
+    "extracts": 20,
+    "pageimages": 50
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "query",
+   "titles": "History of Dhaka Division|History of Dhaka Division, Bangladesh|Dhaka Division, Bangladesh|Dhaka Division|History of Bangladesh|Bangladesh",
+   "prop": "extracts|pageprops|pageimages",
+   "exintro": "1",
+   "explaintext": "1",
+   "exlimit": "max",
+   "redirects": "1",
+   "format": "json",
+   "piprop": "thumbnail|name",
+   "pithumbsize": "240",
+   "pilimit": "max"
+  },
+  "status": 200,
+  "json": {
+   "batchcomplete": "",
+   "query": {
+    "redirects": [
+     {
+      "from": "Dhaka Division, Bangladesh",
+      "to": "Dhaka Division"
+     }
+    ],
+    "pages": {
+     "-1": {
+      "ns": 0,
+      "title": "History of Dhaka Division",
+      "missing": ""
+     },
+     "-2": {
+      "ns": 0,
+      "title": "History of Dhaka Division, Bangladesh",
+      "missing": ""
+     },
+     "3454": {
+      "pageid": 3454,
+      "ns": 0,
+      "title": "Bangladesh",
+      "extract": "Bangladesh, officially the People's Republic of Bangladesh, is a country in South Asia. It is the eighth-most populous country in the world with a population of almost 175.4 million people within an area of 148,461 square kilometres (57,321 sq mi). Bangladesh shares land borders with India to the north, west, and east, and Myanmar to the southeast. It has a coastline along the Bay of Bengal to its south and is separated from Bhutan and Nepal by the Siliguri Corridor, and from China by the Indian states of West Bengal and Sikkim to its north. Dhaka, the capital and largest city, is the nation's political, financial, and cultural centre. Chittagong is the second-largest city and the busiest port of the country.\nThe territory of modern Bangladesh was ruled by successive Hindu and Buddhist dynasties in ancient history. Following the Muslim conquest in 1204, the region came under Sultanate and Mughal rule. As the largest subdivision of the Mughal Empire, Bengal became a major commercial centre, known for its textile industry and agricultural output. The Battle of Plassey in 1757 began British colonial rule, which lasted nearly two centuries; colonial policies redirected wealth from Beng",
+      "pageprops": {
+       "page_image_free": "Flag_of_Bangladesh.svg",
+       "wikibase-shortdesc": "Country in South Asia",
+       "wikibase_item": "Q902"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Flag_of_Bangladesh.svg/250px-Flag_of_Bangladesh.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 144
+      },
+      "pageimage": "Flag_of_Bangladesh.svg"
+     },
+     "403946": {
+      "pageid": 403946,
+      "ns": 0,
+      "title": "Dhaka Division",
+      "extract": "Dhaka Division (Bengali: ঢাকা বিভাগ, romanized: Ḍhaka Bibhag) is an administrative division of Bangladesh. Dhaka serves as the capital city of Dhaka Division, the Dhaka District and Bangladesh. The division remains a population magnet, and covers an area of 21,000 km2 with a population in excess of 44 million, it is one of the fastest growing populous administrative divisions of the world, growing at a rate of 1.94% since prior count, compared with the national average of 1.22%.\nDhaka Division borders every other division in the country except Rangpur Division. It is bounded by Mymensingh Division to the north, Barisal Division to the south, Chittagong Division to the east and south-east, Sylhet Division to the north-east, and Rajshahi Division to the west and Khulna Divisions to the south-west.",
+      "pageprops": {
+       "page_image_free": "Dhaka_April_(33244268934).jpg",
+       "wikibase-shortdesc": "Division of Bangladesh",
+       "wikibase_item": "Q330158"
+      },
+      "thumbnail": {
+       "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Dhaka_April_%2833244268934%29.jpg/250px-Dhaka_April_%2833244268934%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+       "width": 240,
+       "height": 150
+      },
+      "pageimage": "Dhaka_April_(33244268934).jpg"
+     },
+     "40096": {
+      "pageid": 40096,
+      "ns": 0,
+      "title": "History of Bangladesh",
+      "extract": "The history of Bangladesh dates back over four millennia to the Chalcolithic period. The region's early history was characterized by a succession of Hindu and Buddhist kingdoms and empires that fought for control over the Bengal region. Islam arrived in the 8th century and gradually became the dominant religion from the early 13th century with conquests led by Bakhtiyar Khalji and the activities of Sunni missionaries, like Shah Jalal. Muslim rulers promoted the spread of Islam by building mosques across the region. From the 14th century onward, Bengal was ruled by the Bengal Sultanate, founded by Fakhruddin Mubarak Shah, who established an individual currency. The Bengal Sultanate expanded under rulers like Shamsuddin Ilyas Shah, leading to economic prosperity and military dominance, with Bengal being referred to by Europeans as the richest country to trade with. The region later became a part of the Mughal Empire, and according to historian C. A. Bayly, it was probably the empire's wealthiest province.\nFollowing the decline of the Mughal Empire in the early 1700s, Bengal became a semi-independent state under the Nawabs of Bengal, ultimately led by Siraj ud-Daulah. It was later con",
+      "pageprops": {
+       "wikibase-shortdesc": "",
+       "wikibase_item": "Q839809"
+      }
+     }
+    }
+   },
+   "limits": {
+    "extracts": 20,
+    "pageimages": 50
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "Baridhara DOHS",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "Baridhara DOHS",
+    "pageid": 53398572,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "History",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "Baridhara_DOHS",
+      "byteoffset": 557,
+      "anchor": "History",
+      "linkAnchor": "History"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "2",
+      "index": "2",
+      "fromtitle": "Baridhara_DOHS",
+      "byteoffset": 1892,
+      "anchor": "References",
+      "linkAnchor": "References"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Dhaka",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "History of Dhaka",
+    "pageid": 6857127,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Etymology",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 2698,
+      "anchor": "Etymology",
+      "linkAnchor": "Etymology"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Early history",
+      "number": "2",
+      "index": "2",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 4779,
+      "anchor": "Early_history",
+      "linkAnchor": "Early_history"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Kamarupa kingdom",
+      "number": "3",
+      "index": "3",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 5984,
+      "anchor": "Kamarupa_kingdom",
+      "linkAnchor": "Kamarupa_kingdom"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Pala Empire",
+      "number": "4",
+      "index": "4",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 6670,
+      "anchor": "Pala_Empire",
+      "linkAnchor": "Pala_Empire"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Chandra kingdom",
+      "number": "5",
+      "index": "5",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 9153,
+      "anchor": "Chandra_kingdom",
+      "linkAnchor": "Chandra_kingdom"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Sena kingdom",
+      "number": "6",
+      "index": "6",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 9977,
+      "anchor": "Sena_kingdom",
+      "linkAnchor": "Sena_kingdom"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Sultanate period",
+      "number": "7",
+      "index": "7",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 12710,
+      "anchor": "Sultanate_period",
+      "linkAnchor": "Sultanate_period"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Mughal rule and rise as the capital of Bengal",
+      "number": "8",
+      "index": "8",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 16085,
+      "anchor": "Mughal_rule_and_rise_as_the_capital_of_Bengal",
+      "linkAnchor": "Mughal_rule_and_rise_as_the_capital_of_Bengal"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Economy",
+      "number": "8.1",
+      "index": "9",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 26386,
+      "anchor": "Economy",
+      "linkAnchor": "Economy"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Portuguese settlements",
+      "number": "8.2",
+      "index": "10",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 26922,
+      "anchor": "Portuguese_settlements",
+      "linkAnchor": "Portuguese_settlements"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Nawab era",
+      "number": "8.3",
+      "index": "11",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 30704,
+      "anchor": "Nawab_era",
+      "linkAnchor": "Nawab_era"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Armenian settlements",
+      "number": "8.4",
+      "index": "12",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 33361,
+      "anchor": "Armenian_settlements",
+      "linkAnchor": "Armenian_settlements"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Post Armenian settlements: Muslim Elites in Dacca",
+      "number": "8.5",
+      "index": "13",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 36226,
+      "anchor": "Post_Armenian_settlements:_Muslim_Elites_in_Dacca",
+      "linkAnchor": "Post_Armenian_settlements:_Muslim_Elites_in_Dacca"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "British East India Company rule (1793–1857)",
+      "number": "9",
+      "index": "14",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 37347,
+      "anchor": "British_East_India_Company_rule_(1793–1857)",
+      "linkAnchor": "British_East_India_Company_rule_(1793–1857)"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Rise of Dhaka Nawab Estate",
+      "number": "9.1",
+      "index": "15",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 43765,
+      "anchor": "Rise_of_Dhaka_Nawab_Estate",
+      "linkAnchor": "Rise_of_Dhaka_Nawab_Estate"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "British Raj rule (1858–1947)",
+      "number": "10",
+      "index": "16",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 45376,
+      "anchor": "British_Raj_rule_(1858–1947)",
+      "linkAnchor": "British_Raj_rule_(1858–1947)"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "East Bengal's (later East Pakistan's) capital (1947–1971)",
+      "number": "11",
+      "index": "17",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 56187,
+      "anchor": "East_Bengal's_(later_East_Pakistan's)_capital_(1947–1971)",
+      "linkAnchor": "East_Bengal's_(later_East_Pakistan's)_capital_(1947–1971)"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Post-independence of Bangladesh (1971–present)",
+      "number": "12",
+      "index": "18",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 64509,
+      "anchor": "Post-independence_of_Bangladesh_(1971–present)",
+      "linkAnchor": "Post-independence_of_Bangladesh_(1971–present)"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "See also",
+      "number": "13",
+      "index": "19",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 68763,
+      "anchor": "See_also",
+      "linkAnchor": "See_also"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "14",
+      "index": "20",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 68856,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Bibliography",
+      "number": "15",
+      "index": "21",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 68886,
+      "anchor": "Bibliography",
+      "linkAnchor": "Bibliography"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "External links",
+      "number": "16",
+      "index": "22",
+      "fromtitle": "History_of_Dhaka",
+      "byteoffset": 69241,
+      "anchor": "External_links",
+      "linkAnchor": "External_links"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "Dhaka District",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "Dhaka District",
+    "pageid": 4233263,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Geography",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 5755,
+      "anchor": "Geography",
+      "linkAnchor": "Geography"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "History",
+      "number": "2",
+      "index": "2",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 6716,
+      "anchor": "History",
+      "linkAnchor": "History"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Administration",
+      "number": "3",
+      "index": "3",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 17031,
+      "anchor": "Administration",
+      "linkAnchor": "Administration"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Subdivisions",
+      "number": "4",
+      "index": "4",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 17838,
+      "anchor": "Subdivisions",
+      "linkAnchor": "Subdivisions"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Demographics",
+      "number": "5",
+      "index": "5",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 19442,
+      "anchor": "Demographics",
+      "linkAnchor": "Demographics"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Religion",
+      "number": "5.1",
+      "index": "6",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 20932,
+      "anchor": "Religion",
+      "linkAnchor": "Religion"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Economy",
+      "number": "6",
+      "index": "7",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 24454,
+      "anchor": "Economy",
+      "linkAnchor": "Economy"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Places of interest",
+      "number": "7",
+      "index": "8",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 29477,
+      "anchor": "Places_of_interest",
+      "linkAnchor": "Places_of_interest"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Lalbagh Fort",
+      "number": "7.1",
+      "index": "9",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 30698,
+      "anchor": "Lalbagh_Fort",
+      "linkAnchor": "Lalbagh_Fort"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Ahsan Manzil Palace Museum",
+      "number": "7.2",
+      "index": "10",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 30966,
+      "anchor": "Ahsan_Manzil_Palace_Museum",
+      "linkAnchor": "Ahsan_Manzil_Palace_Museum"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Jatiyo Smriti Soudho",
+      "number": "7.3",
+      "index": "11",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 31167,
+      "anchor": "Jatiyo_Smriti_Soudho",
+      "linkAnchor": "Jatiyo_Smriti_Soudho"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Tara Mosque",
+      "number": "7.4",
+      "index": "12",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 31545,
+      "anchor": "Tara_Mosque",
+      "linkAnchor": "Tara_Mosque"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Satmasjid",
+      "number": "7.5",
+      "index": "13",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 32932,
+      "anchor": "Satmasjid",
+      "linkAnchor": "Satmasjid"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "National Museum",
+      "number": "7.6",
+      "index": "14",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 33801,
+      "anchor": "National_Museum",
+      "linkAnchor": "National_Museum"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Bara Katra",
+      "number": "7.7",
+      "index": "15",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 37626,
+      "anchor": "Bara_Katra",
+      "linkAnchor": "Bara_Katra"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Gallery",
+      "number": "8",
+      "index": "16",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 37952,
+      "anchor": "Gallery",
+      "linkAnchor": "Gallery"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Notable People",
+      "number": "9",
+      "index": "17",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 42486,
+      "anchor": "Notable_People",
+      "linkAnchor": "Notable_People"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "See also",
+      "number": "10",
+      "index": "18",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 45584,
+      "anchor": "See_also",
+      "linkAnchor": "See_also"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Notes",
+      "number": "11",
+      "index": "19",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 45630,
+      "anchor": "Notes",
+      "linkAnchor": "Notes"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "12",
+      "index": "20",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 45673,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Extyernal links",
+      "number": "13",
+      "index": "21",
+      "fromtitle": "Dhaka_District",
+      "byteoffset": 45708,
+      "anchor": "Extyernal_links",
+      "linkAnchor": "Extyernal_links"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "Baridhara DOHS",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "Baridhara DOHS",
+    "pageid": 53398572,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"History\">History</h2></div>\n<p>It was built on flood plains, which may potentially make the buildings and infrastructure in the area vulnerable to earthquakes.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> There is a mosque near the lake in Baridhara DOHS.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> Inspire is a creative space in DOHS where people can practice yoga.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> Baridhara DOHS Convention Centre is located here.<sup id=\"cite&#95;ref-5\" class=\"reference\"><a href=\"#cite_note-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.thedailystar.net/frontpage/its-time-wake-82493\">\"It's time to wake up\"</a>. <i>The Daily Star</i>. 16 May 2015<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">6 March</span> 2017</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=The+Daily+Star&amp;rft.atitle=It%27s+time+to+wake+up&amp;rft.date=2015-05-16&amp;rft&#95;id=http%3A%2F%2Fwww.thedailystar.net%2Ffrontpage%2Fits-time-wake-82493&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ABaridhara+DOHS\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.thedailystar.net/city/ex-igp-ismail-passes-away-1305427\">\"Ex-IGP Ismail passes away\"</a>. <i>The Daily Star</i>. 28 October 2016<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">6 March</span> 2017</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=The+Daily+Star&amp;rft.atitle=Ex-IGP+Ismail+passes+away&amp;rft.date=2016-10-28&amp;rft&#95;id=http%3A%2F%2Fwww.thedailystar.net%2Fcity%2Fex-igp-ismail-passes-away-1305427&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ABaridhara+DOHS\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-3\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.thedailystar.net/connecting-the-mind-and-body-42448\">\"Connecting the mind and body\"</a>. <i>The Daily Star</i>. 20 September 2014<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">6 March</span> 2017</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=The+Daily+Star&amp;rft.atitle=Connecting+the+mind+and+body&amp;rft.date=2014-09-20&amp;rft&#95;id=http%3A%2F%2Fwww.thedailystar.net%2Fconnecting-the-mind-and-body-42448&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ABaridhara+DOHS\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-4\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-4\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.thedailystar.net/living-the-alternative-way-47317\">\"Living the Alternative Way\"</a>. <i>The Daily Star</i>. 25 October 2014<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">6 March</span> 2017</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=The+Daily+Star&amp;rft.atitle=Living+the+Alternative+Way&amp;rft.date=2014-10-25&amp;rft&#95;id=http%3A%2F%2Fwww.thedailystar.net%2Fliving-the-alternative-way-47317&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ABaridhara+DOHS\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-5\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-5\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation web cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"http://www.thedailystar.net/shout/pop-culture/cosplayers-brave-bad-weather-121720\">\"Cosplayers Brave Bad Weather\"</a>. <i>The Daily Star</i>. 6 August 2015<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">6 March</span> 2017</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=unknown&amp;rft.jtitle=The+Daily+Star&amp;rft.atitle=Cosplayers+Brave+Bad+Weather&amp;rft.date=2015-08-06&amp;rft&#95;id=http%3A%2F%2Fwww.thedailystar.net%2Fshout%2Fpop-culture%2Fcosplayers-brave-bad-weather-121720&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3ABaridhara+DOHS\" class=\"Z3988\"></span></span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.main‐5c8bb5c95f‐zsrzw\nCached time: 20261010140455\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.136 seconds\nReal time usage: 0.154 seconds\nPreprocessor visited node count: 138/1000000\nRevision size: 1333/2097152 bytes\nPost‐expand include size: 6514/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 1/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 11805/5000000 bytes\nLua time usage: 0.102/10.000 seconds\nLua memory usage: 3166108/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%  139.954      1 -total\n 99.64%  139.454      5 Template:Cite_web\n-->\n\n<!-- Render ID 91d4652e-c4b3-11f1-be42-2d884c0d3a53 -->\n</div>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Dhaka",
+   "section": "2",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "History of Dhaka",
+    "pageid": 6857127,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"Early_history\">Early history</h2></div>\n<p>The Greater Dhaka region was under the kingdom of <a href=\"/wiki/Vanga_Kingdom\" class=\"mw-redirect\" title=\"Vanga Kingdom\">Vanga</a> and <a href=\"/wiki/Gangaridai\" title=\"Gangaridai\">Gangaridai</a> in the early ancient period.<sup id=\"cite&#95;ref-1\" class=\"reference\"><a href=\"#cite_note-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup>\nArchaeological excavations in 2017–2018 inside the former <a href=\"/wiki/Old_Dhaka_Central_Jail\" title=\"Old Dhaka Central Jail\">Old Dhaka Central Jail</a> on Nazimuddin Road in <a href=\"/wiki/Old_Dhaka\" title=\"Old Dhaka\">Old Dhaka</a> revealed some glazed and rolled potteries that are similar to what were found in ancient <a href=\"/wiki/Mahasthangarh\" title=\"Mahasthangarh\">Mahasthangarh</a> and, <a href=\"/wiki/Wari-Bateshwar_ruins\" title=\"Wari-Bateshwar ruins\">Wari-Bateshwar ruins</a> in Bangladesh, and other ruins in India, Malaysia, Indonesia, and Cambodia.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> This suggests Dhaka was inhabited at least from 500 BC to 200 BC.<sup id=\"cite&#95;ref-200bc&#95;3-0\" class=\"reference\"><a href=\"#cite_note-200bc-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-references-wrap\"><ol class=\"references\">\n<li id=\"cite&#95;note-1\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-1\">^</a></b></span> <span class=\"reference-text\"><style data-mw-deduplicate=\"TemplateStyles:r1333433106\">.mw-parser-output cite.citation{font-style:inherit;word-wrap:break-word}.mw-parser-output .citation q{quotes:\"\\\"\"\"\\\"\"\"'\"\"'\"}.mw-parser-output .citation:target{background-color:rgba(0,127,255,0.133)}.mw-parser-output .id-lock-free.id-lock-free a{background:url(\"//upload.wikimedia.org/wikipedia/commons/6/65/Lock-green.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-limited.id-lock-limited a,.mw-parser-output .id-lock-registration.id-lock-registration a{background:url(\"//upload.wikimedia.org/wikipedia/commons/d/d6/Lock-gray-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .id-lock-subscription.id-lock-subscription a{background:url(\"//upload.wikimedia.org/wikipedia/commons/a/aa/Lock-red-alt-2.svg\")right 0.1em center/9px no-repeat}.mw-parser-output .cs1-ws-icon a{background:url(\"//upload.wikimedia.org/wikipedia/commons/4/4c/Wikisource-logo.svg\")right 0.1em center/12px no-repeat}body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-free a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-limited a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-registration a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .id-lock-subscription a,body:not(.skin-timeless):not(.skin-minerva) .mw-parser-output .cs1-ws-icon a{background-size:contain;padding:0 1em 0 0}.mw-parser-output .cs1-code{color:inherit;background:inherit;border:none;padding:inherit}.mw-parser-output .cs1-hidden-error{display:none;color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-visible-error{color:var(--color-error,#bf3c2c)}.mw-parser-output .cs1-maint{display:none;color:#085;margin-left:0.3em}.mw-parser-output .cs1-kern-left{padding-left:0.2em}.mw-parser-output .cs1-kern-right{padding-right:0.2em}.mw-parser-output .citation .mw-selflink{font-weight:inherit}@media screen{.mw-parser-output .cs1-format{font-size:95%}html.skin-theme-clientpref-night .mw-parser-output .cs1-maint{color:#18911f}}@media screen and (prefers-color-scheme:dark){html.skin-theme-clientpref-os .mw-parser-output .cs1-maint{color:#18911f}}</style><cite id=\"CITEREFEnamul&#95;Haque2001\" class=\"citation book cs1\">Enamul Haque (2001). <a rel=\"nofollow\" class=\"external text\" href=\"https://books.google.com/books?id=q_FtAAAAMAAJ\"><i>Excavation at Wari-Bateshwar: A Preliminary Study</i></a>. International Center for Study of Bengal Art. <a href=\"/wiki/ISBN_(identifier)\" class=\"mw-redirect\" title=\"ISBN (identifier)\">ISBN</a>&#160;<a href=\"/wiki/Special:BookSources/978-984-8140-02-4\" title=\"Special:BookSources/978-984-8140-02-4\"><bdi>978-984-8140-02-4</bdi></a>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Excavation+at+Wari-Bateshwar%3A+A+Preliminary+Study&amp;rft.pub=International+Center+for+Study+of+Bengal+Art&amp;rft.date=2001&amp;rft.isbn=978-984-8140-02-4&amp;rft.au=Enamul+Haque&amp;rft&#95;id=https%3A%2F%2Fbooks.google.com%2Fbooks%3Fid%3Dq&#95;FtAAAAMAAJ&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Dhaka\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-2\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-2\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation news cs1 cs1-prop-script cs1-prop-foreign-lang-source\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.prothomalo.com/bangladesh/capital/gn12hn0svf\"><bdi lang=\"bn\">ঢাকা নগরের বয়স আড়াই হাজার বছরের বেশি</bdi></a>. <i>Prothomalo</i> (in Bengali). 29 October 2024<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">13 November</span> 2024</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.jtitle=Prothomalo&amp;rft.atitle=%E0%A6%A2%E0%A6%BE%E0%A6%95%E0%A6%BE+%E0%A6%A8%E0%A6%97%E0%A6%B0%E0%A7%87%E0%A6%B0+%E0%A6%AC%E0%A6%AF%E0%A6%BC%E0%A6%B8+%E0%A6%86%E0%A6%A1%E0%A6%BC%E0%A6%BE%E0%A6%87+%E0%A6%B9%E0%A6%BE%E0%A6%9C%E0%A6%BE%E0%A6%B0+%E0%A6%AC%E0%A6%9B%E0%A6%B0%E0%A7%87%E0%A6%B0+%E0%A6%AC%E0%A7%87%E0%A6%B6%E0%A6%BF&amp;rft.date=2024-10-29&amp;rft&#95;id=https%3A%2F%2Fwww.prothomalo.com%2Fbangladesh%2Fcapital%2Fgn12hn0svf&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Dhaka\" class=\"Z3988\"></span></span>\n</li>\n<li id=\"cite&#95;note-200bc-3\"><span class=\"mw-cite-backlink\"><b><a href=\"#cite_ref-200bc_3-0\">^</a></b></span> <span class=\"reference-text\"><link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1333433106\" /><cite class=\"citation news cs1\"><a rel=\"nofollow\" class=\"external text\" href=\"https://www.rtvonline.com/english/country/17479\">\"Age of Dhaka City More Than 2,500 Years\"</a>. RTV. 30 October 2024<span class=\"reference-accessdate\">. Retrieved <span class=\"nowrap\">13 November</span> 2024</span>.</cite><span title=\"ctx&#95;ver=Z39.88-2004&amp;rft&#95;val&#95;fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Age+of+Dhaka+City+More+Than+2%2C500+Years&amp;rft.date=2024-10-30&amp;rft&#95;id=https%3A%2F%2Fwww.rtvonline.com%2Fenglish%2Fcountry%2F17479&amp;rfr&#95;id=info%3Asid%2Fen.wikipedia.org%3AHistory+of+Dhaka\" class=\"Z3988\"></span></span>\n</li>\n</ol></div>\n<!-- \nNewPP limit report\nParsed by mw‐api‐ext.eqiad.canary‐5c4948f45c‐jsfj9\nCached time: 20261010140455\nCache expiry: 2592000\nCache expiry source: Module:Citation/CS1 (os.date(%Y))\nReduced expiry: false\nComplications: [vary‐revision‐sha1, vary‐revision‐exists]\nCPU time usage: 0.056 seconds\nReal time usage: 0.068 seconds\nPreprocessor visited node count: 84/1000000\nRevision size: 1269/2097152 bytes\nPost‐expand include size: 5138/2097152 bytes\nTemplate argument size: 0/2097152 bytes\nHighest expansion depth: 4/100\nExpensive parser function count: 1/500\nUnstrip recursion depth: 0/20\nUnstrip post‐expand size: 7101/5000000 bytes\nLua time usage: 0.038/10.000 seconds\nLua memory usage: 2966453/52428800 bytes\nNumber of Wikibase entities loaded: 0/500\n-->\n<!--\nTransclusion expansion time report (%,ms,calls,template)\n100.00%   56.936      1 -total\n 90.26%   51.389      1 Template:Cite_book\n  9.49%    5.405      2 Template:Cite_news\n-->\n\n<!-- Render ID 91d46aa8-c4b3-11f1-9311-2bc00d3e9e03 -->\n</div>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "Dhaka District",
+   "section": "2",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "Dhaka District",
+    "pageid": 4233263,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"History\">History</h2></div>\n<style data-mw-deduplicate=\"TemplateStyles:r1368532237\">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+.mw-empty-elt+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main article: <a href=\"/wiki/History_of_Dhaka\" title=\"History of Dhaka\">History of Dhaka</a></div>\n<figure class=\"mw-default-size mw-halign-left\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Dhaka_Lalbagh_Fort_5.JPG\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Dhaka_Lalbagh_Fort_5.JPG/250px-Dhaka_Lalbagh_Fort_5.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"188\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Dhaka_Lalbagh_Fort_5.JPG/500px-Dhaka_Lalbagh_Fort_5.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1280\" data-file-height=\"960\" /></a><figcaption><a href=\"/wiki/Lalbagh_Fort\" title=\"Lalbagh Fort\">Lalbagh Fort</a> was developed by Shaista Khan.</figcaption></figure>\n<p>The administrative Dhaka District was first established in 1772, but the existence of urbanised settlements in the area that is now Dhaka city—dates from the 7th century. The present-day <a href=\"/wiki/Savar_Upazila\" title=\"Savar Upazila\">Savar</a> was the capital of the Sanbagh Kingdom during the seventh and eighth centuries. The city area of Dhaka was ruled by the <a href=\"/wiki/Buddhism\" title=\"Buddhism\">Buddhist</a> kingdom of <a href=\"/wiki/Kamarupa\" title=\"Kamarupa\">Kamarupa</a> and the <a href=\"/wiki/Pala_Empire\" title=\"Pala Empire\">Pala Empire</a> before passing to the control of the <a href=\"/wiki/Hindu\" class=\"mw-redirect\" title=\"Hindu\">Hindu</a> <a href=\"/wiki/Sena_dynasty\" title=\"Sena dynasty\">Sena dynasty</a> in the 9th century. Many believe that the name of the city was derived after the establishment of the goddess <a href=\"/wiki/Dhakeshwari\" class=\"mw-redirect\" title=\"Dhakeshwari\">Dhakeshwari</a>'s temple by <a href=\"/wiki/Ballal_Sena\" class=\"mw-redirect\" title=\"Ballal Sena\">Ballal Sena</a> in the 12th century. Dhaka and its surrounding area were identified as <i>Bengalla</i> around that period. The town itself consisted of a few market centres like Lakshmi Bazar, Shankhari Bazar, Tanti Bazar, Patuatuli, Kumartuli, Bania Nagar and Goal Nagar. After the <a href=\"/wiki/Sena_dynasty\" title=\"Sena dynasty\">Sena dynasty</a>, Dhaka was successively ruled by the <a href=\"/wiki/Turkic_peoples\" title=\"Turkic peoples\">Turkish</a> and <a href=\"/wiki/Pashtun_people\" class=\"mw-redirect\" title=\"Pashtun people\">Afghan</a> governors descending from the <a href=\"/wiki/Delhi_Sultanate\" title=\"Delhi Sultanate\">Delhi Sultanate</a> before the arrival of the <a href=\"/wiki/Mughal_Empire\" title=\"Mughal Empire\">Mughals</a> in 1608.\n</p><p>The development of townships and significant growth in population came as the city was proclaimed the capital of <a href=\"/wiki/Bengal\" title=\"Bengal\">Bengal</a> under <a href=\"/wiki/Mughal_Empire\" title=\"Mughal Empire\">Mughal</a> rule in 1608. During Mughal rule the areas currently under Dhaka district were famous for their textile products—especially the <a href=\"/wiki/Muslin\" title=\"Muslin\">Muslin</a>. Mughal <a href=\"/wiki/Subahdar\" title=\"Subahdar\">subahdar</a> <a href=\"/wiki/Islam_Khan_I\" title=\"Islam Khan I\">Islam Khan</a> was the first administrator of the city. Khan named the town \"Jahangir Nagar\" (<i>City of Jahangir</i>) in honour of the Mughal emperor <a href=\"/wiki/Jahangir\" title=\"Jahangir\">Jahangir</a>, although this name was dropped soon after Jahangir's death. The main expansion of the city took place under the Mughal general <a href=\"/wiki/Shaista_Khan\" title=\"Shaista Khan\">Shaista Khan</a>. The city then measured 19 by 13 kilometres (11.8 by 8.1&#160;mi), with a population of nearly a million people. The city passed to the control of the <a href=\"/wiki/British_East_India_Company\" class=\"mw-redirect\" title=\"British East India Company\">British East India Company</a> in 1757 after the <a href=\"/wiki/Battle_of_Plassey\" title=\"Battle of Plassey\">Battle of Plassey</a> and eventually to the <a href=\"/wiki/The_Crown\" title=\"The Crown\">Crown</a>, <a href=\"/wiki/British_Empire\" title=\"British Empire\">British Empire</a>, in 1765 at the <a href=\"/wiki/Battle_of_Buxar\" title=\"Battle of Buxar\">Battle of Buxar</a>. The city's population shrank dramatically during this period as the prominence of <a href=\"/wiki/Kolkata\" title=\"Kolkata\">Kolkata</a> rose, but substantive development and modernisation eventually followed. A modern civic water supply system was introduced in 1874 and an electricity supply was launched in 1878. The <a href=\"/wiki/Dhaka_Cantonment\" title=\"Dhaka Cantonment\">Dhaka Cantonment</a> was established near the city, serving as a base for <a href=\"/wiki/British_Indian_Army\" title=\"British Indian Army\">British Indian</a> military personnel.\n</p>\n<figure class=\"mw-default-size mw-halign-left\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Jatiyo_Sangshad_Bhaban_(Roehl).jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Jatiyo_Sangshad_Bhaban_%28Roehl%29.jpg/250px-Jatiyo_Sangshad_Bhaban_%28Roehl%29.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"188\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Jatiyo_Sangshad_Bhaban_%28Roehl%29.jpg/500px-Jatiyo_Sangshad_Bhaban_%28Roehl%29.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"800\" data-file-height=\"600\" /></a><figcaption><a href=\"/wiki/Jatiyo_Sangshad_Bhaban\" class=\"mw-redirect\" title=\"Jatiyo Sangshad Bhaban\">Jatiyo Sangshad Bhaban</a> houses the national parliament.</figcaption></figure>\n<p>During the abortive <a href=\"/wiki/Partition_of_Bengal_(1905)\" title=\"Partition of Bengal (1905)\">Partition of Bengal</a> in 1905, Dhaka was declared to be the capital of the newly established state of <a href=\"/wiki/East_Bengal#First_partition,_1905–1912\" title=\"East Bengal\">Eastern Bengal and Assam</a>, but Bengal was reunited in 1911. The rural areas under the present Dhaka district, especially <a href=\"/wiki/Dohar_Upazila\" title=\"Dohar Upazila\">Dohar Upazila</a> were used for the production of <a href=\"/wiki/Indigo\" title=\"Indigo\">indigo</a>.\n</p><p>Following the partition of Bengal in (1947) appending the partition of <a href=\"/wiki/British_India\" class=\"mw-redirect\" title=\"British India\">British India</a> in 1947, Dhaka became the capital of <a href=\"/wiki/East_Bengal\" title=\"East Bengal\">East Bengal</a> as a part of the new <a href=\"/wiki/Islamism\" title=\"Islamism\">Muslim state</a> of <a href=\"/wiki/Pakistan\" title=\"Pakistan\">Pakistan</a>, while the western part of Bengal with a majority Hindu population had become a part of the new and independent India, designated as <a href=\"/wiki/West_Bengal\" title=\"West Bengal\">West Bengal</a> with <a href=\"/wiki/Calcutta\" class=\"mw-redirect\" title=\"Calcutta\">Calcutta</a> as state capital. Calcutta witnessed communal violence that left thousands of people dead. A large proportion of the city's <a href=\"/wiki/Hinduism_in_Bangladesh\" title=\"Hinduism in Bangladesh\">Hindu</a> population departed for <a href=\"/wiki/India\" title=\"India\">India</a>, while the city received hundreds of thousands of <a href=\"/wiki/Islam_in_Bangladesh\" title=\"Islam in Bangladesh\">Muslim</a> immigrants from Calcutta, India. The city's population rose dramatically in a very short period of time, which created severe shortages and infrastructural problems.<sup id=\"cite&#95;ref-Dhaka2&#95;1-0\" class=\"reference\"><a href=\"#cite_note-Dhaka2-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> As the centre of regional politics, Dhaka saw an increasing number of political strikes and incidents of violence. The adoption of <a href=\"/wiki/Urdu\" title=\"Urdu\">Urdu</a> as the sole <a href=\"/wiki/Official_language\" title=\"Official language\">official language</a> of <a href=\"/wiki/Pakistan\" title=\"Pakistan\">Pakistan</a> led to protest marches involving large crowds. Known as the <a href=\"/wiki/Bengali_Language_Movement\" class=\"mw-redirect\" title=\"Bengali Language Movement\">language movement of 1952</a>, the protests resulted in police firing which killed students who were demonstrating peacefully.<sup id=\"cite&#95;ref-CALC&#95;2-0\" class=\"reference\"><a href=\"#cite_note-CALC-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> Throughout the 1950s and '60s, Dhaka remained a hotbed of political activity, and the demands for autonomy for the Bengali population gradually gained momentum.\n</p><p>The <a href=\"/wiki/1970_Bhola_cyclone\" title=\"1970 Bhola cyclone\">1970 Bhola cyclone</a> devastated much of the region, killing an estimated 500,000 people. More than half the city of Dhaka was flooded and millions of people were marooned.<sup class=\"noprint Inline-Template Template-Fact\" style=\"white-space:nowrap;\">&#91;<i><a href=\"/wiki/Wikipedia:Citation_needed\" title=\"Wikipedia:Citation needed\"><span title=\"This claim needs references to reliable sources. (October 2010)\">citation needed</span></a></i>&#93;</sup> With public anger growing against ethnic discrimination and poor cyclone relief efforts from the central government, Bengali politician <a href=\"/wiki/Sheikh_Mujibur_Rahman\" title=\"Sheikh Mujibur Rahman\">Sheikh Mujibur Rahman</a> held a nationalist rally on 7 March 1971 at the <a href=\"/wiki/Suhrawardy_Udyan\" title=\"Suhrawardy Udyan\">Race Course Ground</a>. An estimated one million people attended the gathering, leading to <a href=\"/wiki/Ziaur_Rahman\" title=\"Ziaur Rahman\">Ziaur Rahman</a>'s 26 March declaration of Bangladesh's independence.<sup id=\"cite&#95;ref-CALC&#95;2-1\" class=\"reference\"><a href=\"#cite_note-CALC-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup><sup id=\"cite&#95;ref-REF&#95;3-0\" class=\"reference\"><a href=\"#cite_note-REF-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup> In response, the <a href=\"/wiki/Pakistan_Army\" title=\"Pakistan Army\">Pakistan Army</a> launched <a href=\"/wiki/Operation_Searchlight\" title=\"Operation Searchlight\">Operation Searchlight</a>, which led to the arrests, torture and killing of hundreds of thousands of people, mainly Hindus and <a href=\"/wiki/Bengali_people\" class=\"mw-redirect\" title=\"Bengali people\">Bengali</a> intellectuals.<sup id=\"cite&#95;ref-SelectiveGenocide&#95;4-0\" class=\"reference\"><a href=\"#cite_note-SelectiveGenocide-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>During the <a href=\"/wiki/Bangladesh_Liberation_War\" title=\"Bangladesh Liberation War\">Bangladesh Liberation War</a> the <a href=\"/wiki/Pakistan\" title=\"Pakistan\">Pakistan</a> army arrested and killed fourteen <a href=\"/wiki/Muktijoddha\" class=\"mw-redirect\" title=\"Muktijoddha\">Muktijoddhas</a> from <a href=\"/wiki/Dhamrai_Upazila\" title=\"Dhamrai Upazila\">Dhamrai</a> Bazar. A mass grave created during the war still exists in the western side of Kalampur Bazar.<sup id=\"cite&#95;ref-BPD-Dhamrai&#95;5-0\" class=\"reference\"><a href=\"#cite_note-BPD-Dhamrai-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup> The Pak army also burnt down many houses in Konakhola, Basta, Brahmankirtha, Goalkhali and Khagail Kholamora villages of <a href=\"/wiki/Keraniganj_Upazila\" title=\"Keraniganj Upazila\">Keraniganj Upazila</a>.\n</p><p>The fall of Dhaka city to the allied forces led by <a href=\"/wiki/Jagjit_Singh_Aurora\" title=\"Jagjit Singh Aurora\">Jagjit Singh Arora</a> on 16 December marked the surrender of the Pakistani army. The post-independence period has seen a rapid and massive growth of the city population, attracting migrant workers from rural areas across Bangladesh.<sup id=\"cite&#95;ref-Dhaka2&#95;1-1\" class=\"reference\"><a href=\"#cite_note-Dhaka2-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> A real estate boom followed with <a href=\"/wiki/Urban_sprawl\" title=\"Urban sprawl\">urban sprawl</a> and the development of new settlements such as <a href=\"/wiki/Gulshan_Thana\" title=\"Gulshan Thana\">Gulshan</a>, <a href=\"/wiki/Banani_(town)\" class=\"mw-redirect\" title=\"Banani (town)\">Banani</a> and <a href=\"/wiki/Motijheel_Thana\" title=\"Motijheel Thana\">Motijheel</a>.<sup id=\"cite&#95;ref-Dhaka2&#95;1-2\" class=\"reference\"><a href=\"#cite_note-Dhaka2-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup>                                                                                                                                                                            \n</p><p>During the Quota Reform Movement in Dhaka, students from a wide range of schools, colleges, and universities united to demand a fairer government job recruitment system. The protests became highly visible in front of major educational institutions, with students carrying banners, placards, and chanting slogans to draw attention to their cause. Schools such as Maple Leaf International School and Mastermind English Medium School became early centres of peaceful demonstration, where students organised sit-ins and small marches. The movement quickly spread to college campuses across the city, including Dhaka College, Notre Dame College, and others, while Dhaka University emerged as the heart of the protests. Students occupied central areas like the TSC (Teacher-Student Center) and Shahbagh intersections, forming human chains and holding long sit-ins that lasted for days.\n</p>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "Dhaka Division",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "Dhaka Division",
+    "pageid": 403946,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Etymology",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "Dhaka_Division",
+      "byteoffset": 7663,
+      "anchor": "Etymology",
+      "linkAnchor": "Etymology"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "History",
+      "number": "2",
+      "index": "2",
+      "fromtitle": "Dhaka_Division",
+      "byteoffset": 10768,
+      "anchor": "History",
+      "linkAnchor": "History"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Administrative divisions",
+      "number": "3",
+      "index": "3",
+      "fromtitle": "Dhaka_Division",
+      "byteoffset": 32603,
+      "anchor": "Administrative_divisions",
+      "linkAnchor": "Administrative_divisions"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Demographics",
+      "number": "4",
+      "index": "4",
+      "fromtitle": "Dhaka_Division",
+      "byteoffset": 37104,
+      "anchor": "Demographics",
+      "linkAnchor": "Demographics"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "5",
+      "index": "5",
+      "fromtitle": "Dhaka_Division",
+      "byteoffset": 37865,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "External links",
+      "number": "6",
+      "index": "6",
+      "fromtitle": "Dhaka_Division",
+      "byteoffset": 37893,
+      "anchor": "External_links",
+      "linkAnchor": "External_links"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Bangladesh",
+   "prop": "sections",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "warnings": {
+    "main": {
+     "*": "Subscribe to the mediawiki-api-announce mailing list at <https://lists.wikimedia.org/postorius/lists/mediawiki-api-announce.lists.wikimedia.org/> for notice of API deprecations and breaking changes. Use [[Special:ApiFeatureUsage]] to see usage of deprecated features by your application."
+    },
+    "parse": {
+     "*": "\"prop=sections\" has been deprecated. Please use \"prop=tocdata\" instead."
+    }
+   },
+   "parse": {
+    "title": "History of Bangladesh",
+    "pageid": 40096,
+    "redirects": [],
+    "sections": [
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Ancient period",
+      "number": "1",
+      "index": "1",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 3777,
+      "anchor": "Ancient_period",
+      "linkAnchor": "Ancient_period"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Prehistoric Bengal",
+      "number": "1.1",
+      "index": "2",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 4054,
+      "anchor": "Prehistoric_Bengal",
+      "linkAnchor": "Prehistoric_Bengal"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Gangaridai/Nanda Empire",
+      "number": "1.2",
+      "index": "3",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 12154,
+      "anchor": "Gangaridai/Nanda_Empire",
+      "linkAnchor": "Gangaridai/Nanda_Empire"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Early Middle Ages",
+      "number": "2",
+      "index": "4",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 14838,
+      "anchor": "Early_Middle_Ages",
+      "linkAnchor": "Early_Middle_Ages"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Gauda Kingdom",
+      "number": "2.1",
+      "index": "5",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 18272,
+      "anchor": "Gauda_Kingdom",
+      "linkAnchor": "Gauda_Kingdom"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Pala Empire",
+      "number": "2.2",
+      "index": "6",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 19247,
+      "anchor": "Pala_Empire",
+      "linkAnchor": "Pala_Empire"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Chandra dynasty",
+      "number": "2.3",
+      "index": "7",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 26137,
+      "anchor": "Chandra_dynasty",
+      "linkAnchor": "Chandra_dynasty"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Sena dynasty",
+      "number": "2.4",
+      "index": "8",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 27077,
+      "anchor": "Sena_dynasty",
+      "linkAnchor": "Sena_dynasty"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Deva Kingdom",
+      "number": "2.5",
+      "index": "9",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 28632,
+      "anchor": "Deva_Kingdom",
+      "linkAnchor": "Deva_Kingdom"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Late Middle Ages",
+      "number": "3",
+      "index": "10",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 29459,
+      "anchor": "Late_Middle_Ages",
+      "linkAnchor": "Late_Middle_Ages"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Turko Afghan rule",
+      "number": "3.1",
+      "index": "11",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 35940,
+      "anchor": "Turko_Afghan_rule",
+      "linkAnchor": "Turko_Afghan_rule"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Sonargaon Sultanate",
+      "number": "3.2",
+      "index": "12",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 40373,
+      "anchor": "Sonargaon_Sultanate",
+      "linkAnchor": "Sonargaon_Sultanate"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Bengal Sultanate",
+      "number": "4",
+      "index": "13",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 42246,
+      "anchor": "Bengal_Sultanate",
+      "linkAnchor": "Bengal_Sultanate"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Ilyas Shahi dynasty",
+      "number": "4.1",
+      "index": "14",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 42528,
+      "anchor": "Ilyas_Shahi_dynasty",
+      "linkAnchor": "Ilyas_Shahi_dynasty"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Ganesha dynasty",
+      "number": "4.2",
+      "index": "15",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 45298,
+      "anchor": "Ganesha_dynasty",
+      "linkAnchor": "Ganesha_dynasty"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Hussain Shahi dynasty",
+      "number": "4.3",
+      "index": "16",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 46571,
+      "anchor": "Hussain_Shahi_dynasty",
+      "linkAnchor": "Hussain_Shahi_dynasty"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Mughal period",
+      "number": "5",
+      "index": "17",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 47687,
+      "anchor": "Mughal_period",
+      "linkAnchor": "Mughal_period"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Two great Mughal Subahdars",
+      "number": "5.1",
+      "index": "18",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 58174,
+      "anchor": "Two_great_Mughal_Subahdars",
+      "linkAnchor": "Two_great_Mughal_Subahdars"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Islam Khan",
+      "number": "5.1.1",
+      "index": "19",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 58207,
+      "anchor": "Islam_Khan",
+      "linkAnchor": "Islam_Khan"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Shaista Khan",
+      "number": "5.1.2",
+      "index": "20",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 59651,
+      "anchor": "Shaista_Khan",
+      "linkAnchor": "Shaista_Khan"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Nawabs of Bengal",
+      "number": "6",
+      "index": "21",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 61158,
+      "anchor": "Nawabs_of_Bengal",
+      "linkAnchor": "Nawabs_of_Bengal"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Colonial era",
+      "number": "7",
+      "index": "22",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 64442,
+      "anchor": "Colonial_era",
+      "linkAnchor": "Colonial_era"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Europeans in Bengal",
+      "number": "7.1",
+      "index": "23",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 64459,
+      "anchor": "Europeans_in_Bengal",
+      "linkAnchor": "Europeans_in_Bengal"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "British rule",
+      "number": "7.2",
+      "index": "24",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 70288,
+      "anchor": "British_rule",
+      "linkAnchor": "British_rule"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Bengal Renaissance",
+      "number": "7.3",
+      "index": "25",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 84261,
+      "anchor": "Bengal_Renaissance",
+      "linkAnchor": "Bengal_Renaissance"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Partition of Bengal (1905)",
+      "number": "7.4",
+      "index": "26",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 87353,
+      "anchor": "Partition_of_Bengal_(1905)",
+      "linkAnchor": "Partition_of_Bengal_(1905)"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Partition of Bengal (1947)",
+      "number": "8",
+      "index": "27",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 93432,
+      "anchor": "Partition_of_Bengal_(1947)",
+      "linkAnchor": "Partition_of_Bengal_(1947)"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Pakistan period",
+      "number": "9",
+      "index": "28",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 93912,
+      "anchor": "Pakistan_period",
+      "linkAnchor": "Pakistan_period"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Bengali Language Movement",
+      "number": "9.1",
+      "index": "29",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 102279,
+      "anchor": "Bengali_Language_Movement",
+      "linkAnchor": "Bengali_Language_Movement"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Politics: 1954–1971",
+      "number": "9.2",
+      "index": "30",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 104997,
+      "anchor": "Politics:_1954–1971",
+      "linkAnchor": "Politics:_1954–1971"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Independence movement",
+      "number": "9.3",
+      "index": "31",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 110439,
+      "anchor": "Independence_movement",
+      "linkAnchor": "Independence_movement"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Formal Declaration of Independence",
+      "number": "9.4",
+      "index": "32",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 114695,
+      "anchor": "Formal_Declaration_of_Independence",
+      "linkAnchor": "Formal_Declaration_of_Independence"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Pakistani capitulation and aftermath",
+      "number": "9.5",
+      "index": "33",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 120647,
+      "anchor": "Pakistani_capitulation_and_aftermath",
+      "linkAnchor": "Pakistani_capitulation_and_aftermath"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "People's Republic of Bangladesh",
+      "number": "10",
+      "index": "34",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 126516,
+      "anchor": "People's_Republic_of_Bangladesh",
+      "linkAnchor": "People's_Republic_of_Bangladesh"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Constitution, early democracy and socialism",
+      "number": "10.1",
+      "index": "35",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 126601,
+      "anchor": "Constitution,_early_democracy_and_socialism",
+      "linkAnchor": "Constitution,_early_democracy_and_socialism"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Provisional Government",
+      "number": "10.1.1",
+      "index": "36",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 126651,
+      "anchor": "Provisional_Government",
+      "linkAnchor": "Provisional_Government"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Sheikh Mujib administration",
+      "number": "10.1.2",
+      "index": "37",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 128653,
+      "anchor": "Sheikh_Mujib_administration",
+      "linkAnchor": "Sheikh_Mujib_administration"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Military coups and presidential regimes",
+      "number": "10.2",
+      "index": "38",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 134714,
+      "anchor": "Military_coups_and_presidential_regimes",
+      "linkAnchor": "Military_coups_and_presidential_regimes"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "First martial law and Zia administration",
+      "number": "10.2.1",
+      "index": "39",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 134803,
+      "anchor": "First_martial_law_and_Zia_administration",
+      "linkAnchor": "First_martial_law_and_Zia_administration"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Sattar administration",
+      "number": "10.2.2",
+      "index": "40",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 138473,
+      "anchor": "Sattar_administration",
+      "linkAnchor": "Sattar_administration"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Second martial law and Ershad administration",
+      "number": "10.2.3",
+      "index": "41",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 139095,
+      "anchor": "Second_martial_law_and_Ershad_administration",
+      "linkAnchor": "Second_martial_law_and_Ershad_administration"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Chittagong Hill Tracts conflict",
+      "number": "10.2.4",
+      "index": "42",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 148834,
+      "anchor": "Chittagong_Hill_Tracts_conflict",
+      "linkAnchor": "Chittagong_Hill_Tracts_conflict"
+     },
+     {
+      "toclevel": 2,
+      "level": "3",
+      "line": "Return of parliamentary republic and Battle of the Begums",
+      "number": "10.3",
+      "index": "43",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 151285,
+      "anchor": "Return_of_parliamentary_republic_and_Battle_of_the_Begums",
+      "linkAnchor": "Return_of_parliamentary_republic_and_Battle_of_the_Begums"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "First caretaker government (1990–1991)",
+      "number": "10.3.1",
+      "index": "44",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 151349,
+      "anchor": "First_caretaker_government_(1990–1991)",
+      "linkAnchor": "First_caretaker_government_(1990–1991)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Khaleda administration (1991–1996)",
+      "number": "10.3.2",
+      "index": "45",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 151909,
+      "anchor": "Khaleda_administration_(1991–1996)",
+      "linkAnchor": "Khaleda_administration_(1991–1996)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Second caretaker government (1996)",
+      "number": "10.3.3",
+      "index": "46",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 156290,
+      "anchor": "Second_caretaker_government_(1996)",
+      "linkAnchor": "Second_caretaker_government_(1996)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Hasina administration (1996–2001)",
+      "number": "10.3.4",
+      "index": "47",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 157745,
+      "anchor": "Hasina_administration_(1996–2001)",
+      "linkAnchor": "Hasina_administration_(1996–2001)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Third caretaker government (2001)",
+      "number": "10.3.5",
+      "index": "48",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 162818,
+      "anchor": "Third_caretaker_government_(2001)",
+      "linkAnchor": "Third_caretaker_government_(2001)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Khaleda administration (2001–2006)",
+      "number": "10.3.6",
+      "index": "49",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 163303,
+      "anchor": "Khaleda_administration_(2001–2006)",
+      "linkAnchor": "Khaleda_administration_(2001–2006)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Fourth caretaker regime (2006–2008)",
+      "number": "10.3.7",
+      "index": "50",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 166181,
+      "anchor": "Fourth_caretaker_regime_(2006–2008)",
+      "linkAnchor": "Fourth_caretaker_regime_(2006–2008)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "Hasina administration (2009–2024)",
+      "number": "10.3.8",
+      "index": "51",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 168472,
+      "anchor": "Hasina_administration_(2009–2024)",
+      "linkAnchor": "Hasina_administration_(2009–2024)"
+     },
+     {
+      "toclevel": 3,
+      "level": "4",
+      "line": "The fall of Hasina administration (2024)",
+      "number": "10.3.9",
+      "index": "52",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 180225,
+      "anchor": "The_fall_of_Hasina_administration_(2024)",
+      "linkAnchor": "The_fall_of_Hasina_administration_(2024)"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "See also",
+      "number": "11",
+      "index": "53",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 189680,
+      "anchor": "See_also",
+      "linkAnchor": "See_also"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "References",
+      "number": "12",
+      "index": "54",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 190194,
+      "anchor": "References",
+      "linkAnchor": "References"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Sources",
+      "number": "13",
+      "index": "55",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 190227,
+      "anchor": "Sources",
+      "linkAnchor": "Sources"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "Further reading",
+      "number": "14",
+      "index": "56",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 191250,
+      "anchor": "Further_reading",
+      "linkAnchor": "Further_reading"
+     },
+     {
+      "toclevel": 1,
+      "level": "2",
+      "line": "External links",
+      "number": "15",
+      "index": "57",
+      "fromtitle": "History_of_Bangladesh",
+      "byteoffset": 193257,
+      "anchor": "External_links",
+      "linkAnchor": "External_links"
+     }
+    ],
+    "showtoc": ""
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "Dhaka Division",
+   "section": "2",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "Dhaka Division",
+    "pageid": 403946,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"History\">History</h2></div>\n<style data-mw-deduplicate=\"TemplateStyles:r1368532237\">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+.mw-empty-elt+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main article: <a href=\"/wiki/History_of_Dhaka\" title=\"History of Dhaka\">History of Dhaka</a></div>\n<p>The history of urban settlements in the area of modern-day Dhaka dates to the first millennium.<sup id=\"cite&#95;ref-Britannica-Dhaka&#95;1-0\" class=\"reference\"><a href=\"#cite_note-Britannica-Dhaka-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> The Greater Dhaka region was under the kingdom of <a href=\"/wiki/Vanga_Kingdom\" class=\"mw-redirect\" title=\"Vanga Kingdom\">Vanga</a> and <a href=\"/wiki/Gangaridai\" title=\"Gangaridai\">Gangaridai</a> in ancient period.<sup id=\"cite&#95;ref-2\" class=\"reference\"><a href=\"#cite_note-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> The region was part of the ancient division of <a href=\"/wiki/Bikrampur\" title=\"Bikrampur\">Bikrampur</a>, which was ruled by the <a href=\"/wiki/Sena_dynasty\" title=\"Sena dynasty\">Sena dynasty</a>.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup> The ancient city of <a href=\"/wiki/Bikrampur\" title=\"Bikrampur\">Bikrampur</a> in Dhaka was also one of the capitals of <a href=\"/wiki/Pala_Empire\" title=\"Pala Empire\">Palas</a>, <a href=\"/wiki/Chandra_dynasty\" title=\"Chandra dynasty\">Chandras</a>, <a href=\"/wiki/Varman_dynasty_(Bengal)\" title=\"Varman dynasty (Bengal)\">Varmans</a> and <a href=\"/wiki/Deva_Dynasty\" class=\"mw-redirect\" title=\"Deva Dynasty\">Devas</a>. The ancient city of Dholsamudra in present-day Gazipur served as one of the capitals of the Buddhist <a href=\"/wiki/Pala_Empire\" title=\"Pala Empire\">Pala Empire</a>. In the sixth century, forts were built in <a href=\"/wiki/Kapasia_Upazila\" title=\"Kapasia Upazila\">Toke and Ekdala</a> which continued to be used as late as the <a href=\"/wiki/Mughal_Empire\" title=\"Mughal Empire\">Mughal Period</a>. Chinashkhania was the capital of the Chandalas and Shishu Pal had his capital in modern-day <a href=\"/wiki/Sreepur_Upazila,_Gazipur\" title=\"Sreepur Upazila, Gazipur\">Sreepur</a>, which the ruins of can still be seen today. Another fort was built in Dardaria in 1200.<sup id=\"cite&#95;ref-Banglapedia&#95;4-0\" class=\"reference\"><a href=\"#cite_note-Banglapedia-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> Under <a href=\"/wiki/Islamic\" class=\"mw-redirect\" title=\"Islamic\">Islamic</a> rule, the centre moved to the historic district of <a href=\"/wiki/Sonargaon\" title=\"Sonargaon\">Sonargaon</a>, the regional administrative hub of the <a href=\"/wiki/Delhi_Sultanate\" title=\"Delhi Sultanate\">Delhi</a> and the <a href=\"/wiki/Bengal_Sultanate\" title=\"Bengal Sultanate\">Bengal Sultanates</a>.<sup id=\"cite&#95;ref-archive.thedailystar.net&#95;5-0\" class=\"reference\"><a href=\"#cite_note-archive.thedailystar.net-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>At the end of the <a href=\"/wiki/Karrani_Dynasty\" class=\"mw-redirect\" title=\"Karrani Dynasty\">Karrani Dynasty</a> (1564–1575), the nobles of <a href=\"/wiki/Bengal\" title=\"Bengal\">Bengal</a> became fiercely independent. <a href=\"/wiki/Sulaiman_Khan_Karrani\" title=\"Sulaiman Khan Karrani\">Sulaiman Khan Karrani</a> carved out an independent principality in the Bhati region comprising a part of greater <a href=\"/wiki/Dhaka_district\" class=\"mw-redirect\" title=\"Dhaka district\">Dhaka district</a> and parts of <a href=\"/wiki/Mymensingh_district\" class=\"mw-redirect\" title=\"Mymensingh district\">Mymensingh district</a>. During that period <a href=\"/wiki/Taj_Khan_Karrani\" title=\"Taj Khan Karrani\">Taj Khan Karrani</a> and another Afghan chieftain helped <a href=\"/wiki/Isa_Khan\" title=\"Isa Khan\">Isa Khan</a> to obtain an estate in <a href=\"/wiki/Sonargaon\" title=\"Sonargaon\">Sonargaon</a> and <a href=\"/wiki/Mymensingh\" title=\"Mymensingh\">Mymensingh</a> in 1564. By winning the grace of the Afghan chieftain, Isa Khan gradually increased his strength and status and by 1571, the Mughal Court designated him as the ruler of Bhati.<sup id=\"cite&#95;ref-6\" class=\"reference\"><a href=\"#cite_note-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup> Mughal histories, mainly the <i><a href=\"/wiki/Akbarnama\" title=\"Akbarnama\">Akbarnama</a></i>, the <i><a href=\"/wiki/Ain-i-Akbari\" title=\"Ain-i-Akbari\">Ain-i-Akbari</a></i> and the <i><a href=\"/wiki/Baharistan-i-Ghaibi\" title=\"Baharistan-i-Ghaibi\">Baharistan-i-Ghaibi</a></i> refers to the low-lying regions of Bengal as <i>Bhati.</i> This region includes the Bhagirathi to the <a href=\"/wiki/Meghna_River\" title=\"Meghna River\">Meghna River</a> is Bhati, while others include Hijli, <a href=\"/wiki/Jessore_District\" title=\"Jessore District\">Jessore</a>, Chandradwip and <a href=\"/wiki/Barisal_Division\" title=\"Barisal Division\">Barisal Division</a> in Bhati. Keeping in view the theatre of warfare between the Baro-Bhuiyans and the Mughals, the Baharistan-i-Ghaibi mentions the limits of the area bounded by the <a href=\"/wiki/Ichamati_River\" title=\"Ichamati River\">Ichamati</a> River in the west, the <a href=\"/wiki/Ganges\" title=\"Ganges\">Ganges</a> in the south, the <a href=\"/wiki/Tripura\" title=\"Tripura\">Tripura</a> to the east; Alapsingh pargana (in present <a href=\"/wiki/Mymensingh_District\" title=\"Mymensingh District\">Mymensingh District</a>) and Baniachang (in greater <a href=\"/wiki/Sylhet\" title=\"Sylhet\">Sylhet</a>) in the north. The Baro-Bhuiyans rose to power in this region and put up resistance to the Mughals, until <a href=\"/wiki/Islam_Khan_Chisti\" class=\"mw-redirect\" title=\"Islam Khan Chisti\">Islam Khan Chisti</a> made them submit in the reign of <a href=\"/wiki/Jahangir\" title=\"Jahangir\">Jahangir</a>.<sup id=\"cite&#95;ref-:0&#95;7-0\" class=\"reference\"><a href=\"#cite_note-:0-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup> Throughout his reign Isa Khan put resistance against <a href=\"/wiki/Mughal_Empire\" title=\"Mughal Empire\">Mughal</a> invasion. It was only after his death, when the region went totally under <a href=\"/wiki/Mughal_emperors\" class=\"mw-redirect\" title=\"Mughal emperors\">Mughals</a>.<sup id=\"cite&#95;ref-:0&#95;7-1\" class=\"reference\"><a href=\"#cite_note-:0-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup> <a href=\"/wiki/Isa_Khan\" title=\"Isa Khan\">Isa Khan</a> was buried in the village of <a href=\"/wiki/Kaliganj_Upazila,_Gazipur\" title=\"Kaliganj Upazila, Gazipur\">Bakhtarpur</a>.<sup id=\"cite&#95;ref-8\" class=\"reference\"><a href=\"#cite_note-8\"><span class=\"cite-bracket\">&#91;</span>8<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<figure class=\"mw-default-size mw-halign-left\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Lalbagh_Kella_(Lalbagh_Fort)_Dhaka_Bangladesh_2011_54.JPG\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Lalbagh_Kella_%28Lalbagh_Fort%29_Dhaka_Bangladesh_2011_54.JPG/250px-Lalbagh_Kella_%28Lalbagh_Fort%29_Dhaka_Bangladesh_2011_54.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"190\" height=\"277\" style=\"--mw-file-upright: 0.75\" class=\"mw-file-element mw-file-upright\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Lalbagh_Kella_%28Lalbagh_Fort%29_Dhaka_Bangladesh_2011_54.JPG/500px-Lalbagh_Kella_%28Lalbagh_Fort%29_Dhaka_Bangladesh_2011_54.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"2480\" data-file-height=\"3622\" /></a><figcaption>Ruins of <a href=\"/wiki/Lalbagh_Fort\" title=\"Lalbagh Fort\">Lalbagh Fort</a></figcaption></figure>\n<p>Dhaka became the capital of the Mughal province of Bengal, Bihar, and Orissa in 1610 with a jurisdiction covering modern-day Bangladesh and <a href=\"/wiki/East_India\" title=\"East India\">eastern India</a>, including the modern-day <a href=\"/wiki/Indian_state\" class=\"mw-redirect\" title=\"Indian state\">Indian states</a> of <a href=\"/wiki/West_Bengal\" title=\"West Bengal\">West Bengal</a>, <a href=\"/wiki/Bihar\" title=\"Bihar\">Bihar</a> and <a href=\"/wiki/Orissa\" class=\"mw-redirect\" title=\"Orissa\">Orissa</a>. This province was known as <a href=\"/wiki/Bengal_Subah\" title=\"Bengal Subah\">Bengal Subah</a>. The city was founded during the reign of <a href=\"/wiki/Jahangir\" title=\"Jahangir\">Emperor Jahangir</a>. Emperor <a href=\"/wiki/Shah_Jahan\" title=\"Shah Jahan\">Shah Jahan</a> visited Dhaka in 1624 and stayed in the city for a week, four years before he became emperor in 1628.<sup id=\"cite&#95;ref-9\" class=\"reference\"><a href=\"#cite_note-9\"><span class=\"cite-bracket\">&#91;</span>9<span class=\"cite-bracket\">&#93;</span></a></sup> Dhaka became one of the richest and greatest cities in the world during the early period of Bengal Subah (1610–1717). The prosperity of Dhaka reached its peak during the administration of governor <a href=\"/wiki/Shaista_Khan\" title=\"Shaista Khan\">Shaista Khan</a> (1644-1677 and 1680–1688). Rice was then sold at eight maunds per rupee. Thomas Bowrey, an English merchant sailor who visited the city between 1669 and 1670, wrote that the city was 40 miles in circuit. He estimated the city to be more populated than <a href=\"/wiki/London\" title=\"London\">London</a> with 900,000 people.<sup id=\"cite&#95;ref-10\" class=\"reference\"><a href=\"#cite_note-10\"><span class=\"cite-bracket\">&#91;</span>10<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Bengal became the economic engine of the Mughal Empire. Dhaka played a key role in the <a href=\"/wiki/Proto-industrialisation\" class=\"mw-redirect\" title=\"Proto-industrialisation\">proto-industrialisation</a> of Bengal. It was the centre of the <a href=\"/wiki/Muslin_trade_in_Bengal\" title=\"Muslin trade in Bengal\">muslin trade in Bengal</a>, leading to muslin being called \"daka\" in distant markets as far away as <a href=\"/wiki/Central_Asia\" title=\"Central Asia\">Central Asia</a>.<sup id=\"cite&#95;ref-11\" class=\"reference\"><a href=\"#cite_note-11\"><span class=\"cite-bracket\">&#91;</span>11<span class=\"cite-bracket\">&#93;</span></a></sup>  <a href=\"/wiki/Islam_Khan_I\" title=\"Islam Khan I\">Islam Khan I</a> was the first Mughal governor to reside in the city.<sup id=\"cite&#95;ref-12\" class=\"reference\"><a href=\"#cite_note-12\"><span class=\"cite-bracket\">&#91;</span>12<span class=\"cite-bracket\">&#93;</span></a></sup> Khan named it \"Jahangir Nagar\" (<i>The City of Jahangir</i>) in honour of the Emperor Jahangir. The name was dropped soon after the English conquered. Dhaka became home to one of the richest elites in Mughal India.<sup id=\"cite&#95;ref-13\" class=\"reference\"><a href=\"#cite_note-13\"><span class=\"cite-bracket\">&#91;</span>13<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Under the Nawabs of Bengal, the <a href=\"/wiki/Naib_Nazim_of_Dhaka\" title=\"Naib Nazim of Dhaka\">Naib Nazim of Dhaka</a> was in charge of the city. The Naib Nazim was the deputy governor of Bengal. He also dealt with the upkeep of the Mughal Navy. The Naib Nazim was in charge of the Dhaka Division, which included Dhaka, <a href=\"/wiki/Comilla\" title=\"Comilla\">Comilla</a>, and Chittagong. Dhaka Division was one of the four divisions under the Nawabs of Bengal. The Nawabs of Bengal allowed European trading companies to establish factories across Bengal. The region then became a hotbed for European rivalries. The British moved to oust the last independent Nawab of Bengal in 1757, who was allied with the French. Due to the defection of Nawab's army chief <a href=\"/wiki/Mir_Jafar\" title=\"Mir Jafar\">Mir Jafar</a> to the British side, the last Nawab lost the <a href=\"/wiki/Battle_of_Plassey\" title=\"Battle of Plassey\">Battle of Plassey</a>.<sup id=\"cite&#95;ref-hi&#95;14-0\" class=\"reference\"><a href=\"#cite_note-hi-14\"><span class=\"cite-bracket\">&#91;</span>14<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>In the northern part of the Dhaka division, <a href=\"/wiki/Bhawal_Estate\" title=\"Bhawal Estate\">Bhawal Estate</a> was a large <a href=\"/wiki/Zamindari\" class=\"mw-redirect\" title=\"Zamindari\">zamindari</a> in <a href=\"/wiki/Bengal\" title=\"Bengal\">Bengal</a> (in modern-day <a href=\"/wiki/Gazipur\" title=\"Gazipur\">Gazipur</a>, Bangladesh) until it was abolished according to <i>East Bengal State Acquisition and Tenancy Act of 1950</i>. In the late 17th century, Daulat Ghazi was the zamindar of the Ghazi estate of Bhawal. Bala Ram was Diwan of Daulat Ghazi. In 1704, as the consequence of change in the policy of revenue collection, Bala Ram's son Sri Krishna was installed as the zamindar of Bhawal by <a href=\"/wiki/Murshid_Quli_Khan\" title=\"Murshid Quli Khan\">Murshid Quli Khan</a>. Since then, through acquisitions the zamindari expanded. The family turned into the proprietor of the whole Bhawal pargana after purchasing the zamindari of J. Wise, an indigo grower for Rs 4,46,000.<sup id=\"cite&#95;ref-bpedia&#95;15-0\" class=\"reference\"><a href=\"#cite_note-bpedia-15\"><span class=\"cite-bracket\">&#91;</span>15<span class=\"cite-bracket\">&#93;</span></a></sup> In 1878, <a href=\"/wiki/British_Raj\" title=\"British Raj\">British Raj</a> conferred <i>Raja</i> title to Zamindar Kalinarayan Roy Chowdhury who oversaw the Bhawal estate.<sup id=\"cite&#95;ref-bpedia&#95;15-1\" class=\"reference\"><a href=\"#cite_note-bpedia-15\"><span class=\"cite-bracket\">&#91;</span>15<span class=\"cite-bracket\">&#93;</span></a></sup> At its peak, the estate comprised over 1,500 square kilometer, which included 2,274 villages and around 55,000 villagers.<sup id=\"cite&#95;ref-haunted&#95;16-0\" class=\"reference\"><a href=\"#cite_note-haunted-16\"><span class=\"cite-bracket\">&#91;</span>16<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>On the southern side the notable township was Fatehabad located by a stream known as the Dead Padma, which was 32 kilometres (20&#160;mi) from the main channel of the Padma River. Sultan <a href=\"/wiki/Jalaluddin_Muhammad_Shah\" title=\"Jalaluddin Muhammad Shah\">Jalaluddin Muhammad Shah</a> established a <a href=\"/wiki/Mint_(facility)\" title=\"Mint (facility)\">mint</a> in Fatehabad during his reign in the early 15th century. Fatehabad continued to be a mint town of the <a href=\"/wiki/Bengal_Sultanate\" title=\"Bengal Sultanate\">Bengal Sultanate</a> until 1538. In <a href=\"/wiki/Ain-i-Akbari\" title=\"Ain-i-Akbari\">Ain-i-Akbari</a>, it was named as <i>Haweli Mahal Fatehabad</i> during the reign of <a href=\"/wiki/Emperor_Akbar\" class=\"mw-redirect\" title=\"Emperor Akbar\">Emperor Akbar</a> in the <a href=\"/wiki/Mughal_Empire\" title=\"Mughal Empire\">Mughal Empire</a>. The <a href=\"/wiki/Portuguese_people\" title=\"Portuguese people\">Portuguese</a> cartographer <a href=\"/wiki/Jo%C3%A3o_de_Barros\" title=\"João de Barros\">João de Barros</a> mentioned it as <i>Fatiabas</i>. The Dutch map of Van den Brouck described it as <i>Fathur</i>.<sup id=\"cite&#95;ref-en.banglapedia.org&#95;17-0\" class=\"reference\"><a href=\"#cite_note-en.banglapedia.org-17\"><span class=\"cite-bracket\">&#91;</span>17<span class=\"cite-bracket\">&#93;</span></a></sup> By the 19th century, the town was renamed as Faridpur in honour of the <a href=\"/wiki/Sufi\" class=\"mw-redirect\" title=\"Sufi\">Sufi</a> saint Shah Fariduddin Masud, a follower of the <a href=\"/wiki/Chishti_order\" class=\"mw-redirect\" title=\"Chishti order\">Chishti order</a> of <a href=\"/wiki/Ajmer\" title=\"Ajmer\">Ajmer</a>.<sup id=\"cite&#95;ref-en.banglapedia.org&#95;17-1\" class=\"reference\"><a href=\"#cite_note-en.banglapedia.org-17\"><span class=\"cite-bracket\">&#91;</span>17<span class=\"cite-bracket\">&#93;</span></a></sup> <a href=\"/wiki/Haji_Shariatullah\" title=\"Haji Shariatullah\">Haji Shariatullah</a> and <a href=\"/wiki/Dudu_Miyan\" title=\"Dudu Miyan\">Dudu Miyan</a> led the conservative <a href=\"/wiki/Faraizi_movement\" title=\"Faraizi movement\">Faraizi movement</a> in Faridpur during the early 19th century. The Faridpur District was established by the British in 1786. The Faridpur Subdivision was a part of Dacca Division in the <a href=\"/wiki/Bengal_Presidency\" title=\"Bengal Presidency\">Bengal Presidency</a> established by the <a href=\"/wiki/East_India_Company\" title=\"East India Company\">East India Company</a>. The municipality of Faridpur was established in 1869.<sup id=\"cite&#95;ref-global.britannica.com&#95;18-0\" class=\"reference\"><a href=\"#cite_note-global.britannica.com-18\"><span class=\"cite-bracket\">&#91;</span>18<span class=\"cite-bracket\">&#93;</span></a></sup> The subdivision covered modern day Faridpur, <a href=\"/wiki/Rajbari_District\" title=\"Rajbari District\">Rajbari</a>, <a href=\"/wiki/Madaripur\" title=\"Madaripur\">Madaripur</a>, <a href=\"/wiki/Shariatpur\" title=\"Shariatpur\">Shariatpur</a> and <a href=\"/wiki/Gopalganj_District,_Bangladesh\" title=\"Gopalganj District, Bangladesh\">Gopalganj</a> districts (collectively known as Greater Faridpur). It was included in <a href=\"/wiki/Eastern_Bengal_and_Assam\" title=\"Eastern Bengal and Assam\">Eastern Bengal and Assam</a> during the <a href=\"/wiki/British_Raj\" title=\"British Raj\">British Raj</a> between 1905 and 1912.\n</p>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Bengal_gazetteer_1907-9.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Bengal_gazetteer_1907-9.jpg/250px-Bengal_gazetteer_1907-9.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"202\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Bengal_gazetteer_1907-9.jpg/500px-Bengal_gazetteer_1907-9.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"2000\" data-file-height=\"1612\" /></a><figcaption>Dhaka was the capital of <a href=\"/wiki/Eastern_Bengal_and_Assam\" title=\"Eastern Bengal and Assam\">Eastern Bengal and Assam</a> in the <a href=\"/wiki/British_Raj\" title=\"British Raj\">British Raj</a> between 1905 and 1912</figcaption></figure>\n<p>During the <a href=\"/wiki/Indian_Rebellion_of_1857\" title=\"Indian Rebellion of 1857\">Indian mutiny of 1857</a>, Dhaka witnessed revolts by the <a href=\"/wiki/Bengal_Army\" title=\"Bengal Army\">Bengal Army</a>.<sup id=\"cite&#95;ref-19\" class=\"reference\"><a href=\"#cite_note-19\"><span class=\"cite-bracket\">&#91;</span>19<span class=\"cite-bracket\">&#93;</span></a></sup> <a href=\"/wiki/British_Raj\" title=\"British Raj\">Direct rule by the British crown</a> was established following the successful quelling of the mutiny. It bestowed privileges on the Dhaka Nawab Family, which dominated the city's political and social elite. In 1885, the Dhaka State Railway was opened with a 144&#160;km metre gauge (1000&#160;mm) rail line connecting <a href=\"/wiki/Mymensingh\" title=\"Mymensingh\">Mymensingh</a> and the <a href=\"/wiki/Port_of_Narayanganj\" title=\"Port of Narayanganj\">Port of Narayanganj</a> through Dhaka.<sup id=\"cite&#95;ref-banglapedia.railway&#95;20-0\" class=\"reference\"><a href=\"#cite_note-banglapedia.railway-20\"><span class=\"cite-bracket\">&#91;</span>20<span class=\"cite-bracket\">&#93;</span></a></sup> The city later became a hub of the <a href=\"/wiki/Eastern_Bengal_Railway\" title=\"Eastern Bengal Railway\">Eastern Bengal State Railway</a>.<sup id=\"cite&#95;ref-banglapedia.railway&#95;20-1\" class=\"reference\"><a href=\"#cite_note-banglapedia.railway-20\"><span class=\"cite-bracket\">&#91;</span>20<span class=\"cite-bracket\">&#93;</span></a></sup> The electricity supply began in 1901.<sup id=\"cite&#95;ref-tusher.kobiraj.com&#95;21-0\" class=\"reference\"><a href=\"#cite_note-tusher.kobiraj.com-21\"><span class=\"cite-bracket\">&#91;</span>21<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>"
+    }
+   }
+  }
+ },
+ {
+  "host": "en.wikipedia.org",
+  "params": {
+   "action": "parse",
+   "page": "History of Bangladesh",
+   "section": "1",
+   "prop": "text",
+   "disabletoc": "1",
+   "disableeditsection": "1",
+   "redirects": "1",
+   "format": "json"
+  },
+  "status": 200,
+  "json": {
+   "parse": {
+    "title": "History of Bangladesh",
+    "pageid": 40096,
+    "redirects": [],
+    "text": {
+     "*": "<div class=\"mw-content-ltr mw-parser-output\" lang=\"en\" dir=\"ltr\"><div class=\"mw-heading mw-heading2\"><h2 id=\"Ancient_period\">Ancient period</h2></div>\n<style data-mw-deduplicate=\"TemplateStyles:r1368532237\">.mw-parser-output .hatnote{font-style:italic}.mw-parser-output div.hatnote{padding-left:1.6em;margin-bottom:0.5em}.mw-parser-output .hatnote i{font-style:normal}.mw-parser-output .hatnote+.mw-empty-elt+.hatnote{margin-top:-0.5em}@media print{body.ns-0 .mw-parser-output .hatnote{display:none!important}}</style><div role=\"note\" class=\"hatnote navigation-not-searchable\">Further information: <a href=\"/wiki/Gangaridai\" title=\"Gangaridai\">Gangaridai</a>, <a href=\"/wiki/Magadha\" title=\"Magadha\">Magadha</a>, <a href=\"/wiki/Pundravardhana\" title=\"Pundravardhana\">Pundravardhana</a>, <a href=\"/wiki/Varendra\" title=\"Varendra\">Varendra</a>, <a href=\"/wiki/Anga\" title=\"Anga\">Anga</a>, <a href=\"/wiki/Vanga_Kingdom\" class=\"mw-redirect\" title=\"Vanga Kingdom\">Vanga Kingdom</a>, <a href=\"/wiki/Harikela\" title=\"Harikela\">Harikela</a>, and <a href=\"/wiki/Samatata\" title=\"Samatata\">Samatata</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Mahasthan_Brahmi_Inscription.png\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Mahasthan_Brahmi_Inscription.png/250px-Mahasthan_Brahmi_Inscription.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"250\" height=\"211\" class=\"mw-file-element\" srcset=\"//upload.wikimedia.org/wikipedia/commons/5/53/Mahasthan_Brahmi_Inscription.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail_unscaled 2x\" data-file-width=\"430\" data-file-height=\"363\" /></a><figcaption>The <a href=\"/wiki/Mahasthan_Brahmi_Inscription\" title=\"Mahasthan Brahmi Inscription\">Mahasthan Brahmi Inscription</a> from the 3rd century BCE is the earliest text on governance in the Bengal region</figcaption></figure>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Prehistoric_Bengal\">Prehistoric Bengal</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">See also: <a href=\"/wiki/South_Asian_Bronze_Age\" class=\"mw-redirect\" title=\"South Asian Bronze Age\">South Asian Bronze Age</a></div>\n<figure class=\"mw-halign-right\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Wari-Boteshwar_Excavation_053.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Wari-Boteshwar_Excavation_053.jpg/250px-Wari-Boteshwar_Excavation_053.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"200\" height=\"133\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Wari-Boteshwar_Excavation_053.jpg/500px-Wari-Boteshwar_Excavation_053.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"1024\" data-file-height=\"683\" /></a><figcaption>The ruins of <a href=\"/wiki/Wari-Bateshwar_ruins\" title=\"Wari-Bateshwar ruins\">Wari-Bateshwar</a> in <a href=\"/wiki/Narsingdi\" title=\"Narsingdi\">Narsingdi</a> is believed to be from the <a href=\"/wiki/Copper_Age\" class=\"mw-redirect\" title=\"Copper Age\">Copper Age</a>. Suggesting a thriving culture in ancient Bengal</figcaption></figure>\n<figure class=\"mw-halign-right\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Mahasthangar_Museum_Bogra_Bangladesh_(6).JPG\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Mahasthangar_Museum_Bogra_Bangladesh_%286%29.JPG/250px-Mahasthangar_Museum_Bogra_Bangladesh_%286%29.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"200\" height=\"150\" class=\"mw-file-element\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Mahasthangar_Museum_Bogra_Bangladesh_%286%29.JPG/500px-Mahasthangar_Museum_Bogra_Bangladesh_%286%29.JPG?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"2048\" data-file-height=\"1536\" /></a><figcaption>An ancient inscription from the site of <a href=\"/wiki/Mahasthangarh\" title=\"Mahasthangarh\">Mahasthangarh</a></figcaption></figure>\n<p>It is believed that there were movements of Indo-Aryans, Dravidians and Mongoloids, including a people called Vanga, into Bengal.<sup id=\"cite&#95;ref-Baxter&#95;1997&#95;12&#95;1-0\" class=\"reference\"><a href=\"#cite_note-Baxter_1997_12-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup>  There is weak evidence for a prehistoric human presence in the region.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;11&#95;2-0\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_11-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup> There is scant evidence of a human presence during the Neolithic and Chalcolithic eras.<sup id=\"cite&#95;ref-Baxter&#95;1997&#95;12&#95;1-1\" class=\"reference\"><a href=\"#cite_note-Baxter_1997_12-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> This could be because of the shifts in the rivers' courses.<sup id=\"cite&#95;ref-Baxter&#95;1997&#95;12&#95;1-2\" class=\"reference\"><a href=\"#cite_note-Baxter_1997_12-1\"><span class=\"cite-bracket\">&#91;</span>1<span class=\"cite-bracket\">&#93;</span></a></sup> The Bengali climate and geography is not suitable for tangible archaeological remains. Due to lack of stones the early humans in Bengal probably used materials such as wood and bamboo that could not survive in the environment. South Asian archaeologists have tended to focus on other parts of the subcontinent. Archaeologists interested in Bengal have focused on more recent history.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;11&#95;2-1\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_11-2\"><span class=\"cite-bracket\">&#91;</span>2<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>West Bengal holds the earliest evidence of settled agrarian societies.<sup id=\"cite&#95;ref-3\" class=\"reference\"><a href=\"#cite_note-3\"><span class=\"cite-bracket\">&#91;</span>3<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Agricultural success gave ground in the fifth century BCE for a stationary culture and the emergence of towns, cross-sea trade and the earliest polities. Archaeologists have uncovered a port at Wari-Bateshwar which traded with Ancient Rome and Southeast Asia. The archaeologists have discovered coinage, pottery, iron artifacts, bricked road and a fort in Wari-Bateshwar. The findings suggest that the area was an important administrative hub, which had industries such as iron smelting and valuable stone beads. The site shows widespread use of clay. The clay, and bricks, were used to build walls.<sup id=\"cite&#95;ref-4\" class=\"reference\"><a href=\"#cite_note-4\"><span class=\"cite-bracket\">&#91;</span>4<span class=\"cite-bracket\">&#93;</span></a></sup> The most famous terracotta plaques, made by clay, are from Chandraketurgah and depicts deities and scenes of nature and ordinary life.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;17&#95;5-0\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_17-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup> The early coinage discovered in War-Bateshwar and <a href=\"/wiki/Chandraketugarh\" title=\"Chandraketugarh\">Chandraketugarh</a> (West Bengal, India) depict boats.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;19&#95;6-0\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_19-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Archaeological excavations in Bangladesh revealed evidences of the <a href=\"/wiki/Northern_Black_Polished_Ware\" title=\"Northern Black Polished Ware\">Northern Black Polished Ware</a> (NBPW or NBP) culture of the <a href=\"/wiki/Indian_subcontinent\" title=\"Indian subcontinent\">Indian subcontinent</a> (c. 700–200&#160;BC), which was an <a href=\"/wiki/Iron_Age\" title=\"Iron Age\">Iron Age</a> culture developed beginning around 700&#160;BC and peaked from c. 500–300&#160;BC, coinciding with the emergence of 16 great states or <a href=\"/wiki/Mahajanapadas\" title=\"Mahajanapadas\">mahajanapadas</a> in Northern India, and the subsequent rise of the <a href=\"/wiki/Mauryan_Empire\" class=\"mw-redirect\" title=\"Mauryan Empire\">Mauryan Empire</a>.<sup id=\"cite&#95;ref-7\" class=\"reference\"><a href=\"#cite_note-7\"><span class=\"cite-bracket\">&#91;</span>7<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>Well developed towns had emerged by 300 BCE such as Tamralipti (present-day <a href=\"/wiki/Tamluk\" title=\"Tamluk\">Tamluk</a>, West Bengal, India), Mahasthan and Mainamati.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;16&#95;8-0\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_16-8\"><span class=\"cite-bracket\">&#91;</span>8<span class=\"cite-bracket\">&#93;</span></a></sup> Instead of the seaside, main towns sprang up by the riversides.<sup id=\"cite&#95;ref-Baxter&#95;1997&#95;13&#95;9-0\" class=\"reference\"><a href=\"#cite_note-Baxter_1997_13-9\"><span class=\"cite-bracket\">&#91;</span>9<span class=\"cite-bracket\">&#93;</span></a></sup> Mahasthan contains the earliest piece of writing in Bangladesh, a stone inscription. It indicates that the site was an important town in the Maurya empire. Mahasthan is believed to have then been a provincial centre.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;16&#95;8-1\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_16-8\"><span class=\"cite-bracket\">&#91;</span>8<span class=\"cite-bracket\">&#93;</span></a></sup> The inscription, in Prakrit, apparently contains a command to stock up supplies in case of an emergency.<sup id=\"cite&#95;ref-10\" class=\"reference\"><a href=\"#cite_note-10\"><span class=\"cite-bracket\">&#91;</span>10<span class=\"cite-bracket\">&#93;</span></a></sup> The inscription is called the Mahasthan Brahmi Inscription.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;17&#95;5-1\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_17-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup> Bengal was the eastern frontier of the Mauryan empire. Western Bengal with its port of Tamralipti achieved importance under the Mauryas.<sup id=\"cite&#95;ref-Baxter&#95;1997&#95;13&#95;9-1\" class=\"reference\"><a href=\"#cite_note-Baxter_1997_13-9\"><span class=\"cite-bracket\">&#91;</span>9<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>A prominent view in scholarship is that the Mauryan and Gupta empires exercised authority over most parts of the Bengal delta. The incomplete evidence which exists suggests that Bengal's western rather than eastern regions were parts of larger empires.<sup id=\"cite&#95;ref-11\" class=\"reference\"><a href=\"#cite_note-11\"><span class=\"cite-bracket\">&#91;</span>11<span class=\"cite-bracket\">&#93;</span></a></sup> The ancient zones in Bengal were the Bhagirathi-Hooghly basin, Harikela, Samatata, Vanga and Varendra.<sup id=\"cite&#95;ref-12\" class=\"reference\"><a href=\"#cite_note-12\"><span class=\"cite-bracket\">&#91;</span>12<span class=\"cite-bracket\">&#93;</span></a></sup> Vanga is believed to be central Bengal, Harikela and Samitata were apparently Bengal's eastern zones and Varendra was northern Bengal.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;19&#95;6-1\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_19-6\"><span class=\"cite-bracket\">&#91;</span>6<span class=\"cite-bracket\">&#93;</span></a></sup> The names of sites indicate that Tibeto-Burman, Austro-Asiatic and Dravidian languages were spoken by the majority of people. Indo-European languages became prominent from 400 BCE.<sup id=\"cite&#95;ref-Willem&#95;van&#95;Schendel&#95;17&#95;5-2\" class=\"reference\"><a href=\"#cite_note-Willem_van_Schendel_17-5\"><span class=\"cite-bracket\">&#91;</span>5<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p><p>The Vanga Kingdom was a powerful seafaring nation of <a href=\"/wiki/Ancient_Bengal\" class=\"mw-redirect\" title=\"Ancient Bengal\">Ancient Bengal</a>. They had overseas trade relations with <a href=\"/wiki/Java\" title=\"Java\">Java</a>, <a href=\"/wiki/Sumatra\" title=\"Sumatra\">Sumatra</a> and <a href=\"/wiki/Rattanakosin_Kingdom\" class=\"mw-redirect\" title=\"Rattanakosin Kingdom\">Siam</a> (modern day <a href=\"/wiki/Thailand\" title=\"Thailand\">Thailand</a>). According to <a href=\"/wiki/Mahavamsa\" class=\"mw-redirect\" title=\"Mahavamsa\">Mahavamsa</a>, the Vanga prince <a href=\"/wiki/Vijaya_of_Sri_Lanka\" class=\"mw-redirect\" title=\"Vijaya of Sri Lanka\">Vijaya Singha</a> conquered <a href=\"/wiki/Lanka\" title=\"Lanka\">Lanka</a> (modern day <a href=\"/wiki/Sri_Lanka\" title=\"Sri Lanka\">Sri Lanka</a>) in 544&#160;BC and gave the name \"<a href=\"/wiki/Sinhala_Kingdom\" class=\"mw-redirect\" title=\"Sinhala Kingdom\">Sinhala</a>\" to the country.<sup id=\"cite&#95;ref-13\" class=\"reference\"><a href=\"#cite_note-13\"><span class=\"cite-bracket\">&#91;</span>13<span class=\"cite-bracket\">&#93;</span></a></sup> <a href=\"/wiki/Bengali_people\" class=\"mw-redirect\" title=\"Bengali people\">Bengali people</a> migrated to the <a href=\"/wiki/Maritime_Southeast_Asia\" title=\"Maritime Southeast Asia\">Maritime Southeast Asia</a> and <a href=\"/wiki/Siam\" class=\"mw-redirect\" title=\"Siam\">Siam</a> (in modern Thailand), establishing their own settlement there.<sup id=\"cite&#95;ref-paxgaea.com&#95;14-0\" class=\"reference\"><a href=\"#cite_note-paxgaea.com-14\"><span class=\"cite-bracket\">&#91;</span>14<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>\n<div class=\"mw-heading mw-heading3\"><h3 id=\"Gangaridai/Nanda_Empire\"><span id=\"Gangaridai.2FNanda_Empire\"></span>Gangaridai/Nanda Empire</h3></div>\n<link rel=\"mw-deduplicated-inline-style\" href=\"mw-data:TemplateStyles:r1368532237\" /><div role=\"note\" class=\"hatnote navigation-not-searchable\">Main articles: <a href=\"/wiki/Gangaridai\" title=\"Gangaridai\">Gangaridai</a> and <a href=\"/wiki/Nanda_dynasty\" class=\"mw-redirect\" title=\"Nanda dynasty\">Nanda dynasty</a></div>\n<figure class=\"mw-default-size\" typeof=\"mw:File/Thumb\"><a href=\"/wiki/File:Asia_323bc.jpg\" class=\"mw-file-description\"><img src=\"//thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Asia_323bc.jpg/330px-Asia_323bc.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail\" decoding=\"async\" loading=\"lazy\" width=\"310\" height=\"178\" style=\"--mw-file-upright: 1.25\" class=\"mw-file-element mw-file-upright\" srcset=\"//thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Asia_323bc.jpg/960px-Asia_323bc.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail 2x\" data-file-width=\"2040\" data-file-height=\"1169\" /></a><figcaption>Asia in 323 BCE, the <a href=\"/wiki/Nanda_Empire\" title=\"Nanda Empire\">Nanda Empire</a> and <a href=\"/wiki/Gangaridai\" title=\"Gangaridai\">Gangaridai</a> Empire in relation to <a href=\"/wiki/Alexander_the_Great\" title=\"Alexander the Great\">Alexander</a>'s Empire and neighbours.</figcaption></figure>\n<p>Though north and west Bengal were part of the empire, southern Bengal thrived and became powerful with her overseas trades. In 326&#160;BCE, with the invasion of <a href=\"/wiki/Alexander_the_Great\" title=\"Alexander the Great\">Alexander the Great</a> the region again came to prominence. The Greek and Latin historians suggested that Alexander the Great withdrew from India anticipating the valiant counter-attack of the <a href=\"/wiki/Gangaridai\" title=\"Gangaridai\">Gangaridai</a> empire that was located in the Bengal region. Alexander, after the meeting with his officer, <a href=\"/wiki/Coenus_(general)\" title=\"Coenus (general)\">Coenus</a>, was convinced that it was better to return. <a href=\"/wiki/Diodorus_Siculus\" title=\"Diodorus Siculus\">Diodorus Siculus</a> mentions Gangaridai to be the most powerful empire in India. The allied forces of the <a href=\"/wiki/Nanda_Empire\" title=\"Nanda Empire\">Nanda Empire</a>/<a href=\"/wiki/Gangaridai\" title=\"Gangaridai\">Gangaridai</a> empire and Prasioi (region inside Nanda empire)were preparing a massive counter-attack against the forces of Alexander on the banks of the Ganges. Gangaridai, according to the Greek accounts, kept on flourishing at least up to the 1st century CE.\nThe Greeco-Roman sources description of Gangaridai matches with Nanda empire. \n<sup id=\"cite&#95;ref-15\" class=\"reference\"><a href=\"#cite_note-15\"><span class=\"cite-bracket\">&#91;</span>15<span class=\"cite-bracket\">&#93;</span></a></sup>\n</p>"
+    }
+   }
+  }
+ },
+ {
+  "host": "commons.wikimedia.org",
+  "params": {
+   "action": "query",
+   "format": "json",
+   "prop": "imageinfo",
+   "iiprop": "extmetadata|url",
+   "iiextmetadatafilter": "LicenseShortName|LicenseUrl|Artist",
+   "titles": "File:Bangladesh_National_Parliament_House.jpg|File:DOHS_Baridhara_1.jpg|File:DhakaCity1861.png|File:Dhaka_April_(33244268934).jpg"
+  },
+  "status": 200,
+  "json": {
+   "batchcomplete": "",
+   "query": {
+    "normalized": [
+     {
+      "from": "File:Bangladesh_National_Parliament_House.jpg",
+      "to": "File:Bangladesh National Parliament House.jpg"
+     },
+     {
+      "from": "File:DOHS_Baridhara_1.jpg",
+      "to": "File:DOHS Baridhara 1.jpg"
+     },
+     {
+      "from": "File:Dhaka_April_(33244268934).jpg",
+      "to": "File:Dhaka April (33244268934).jpg"
+     }
+    ],
+    "pages": {
+     "142791424": {
+      "pageid": 142791424,
+      "ns": 6,
+      "title": "File:Bangladesh National Parliament House.jpg",
+      "imagerepository": "local",
+      "imageinfo": [
+       {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Bangladesh_National_Parliament_House.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:Bangladesh_National_Parliament_House.jpg",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=142791424",
+        "extmetadata": {
+         "Artist": {
+          "value": "রিজওয়ান আহমেদ",
+          "source": "commons-desc-page"
+         },
+         "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+         },
+         "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+         }
+        }
+       }
+      ]
+     },
+     "152774305": {
+      "pageid": 152774305,
+      "ns": 6,
+      "title": "File:DOHS Baridhara 1.jpg",
+      "imagerepository": "local",
+      "imageinfo": [
+       {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/DOHS_Baridhara_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:DOHS_Baridhara_1.jpg",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=152774305",
+        "extmetadata": {
+         "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:%E0%A6%AE%E0%A7%8B%E0%A6%B9%E0%A6%BE%E0%A6%AE%E0%A7%8D%E0%A6%AE%E0%A6%A6_%E0%A6%9C%E0%A6%A8%E0%A6%BF_%E0%A6%B9%E0%A7%8B%E0%A6%B8%E0%A7%87%E0%A6%A8\" title=\"User:মোহাম্মদ জনি হোসেন\">Md Joni Hossain</a>",
+          "source": "commons-desc-page"
+         },
+         "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+         },
+         "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+         }
+        }
+       }
+      ]
+     },
+     "21147368": {
+      "pageid": 21147368,
+      "ns": 6,
+      "title": "File:DhakaCity1861.png",
+      "imagerepository": "local",
+      "imageinfo": [
+       {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/DhakaCity1861.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:DhakaCity1861.png",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=21147368",
+        "extmetadata": {
+         "Artist": {
+          "value": "Frederick William Alexander de Fabeck (1830-1912)",
+          "source": "commons-desc-page"
+         },
+         "LicenseShortName": {
+          "value": "Public domain",
+          "source": "commons-desc-page",
+          "hidden": ""
+         }
+        }
+       }
+      ]
+     },
+     "63107314": {
+      "pageid": 63107314,
+      "ns": 6,
+      "title": "File:Dhaka April (33244268934).jpg",
+      "imagerepository": "local",
+      "imageinfo": [
+       {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Dhaka_April_%2833244268934%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:Dhaka_April_(33244268934).jpg",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=63107314",
+        "extmetadata": {
+         "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/84891020@N03\">ASaber91</a>",
+          "source": "commons-desc-page"
+         },
+         "LicenseShortName": {
+          "value": "CC BY 2.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+         },
+         "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/2.0",
+          "source": "commons-desc-page"
+         }
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ }
+]

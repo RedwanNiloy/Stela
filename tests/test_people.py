@@ -56,7 +56,7 @@ def run(coro):
 
 @pytest.fixture(autouse=True)
 def clean_caches(monkeypatch):
-    for mod, name in ((geo, "_place_cache"), (geo, "_address_cache"), (people, "_article_cache"), (people, "_titles_cache")):
+    for mod, name in ((geo, "_place_cache"), (geo, "_address_cache"), (geo, "_commons_cache"), (people, "_article_cache"), (people, "_titles_cache")):
         monkeypatch.setattr(mod, name, TTLCache())
     monkeypatch.setattr(geo, "NOMINATIM_GAP", 0.0)
     monkeypatch.setattr(people, "WIKI_GAP", 0.0)
@@ -522,3 +522,46 @@ def test_logs_never_contain_coordinates_or_place_names(api, caplog):
     for secret in ("51.13", "1.3099", "Dover", "Kent", "England", "Stone Age"):
         assert secret not in caplog.text
     assert "people" in caplog.text   # it did log: only counts, statuses and timing
+
+
+# ---------------------------------------------------------------- lead images (Wikipedia pageimages + Commons licence)
+def image_by_title(facts):
+    return {e["article"]["title"]: e["image"] for e in facts["early_history"]}
+
+
+def test_excerpt_with_a_licensed_lead_image_gets_credit_and_file_page():
+    facts, _, net = fetch("dover", DOVER)
+    img = image_by_title(facts)["History of England"]
+    assert img["license"] == "Public domain" and img["author"] and img["file_page"].startswith("https://commons.wikimedia.org/wiki/File:")
+    assert img["url"].startswith("https://thumb.wikimedia.org/")
+    assert sum(1 for c in net.calls if c[0] == "commons.wikimedia.org") == 1       # one licence call for all the excerpts
+
+
+def test_excerpt_whose_article_has_no_image_has_none():
+    facts, _, _ = fetch("dover", DOVER)
+    assert image_by_title(facts)["History of Dover"] is None
+
+
+def test_lead_image_without_a_licence_or_author_is_not_shown():
+    def strip(host, params, body):
+        if host == "commons.wikimedia.org":
+            for page in body["query"]["pages"].values():
+                page["imageinfo"][0]["extmetadata"].pop("LicenseShortName", None)
+        return body
+    facts, _, _ = fetch("dover", DOVER, edit=strip)
+    assert all(e["image"] is None for e in facts["early_history"]) and facts["early_history"]   # the text is still there
+
+    def no_author(host, params, body):
+        if host == "commons.wikimedia.org":
+            for page in body["query"]["pages"].values():
+                page["imageinfo"][0]["extmetadata"]["Artist"] = {"value": ""}
+        return body
+    facts, _, _ = fetch("dover", DOVER, edit=no_author)
+    assert all(e["image"] is None for e in facts["early_history"])
+
+
+def test_failed_image_lookup_keeps_the_excerpts_and_is_not_an_incomplete_result():
+    net = Replay(cassette("dover"), fail=lambda host, params: host == "commons.wikimedia.org")
+    facts, statuses = run(_fetch(net, DOVER))
+    assert facts["early_history"] and all(e["image"] is None for e in facts["early_history"])
+    assert facts["incomplete"] is False and statuses["wikipedia"] == "ok"

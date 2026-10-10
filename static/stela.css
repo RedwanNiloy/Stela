@@ -161,6 +161,16 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .rec-sil { padding: 10px 14px; box-sizing: border-box; opacity: .7; }
 .credit a { color: var(--soft); overflow-wrap: anywhere; }
 .credit { margin-top: var(--s1); }
+.rec-photo.illustration { background: #f4ecd8; }                 /* PhyloPic silhouettes are dark: keep a light backing in dark mode */
+.rec-photo.illustration img { object-fit: contain; padding: 6px; box-sizing: border-box; }
+.excerpt { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--s3); align-items: start; }
+.figs { list-style: none; margin: var(--s3) 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--s3); }
+.fig-name { font-weight: 600; font-size: .85rem; margin-top: var(--s1); }
+.credit-subject { display: block; }
+.scene { display: block; flex: none; width: 120px; height: 90px; border-radius: var(--r); }
+.was { display: flex; gap: var(--s3); align-items: flex-start; }
+#rock { position: relative; }
+.strata { position: absolute; right: 0; top: var(--s3); width: 36px; height: 36px; color: var(--ochre); opacity: .35; }
 .local-name span { font-weight: 600; color: var(--ink); }
 .dead { color: var(--ochre); font-weight: 600; }
 .excerpt { padding: var(--s3) 0; border-top: 1px solid var(--line); }

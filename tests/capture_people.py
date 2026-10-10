@@ -17,7 +17,7 @@ from app import geo, people  # noqa: E402
 
 OUT = Path(__file__).parent / "samples"
 MAX_EXTRACT = 1200
-PACE = 1.0  # seconds before each Wikipedia request while recording
+PACE = 2.0  # seconds before each Wikipedia request while recording
 PLACES = {"dover": (51.13, 1.31), "dhaka": (23.81, 90.41), "madison": (43.07, -89.40)}
 
 
@@ -35,7 +35,7 @@ class Recorder(httpx.AsyncBaseTransport):
         self.inner, self.entries = httpx.AsyncHTTPTransport(), []
 
     async def handle_async_request(self, request):
-        if "wikipedia" in request.url.host:
+        if "wikipedia" in request.url.host or "wikimedia" in request.url.host:
             await asyncio.sleep(PACE)  # spread the requests out: bursts of 13 got HTTP 429 from Wikipedia
         resp = await self.inner.handle_async_request(request)
         body = await resp.aread()

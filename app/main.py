@@ -124,7 +124,12 @@ async def fossils(request: Request, lat: float = Query(ge=-90, le=90), lng: floa
     text, mode = await narrate.narrate(client, facts, "fossils")
     log.info("fossils status=%s mode=%s %.0fms", status.split(":")[0], mode, (time.perf_counter() - t0) * 1000)
 
+    # Illustrations for the groups shown (never part of the facts the model sees). A failure only means placeholders.
+    images = {}
+    if fossil_fact and fossil_fact.get("classes"):
+        images, _ = await geo.safe(asyncio.wait_for(geo.fossil_images(client, [n for n, _ in fossil_fact["classes"]]), 9.0))
     result = {"fossils": fossil_fact, "scope": scope, "narration": text, "mode": mode,
+              "images": images or {}, "images_note": geo.FOSSIL_IMAGE_NOTE,
               "source": {"id": "pbdb", **geo.SOURCES["pbdb"], "status": status}}
     if not status.startswith("failed") and mode != "facts-only":
         fossil_cache.set(key, result)

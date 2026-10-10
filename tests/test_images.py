@@ -7,10 +7,18 @@ import json
 from pathlib import Path
 
 import httpx
+import pytest
 
 from app import geo
 
 SAMPLES = Path(__file__).parent / "samples"
+
+
+@pytest.fixture(autouse=True)
+def clean_caches(monkeypatch):
+    for name in ("_image_cache", "_commons_cache", "_fossil_image_cache"):
+        monkeypatch.setattr(geo, name, geo.TTLCache())
+    monkeypatch.setattr(geo, "_phylopic_build", {"n": None, "until": 0.0})
 
 
 def sample(place):
@@ -177,3 +185,103 @@ def test_one_429_is_retried_once():
             await geo.add_images(c, es)
     run(go())
     assert hits["n"] == 2 and all(e["image"] for e in es)
+
+
+# ---------------------------------------------------------------- fossil group illustrations (PhyloPic, then Wikipedia)
+PHYLO = json.loads((SAMPLES / "phylopic.json").read_text(encoding="utf-8"))
+
+
+def phylopic_net(fail=False, calls=None):
+    """Answers like api.phylopic.org from the recorded replies; every other host (Wikipedia, Commons) answers like the Dover
+    sample, with `Gadus morhua` standing in for a fallback hit."""
+    def handler(request):
+        host, path = request.url.host, request.url.path
+        if calls is not None:
+            calls.append(host + path)
+        if host == "api.phylopic.org":
+            if fail:
+                return httpx.Response(503, json={})
+            if path == "/":
+                return httpx.Response(200, json=PHYLO["root"])
+            if path == "/nodes":
+                return httpx.Response(200, json=PHYLO["nodes"][request.url.params["filter_name"]])
+            return httpx.Response(200, json=PHYLO["node"][path])
+        rec = sample("dover")
+        if "wikipedia" in host:
+            titles = request.url.params["titles"].split("|")
+            body = copy.deepcopy(rec["wikipedia"])
+            body["query"]["redirects"] = [{"from": t, "to": "Atlantic cod"} for t in titles]
+            return httpx.Response(200, json=body)
+        return httpx.Response(200, json=rec["commons"])
+    return httpx.AsyncClient(transport=httpx.MockTransport(handler), follow_redirects=True)
+
+
+def fossils(names, **kw):
+    async def go():
+        async with phylopic_net(**kw) as c:
+            return await geo.fossil_images(c, names)
+    return run(go())
+
+
+def test_phylopic_licensed_image_names_the_member_drawn_and_credits_the_author():
+    got = fossils(["Cephalopoda"])["Cephalopoda"]
+    assert got["source"] == "PhyloPic" and got["kind"] == "illustration"
+    assert got["subject"] == "Cassinoceras" and got["author"] == "Antonov" and got["license"] == "Public domain"
+    assert got["url"].startswith("https://images.phylopic.org/") and got["url"].endswith("128x128.png")
+    assert got["file_page"].startswith("https://www.phylopic.org/images/")
+
+
+def test_phylopic_non_commercial_licence_is_not_shown_and_wikipedia_is_tried():
+    got = fossils(["Gastropoda"])["Gastropoda"]             # PhyloPic's picture is CC BY-NC-SA 3.0
+    assert got is None or got["source"] == "Wikimedia Commons"
+    assert geo.phylopic_license("https://creativecommons.org/licenses/by-nc-sa/3.0/") is None
+    assert geo.phylopic_license("https://creativecommons.org/licenses/by/4.0/")[0] == "CC BY 4.0"
+    assert geo.phylopic_license("https://creativecommons.org/publicdomain/zero/1.0/")[0] == "CC0 1.0"
+
+
+def test_phylopic_picture_without_an_author_is_not_shown():
+    im = PHYLO["node"][next(h for h in PHYLO["node"] if "primaryImage" in (PHYLO["node"][h]["_embedded"] or {}) and
+                            not PHYLO["node"][h]["_embedded"]["primaryImage"].get("attribution"))]["_embedded"]["primaryImage"]
+    assert geo.phylopic_from_image(im) is None
+
+
+def test_no_phylopic_node_falls_back_to_the_wikipedia_image_with_its_credit():
+    got = fossils(["Schloenbachia"])["Schloenbachia"]
+    assert got and got["source"] == "Wikimedia Commons" and got["kind"] == "photo" and got["author"]
+
+
+def test_a_failed_phylopic_lookup_gives_placeholders_not_errors_and_is_not_cached():
+    names = ["Cephalopoda", "Bivalvia"]
+    async def go():
+        async with phylopic_net(fail=True) as c:
+            return await geo.fossil_images(c, names)
+    got = run(go())
+    assert set(got) == set(names) and all(v is None or v["source"] == "Wikimedia Commons" for v in got.values())
+    assert geo._fossil_image_cache.get("Cephalopoda") is None   # a retry later can still find it
+    assert fossils(names)["Cephalopoda"]["source"] == "PhyloPic"
+
+
+def test_at_most_six_groups_are_looked_up_and_results_are_cached():
+    calls = []
+    async def go():
+        async with phylopic_net(calls=calls) as c:
+            return await geo.fossil_images(c, ["Cephalopoda"] + [f"Group{i}" for i in range(8)])
+    got = run(go())
+    assert len(got) == geo.MAX_FOSSIL_IMAGES == 6 and got["Cephalopoda"]
+    calls.clear()
+    async def again():
+        async with phylopic_net(calls=calls) as c:
+            return await geo.fossil_images(c, ["Cephalopoda"])
+    run(again())
+    assert calls == []                                       # served from the cache
+
+
+def test_the_llm_never_sees_fossil_or_history_images():
+    from app import narrate
+    img = {"url": "https://images.phylopic.org/x.png", "author": "A. Person", "license": "CC0 1.0", "file_page": "https://www.phylopic.org/images/x"}
+    facts = {"rock": None, "human_history_nearby": [], "scope": {}, "fossils_found_nearby": {"count": 3, "classes": [["Cephalopoda", 3]], "taxa": []},
+             "early_history": [{"scope": {"label": "city", "place_name": "Dover", "level": "city"}, "article": {"title": "History of Dover"},
+                                "intro": "Dover is a port.", "early": None, "image": img}], "traditions": []}
+    for part in ("fossils", "people"):
+        prompt = narrate.build_prompt(facts, part).split("FACTS:")[1]
+        assert "phylopic" not in prompt.lower() and "A. Person" not in prompt and "image" not in prompt.lower()

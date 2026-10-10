@@ -40,6 +40,8 @@ SOURCES = {
     "wikipedia": {"name": "Wikipedia", "url": "https://en.wikipedia.org", "license": "CC-BY-SA 4.0"},
     "commons": {"name": "Wikimedia Commons (species photos)", "url": "https://commons.wikimedia.org",
                 "license": "per photo, credited beside each one"},
+    "phylopic": {"name": "PhyloPic (fossil group illustrations)", "url": "https://www.phylopic.org",
+                 "license": "per image, credited beside each one"},
     "nominatim": {"name": "OpenStreetMap Nominatim (nearest place)", "url": "https://nominatim.openstreetmap.org",
                   "license": "ODbL"},
 }
@@ -49,6 +51,22 @@ async def get_json(client, url, timeout, **params):
     r = await client.get(url, params=params, timeout=timeout)
     r.raise_for_status()
     return r.json()
+
+
+async def get_json_retry(client, url, timeout, **params):
+    """get_json, but HTTP 429 (Wikimedia answers "Retry-After: 1" to short bursts) is retried up to twice, after that pause
+    (1 s, then 2 s at most). Used for the optional picture lookups only; the data layers keep their own pacing."""
+    for attempt in range(3):
+        try:
+            return await get_json(client, url, timeout, **params)
+        except httpx.HTTPStatusError as err:
+            if err.response.status_code != 429 or attempt == 2:
+                raise
+            try:
+                pause = float(err.response.headers.get("retry-after", "1"))
+            except ValueError:
+                pause = 1.0
+            await asyncio.sleep(min(max(pause, 0.5), 2.0) * (attempt + 1))
 
 
 def haversine_km(lat1, lng1, lat2, lng2):
@@ -371,12 +389,47 @@ def image_from_pages(page, info):
     lic_url = (meta.get("LicenseUrl") or {}).get("value") or ""
     return {"url": src, "width": thumb.get("width"), "height": thumb.get("height"),
             "author": author[:90], "license": licence, "license_url": re.sub(r"^http://", "https://", lic_url) if lic_url.startswith(("http://", "https://")) else None,
-            "file_page": file_page}
+            "file_page": file_page, "source": "Wikimedia Commons", "kind": "photo"}
+
+
+_commons_cache = TTLCache(ttl_seconds=24 * 3600, max_items=2000)  # file name -> {"info": Commons imageinfo page or {}}
+
+
+async def commons_infos(client, files):
+    """{file name: Commons imageinfo page or None}. One call for the files not cached. Raises on a failed call."""
+    out, todo = {}, []
+    for f in files:
+        hit = _commons_cache.get(f)
+        if hit is None:
+            todo.append(f)
+        else:
+            out[f] = hit["info"] or None
+    if todo:
+        com = await get_json_retry(client, COMMONS, IMAGE_TIMEOUT, action="query", format="json", prop="imageinfo",
+                             iiprop="extmetadata|url", iiextmetadatafilter="LicenseShortName|LicenseUrl|Artist",
+                             titles="|".join("File:" + f for f in todo))
+        cq = com.get("query") or {}
+        cmoved = {x["from"]: x["to"] for x in cq.get("normalized") or []}
+        by_title = {p.get("title"): p for p in (cq.get("pages") or {}).values() if "missing" not in p}
+        for f in todo:
+            t = "File:" + f.replace("_", " ")
+            info = by_title.get(cmoved.get("File:" + f, t)) or by_title.get(t)
+            _commons_cache.set(f, {"info": info or {}})
+            out[f] = info
+    return out
+
+
+async def images_for_pages(client, pages):
+    """For Wikipedia page dicts (with `thumbnail` and `pageimage` from prop=pageimages): a list, aligned with `pages`, of
+    image dicts or None. One Commons call at most. Raises if that call fails."""
+    files = sorted({p["pageimage"] for p in pages if p and p.get("pageimage") and (p.get("thumbnail") or {}).get("source")})
+    infos = await commons_infos(client, files) if files else {}
+    return [image_from_pages(p, infos.get(p["pageimage"])) if p and p.get("pageimage") else None for p in pages]
 
 
 async def lookup_images(client, names):
-    """{scientific name: image dict or None} for the names, using two API calls in total. Raises on a failed call."""
-    wiki = await get_json(client, WIKI, IMAGE_TIMEOUT, action="query", format="json", prop="pageimages",
+    """{taxon name: image dict or None} for the names, using two API calls in total. Raises on a failed call."""
+    wiki = await get_json_retry(client, WIKI, IMAGE_TIMEOUT, action="query", format="json", prop="pageimages",
                           piprop="thumbnail|name", pithumbsize=IMAGE_THUMB_PX, redirects=1, titles="|".join(names))
     q = wiki.get("query") or {}
     moved = {x["from"]: x["to"] for x in q.get("normalized") or []}
@@ -384,21 +437,8 @@ async def lookup_images(client, names):
     # a normalised title may also be redirected, so follow the chain once more
     final = lambda n: moved.get(moved.get(n, n), moved.get(n, n))
     pages = {p.get("title"): p for p in (q.get("pages") or {}).values() if "missing" not in p}
-    wanted = {n: pages.get(final(n)) for n in names}
-    files = sorted({p["pageimage"] for p in wanted.values() if p and p.get("pageimage")})
-    infos = {}
-    if files:
-        com = await get_json(client, COMMONS, IMAGE_TIMEOUT, action="query", format="json", prop="imageinfo",
-                             iiprop="extmetadata|url", iiextmetadatafilter="LicenseShortName|LicenseUrl|Artist",
-                             titles="|".join("File:" + f for f in files))
-        cq = com.get("query") or {}
-        cmoved = {x["from"]: x["to"] for x in cq.get("normalized") or []}
-        by_title = {p.get("title"): p for p in (cq.get("pages") or {}).values() if "missing" not in p}
-        for f in files:
-            t = "File:" + f.replace("_", " ")
-            infos[f] = by_title.get(cmoved.get("File:" + f, t)) or by_title.get(t)
-    return {n: (image_from_pages(p, infos.get(p["pageimage"])) if p and p.get("pageimage") else None)
-            for n, p in wanted.items()}
+    found = await images_for_pages(client, [pages.get(final(n)) for n in names])
+    return dict(zip(names, found))
 
 
 async def add_images(client, entries):
@@ -416,15 +456,7 @@ async def add_images(client, entries):
         return
     names = sorted({e["species"] for e in todo})[:MAX_NAME_LOOKUPS]
 
-    async def attempt():  # Wikipedia sometimes answers 429 when the history lookups run at the same moment: one quick retry
-        try:
-            return await lookup_images(client, names)
-        except httpx.HTTPStatusError as err:
-            if err.response.status_code != 429:
-                raise
-            await asyncio.sleep(1.0)
-            return await lookup_images(client, names)
-    got, status = await safe(asyncio.wait_for(attempt(), IMAGE_TOTAL_TIMEOUT))
+    got, status = await safe(asyncio.wait_for(lookup_images(client, names), IMAGE_TOTAL_TIMEOUT))
     if status != "ok":
         for e in todo:
             e["image_status"] = status   # "failed: HTTPStatusError": the card shows the placeholder; this is for the sources list
@@ -433,6 +465,102 @@ async def add_images(client, entries):
         if e["species"] in got:
             e["image"] = got[e["species"]]
             _image_cache.set(e["species"], {"image": e["image"]})
+
+
+# ---- Fossil group illustrations: PhyloPic by taxon name, then the Wikipedia/Commons page image by the same rules ----
+# Real responses (checked): GET api.phylopic.org/ redirects to /?build=N. GET /nodes?build=N&filter_name=<lowercase name>&page=0
+# gives _links.items[{href, title}]. GET /nodes/<uuid>?build=N&embed_primaryImage=true gives
+# _embedded.primaryImage{attribution (may be null), _links{license.href (a creativecommons.org URL), self.href (/images/<uuid>),
+# specificNode.title, thumbnailFiles[{href, sizes}]}}. The picture is of ONE member of the group, which the caption names.
+PHYLOPIC = "https://api.phylopic.org"
+PHYLOPIC_PAGE = "https://www.phylopic.org/images/"
+PHYLOPIC_IMAGES = "https://images.phylopic.org/"
+FOSSIL_IMAGE_NOTE = "Illustrations show the animal group, not a fossil found near you."
+MAX_FOSSIL_IMAGES = 6
+_phylopic_build = {"n": None, "until": 0.0}
+_fossil_image_cache = TTLCache(ttl_seconds=24 * 3600, max_items=500)  # taxon name -> {"image": dict or None}
+
+
+def phylopic_license(href):
+    """creativecommons.org URL -> (short label, https URL), or None for licences that do not allow display with credit."""
+    m = re.match(r"^https?://creativecommons\.org/(publicdomain/zero|publicdomain/mark|licenses/by|licenses/by-sa)/(\d(?:\.\d)?)/?$",
+                 href or "")
+    if not m:
+        return None
+    kind, ver = m.groups()
+    labels = {"publicdomain/zero": "CC0 1.0", "publicdomain/mark": "Public domain",
+              "licenses/by": f"CC BY {ver}", "licenses/by-sa": f"CC BY-SA {ver}"}
+    return labels[kind], f"https://creativecommons.org/{kind}/{ver}/"
+
+
+def phylopic_from_image(im):
+    """PhyloPic primaryImage object -> image dict, or None when it has no author, no allowed licence or no thumbnail."""
+    links = (im or {}).get("_links") or {}
+    lic = phylopic_license((links.get("license") or {}).get("href"))
+    author = " ".join(((im or {}).get("attribution") or "").split())
+    thumbs = [t for t in links.get("thumbnailFiles") or [] if str(t.get("href", "")).startswith(PHYLOPIC_IMAGES)]
+    page = (links.get("self") or {}).get("href", "").split("?")[0]
+    if not (lic and author and thumbs and page.startswith("/images/")):
+        return None
+    thumb = next((t for t in thumbs if t.get("sizes") == "128x128"), thumbs[0])
+    w, _, h = str(thumb.get("sizes", "128x128")).partition("x")
+    return {"url": thumb["href"], "width": int(w or 128), "height": int(h or 128), "author": author[:90],
+            "license": lic[0], "license_url": lic[1], "file_page": PHYLOPIC_PAGE + page.split("/")[-1],
+            "source": "PhyloPic", "kind": "illustration", "subject": (links.get("specificNode") or {}).get("title")}
+
+
+async def phylopic_build(client):
+    if _phylopic_build["n"] and _phylopic_build["until"] > time.monotonic():
+        return _phylopic_build["n"]
+    r = await client.get(PHYLOPIC + "/", timeout=IMAGE_TIMEOUT, follow_redirects=True)
+    r.raise_for_status()
+    _phylopic_build.update(n=int(r.json()["build"]), until=time.monotonic() + 3600)
+    return _phylopic_build["n"]
+
+
+async def phylopic_image(client, name):
+    """The PhyloPic picture for one taxon name, or None (no node, no picture, or not allowed). Raises on a failed call."""
+    build = await phylopic_build(client)
+    nodes = await get_json_retry(client, PHYLOPIC + "/nodes", IMAGE_TIMEOUT, build=build, filter_name=name.lower(), page=0)
+    items = ((nodes or {}).get("_links") or {}).get("items") or []
+    item = next((i for i in items if (i.get("title") or "").lower() == name.lower()), None)
+    if not item or not str(item.get("href", "")).startswith("/nodes/"):
+        return None
+    node = await get_json_retry(client, PHYLOPIC + item["href"].split("?")[0], IMAGE_TIMEOUT, build=build, embed_primaryImage="true")
+    return phylopic_from_image(((node or {}).get("_embedded") or {}).get("primaryImage"))
+
+
+async def fossil_images(client, names):
+    """{group name: image dict or None} for up to MAX_FOSSIL_IMAGES names. PhyloPic first; names it has no usable picture
+    for are tried on Wikipedia/Commons. A lookup that fails leaves None for that name and is not cached."""
+    names = list(dict.fromkeys(names))[:MAX_FOSSIL_IMAGES]
+    out, todo = {}, []
+    for n in names:
+        hit = _fossil_image_cache.get(n)
+        if hit is None:
+            todo.append(n)
+        else:
+            out[n] = hit["image"]
+    if not todo:
+        return out
+    results = await asyncio.gather(*(safe(phylopic_image(client, n)) for n in todo))
+    settled, missing = {}, []   # settled[n]: every lookup for n worked, so "no picture" may be cached
+    for n, (img, status) in zip(todo, results):
+        out[n] = img
+        settled[n] = status == "ok"
+        if not img:
+            missing.append(n)
+    if missing:
+        got, status = await safe(lookup_images(client, missing))
+        for n in missing:
+            if status == "ok":
+                out[n] = got.get(n)
+            else:
+                settled[n] = False
+    for n in todo:
+        if settled[n]:
+            _fossil_image_cache.set(n, {"image": out[n]})
+    return out
 
 
 def images_status(rare):

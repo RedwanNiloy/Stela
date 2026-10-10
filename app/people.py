@@ -44,6 +44,7 @@ MAX_EXCERPT_CHARS = 450
 SECTION_PARAGRAPHS = 8      # only the first paragraphs of a section are read
 BATCH = 20                  # titles per MediaWiki query (the extracts API serves 20 pages per call)
 WIKI_TIMEOUT = 8.0
+IMAGE_TOTAL = 6.0           # cap for the image licence lookup
 PEOPLE_TOTAL = 25.0         # cap for the whole layer
 
 MAX_PARALLEL = 3            # simultaneous Wikipedia requests (Wikimedia rate-limits anonymous bursts with HTTP 429)
@@ -290,8 +291,9 @@ async def fetch_titles(client, titles):
     hit = _titles_cache.get(key)
     if hit:
         return hit["value"]
-    value = await geo.get_json(client, geo.WIKI, WIKI_TIMEOUT, action="query", titles="|".join(titles), prop="extracts|pageprops",
-                               exintro=1, explaintext=1, exlimit="max", redirects=1, format="json")
+    value = await geo.get_json(client, geo.WIKI, WIKI_TIMEOUT, action="query", titles="|".join(titles), prop="extracts|pageprops|pageimages",
+                               exintro=1, explaintext=1, exlimit="max", redirects=1, format="json",
+                               piprop="thumbnail|name", pithumbsize=geo.IMAGE_THUMB_PX, pilimit="max")
     _titles_cache.set(key, {"value": value})
     return value
 
@@ -360,9 +362,15 @@ async def fetch_people(client, lat, lng):
             chosen.append((h, *found))
     details = await asyncio.gather(*(geo.safe(limited(fetch_details(client, page["title"], kind))) for _, _, page, kind in chosen))
 
+    # The article's lead image (already in the titles reply) plus its licence from Commons: one extra call, and a failure
+    # only means the excerpts show no picture.
+    images, _ = await geo.safe(asyncio.wait_for(geo.images_for_pages(client, [page for _, _, page, _ in chosen]), IMAGE_TOTAL))
+    images = images or [None] * len(chosen)
+
     excerpts, traditions = [], []
-    for (h, name, page, kind), (det, _) in zip(chosen, details):
+    for (h, name, page, kind), (det, _), image in zip(chosen, details, images):
         ex, tr = build_excerpt(h, name, page, kind, det)  # a failed section lookup still gives the introduction
+        ex["image"] = image   # shown on the page only; llm_view never passes it to the model
         if ex["intro"] or ex["early"]:
             excerpts.append(ex)
         traditions += tr
