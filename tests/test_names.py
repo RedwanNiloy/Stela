@@ -190,7 +190,7 @@ def test_species_records_give_the_key_and_country():
 
 
 # ---------------------------------------------------------------- narration: only supplied names
-RARE = {"rock": None, "human_history_nearby": [], "places_to_visit": [], "rare_animals_note": geo.RARE_NOTE,
+RARE = {"rock": None, "human_history_nearby": [], "rare_animals_note": geo.RARE_NOTE,
         "rare_names_note": geo.RARE_NAMES_NOTE, "scope": {},
         "rare_animals_recorded_nearby": [{"species": "Sphyrna lewini", "records": 48, "datasets": ["iNaturalist"], "records_checked": 48,
                                           "marked_dead": 5, "marked_alive": 0, "specimen_records": 0,
@@ -244,7 +244,7 @@ def api(monkeypatch):
         return [{"species": "Sphyrna lewini", "records": 1, "local_names": [{"name": "x", "language": lang or "-", "language_name": "X", "source": "GBIF", "dataset": ""}]}], geo.rare_scope(None, None)
 
     async def human(c, lat, lng):
-        return [], geo.human_scope("none", geo_note="x"), "empty", []
+        return [], geo.human_scope("none", geo_note="x"), "empty"
 
     async def llm(c, prompt):
         raise RuntimeError("no model")

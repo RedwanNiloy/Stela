@@ -34,10 +34,7 @@ GROUNDING_RULES = """STRICT RULES (these override everything else):
    the walker's exact spot. For level "none", say "nothing recorded". For a coarser map, say the rock is a broader grouping.
 10. Copy numbers, distances and ages exactly as written in the facts (say "1,658 times", not "sixteen thousand times").
     Never convert units or round them differently.
-11. Places to visit: mention only places that are listed in places_to_visit, using the name and the "distance" text exactly as
-    written there. If places_to_visit is empty, say nothing was recorded nearby and do not suggest, recommend or invent any
-    place. Never say a place is open, and never give opening hours, prices or walking times.
-12. Animal names: always use the scientific name as written. You may use a local or English name only if it appears in that
+11. Animal names: always use the scientific name as written. You may use a local or English name only if it appears in that
     species' "names" list, exactly as written there, and say which language it is. Never translate a name, and never make
     up or recall a common name from memory, for any species. If a species has no names, use its scientific name.
 """
@@ -49,7 +46,7 @@ no headings, no markdown."""
 
 MAIN_TASK = """TASK: In under 150 words, tell the walker: 1) the rock under their feet and how old it is
 (compare with humans using time_ruler), 2) what this place probably was then, 3) human history (or the wider place it is about, if the scope says so),
-4) rare animals RECORDED nearby (records only; mention the caveat), 5) at most two entries from places_to_visit, if any.
+4) rare animals RECORDED nearby (records only; mention the caveat).
 Do not mention fossils; they are shown separately."""
 
 FOSSIL_TASK = """TASK: In 2 to 4 short sentences, continue the story for the same walker (do not greet them again).
@@ -98,8 +95,6 @@ def llm_view(facts):
         view["human_history_nearby"] = [{**h, "summary": h["summary"][:240]} for h in view["human_history_nearby"]]
     if view.get("rare_animals_recorded_nearby"):
         view["rare_animals_recorded_nearby"] = [_rare_for_llm(r) for r in view["rare_animals_recorded_nearby"]]
-    if view.get("places_to_visit"):
-        view["places_to_visit"] = [{"name": e["name"], "type": e["type"], "distance": e["label"]} for e in view["places_to_visit"]]
     if "early_history" in view:  # People and past civilizations: scope labels and text only, no URLs or licence data
         view.pop("license", None)
         view["early_history"] = [{"scope": e["scope"]["label"], "place": e["scope"]["place_name"], "wikipedia_article": e["article"]["title"],
@@ -256,14 +251,6 @@ def facts_only_text(facts, part="main"):
         parts.append(f"{scope_note(facts, 'human')} {human[0]['summary']}")
     else:
         parts.append("Human history nearby: " + "; ".join(f"{h['place']} ({h['distance_m']} m)" for h in human[:3]) + ".")
-    places = facts.get("places_to_visit")
-    if places is None:
-        parts.append("Museums and historic sites could not be checked right now.")
-    elif not places:
-        parts.append("No museums or historic sites recorded nearby.")
-    else:
-        parts.append("Museums and historic sites recorded nearby: " + "; ".join(f"{e['name']} ({e['label']})" for e in places[:3])
-                     + ". Check access and opening times before you go.")
     rare = facts.get("rare_animals_recorded_nearby")
     if rare is None:
         parts.append("Rare animal records could not be checked right now.")
@@ -277,18 +264,7 @@ def facts_only_text(facts, part="main"):
     return " ".join(p.replace("  ", " ") for p in parts)
 
 
-# Safety net for rule 11: the story may only mention kinds of place that appear in the facts it was given. A model that
-# writes "the national museum" or "an old castle" when nothing like that was supplied is recommending a place it invented.
-PLACE_TERMS = re.compile(r"(?<!\w)(museums?|castles?|forts?|fortress(?:es)?|palaces?|temples?|mosques?|cathedrals?|abbeys?|"
-                         r"monasteries|monastery|galleries|gallery|monuments?|lighthouses?)(?!\w)", re.I)
-
-
-def invented_place_terms(text, facts):
-    allowed = json.dumps(llm_view(facts), ensure_ascii=False).lower()
-    return [m.group(0) for m in PLACE_TERMS.finditer(text) if m.group(0).lower().rstrip("s").rstrip("e") not in allowed]
-
-
-# Safety net for rule 12: a name introduced with "known as / called / named" must be one the facts supplied. (In testing, a small
+# Safety net for rule 11: a name introduced with "known as / called / named" must be one the facts supplied. (In testing, a small
 # model wrote invented common names such as "ruff-legged tern" for scientific names.)
 NAMING_PHRASE = re.compile(
     r"(?:known as|called|named|nicknamed)\s+(?:the\s+|a\s+|an\s+)?[\"\u201c']?"
@@ -330,14 +306,14 @@ def claims_animals_alive(text):
 async def narrate(client, facts, part="main"):
     """Returns (text, mode); mode is 'online', 'offline' or 'facts-only'. Never raises."""
     nothing_to_say = part == "main" and facts.get("rock") is None and not facts.get("human_history_nearby") \
-        and not facts.get("rare_animals_recorded_nearby") and not facts.get("places_to_visit")
+        and not facts.get("rare_animals_recorded_nearby")
     if part == "people" and not (facts.get("early_history") or facts.get("traditions")):
         nothing_to_say = True  # nothing found (or nothing could be looked up): never ask a model to talk
     if nothing_to_say:  # with no facts, a template is safer than asking a model to talk
         return facts_only_text(facts, part), "facts-only"
     try:
         text, mode = await call_llm(client, build_prompt(facts, part))
-        if part == "main" and (claims_animals_alive(text) or invented_place_terms(text, facts) or invented_common_names(text, facts)):
+        if part == "main" and (claims_animals_alive(text) or invented_common_names(text, facts)):
             return facts_only_text(facts, part), "facts-only"
         if part == "people" and people_violations(text, facts):
             return facts_only_text(facts, part), "facts-only"

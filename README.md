@@ -57,7 +57,7 @@ An ancient-discovery feel in original CSS/SVG only: sandstone, papyrus and deep 
 
 ## People and past civilizations
 
-A card with what Wikipedia says about the early history of your place at up to five scopes: **your area, city, district, region, country**. It replaces the old "Human history nearby" card; the museums and historic sites themselves are listed in "Places to visit".
+A card with what Wikipedia says about the early history of your place at up to five scopes: **your area, city, district, region, country**. It replaces the old "Human history nearby" card; the nearby history pages are still used by the narration.
 
 How it works (`app/people.py`, endpoints `/api/people` for the excerpts and `/api/people/story` for the scribe's paragraph):
 
@@ -78,17 +78,6 @@ Under each rare-animal record the card shows the scientific name always, and a c
 - **Labelling.** For example "English name: Common Rabbit (GBIF · Catalogue of Life)" or "Bengali name: ... (GBIF · <dataset>)". Names are never translated, guessed or written by the model: the model sees only the supplied names, and a code check discards a story that introduces a name ("also known as...") that was not supplied.
 - **If a lookup fails or returns nothing,** the species keeps its scientific name only, and the rest of the card is unaffected.
 - **Fossils are not covered.** PBDB's `nm2` common-name field was checked: it is English only, empty for most taxa (for example Cephalopoda, *Schloenbachia*, *Gavelinella* have none) and loose where present (Bivalvia gives "clam"), so it is not used.
-
-## Places to visit
-
-Museums and historic sites within about 10 km, nearest first, up to 5 entries (this replaces the earlier "Dig sites nearby" card). It reuses the Wikipedia geosearch the app already runs: no new request, no reverse geocoding, no widening to a city, district or division.
-
-- **What counts.** A Wikipedia page is kept when its title or its first sentence says it is a museum, castle or fort, palace, place of worship (temple, mosque, abbey, cathedral, monastery), ruins or archaeological site, or a historic site (for example "Grade II* listed", "medieval", "is a historic church", war memorial). Pages that only mention a museum in a later sentence, such as a university hall that houses one, are not kept. The rules are in `VISIT_RULES` in `app/geo.py`.
-- **Each entry** shows the name, the type, the straight-line distance and compass direction ("about 3 km north-east"), the first sentence of the Wikipedia introduction, the source name, a Wikipedia link, and an "Open in map" link (a plain OpenStreetMap URL with the place's coordinates; no routing service). The entries are marked on the Leaflet map with an original SVG marker.
-- **No promises.** The card says "Distances are straight-line. Check access and opening times before you go." It never states opening hours, prices or that a place is open to visitors.
-- **Empty state.** If nothing is found it shows exactly "No museums or historic sites recorded near you. Try dropping a pin in a city." and nothing else is put in the list.
-- **Narration.** The model sees only each place's name, type and distance text, and may mention only those, exactly as written. With an empty list it must say nothing was recorded nearby. A code check discards a story that names a kind of place (museum, castle, temple...) that is not in the facts.
-- **Overpass was tried and left out.** OpenStreetMap's Overpass API (`tourism=museum`, `historic=*`) was too slow and flaky in testing (timeouts and a 504 from three places, one answer after 12 s) and its results were mostly memorial plaques, so it is not used. No coordinates are sent to it.
 
 ## Passport and Walk mode
 
@@ -166,7 +155,7 @@ Stela does not store or log your location or IP address. Your browser's language
 | [Macrostrat](https://macrostrat.org) | rock unit, age | CC-BY 4.0 |
 | [Paleobiology Database](https://paleobiodb.org) | fossil finds | CC-BY 4.0 |
 | [GBIF](https://www.gbif.org) with IUCN Red List categories | rare animal records | CC0 / CC-BY per dataset |
-| [Wikipedia](https://en.wikipedia.org) / MediaWiki API | nearby pages for "Places to visit" (museums and historic sites); history excerpts for "People and past civilizations" | text under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): excerpts are shortened and attributed on the page, with links to the article and its authors |
+| [Wikipedia](https://en.wikipedia.org) / MediaWiki API | nearby history pages; history excerpts for "People and past civilizations" | text under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): excerpts are shortened and attributed on the page, with links to the article and its authors |
 | [OpenStreetMap Nominatim](https://nominatim.org) | place hierarchy (neighbourhood to country), nearest city/town and country | ODbL |
 | [OpenStreetMap](https://www.openstreetmap.org/copyright) tiles, [Leaflet](https://leafletjs.com) | map | ODbL, BSD-2 |
 
@@ -194,7 +183,6 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - **Wikipedia may rate-limit (HTTP 429)**, especially for anonymous or shared-IP clients. The card then says it could not be checked. Setting `STELA_CONTACT` helps.
 - **Small language models can slip.** Strict prompts reduce invented details but cannot guarantee zero. In testing, a 4B local model sometimes turned scientific names into common names, and once said rare animals "wander" the area. A code check now discards any story that calls the animals alive or living here and shows the plain facts instead. That is why the plain fact cards are always shown under the story.
 - PBDB can take 30 seconds or more for sparse regions.
-- **Places to visit are not visit advice.** They are Wikipedia pages, so some are buildings or monuments you cannot enter or that no longer exist. The type comes from keywords in the first sentence, so it can be wrong or missing. Directions and distances are straight lines from the point you looked up, and Wikipedia's coordinates for a place can be approximate.
 - **A one-line summary is the first sentence of the introduction**, which Wikipedia sometimes cuts short (for example after "St.").
 - **The passport is per browser and per device.** Clearing site data, using a private window, or switching phones starts a new one. There is no sync, by design.
 - **Walk mode needs the page open and visible.** Browsers pause GPS for hidden pages and locked screens, so it cannot track you in the background. GPS can be slow or inaccurate indoors, under tree cover and in cities; weak fixes are ignored rather than guessed from.
@@ -202,13 +190,6 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - **Walk mode and the rate limit.** Each new story is four requests (where, fossils, people, people/story; about 20 stories a minute are allowed). If the server says slow down, Walk mode pauses for a minute.
 
 - **Local names are incomplete and sometimes wrong.** GBIF aggregates many datasets, some of which label names with the wrong language (a Spanish name tagged English, for example), and many species have no name in the language you read. In testing, none of Dhaka's eight rare species had a single Bengali, Hindi or Urdu name, so Dhaka shows English names or only scientific names. The card says "Local names come from GBIF and may be incomplete." The country's main language is a rough short list, and countries not on it are skipped.
-- **Dense cities hide sites.** The geosearch returns only the 50 nearest Wikipedia pages. In a dense modern district they can all be within about 2 km (in the Dhaka test they were), so older sites farther out, still inside 10 km, are never looked at. A place can therefore show few or no entries even when there are sites in the wider city.
-
-## Planned next steps
-
-- Widening "Places to visit" to the city, district and division when nothing is found nearby (with clear scope labels, like the other cards).
-- A way past the 50-page cap in dense cities, if it can be done without many more requests.
-
 ## Out of scope for v1
 
 Sky and star views, AR/VR, accounts, databases, a time slider, animal images or 3D models, and storing any user location.

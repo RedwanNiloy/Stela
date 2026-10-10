@@ -105,10 +105,6 @@
           <div id="people"></div>
         </article>
 
-        <article class="card" id="card-sites">
-          <h2>Places to visit</h2>
-          <div id="sites"></div>
-        </article>
       </div>
     </section>
 
@@ -116,7 +112,6 @@
       <p><strong>Honest notes.</strong> Fossil records show what has been <em>found</em> near here, not everything that lived here.</p>
       <p>Whether a place was sea, land or swamp is <em>inferred from the rock type</em>, so it is only ever "probably".</p>
       <p>Animal records show where an animal was observed, not necessarily where it lives.</p>
-      <p>Places to visit are museums and historic sites that have a Wikipedia page, within about 10 km. They may not be open to visitors. Distances are straight lines, not routes. Check access and opening times before you go.</p>
       <p>The narration is written by an open-weight AI model that is only given the facts shown on this page. Check the cards below it.</p>
       <p>The scribe, the stone tablets and the layers are original decoration. They are not a picture of any real culture or period, and the layers are for orientation, not to scale.</p>
     </div>
@@ -187,7 +182,6 @@ let run = 0;                 // incremented on every new lookup so stale replies
 let storyText = "";          // what "Listen" reads
 let marker = null;
 let quiet = false;           // true while a Walk-mode refresh is in progress: no flashy animation
-let lookup = { lat: null, lng: null };  // where the current story is for (used for direction and distance to sites)
 
 const map = L.map("map", { worldCopyJump: true }).setView([20, 10], 2);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -251,8 +245,6 @@ let lastRock = null;  // the most recent mapped rock, to notice when a walker cr
 async function explore(lat, lng, opts = {}) {
   const me = ++run;
   quiet = !!opts.walk;
-  lookup = { lat, lng };
-  clearPlaceMarkers();
   if (!opts.walk) {
     Voice.stop(); setListenLabel();
     storyText = "";
@@ -275,7 +267,7 @@ async function explore(lat, lng, opts = {}) {
   if (opts.walk) { Voice.stop(); setListenLabel(); } else say("");
   renderWhere(data);
   $("#results").hidden = false;
-  if (!opts.walk) { carveAll(); fitToPlaces(); $("#card-story").scrollIntoView(scrollOpts("start")); }
+  if (!opts.walk) { carveAll(); $("#card-story").scrollIntoView(scrollOpts("start")); }
   if (opts.real) stampPassport(lat, lng, data.facts.rock);
   if (data.facts.rock) lastRock = data.facts.rock;
 
@@ -362,7 +354,6 @@ function renderWhere(d) {
 
   digData = { rock, ruler: f.time_ruler, scopes: sc, human: hh, fossils: undefined, fossilScope: null };  // fossils: undefined = still loading
   renderDig();
-  renderPlaces(f);
   renderSources(d.sources);
 }
 
@@ -546,8 +537,10 @@ function traditionsBlock(list) {
       h("div", { class: "small" }, `Wikipedia, ${t.article.title} \u00b7 about ${t.scope.place_name} (${t.scope.label}), not your exact spot unless that says your area`)))));
 }
 
+let peopleHasExcerpts = false;  // the story paragraph only adds something when there are excerpts to narrate
 function renderPeople(d) {
   const p = d.people, box = $("#people");
+  peopleHasExcerpts = !!(p.early_history && p.early_history.length);
   if (p.early_history == null) setContent(box, empty("The early history of this area could not be looked up right now."), peopleNote());
   else if (!p.early_history.length && !p.traditions.length) setContent(box, h("p", { class: "empty" }, "No early history recorded for this area."), peopleNote(p.incomplete));
   else setContent(box, p.early_history.map(excerptBlock), traditionsBlock(p.traditions), peopleNote(p.incomplete));
@@ -556,7 +549,7 @@ function renderPeople(d) {
 }
 
 function renderPeopleStory(st) {
-  if (!st.narration) return;
+  if (!st.narration || !peopleHasExcerpts) return;  // nothing found or lookup failed: the card already says so
   $("#people").append(h("div", { class: "scribe-add" }, paragraphs(st.narration)));
   storyText = (storyText + " " + st.narration).trim();
 }
@@ -719,53 +712,6 @@ document.addEventListener("visibilitychange", () => {
   else if (walk.on) { startWatch(); walkStatus.textContent = "Walk mode is on."; }
 });
 window.addEventListener("pagehide", stopWatch);
-
-/* ---------- Places to visit ----------
- * Museums and historic sites from the Wikipedia geosearch the app already runs (about 10 km, nearest first, up to 5).
- * Distances are straight lines. Nothing here says a place is open, or gives opening hours or prices. */
-const PLACES_NONE = "No museums or historic sites recorded near you. Try dropping a pin in a city.";
-const PLACES_NOTE = "Distances are straight-line. Check access and opening times before you go.";
-let placeMarkers = [];
-const placeIcon = L.divIcon({
-  className: "site-marker", iconSize: [34, 44], iconAnchor: [17, 42], popupAnchor: [0, -38],
-  html: '<svg viewBox="0 0 34 44" aria-hidden="true"><path d="M17 42C7 30 3 24 3 16a14 14 0 0 1 28 0c0 8-4 14-14 26z" fill="var(--ochre)" stroke="var(--ink)" stroke-width="2.5"/>' +
-    '<path d="M11 21V15a6 6 0 0 1 12 0v6z" fill="var(--card)" stroke="var(--ink)" stroke-width="1.8"/><path d="M13 17h8M13 20h8" stroke="var(--stone-dark)" stroke-width="1.5"/></svg>',
-});
-function clearPlaceMarkers() { placeMarkers.forEach((m) => m.remove()); placeMarkers = []; }
-
-function markPlaces(places) {
-  clearPlaceMarkers();
-  placeMarkers = places.map((p) => {
-    const m = L.marker([p.lat, p.lng], { icon: placeIcon, title: p.name, alt: p.name }).addTo(map);
-    m.bindPopup(h("div", {}, h("strong", {}, p.name), h("br"), p.label + " (straight line)"));
-    return m;
-  });
-}
-
-function fitToPlaces() {  // show the user's pin and the places together, without zooming in too far
-  if (!placeMarkers.length || lookup.lat == null) return;
-  const points = [[lookup.lat, lookup.lng], ...placeMarkers.map((m) => m.getLatLng())];
-  map.fitBounds(L.latLngBounds(points), { maxZoom: 15, padding: [30, 30], animate: !reduceMotion() });
-}
-
-function placeItem(e) {
-  const link = (href, text) => h("a", { href, target: "_blank", rel: "noopener noreferrer" }, text);
-  return h("li", {},
-    h("strong", {}, e.name), e.type ? h("span", { class: "place-type" }, e.type) : null,
-    h("div", { class: "small" }, e.label),
-    e.summary ? h("p", {}, e.summary) : null,
-    h("div", { class: "small" }, "Source: " + e.source),
-    h("div", { class: "site-links" }, link(e.url, "Wikipedia page \u2197"), link(e.map_url, "Open in map \u2197")));
-}
-
-function renderPlaces(facts) {
-  const places = facts.places_to_visit, box = $("#sites");
-  const note = h("p", { class: "small" }, PLACES_NOTE);
-  clearPlaceMarkers();
-  if (places == null) setContent(box, empty("Could not be checked right now."), note);
-  else if (!places.length) setContent(box, h("p", { class: "empty" }, PLACES_NONE), note);
-  else { setContent(box, h("ul", { class: "sites" }, places.map(placeItem)), note); markPlaces(places); }
-}
 
 /* ---------- Era strip: today on the left, deep time on the right. The rock is a band; human history is a marked sliver. ---------- */
 function eraStrip(rock) {
