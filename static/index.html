@@ -218,13 +218,14 @@
   </details>
 </main>
 
-<div class="splash" id="splash" hidden role="status" aria-live="polite">
+<div class="splash" id="splash" hidden role="dialog" aria-modal="true" aria-labelledby="splash-name">
   <div class="splash-rays" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="splash-ring" aria-hidden="true"></div>
   <div class="splash-art" id="splash-art"></div>
   <p class="splash-kicker">Badge unlocked</p>
   <p class="splash-name" id="splash-name"></p>
   <p class="splash-sub" id="splash-sub"></p>
+  <button class="btn splash-ok" id="splash-ok" type="button">OK</button>
 </div>
 <div class="scrim" id="scrim" hidden></div>
 <aside class="drawer" id="drawer" hidden aria-label="Walk mode, passport and badges" tabindex="-1">
@@ -1141,8 +1142,8 @@ function awardBadge(lat, lng, rock, how) {
 }
 updateBadgeUi();
 
-/* The splash for a newly earned badge: a short burst over the page (about 1.8 s, no sound, never blocks taps, skipped under
- * prefers-reduced-motion because the badge card and its text still announce the badge). It removes itself when the animation ends. */
+/* The splash for a newly earned badge: a short burst over the page (about 1 s, no sound) that stays until OK is tapped.
+ * Skipped under prefers-reduced-motion, because the badge card and its text still announce the badge. */
 const splashEl = $("#splash");
 function showSplash(res) {
   if (reduceMotion()) return;
@@ -1154,9 +1155,18 @@ function showSplash(res) {
   splashEl.hidden = false;
   void splashEl.offsetWidth;
   splashEl.classList.add("go");
+  $("#splash-ok").focus({ preventScroll: true });
 }
-splashEl.addEventListener("animationend", (e) => { if (e.target === splashEl) { splashEl.hidden = true; splashEl.classList.remove("go"); } });
-splashEl.addEventListener("click", () => { splashEl.hidden = true; splashEl.classList.remove("go"); });
+function closeSplash() {
+  if (splashEl.hidden) return;
+  splashEl.hidden = true; splashEl.classList.remove("go");
+  $("#summary").scrollIntoView(scrollOpts("start"));   // back to the result underneath
+}
+$("#splash-ok").addEventListener("click", closeSplash);
+splashEl.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeSplash();
+  else if (e.key === "Tab") { e.preventDefault(); $("#splash-ok").focus(); }   // one control: keep focus on it
+});
 
 /* ---------- Side panel: Walk mode, Passport and badges (kept out of the page flow so the results are not pushed down) ---------- */
 const drawer = $("#drawer"), scrim = $("#scrim"), menuBtn = $("#menu");

@@ -320,8 +320,8 @@ body.drawer-open { overflow: hidden; }
 
 /* ---------- Badge splash ---------- */
 .splash { position: fixed; inset: 0; z-index: 1600; display: grid; place-content: center; justify-items: center; text-align: center; padding: var(--s5);
-  background: radial-gradient(circle at 50% 45%, rgba(14, 84, 80, .82), rgba(20, 12, 4, .9) 75%); color: #fff6e0; pointer-events: none; opacity: 0; }
-.splash.go { animation: splashlife 1.8s ease-out both; }
+  background: radial-gradient(circle at 50% 45%, rgba(14, 64, 60, .96), rgba(20, 12, 4, .97) 75%); color: #fff6e0; opacity: 0; }
+.splash.go { animation: splashlife .25s ease-out both; }
 .splash-art { position: relative; z-index: 2; }
 .splash-badge { width: 132px; height: 132px; filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .45)); }
 .splash.go .splash-badge { animation: splashpop .7s cubic-bezier(.2, .85, .3, 1.15) both; }
@@ -332,11 +332,13 @@ body.drawer-open { overflow: hidden; }
 .splash-rays i:nth-child(3n) { background: #7fdacf; }
 .splash-rays i:nth-child(3n+1) { background: #f6e9c8; }
 .splash.go .splash-rays i { animation: splashray .9s ease-out .1s both; }
+.splash-ok { margin-top: var(--s5); min-width: 160px; min-height: 52px; font-size: 1.1rem; background: #f0b45c; border-color: #f0b45c; color: #231a0e; }
+.splash.go .splash-ok { animation: splashtext .4s ease-out .5s both; }
 .splash-kicker { margin-top: var(--s5); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #f0b45c; }
 .splash-name { margin-top: var(--s1); font-family: var(--display); font-size: 1.5rem; font-weight: 600; letter-spacing: .04em; }
 .splash-sub { margin-top: var(--s2); font-size: .9rem; max-width: 22rem; color: #f4eada; }
 .splash.go .splash-kicker, .splash.go .splash-name, .splash.go .splash-sub { animation: splashtext .5s ease-out .25s both; }
-@keyframes splashlife { 0% { opacity: 0; } 12% { opacity: 1; } 78% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes splashlife { from { opacity: 0; } to { opacity: 1; } }
 @keyframes splashpop { 0% { transform: scale(.3) rotate(-14deg); opacity: 0; } 65% { transform: scale(1.12) rotate(4deg); opacity: 1; } 100% { transform: none; opacity: 1; } }
 @keyframes splashring { 0% { transform: scale(.5); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
 @keyframes splashray { 0% { transform: rotate(var(--a)) translateY(30px); opacity: 0; } 25% { opacity: 1; } 100% { transform: rotate(var(--a)) translateY(110px); opacity: 0; } }
