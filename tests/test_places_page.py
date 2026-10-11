@@ -51,7 +51,8 @@ def test_start_backdrop_is_decorative_inline_svg_with_no_external_image():
     assert 'aria-hidden="true"' in start.split('class="start-bg"')[0][-60:] or "aria-hidden" in block
     assert "<svg" in block and "<img" not in block and "http" not in block.replace("http://www.w3.org", "")
     css = (STATIC / "stela.css").read_text(encoding="utf-8")
-    assert "url(" not in css.split("Start screen: blurred fossil")[1]   # no image file, no new data source
+    urls = re.findall(r"url\(([^)]*)\)", css.split("Start screen backdrop")[1])
+    assert all(u.strip("\"'").startswith("data:image/svg+xml") for u in urls)   # only a generated grain, no image file or remote source
 
 
 def test_how_it_works_is_a_popup_dialog_not_a_dropdown():

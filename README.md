@@ -24,7 +24,7 @@ Visitors first see a full-screen intro (wordmark, tagline, a short hook, a large
 - Moving from the start screen to the app is a 220 ms fade, skipped under `prefers-reduced-motion`. The theme toggle is on the start screen too. No sound, no autoplay, no large images; tap targets are at least 44 px.
 - The flow lives in `static/stela-start.js` (no DOM code), tested in `tests/start.test.js`: creating it and "Explore the map" never request the location, Start requests it once, and a late answer after choosing the map is ignored.
 
-The start screen has a soft, blurred backdrop scene of pyramids, a mummy and ammonite fossils in rock strata (a warm desert day in light mode, a night version in dark mode). It is original inline SVG in `static/index.html` (no image file, no new data source, hidden from screen readers), blurred with CSS and faded behind the text so it stays readable in light and dark mode.
+The start screen has a quiet vintage backdrop: aged parchment with a fine double border and thin engraved line art of a pyramid, a mummy and ammonite fossils (a gold-on-dark version in dark mode). The line art is original inline SVG in `static/index.html` and the paper grain is generated in CSS (no image file, no new data source, hidden from screen readers); it stays in the corners so the text is never behind it.
 
 ### Try these places
 
