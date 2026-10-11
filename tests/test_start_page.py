@@ -49,3 +49,9 @@ def test_icons_and_favicon_ico_are_served_and_manifest_files_exist():
         r = client.get(path)
         assert r.status_code == 200, path
         assert len(r.content) > 100, path
+
+
+def test_static_files_are_revalidated_so_old_scripts_are_never_mixed_with_a_new_page():
+    client = TestClient(app)
+    for path in ("/", "/stela-logic.js", "/stela.css"):
+        assert client.get(path).headers["cache-control"] == "no-cache", path

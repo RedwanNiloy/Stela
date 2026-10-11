@@ -59,6 +59,8 @@ async def guard_and_log(request: Request, call_next):
     except Exception as e:
         log.error("%s 500 %s", path, type(e).__name__)
         return JSONResponse({"detail": "Something went wrong. Please try again."}, status_code=500)
+    if not path.startswith("/api/"):
+        response.headers["Cache-Control"] = "no-cache"  # static files: always revalidate (cheap 304), so a new deploy is never mixed with stale scripts
     if path != "/health":
         log.info("%s %s %.0fms", path, response.status_code, (time.perf_counter() - start) * 1000)
     return response
