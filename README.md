@@ -2,6 +2,15 @@
 
 > Every place is a stone with a story carved in it.
 
+**Links**
+
+- Live demo: https://YOUR-SERVICE.onrender.com (placeholder: replace with the real Render URL)
+- Demo video: YOUR-VIDEO-LINK (placeholder: replace after uploading)
+- DEV post: YOUR-DEV-POST-LINK (placeholder: fill in after publishing)
+- Repo: https://github.com/RedwanNiloy/Stela
+
+Built October YOUR-START-DATE to 11, 2026 for the Hacktoberfest Open-Source AI Challenge, Week 1.
+
 Open Stela on your phone, tap **Start** (or drop a pin on the map), and put the phone away. A calm "stone scribe" tells you about the ground under your feet: the rock and its age, what the place probably was (sea, land, swamp), the fossils found nearby, rare animal records nearby, and human history close by. It can read the story aloud.
 
 Built for the Hacktoberfest Open-Source AI Challenge, Week 1 "Touch Grass".
@@ -312,4 +321,4 @@ Please check each provider's current terms before heavy use. All artwork is orig
 - **Local names are incomplete and sometimes wrong.** GBIF aggregates many datasets, some of which label names with the wrong language (a Spanish name tagged English, for example), and many species have no name in the language you read. In testing, none of Dhaka's eight rare species had a single Bengali, Hindi or Urdu name, so Dhaka shows English names or only scientific names. The card says "Local names come from GBIF and may be incomplete." The country's main language is a rough short list, and countries not on it are skipped.
 ## Out of scope for v1
 
-Sky and star views, AR/VR, accounts, databases, a time slider, animal images or 3D models, and storing any user location.
+Not in this version: sky and star views, AR/VR, 3D models, accounts or sign-in, a server-side database, a time slider, and storing your location on the server. The passport and badges exist, but they live only in your browser (see "Passport and Walk mode"). Pictures of animals are shown (species photos and fossil group illustrations, each credited), as flat images, not 3D.
