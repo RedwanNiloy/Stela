@@ -88,6 +88,10 @@
       </div>
     </div>
     <div class="top-actions">
+    <button class="icon-btn" id="menu" type="button" aria-label="Open Walk mode, Passport and badges" title="Walk mode, Passport, badges" aria-expanded="false" aria-controls="drawer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="menu-dot" id="menu-dot" hidden></span>
+    </button>
     <button class="icon-btn" id="home" type="button" aria-label="Back to the start screen" title="Home">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -114,35 +118,9 @@
   <p class="sr-only" id="map-alt" role="status" aria-live="polite">No place chosen yet.</p>
   <p id="msg" role="status" aria-live="polite" hidden></p>
 
-  <div class="toolbar">
-    <button class="btn btn-quiet" id="walk" type="button" aria-pressed="false">Walk mode: off</button>
-    <button class="btn btn-quiet" id="passport-btn" type="button" aria-expanded="false" aria-controls="passport">Passport (0)</button>
-    <button class="btn btn-quiet" id="badges-btn" type="button" aria-expanded="false" aria-controls="badges">My badges (0)</button>
-  </div>
-  <p class="walk-note">Walk mode keeps your GPS on, so it uses more battery. It only watches while this page is open and visible, and asks for a new story after you move about 300 m.</p>
-  <label class="check" id="autoread-row" hidden><input type="checkbox" id="autoread"> Read each new story aloud automatically</label>
   <p id="walkstatus" role="status" aria-live="polite" class="small"></p>
   <p id="walkmsg" role="status" aria-live="polite"></p>
   <div id="walkoffer" hidden><button class="btn btn-quiet" id="walk-listen" type="button">Listen to the new story</button></div>
-
-  <section id="passport" class="panel" hidden aria-label="Passport">
-    <h2>Passport</h2>
-    <div id="passport-body"></div>
-    <button class="link-btn" id="passport-clear" type="button">Clear my passport</button>
-    <p class="small">Your passport lives only in this browser. It is never sent to the server.</p>
-  </section>
-
-  <section id="badges" class="panel" hidden aria-label="My badges">
-    <h2>My badges</h2>
-    <p class="rank-line" id="badges-rank"></p>
-    <ul class="bd-grid" id="badges-grid"></ul>
-    <h3 class="bd-sub">Separate badge</h3>
-    <ul class="bd-grid" id="badges-armchair"></ul>
-    <p class="small" id="badges-unsaved" hidden>Your browser is blocking storage, so badges only last until you close the page.</p>
-    <button class="link-btn" id="badges-clear" type="button">Clear my badges</button>
-    <p class="small">Badges are based on the rock's mapped age range and are stored only in this browser.</p>
-    <p class="small">Only lookups made with your device's location (Start, Use my location, Walk mode) earn era badges and count toward your rank. Dropping a pin earns only Armchair Explorer.</p>
-  </section>
 
   <section id="results" hidden aria-label="Result">
     <article class="panel summary" id="summary">
@@ -239,6 +217,50 @@
     <ul><li>Your location is used for this lookup only. Stela does not store or log it. Your passport stays in this browser.</li></ul>
   </details>
 </main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Walk mode, passport and badges" tabindex="-1">
+  <div class="drawer-top">
+    <h2>My journey</h2>
+    <button class="icon-btn" id="drawer-close" type="button" aria-label="Close this panel">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="drawer-group">
+    <h3 class="drawer-h">Walk mode</h3>
+    <div class="toolbar">
+    <button class="btn btn-quiet" id="walk" type="button" aria-pressed="false">Walk mode: off</button>
+    </div>
+  <p class="walk-note">Walk mode keeps your GPS on, so it uses more battery. It only watches while this page is open and visible, and asks for a new story after you move about 300 m.</p>
+    <label class="check" id="autoread-row" hidden><input type="checkbox" id="autoread"> Read each new story aloud automatically</label>
+  </div>
+  <div class="drawer-group">
+    <button class="btn btn-quiet" id="passport-btn" type="button" aria-expanded="false" aria-controls="passport">Passport (0)</button>
+  </div>
+
+  <section id="passport" class="panel" hidden aria-label="Passport">
+    <h2>Passport</h2>
+    <div id="passport-body"></div>
+    <button class="link-btn" id="passport-clear" type="button">Clear my passport</button>
+    <p class="small">Your passport lives only in this browser. It is never sent to the server.</p>
+  </section>
+
+  <div class="drawer-group">
+    <button class="btn btn-quiet" id="badges-btn" type="button" aria-expanded="false" aria-controls="badges">My badges (0)</button>
+  </div>
+  <section id="badges" class="panel" hidden aria-label="My badges">
+    <h2>My badges</h2>
+    <p class="rank-line" id="badges-rank"></p>
+    <ul class="bd-grid" id="badges-grid"></ul>
+    <h3 class="bd-sub">Separate badge</h3>
+    <ul class="bd-grid" id="badges-armchair"></ul>
+    <p class="small" id="badges-unsaved" hidden>Your browser is blocking storage, so badges only last until you close the page.</p>
+    <button class="link-btn" id="badges-clear" type="button">Clear my badges</button>
+    <p class="small">Badges are based on the rock's mapped age range and are stored only in this browser.</p>
+    <p class="small">Only lookups made with your device's location (Start, Use my location, Walk mode) earn era badges and count toward your rank. Dropping a pin earns only Armchair Explorer.</p>
+  </section>
+
+</aside>
 
 <nav class="bottombar" aria-label="Main actions">
   <button class="btn" id="locate2" type="button"><svg aria-hidden="true"><use href="#i-pin"/></svg>Use my location</button>
@@ -446,6 +468,7 @@ function showApp() {
 }
 function showStart() {
   Voice.stop(); setListenLabel();
+  closeDrawer();
   if (walk.on) walkOff("");                              // Home turns GPS watching off
   appEl.hidden = true; startEl.hidden = false;
   document.body.dataset.view = "start";
@@ -1071,6 +1094,36 @@ function awardBadge(lat, lng, rock, how) {
 }
 updateBadgeUi();
 
+/* ---------- Side panel: Walk mode, Passport and badges (kept out of the page flow so the results are not pushed down) ---------- */
+const drawer = $("#drawer"), scrim = $("#scrim"), menuBtn = $("#menu");
+function openDrawer() {
+  drawer.hidden = false; scrim.hidden = false;
+  menuBtn.setAttribute("aria-expanded", "true");
+  document.body.classList.add("drawer-open");
+  $("#drawer-close").focus({ preventScroll: true });
+}
+function closeDrawer() {
+  if (drawer.hidden) return;
+  drawer.hidden = true; scrim.hidden = true;
+  menuBtn.setAttribute("aria-expanded", "false");
+  document.body.classList.remove("drawer-open");
+  if (!appEl.hidden) menuBtn.focus({ preventScroll: true });
+}
+menuBtn.addEventListener("click", () => (drawer.hidden ? openDrawer() : closeDrawer()));
+$("#drawer-close").addEventListener("click", closeDrawer);
+scrim.addEventListener("click", closeDrawer);
+document.addEventListener("keydown", (e) => {
+  if (drawer.hidden) return;
+  if (e.key === "Escape") { closeDrawer(); return; }
+  if (e.key !== "Tab") return;   // keep Tab inside the open panel
+  const f = [...drawer.querySelectorAll("button, input, a[href], summary")].filter((x) => !x.disabled && x.offsetParent !== null);
+  if (!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+$("#walk").addEventListener("click", closeDrawer);   // the walk status line lives in the page, so show it
+
 /* ---------- Walk mode ----------
  * Uses watchPosition (the browser tells us when the position changes), never a timer. A new story is requested
  * only when a fix is more than ~300 m from the last request. Watching stops when the toggle is off or the page is hidden. */
@@ -1089,6 +1142,7 @@ function setWalkUi() {
   walkBtn.setAttribute("aria-pressed", String(walk.on));
   walkBtn.textContent = walk.on ? "Walk mode: on" : "Walk mode: off";
   $("#autoread-row").hidden = !walk.on || !Voice.supported;
+  $("#menu-dot").hidden = !walk.on;   // a small dot on the menu button while GPS watching is on
 }
 function walkOff(message) {
   walk.on = false; stopWatch(); setWalkUi();

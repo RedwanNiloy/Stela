@@ -127,6 +127,10 @@ The same rules apply everywhere: a picture is shown only with an author and a li
 
 Optional and off by default. A speaker button in the header turns them on; the choice is remembered in your browser (and the page works the same if storage is blocked). The sounds are synthesized in your browser with the Web Audio API (oscillators and filtered noise): there are no audio files and no libraries, and nothing is sent anywhere. They are a soft stone tap on buttons and sections, a short low chime when results arrive, a quiet low tone for empty or error states, and a two-note sound for "Era unlocked". Each is under 0.5 s and quiet. Audio starts only after your first tap, never while the Listen voice is speaking, and never as the only feedback: each sound goes with a visible change. All of it lives in `static/stela-sound.js`, so it is easy to remove.
 
+## The side panel
+
+Walk mode, the Passport and My badges live in a side panel opened from the menu button in the header (a dot on the button shows Walk mode is on), so they do not push the results down the page. It closes with the close button, Escape or a tap outside, and Tab stays inside it while open. Turning Walk mode on closes it, and the Walk status, "new rock unit" message and Listen offer stay in the page where they can be seen.
+
 ## Era badges and traveler ranks
 
 Each lookup can earn an **era badge** from how old the rock is, and the number of different era badges sets your **rank**. There is a "My badges" view (original inline SVG art; locked badges are greyed out and say which age range unlocks them), the rank is shown at the top of the results, and a card under the summary says what the lookup gave. A new badge gets a short "Badge unlocked" pop (under 1 second, no sound, none under `prefers-reduced-motion`).

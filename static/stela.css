@@ -290,3 +290,22 @@ body[data-view="start"] { padding-bottom: 0; }
 @keyframes bdpop { 0% { transform: scale(.6) rotate(-8deg); opacity: 0; } 60% { transform: scale(1.12) rotate(3deg); opacity: 1; } 100% { transform: none; } }
 @keyframes bdglow { 0% { box-shadow: 0 0 0 0 var(--ochre); } 40% { box-shadow: 0 0 0 6px var(--ochre); } 100% { box-shadow: var(--shadow); } }
 @media (prefers-reduced-motion: reduce) { .badgecard.unlocked, .badgecard.unlocked .bd-big { animation: none; } }
+
+/* ---------- Side panel (Walk mode, Passport, badges) ---------- */
+.icon-btn { position: relative; }
+.menu-dot { position: absolute; top: 6px; right: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.scrim { position: fixed; inset: 0; z-index: 1400; background: rgba(20, 12, 4, .5); }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 1500; width: min(400px, 92vw); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--bg); border-left: 1px solid var(--line); box-shadow: -8px 0 28px rgba(0, 0, 0, .3); padding: var(--s3) var(--s4) var(--s6);
+  animation: drawerin .2s ease-out both; }
+@keyframes drawerin { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.drawer-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); position: sticky; top: calc(-1 * var(--s3)); background: var(--bg); padding: var(--s2) 0; z-index: 1; }
+.drawer-top h2 { font-family: var(--display); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 1rem; }
+.drawer-group { margin-top: var(--s4); }
+.drawer-h { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ochre); margin-bottom: var(--s2); }
+.drawer .toolbar { margin-top: 0; }
+.drawer .toolbar .btn, .drawer-group > .btn { width: 100%; flex: 1 1 100%; }
+.drawer .panel { margin-top: var(--s3); box-shadow: none; }
+.drawer .bd-grid { grid-template-columns: 1fr; }
+body.drawer-open { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .drawer { animation: none; } }
