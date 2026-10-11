@@ -2,14 +2,31 @@
 
 > Every place is a stone with a story carved in it.
 
-Open Stela on your phone, tap **Use my location** (or drop a pin on the map), and put the phone away. A calm "stone scribe" tells you about the ground under your feet: the rock and its age, what the place probably was (sea, land, swamp), the fossils found nearby, rare animal records nearby, and human history close by. It can read the story aloud.
+Open Stela on your phone, tap **Start** (or drop a pin on the map), and put the phone away. A calm "stone scribe" tells you about the ground under your feet: the rock and its age, what the place probably was (sea, land, swamp), the fossils found nearby, rare animal records nearby, and human history close by. It can read the story aloud.
 
 Built for the Hacktoberfest Open-Source AI Challenge, Week 1 "Touch Grass".
+
+![The start screen on a phone](docs/start-screen.png)
 
 ## The one rule
 
 **Code collects facts from open datasets. The open-weight LLM may only narrate those facts.**
 The model never looks anything up. If a source is empty, the story says "nothing recorded nearby". If a source is down, the story says it could not be checked. If the model itself is down or too slow, you get the same facts as a plain text summary (`mode: "facts-only"`), never an error screen.
+
+## The start screen
+
+Visitors first see a full-screen intro (wordmark, tagline, a short hook, a large **Start** button), not the map.
+
+- **Start** asks the browser for your location, and only then. Nothing asks for it while the page loads. While the browser's prompt is open the button says "Finding you..."; when a position arrives the results view opens and the lookup runs. If location is denied, unavailable or times out, the map view opens with a friendly message pointing to the pin.
+- **Explore the map instead** opens the map with no location request.
+- **How it works** opens three bullets reusing the About text (open data, an open-weight model that only narrates the facts, location used for the lookup only).
+- The header has a **Home** button that returns to the start screen (it also switches Walk mode off, so GPS is not left running). Reloading shows the start screen again.
+- Moving from the start screen to the app is a 220 ms fade, skipped under `prefers-reduced-motion`. The theme toggle is on the start screen too. No sound, no autoplay, no large images; tap targets are at least 44 px.
+- The flow lives in `static/stela-start.js` (no DOM code), tested in `tests/start.test.js`: creating it and "Explore the map" never request the location, Start requests it once, and a late answer after choosing the map is ignored.
+
+## Icons
+
+An original carved-stone tablet with strata bands (sand, turquoise, ochre) in `static/favicon.svg`. `python tools/make_icons.py` builds `favicon-32.png`, `favicon-48.png`, `favicon.ico` (16/32/48), and the full-bleed `apple-touch-icon.png` (180), `icon-192.png` and `icon-512.png` for `manifest.webmanifest`. It rasterises the SVG with headless Edge/Chrome and packs the files with Pillow (`pip install pillow`); cairosvg was not used because it needs the native Cairo library. The static folder is served as-is, so `/favicon.ico` and the rest need no extra Render setup.
 
 ## How it works
 
@@ -44,6 +61,8 @@ static/index.html  one mobile-first page, vanilla JS, Leaflet map, no build step
 static/stela.css   the look: palette tokens, light/dark, accordion sections, timeline, image boxes
 static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tested in Node)
 static/stela-sound.js  optional synthesized UI sounds (one play(name) function, easy to remove)
+static/stela-start.js  start-screen flow (when the location is requested), tested in Node
+static/favicon.svg, *.png, favicon.ico, manifest.webmanifest  icons (built by tools/make_icons.py)
 tests/           parsing, scope, names, picture and fallback tests on saved real API responses (tests/samples), plus Node tests of the browser logic and sounds
 ```
 

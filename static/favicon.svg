@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Stela</title>
+  <defs><clipPath id="stone"><path d="M17 56V28a15 15 0 0 1 30 0v28z"/></clipPath></defs>
+  <rect width="64" height="64" rx="14" fill="#8a4607"/>
+  <path d="M17 56V28a15 15 0 0 1 30 0v28z" fill="#f6e9c8"/>
+  <g clip-path="url(#stone)">
+    <rect x="0" y="31" width="64" height="9" fill="#0e8a82"/>
+    <rect x="0" y="44" width="64" height="12" fill="#c9852a"/>
+  </g>
+  <path d="M17 56V28a15 15 0 0 1 30 0v28z" fill="none" stroke="#2b1a08" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>

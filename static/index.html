@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Stela</title>
+<title>Stela: what was here before you?</title>
+<meta name="theme-color" content="#f3e7cc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1612" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="description" content="Every place is a stone with a story carved in it. Tap to hear the ancient history of the ground under your feet.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="stela.css">
 </head>
-<body>
+<body data-view="start">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -34,6 +41,36 @@
   </defs>
 </svg>
 
+<section class="start" id="start" aria-labelledby="start-title">
+  <button class="icon-btn theme-toggle" type="button" aria-label="Switch to dark theme">
+    <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="start-inner">
+    <svg class="start-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><clipPath id="st-stone"><path d="M17 56V28a15 15 0 0 1 30 0v28z"/></clipPath></defs><rect width="64" height="64" rx="14" fill="#8a4607"/><path d="M17 56V28a15 15 0 0 1 30 0v28z" fill="#f6e9c8"/><g clip-path="url(#st-stone)"><rect y="31" width="64" height="9" fill="#0e8a82"/><rect y="44" width="64" height="12" fill="#c9852a"/></g><path d="M17 56V28a15 15 0 0 1 30 0v28z" fill="none" stroke="#2b1a08" stroke-width="2.5" stroke-linejoin="round"/></svg>
+    <h1 class="start-word" id="start-title">STELA</h1>
+    <p class="start-tag">Every place is a stone with a story carved in it.</p>
+    <p class="start-q">Want to know what was here before you?</p>
+    <p class="start-hook">Stand anywhere and find out what the ground beneath you was long ago: seas, swamps, ancient animals and early people.</p>
+    <noscript><p class="panel">Stela needs JavaScript to look up the ground under your feet.</p></noscript>
+    <div class="start-actions">
+      <button class="btn btn-start" id="start-go" type="button">Start</button>
+      <p class="start-note" id="start-note">Stela uses your location only to look up the ground under you. It is not stored.</p>
+      <button class="btn btn-quiet btn-map" id="start-map" type="button">Explore the map instead</button>
+      <button class="link-btn" id="start-how" type="button" aria-expanded="false" aria-controls="how-panel">How it works</button>
+    </div>
+    <div class="panel how" id="how-panel" hidden>
+      <ul>
+        <li>Code collects facts from open data: Macrostrat, the Paleobiology Database, GBIF, Wikipedia and OpenStreetMap Nominatim.</li>
+        <li>The narration is written by an open-weight AI model that is only given those facts.</li>
+        <li>Your location is used for this lookup only. Stela does not store or log it. Your passport stays in this browser.</li>
+      </ul>
+    </div>
+    <p class="start-status" id="start-status" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<div id="app" hidden>
 <header class="topbar">
   <div class="wrap">
     <div class="brand">
@@ -44,18 +81,19 @@
       </div>
     </div>
     <div class="top-actions">
+    <button class="icon-btn" id="home" type="button" aria-label="Back to the start screen" title="Home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
     <button class="icon-btn" id="sound" type="button" aria-pressed="false" aria-label="Sound effects off. Turn on" title="Sound effects: off" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><g class="snd-on"><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g><path class="snd-off" d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
-    <button class="icon-btn" id="theme" type="button" aria-label="Switch to dark theme">
+    <button class="icon-btn theme-toggle" id="theme" type="button" aria-label="Switch to dark theme">
       <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
     </button>
     </div>
   </div>
 </header>
-
-<noscript><p class="wrap panel">Stela needs JavaScript to look up the ground under your feet.</p></noscript>
 
 <main class="wrap">
   <section class="mapcard" id="mapcard" aria-label="Map">
@@ -183,10 +221,12 @@
   <button class="btn" id="locate2" type="button"><svg aria-hidden="true"><use href="#i-pin"/></svg>Use my location</button>
   <button class="btn btn-quiet" id="listen2" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span class="lbl">Listen</span></button>
 </nav>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="stela-logic.js"></script>
 <script src="stela-sound.js"></script>
+<script src="stela-start.js"></script>
 <script>
 "use strict";
 const $ = (sel) => document.querySelector(sel);
@@ -221,10 +261,10 @@ function retryRow(text, onRetry) {
 }
 
 /* ---------- Theme: light or dark, remembered in this browser only (a per-viewer convenience) ---------- */
-const themeBtn = $("#theme");
+const themeBtns = document.querySelectorAll(".theme-toggle");   // one on the start screen, one in the header
 function applyTheme(t) {
   document.documentElement.dataset.theme = t;
-  themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+  themeBtns.forEach((b) => b.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme"));
 }
 (function initTheme() {
   let t = null;
@@ -232,11 +272,11 @@ function applyTheme(t) {
   if (t !== "light" && t !== "dark") t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   applyTheme(t);
 })();
-themeBtn.addEventListener("click", () => {
+themeBtns.forEach((b) => b.addEventListener("click", () => {
   const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   applyTheme(next);
   try { localStorage.setItem("stela.theme", next); } catch (e) { /* not remembered: still switched for this visit */ }
-});
+}));
 
 /* ---------- Voice: the ONLY place that knows how speech works. Swap this object for ElevenLabs later. ---------- */
 const Voice = {
@@ -337,29 +377,78 @@ function say(text, warn, loading, retry) {
 }
 
 /* ---------- Location ---------- */
+/* Asks the browser for a position. Called only from a tap: Start or a "Use my location" button (Walk mode has its own watch). */
+function requestPosition(onFound, onFailed) {
+  if (!navigator.geolocation) { onFailed(); return; }
+  navigator.geolocation.getCurrentPosition(
+    (pos) => onFound(pos.coords.latitude, pos.coords.longitude),
+    onFailed,
+    { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 }
+  );
+}
+function foundMe(lat, lng) {
+  if (mapcard.classList.contains("collapsed")) setMapCollapsed(false);
+  placePin(lat, lng);
+  if (map) map.setView([lat, lng], 12);
+  explore(lat, lng, { real: true });
+}
+const NO_LOCATION_MSG = "No problem. Location is switched off or was declined. Tap anywhere on the map to drop a pin and explore that place instead.";
+function noLocation() {
+  if (mapcard.classList.contains("collapsed")) setMapCollapsed(false);
+  say(NO_LOCATION_MSG, true);
+}
 function locateMe() {
   if (!navigator.geolocation) {
     say("This browser cannot share your location. Tap the map to drop a pin instead.", true);
     return;
   }
   say("Finding you...", false, true);
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      const { latitude: lat, longitude: lng } = pos.coords;
-      if (mapcard.classList.contains("collapsed")) setMapCollapsed(false);
-      placePin(lat, lng);
-      if (map) map.setView([lat, lng], 12);
-      explore(lat, lng, { real: true });
-    },
-    () => {
-      if (mapcard.classList.contains("collapsed")) setMapCollapsed(false);
-      say("No problem. Location is switched off or was declined. Tap anywhere on the map to drop a pin and explore that place instead.", true);
-    },
-    { enableHighAccuracy: false, timeout: 15000, maximumAge: 60000 }
-  );
+  requestPosition(foundMe, noLocation);
 }
 $("#locate").addEventListener("click", locateMe);
 $("#locate2").addEventListener("click", locateMe);
+
+/* ---------- Start screen ---------- */
+const startEl = $("#start"), appEl = $("#app"), startGo = $("#start-go"), startStatus = $("#start-status");
+function showApp() {
+  const wasHidden = appEl.hidden;
+  startEl.hidden = true; appEl.hidden = false;
+  document.body.dataset.view = "app";
+  if (!wasHidden) return;
+  window.scrollTo(0, 0);
+  appEl.classList.remove("fade-in");
+  if (!reduceMotion()) { void appEl.offsetWidth; appEl.classList.add("fade-in"); }
+  if (map) setTimeout(() => map.invalidateSize(), 0);   // the map was laid out while hidden
+}
+function showStart() {
+  Voice.stop(); setListenLabel();
+  if (walk.on) walkOff("");                              // Home turns GPS watching off
+  appEl.hidden = true; startEl.hidden = false;
+  document.body.dataset.view = "start";
+  startStatus.textContent = "";
+  window.scrollTo(0, 0);
+  startGo.focus({ preventScroll: true });
+}
+const startFlow = StelaStart.create({
+  requestLocation: requestPosition,
+  showApp, showStart,
+  setBusy(busy) {
+    startGo.disabled = busy;
+    startGo.textContent = busy ? "Finding you..." : "Start";
+    startGo.setAttribute("aria-busy", String(busy));
+    startStatus.textContent = busy ? "Waiting for your browser to share your location." : "";
+  },
+  onFound: foundMe,
+  onUnavailable: noLocation,
+});
+startGo.addEventListener("click", () => startFlow.start());
+$("#start-map").addEventListener("click", () => startFlow.exploreMap());
+$("#home").addEventListener("click", () => startFlow.home());
+$("#start-how").addEventListener("click", (e) => {
+  const open = $("#how-panel").hidden;
+  $("#how-panel").hidden = !open;
+  e.currentTarget.setAttribute("aria-expanded", String(open));
+});
 
 /* ---------- Listen ---------- */
 const listenBtns = [$("#listen"), $("#listen2")];
