@@ -374,13 +374,6 @@ body.drawer-open { overflow: hidden; }
 /* ---------- Start screen: blurred fossil and rock backdrop (original inline SVG, decorative only) ---------- */
 .start { overflow: hidden; isolation: isolate; }
 .start-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.start-bg svg { width: 100%; height: 100%; display: block; transform: scale(1.12); filter: blur(4px); opacity: .9; }
-.start-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, var(--bg) 0%, transparent 78%); opacity: .5; }
-.bg-a { fill: var(--chip); } .bg-b { fill: color-mix(in srgb, var(--ochre) 38%, var(--bg)); } .bg-c { fill: color-mix(in srgb, var(--accent) 32%, var(--bg)); }
-.bg-peb { fill: color-mix(in srgb, var(--ochre) 38%, var(--bg)); }
-.bg-shell { fill: color-mix(in srgb, var(--ochre) 20%, var(--bg)); }
-.bg-line { fill: none; stroke: var(--ochre); stroke-width: 11; stroke-linecap: round; opacity: .8; }
-.bg-rib { fill: none; stroke: var(--ochre); stroke-width: 6; stroke-linecap: round; opacity: .6; }
 @media (min-width: 640px) {
   .start-bg svg { width: 880px; margin: 0 auto; -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
 }
@@ -451,3 +444,36 @@ body.drawer-open { overflow: hidden; }
 .modal .btn { width: 100%; }
 @keyframes modalin { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .modal { animation: none; } }
+
+/* Backdrop scene: pyramids, a mummy and ammonites in rock strata. Light mode is a warm, saturated desert day; dark mode is a night version. */
+.start-bg { --bg-s1: #ffc47a; --bg-s2: #fff0cf; --bg-g1: #fff6d8; --bg-g2: rgba(255, 240, 200, 0); --bg-sun: #ff9f43;
+  --bg-pl: #f0a64a; --bg-ps: #b5651f; --bg-d1: #f0bf7a; --bg-d2: #e3a853; --bg-d3: #d4964a;
+  --bg-r1: #dfae6e; --bg-r2: #cc9250; --bg-r3: #b57a3c; --bg-mum: #f7e6bd; --bg-wrap: #b38a52; --bg-eye: #3a2410;
+  --bg-shell: #f3c993; --bg-line: #7a3b14; --bg-wash: #fbefd0; }
+:root[data-theme="dark"] .start-bg { --bg-s1: #161c38; --bg-s2: #4a3140; --bg-g1: rgba(244, 226, 170, .5); --bg-g2: rgba(244, 226, 170, 0); --bg-sun: #f1e2b8;
+  --bg-pl: #8a5a2b; --bg-ps: #4a2f1a; --bg-d1: #5c3d20; --bg-d2: #43291a; --bg-d3: #2e1c12;
+  --bg-r1: #3c2616; --bg-r2: #2f1d11; --bg-r3: #23160d; --bg-mum: #b5a381; --bg-wrap: #6e5c3e; --bg-eye: #1b1612;
+  --bg-shell: #6b4a2a; --bg-line: #e0b36a; --bg-wash: #1b1612; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .start-bg { --bg-s1: #161c38; --bg-s2: #4a3140; --bg-g1: rgba(244, 226, 170, .5); --bg-g2: rgba(244, 226, 170, 0); --bg-sun: #f1e2b8;
+    --bg-pl: #8a5a2b; --bg-ps: #4a2f1a; --bg-d1: #5c3d20; --bg-d2: #43291a; --bg-d3: #2e1c12;
+    --bg-r1: #3c2616; --bg-r2: #2f1d11; --bg-r3: #23160d; --bg-mum: #b5a381; --bg-wrap: #6e5c3e; --bg-eye: #1b1612;
+    --bg-shell: #6b4a2a; --bg-line: #e0b36a; --bg-wash: #1b1612; }
+}
+.start-bg svg { width: 100%; height: 100%; display: block; transform: scale(1.06); filter: blur(3px); }
+.start-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 52% at 50% 42%, var(--bg-wash) 0%, transparent 100%); opacity: .62; }
+.bg-s1 { stop-color: var(--bg-s1); } .bg-s2 { stop-color: var(--bg-s2); } .bg-g1 { stop-color: var(--bg-g1); } .bg-g2 { stop-color: var(--bg-g2); }
+.bg-sun { fill: var(--bg-sun); }
+.bg-pyr-l { fill: var(--bg-pl); } .bg-pyr-s { fill: var(--bg-ps); }
+.bg-dune1 { fill: var(--bg-d1); } .bg-dune2 { fill: var(--bg-d2); } .bg-dune3 { fill: var(--bg-d3); }
+.bg-rock1 { fill: var(--bg-r1); } .bg-rock2 { fill: var(--bg-r2); } .bg-rock3 { fill: var(--bg-r3); }
+.bg-mum { fill: var(--bg-mum); stroke: var(--bg-wrap); stroke-width: 3; }
+.bg-wrap path { fill: none; stroke: var(--bg-wrap); stroke-width: 4; stroke-linecap: round; }
+.bg-arm { fill: none; stroke: var(--bg-wrap); stroke-width: 12; stroke-linecap: round; }
+.bg-eye { fill: var(--bg-eye); }
+.bg-shell { fill: var(--bg-shell); } .bg-rim { fill: none; stroke: var(--bg-line); stroke-width: 6; opacity: .7; }
+.bg-line { fill: none; stroke: var(--bg-line); stroke-width: 10; stroke-linecap: round; }
+.bg-rib { fill: none; stroke: var(--bg-line); stroke-width: 5; stroke-linecap: round; opacity: .75; }
+
+/* small text on the backdrop sits on a soft pill so it stays readable */
+.start-note, .places-note, .start-tag { background: color-mix(in srgb, var(--bg) 70%, transparent); padding: 2px var(--s2); border-radius: 8px; }
