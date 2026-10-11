@@ -61,3 +61,8 @@ def test_how_it_works_is_a_popup_dialog_not_a_dropdown():
     modal = HTML.split('id="how-modal"')[1].split('<div id="app"')[0]
     assert modal.count("<li>") == 3 and 'id="how-ok"' in modal
     assert 'e.key === "Escape"' in HTML.split("function closeHow")[1]
+
+
+def test_people_lookup_retries_quietly_before_showing_try_again():
+    assert "PEOPLE_AUTO_RETRY_MS" in HTML and "Still looking, this place is busy" in HTML
+    assert "d.people.early_history == null) { again(); return; }" in HTML

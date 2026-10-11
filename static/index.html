@@ -693,18 +693,30 @@ function loadFossils(me, lat, lng) {
     setSum("fossils", "Could not be reached right now");
   });
 }
-function loadPeople(me, lat, lng) {
-  setContent($("#people"), skeleton());
-  setSum("people", "Looking up Wikipedia history articles...");
-  api("/api/people", lat, lng).then((d) => {
+/* The history lookups share one slow, polite queue on the server (OpenStreetMap allows one request a second), so a busy
+ * moment can make one fail. Before showing "Try again" the page quietly tries up to two more times, after a short wait. */
+const PEOPLE_AUTO_RETRY_MS = [4000, 8000];
+function loadPeople(me, lat, lng, attempt = 0) {
+  const again = () => {
     if (me !== run) return;
-    renderPeople(d);
-    return api("/api/people/story", lat, lng).then((st) => { if (me === run) renderPeopleStory(st); });
-  }).catch(() => {
-    if (me !== run) return;
+    if (attempt < PEOPLE_AUTO_RETRY_MS.length) {
+      setSum("people", "Still looking, this place is busy...");
+      setTimeout(() => { if (me === run) loadPeople(me, lat, lng, attempt + 1); }, PEOPLE_AUTO_RETRY_MS[attempt]);
+      return;
+    }
     setContent($("#people"), retryRow("The early history of this area could not be looked up right now.", () => loadPeople(me, lat, lng)), peopleNote());
     setSum("people", "Could not be looked up right now");
-  });
+  };
+  if (attempt === 0) {
+    setContent($("#people"), skeleton());
+    setSum("people", "Looking up Wikipedia history articles...");
+  }
+  api("/api/people", lat, lng).then((d) => {
+    if (me !== run) return;
+    if (d.people.early_history == null) { again(); return; }   // nothing could be looked up: wait, then try again
+    renderPeople(d);
+    return api("/api/people/story", lat, lng).then((st) => { if (me === run) renderPeopleStory(st); });
+  }).catch(again);
 }
 
 /* ---------- Rendering ---------- */

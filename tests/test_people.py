@@ -566,3 +566,58 @@ def test_failed_image_lookup_keeps_the_excerpts_and_is_not_an_incomplete_result(
     assert facts["early_history"] and all(e["image"] is None for e in facts["early_history"])
     assert facts["incomplete"] is False and statuses["wikipedia"] == "ok"
     assert facts["images_failed"] is True                  # so the API does not cache this answer for hours
+
+
+# ---------------------------------------------------------------- a busy moment: repeat taps share one lookup
+def test_same_spot_requests_share_one_lookup(monkeypatch):
+    """Two requests for one spot at once (a retry tap, or the story call) must run ONE lookup, not queue two."""
+    calls = []
+
+    async def slow_fetch(client, lat, lng):
+        calls.append((lat, lng))
+        await asyncio.sleep(0.05)
+        return {"early_history": [], "traditions": [], "license": people.LICENSE, "incomplete": False}, {"wikipedia": "empty", "nominatim": "ok"}
+
+    monkeypatch.setattr(people, "fetch_people", slow_fetch)
+    monkeypatch.setattr(main, "people_cache", TTLCache())
+    monkeypatch.setattr(main, "people_recent", TTLCache(ttl_seconds=60))
+
+    class Req:  # people_facts only reads request.app.state.http
+        class app:
+            class state:
+                http = None
+
+    async def both():
+        return await asyncio.gather(main.people_facts(Req, 51.1, 1.3), main.people_facts(Req, 51.1, 1.3))
+
+    (a, _), (b, _) = run(both())
+    assert len(calls) == 1 and a is b
+    assert main._people_inflight == {}
+
+
+def test_story_reuses_a_recent_partial_result(monkeypatch):
+    """A lookup with gaps is not cached for hours, but the story call right after it must not repeat the whole lookup."""
+    calls = []
+
+    async def partial_fetch(client, lat, lng):
+        calls.append(1)
+        return ({"early_history": [], "traditions": [], "license": people.LICENSE, "incomplete": True},
+                {"wikipedia": "failed: HTTP 429", "nominatim": "ok"})
+
+    monkeypatch.setattr(people, "fetch_people", partial_fetch)
+    monkeypatch.setattr(main, "people_cache", TTLCache())
+    monkeypatch.setattr(main, "people_recent", TTLCache(ttl_seconds=60))
+
+    class Req:
+        class app:
+            class state:
+                http = None
+
+    async def flow():
+        first, cached1 = await main.people_facts(Req, 51.1, 1.3)
+        again, cached2 = await main.people_facts(Req, 51.1, 1.3, reuse_recent=True)
+        fresh, cached3 = await main.people_facts(Req, 51.1, 1.3)   # a retry tap is a real new lookup
+        return cached1, cached2, cached3
+
+    assert run(flow()) == (False, True, False)
+    assert len(calls) == 2

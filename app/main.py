@@ -31,6 +31,8 @@ where_cache = TTLCache()    # fast facts + narration
 fossil_cache = TTLCache()   # PBDB fossils + narration
 people_cache = TTLCache()   # People and past civilizations: the excerpts (facts)
 story_cache = TTLCache()    # ... and the narration paragraph about them
+people_recent = TTLCache(ttl_seconds=60)   # the last people result for a spot, even an incomplete one: read only by the story call
+_people_inflight = {}       # spot -> the running people lookup, so a second tap (or the story call) shares it instead of queueing again
 limiter = RateLimiter(limit=80, window=60)  # 4 calls per lookup (where, fossils, people, people/story) = about 20 lookups a minute
 
 
@@ -143,13 +145,24 @@ def people_sources(statuses):
     return [{"id": k, **geo.SOURCES[k], "status": statuses.get(k, "n/a")} for k in ("wikipedia", "nominatim")]
 
 
-async def people_facts(request, lat, lng):
-    """The excerpts for a spot (cached). Returns (result dict, from_cache). Never raises."""
+async def people_facts(request, lat, lng, reuse_recent=False):
+    """The excerpts for a spot (cached). Returns (result dict, from_cache). Never raises.
+    Lookups queue behind one shared Nominatim clock, so a repeat request for a spot already being looked up joins that
+    lookup instead of starting (and queueing) another. reuse_recent: the story call may reuse a result from the last
+    minute even if it had gaps, instead of repeating the whole lookup."""
     key = cache_key(lat, lng)
-    hit = people_cache.get(key)
+    hit = people_cache.get(key) or (people_recent.get(key) if reuse_recent else None)
     if hit:
         return hit, True
-    client = request.app.state.http
+    running = _people_inflight.get(key)
+    if running is None:
+        running = asyncio.ensure_future(_people_lookup(request.app.state.http, key, lat, lng))
+        _people_inflight[key] = running
+        running.add_done_callback(lambda _t: _people_inflight.pop(key, None))
+    return await asyncio.shield(running), False
+
+
+async def _people_lookup(client, key, lat, lng):
     t0 = time.perf_counter()
     try:
         facts, statuses = await asyncio.wait_for(people.fetch_people(client, lat, lng), people.PEOPLE_TOTAL)
@@ -162,7 +175,9 @@ async def people_facts(request, lat, lng):
     result = {"people": facts, "sources": people_sources(statuses)}
     if not failed and not facts.get("incomplete") and not facts.get("images_failed"):  # never keep a result with gaps for hours
         people_cache.set(key, result)
-    return result, False
+    elif facts["early_history"] is not None:   # a partial result is kept for one minute, only for the story call
+        people_recent.set(key, result)
+    return result
 
 
 @app.get("/api/people")
@@ -179,7 +194,7 @@ async def people_story(request: Request, lat: float = Query(ge=-90, le=90), lng:
     hit = story_cache.get(key)
     if hit:
         return {**hit, "cached": True}
-    result, _ = await people_facts(request, lat, lng)
+    result, _ = await people_facts(request, lat, lng, reuse_recent=True)
     t0 = time.perf_counter()
     text, mode = await narrate.narrate(request.app.state.http, result["people"], "people")
     log.info("people-story mode=%s %.0fms", mode, (time.perf_counter() - t0) * 1000)
