@@ -67,14 +67,7 @@
       <button class="btn btn-start" id="start-go" type="button">Start</button>
       <p class="start-note" id="start-note">Stela uses your location only to look up the ground under you. It is not stored.</p>
       <button class="btn btn-quiet btn-map" id="start-map" type="button">Explore the map instead</button>
-      <button class="link-btn" id="start-how" type="button" aria-expanded="false" aria-controls="how-panel">How it works</button>
-    </div>
-    <div class="panel how" id="how-panel" hidden>
-      <ul>
-        <li>Code collects facts from open data: Macrostrat, the Paleobiology Database, GBIF, Wikipedia and OpenStreetMap Nominatim.</li>
-        <li>The narration is written by an open-weight AI model that is only given those facts.</li>
-        <li>Your location is used for this lookup only. Stela does not store or log it. Your passport stays in this browser.</li>
-      </ul>
+      <button class="link-btn" id="start-how" type="button" aria-haspopup="dialog" aria-controls="how-modal">How it works</button>
     </div>
     <p class="start-status" id="start-status" role="status" aria-live="polite"></p>
     <section class="places" id="places" aria-labelledby="places-title" hidden>
@@ -90,6 +83,19 @@
     </section>
   </div>
 </section>
+
+<div class="modal-wrap" id="how-modal" hidden>
+  <div class="modal-scrim" id="how-scrim"></div>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="how-title" tabindex="-1">
+    <h2 id="how-title">How it works</h2>
+    <ul>
+      <li>Code collects facts from open data: Macrostrat, the Paleobiology Database, GBIF, Wikipedia and OpenStreetMap Nominatim.</li>
+      <li>The narration is written by an open-weight AI model that is only given those facts.</li>
+      <li>Your location is used for this lookup only. Stela does not store or log it. Your passport stays in this browser.</li>
+    </ul>
+    <button class="btn" id="how-ok" type="button">Got it</button>
+  </div>
+</div>
 
 <div id="app" hidden>
 <header class="topbar">
@@ -575,10 +581,26 @@ function exampleVisit(place) {
 startGo.addEventListener("click", () => startFlow.start());
 $("#start-map").addEventListener("click", () => startFlow.exploreMap());
 $("#home").addEventListener("click", () => startFlow.home());
-$("#start-how").addEventListener("click", (e) => {
-  const open = $("#how-panel").hidden;
-  $("#how-panel").hidden = !open;
-  e.currentTarget.setAttribute("aria-expanded", String(open));
+/* How it works: a pop-up message (not a dropdown). Escape, the scrim and the button close it; focus goes back to the link. */
+const howModal = $("#how-modal"), howLink = $("#start-how");
+function openHow() {
+  howModal.hidden = false;
+  howLink.setAttribute("aria-expanded", "true");
+  $("#how-ok").focus({ preventScroll: true });
+}
+function closeHow() {
+  if (howModal.hidden) return;
+  howModal.hidden = true;
+  howLink.setAttribute("aria-expanded", "false");
+  howLink.focus({ preventScroll: true });
+}
+howLink.addEventListener("click", openHow);
+$("#how-ok").addEventListener("click", closeHow);
+$("#how-scrim").addEventListener("click", closeHow);
+document.addEventListener("keydown", (e) => {
+  if (howModal.hidden) return;
+  if (e.key === "Escape") { closeHow(); return; }
+  if (e.key === "Tab") { e.preventDefault(); $("#how-ok").focus(); }   // the only control is the button: keep focus inside
 });
 
 /* ---------- Listen ---------- */

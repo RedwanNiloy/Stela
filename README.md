@@ -19,7 +19,7 @@ Visitors first see a full-screen intro (wordmark, tagline, a short hook, a large
 
 - **Start** asks the browser for your location, and only then. Nothing asks for it while the page loads. While the browser's prompt is open the button says "Finding you..."; when a position arrives the results view opens and the lookup runs. If location is denied, unavailable or times out, the map view opens with a friendly message pointing to the pin.
 - **Explore the map instead** opens the map with no location request.
-- **How it works** opens three bullets reusing the About text (open data, an open-weight model that only narrates the facts, location used for the lookup only).
+- **How it works** opens a pop-up message (closes with Escape, a tap outside, or "Got it") with three bullets reusing the About text (open data, an open-weight model that only narrates the facts, location used for the lookup only).
 - The header has a **Home** button that returns to the start screen (it also switches Walk mode off, so GPS is not left running). Reloading shows the start screen again.
 - Moving from the start screen to the app is a 220 ms fade, skipped under `prefers-reduced-motion`. The theme toggle is on the start screen too. No sound, no autoplay, no large images; tap targets are at least 44 px.
 - The flow lives in `static/stela-start.js` (no DOM code), tested in `tests/start.test.js`: creating it and "Explore the map" never request the location, Start requests it once, and a late answer after choosing the map is ignored.

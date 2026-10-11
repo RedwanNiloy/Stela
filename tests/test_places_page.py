@@ -52,3 +52,11 @@ def test_start_backdrop_is_decorative_inline_svg_with_no_external_image():
     assert "<svg" in block and "<img" not in block and "http" not in block.replace("http://www.w3.org", "")
     css = (STATIC / "stela.css").read_text(encoding="utf-8")
     assert "url(" not in css.split("Start screen: blurred fossil")[1]   # no image file, no new data source
+
+
+def test_how_it_works_is_a_popup_dialog_not_a_dropdown():
+    assert 'id="how-panel"' not in HTML
+    assert 'id="how-modal"' in HTML and 'role="dialog" aria-modal="true" aria-labelledby="how-title"' in HTML
+    modal = HTML.split('id="how-modal"')[1].split('<div id="app"')[0]
+    assert modal.count("<li>") == 3 and 'id="how-ok"' in modal
+    assert 'e.key === "Escape"' in HTML.split("function closeHow")[1]

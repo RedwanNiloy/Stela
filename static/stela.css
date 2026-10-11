@@ -261,9 +261,6 @@ body[data-view="start"] { padding-bottom: 0; }
 .btn-map { width: 100%; min-height: 52px; border-color: var(--ink); }
 .start-note { font-size: .88rem; line-height: 1.4; color: var(--soft); }
 .start-status { min-height: 1.4em; margin-top: var(--s3); font-size: .88rem; color: var(--soft); }
-.how { width: 100%; margin-top: var(--s3); text-align: left; }
-.how ul { margin: 0; padding-left: var(--s5); }
-.how li + li { margin-top: var(--s2); }
 .fade-in { animation: appfade .22s ease-out both; }
 @keyframes appfade { from { opacity: 0; } to { opacity: 1; } }
 @media (min-width: 768px) { .start-inner { max-width: 560px; } .start-q { font-size: 1.45rem; } }
@@ -421,7 +418,6 @@ body.drawer-open { overflow: hidden; }
 .btn-map { min-height: 48px; }
 .start-status { margin-top: 0; min-height: 0; }
 .places { margin-top: var(--s3); }
-.how { margin-top: var(--s2); }
 @media (max-height: 800px) {
   .start-mark { display: none; }
   .start-word { margin-top: var(--s2); }
@@ -443,3 +439,15 @@ body.drawer-open { overflow: hidden; }
   .start-actions { margin-top: var(--s3); }
   .start-q { font-size: 1.1rem; }
 }
+
+/* ---------- How it works pop-up ---------- */
+.modal-wrap { position: fixed; inset: 0; z-index: 1700; display: grid; place-items: center; padding: var(--s4); }
+.modal-scrim { position: absolute; inset: 0; background: rgba(20, 12, 4, .6); }
+.modal { position: relative; width: 100%; max-width: 440px; max-height: 90dvh; overflow-y: auto; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 18px 50px rgba(0, 0, 0, .4); padding: var(--s5); animation: modalin .18s ease-out both; }
+.modal h2 { font-family: var(--display); font-size: 1.15rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: var(--s3); }
+.modal ul { margin: 0 0 var(--s4); padding-left: var(--s5); line-height: 1.5; }
+.modal li + li { margin-top: var(--s2); }
+.modal .btn { width: 100%; }
+@keyframes modalin { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .modal { animation: none; } }
