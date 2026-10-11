@@ -443,7 +443,7 @@ body.drawer-open { overflow: hidden; }
 
 
 
-/* Start screen backdrop: vintage parchment with quiet engraved line art (pyramid, mummy, ammonites). Original inline SVG and
+/* Start screen backdrop: vintage parchment with quiet engraved line art (pyramid, Anubis, ammonites). Original inline SVG and
  * a generated paper grain (a data: URI, no image file, no new data source). Decorative only. */
 .start-bg { --paper1: #f6ebd0; --paper2: #e7d2a3; --ink: #6b4a22; --grain: .55;
   position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
@@ -457,9 +457,9 @@ body.drawer-open { overflow: hidden; }
 .bg-m .thin { stroke-width: 1px; }
 .bg-m .dot { fill: var(--ink); stroke: none; }
 .m-pyr { width: clamp(84px, 22vw, 170px); left: 7%; top: 3.5%; }
-.m-mum { width: clamp(30px, 7vw, 54px); right: 17%; top: 3.5%; }
+.m-anu { width: clamp(58px, 15vw, 96px); right: 16%; top: 3%; }
 .m-amm { width: min(76vw, 440px); right: -20%; bottom: -16%; }
 .m-amm2 { width: clamp(70px, 18vw, 130px); left: 5%; bottom: 3%; }
-@media (min-width: 640px) { .m-pyr { left: 12%; top: 8%; } .m-mum { right: 14%; top: 8%; } .m-amm { right: 3%; bottom: -8%; } .m-amm2 { left: 10%; bottom: 8%; } }
+@media (min-width: 640px) { .m-pyr { left: 12%; top: 8%; } .m-anu { right: 12%; top: 6%; width: 112px; } .m-amm { right: 3%; bottom: -8%; } .m-amm2 { left: 10%; bottom: 8%; } }
 .m-amm { opacity: .38; }
-@media (min-width: 640px) { .m-pyr { width: 150px; top: 5%; } .m-mum { top: 5%; } }
+@media (min-width: 640px) { .m-pyr { width: 150px; top: 5%; } .m-anu { top: 5%; } }
