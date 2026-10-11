@@ -4,8 +4,8 @@
 
 **Links**
 
-- Live demo: https://YOUR-SERVICE.onrender.com (placeholder: replace with the real Render URL)
-- Demo video: YOUR-VIDEO-LINK (placeholder: replace after uploading)
+- Live demo: https://stela-0oz5.onrender.com/ (placeholder: replace with the real Render URL)
+- Demo video: https://youtube.com/shorts/qN13-StkjzA?si=Na2rDM00hBfKPCYL (placeholder: replace after uploading)
 - DEV post: YOUR-DEV-POST-LINK (placeholder: fill in after publishing)
 - Repo: https://github.com/RedwanNiloy/Stela
 
@@ -322,3 +322,7 @@ Please check each provider's current terms before heavy use. All artwork is orig
 ## Out of scope for v1
 
 Not in this version: sky and star views, AR/VR, 3D models, accounts or sign-in, a server-side database, a time slider, and storing your location on the server. The passport and badges exist, but they live only in your browser (see "Passport and Walk mode"). Pictures of animals are shown (species photos and fossil group illustrations, each credited), as flat images, not 3D.
+
+## License
+
+Stela's code is released under the [MIT License](LICENSE). The data it shows keeps its own licences, credited in the app and in the sources list above (for example Wikipedia text is CC BY-SA 4.0 and each photo has its own licence).
