@@ -503,7 +503,7 @@ async function explore(lat, lng, opts = {}) {
   if (!opts.walk) play(data.facts.rock ? "chime" : "low");   // results arrived (or the map had no rock): the cards appear
   updateReadMore();
   if (!opts.walk) { setMapCollapsed(true); mapToggle.hidden = false; $("#summary").scrollIntoView(scrollOpts("start")); }
-  if (opts.real) stampPassport(lat, lng, data.facts.rock);
+  stampPassport(lat, lng, data.facts.rock, opts.real ? "here" : "pin");
   if (data.facts.rock) lastRock = data.facts.rock;
   loadPeople(me, lat, lng);
   loadFossils(me, lat, lng);
@@ -903,16 +903,15 @@ function unlockBadge(era) {
   return chip;
 }
 
-function stampPassport(lat, lng, rock) {
-  const res = passport.add(lat, lng, rock, todayLocal());
+function stampPassport(lat, lng, rock, how) {
+  const res = passport.add(lat, lng, rock, todayLocal(), how);
   updatePassport();
   const note = $("#stamp");
   if (res.added) {
-    const era = rock.b_int_name || rock.t_int_name || "Unknown era";
-    setContent(note, "Stamped in your passport.", res.newEra ? unlockBadge(era) : null);
+    const era = rock && (rock.b_int_name || rock.t_int_name || "Unknown era");
+    setContent(note, rock ? "Stamped in your passport." : "Stamped in your passport (no rock is mapped at this spot).", res.newEra ? unlockBadge(era) : null);
   } else {
-    // say why nothing was stamped, instead of silently doing nothing
-    setContent(note, rock ? "This spot is already in your passport." : "Not stamped: no rock unit is mapped at this spot, so there is no era to collect. Try another place.");
+    setContent(note, "This spot is already in your passport.");
   }
   note.hidden = false;
 }
@@ -929,12 +928,14 @@ function updatePassport() {
 function renderPassport() {
   const list = passport.list().reverse(), st = passport.stats();
   setContent($("#passport-body"),
-    h("p", { class: "pass-sum" }, `${st.places} place${st.places === 1 ? "" : "s"} visited, ${st.eras} era${st.eras === 1 ? "" : "s"} collected`),
+    h("p", { class: "pass-sum" }, `${st.places} place${st.places === 1 ? "" : "s"} stamped, ${st.eras} era${st.eras === 1 ? "" : "s"} collected`),
+    st.oldest ? h("p", { class: "pass-oldest" }, h("span", { class: "pass-label" }, "Oldest ground you have looked up"),
+      `${st.oldest.era}: its rock began forming about ${fmtMa(st.oldest.b_age)} million years ago (${st.oldest.rock}).`) : null,
     passport.persisted ? null : h("p", { class: "scope scope-wider_area" }, "Your browser is blocking storage, so this passport only lasts until you close the page."),
-    list.length === 0 ? empty("No stamps yet. Use your location (or Walk mode) outdoors to collect your first one. Pins dropped on the map do not count as visits.")
+    list.length === 0 ? empty("No stamps yet. Use your location, Walk mode, or drop a pin on the map to collect your first one.")
       : h("ul", { class: "pass-list" }, list.map((e) => h("li", {},
-          h("span", { class: "pass-era" }, e.era), e.rock,
-          h("div", { class: "small" }, `${ageRange(e)} · ${e.date} · ${e.lat.toFixed(3)}, ${e.lng.toFixed(3)}`)))));
+          h("span", { class: "pass-era" }, e.era), e.era === StelaLogic.NO_ROCK ? "No rock unit mapped at this spot" : e.rock,
+          h("div", { class: "small" }, `${e.era === StelaLogic.NO_ROCK ? "" : ageRange(e) + " · "}${e.how === "pin" ? "pin dropped" : "your location"} · ${e.date} · ${e.lat.toFixed(3)}, ${e.lng.toFixed(3)}`)))));
   clearBtn.hidden = list.length === 0;
   clearBtn.textContent = clearArmed ? "Tap again to clear everything" : "Clear my passport";
 }

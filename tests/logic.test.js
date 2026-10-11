@@ -80,12 +80,13 @@ test("a changed rock NAME caused only by a different map scale is not a real cha
 });
 
 // ---------------------------------------------------------------- passport
+function sharedStore() { const s = memoryStorage(); return () => s; }
 test("passport stores rounded coordinates, rock, era, age range and date", () => {
   const s = memoryStorage();
   const pass = L.createPassport(() => s);
   assert.deepEqual(pass.add(43.07041, -89.40049, ROCK, "2026-10-10"), { added: true, newEra: true });
   const [e] = pass.list();
-  assert.deepEqual(e, { lat: 43.07, lng: -89.4, rock: "Wonewoc Formation (Cw)", era: "Cambrian", b_age: 497.5, t_age: 493.575, date: "2026-10-10" });
+  assert.deepEqual(e, { lat: 43.07, lng: -89.4, rock: "Wonewoc Formation (Cw)", era: "Cambrian", b_age: 497.5, t_age: 493.575, date: "2026-10-10", how: "here" });
   assert.ok(s._m.has(L.KEY));
   assert.equal(pass.persisted, true);
 });
@@ -97,15 +98,45 @@ test("the same rounded spot is stamped only once; a new era is flagged once", ()
   assert.equal(pass.add(43.0704, -89.3996, ROCK, "2026-10-11").added, false);       // same place after rounding
   assert.deepEqual(pass.add(43.2, -89.4, ROCK, "2026-10-11"), { added: true, newEra: false });  // same era again
   assert.deepEqual(pass.add(51.13, 1.31, CHALK, "2026-10-12"), { added: true, newEra: true });
-  assert.deepEqual(pass.stats(), { places: 3, eras: 2 });
+  assert.deepEqual({ ...pass.stats(), oldest: undefined }, { places: 3, eras: 2, oldest: undefined });
 });
 
-test("a place with no rock (or bad coordinates) is not stamped", () => {
-  const s = memoryStorage();
-  const pass = L.createPassport(() => s);
-  assert.equal(pass.add(43.07, -89.4, null, "2026-10-10").added, false);
+test("bad coordinates are not stamped", () => {
+  const pass = L.createPassport(sharedStore());
   assert.equal(pass.add(NaN, -89.4, ROCK, "2026-10-10").added, false);
   assert.equal(pass.stats().places, 0);
+});
+
+test("a place with no rock is stamped too, but does not count as an era", () => {
+  const pass = L.createPassport(sharedStore());
+  assert.deepEqual(pass.add(23.81, 90.41, null, "2026-10-10", "pin"), { added: true, newEra: false });
+  const [e] = pass.list();
+  assert.equal(e.era, L.NO_ROCK);
+  assert.equal(e.how, "pin");
+  assert.equal(e.b_age, null);
+  assert.deepEqual(pass.stats(), { places: 1, eras: 0, oldest: null });
+});
+
+test("a no-rock stamp is filled in when a later lookup at that spot finds a rock; a rock stamp is never replaced by no-rock", () => {
+  const pass = L.createPassport(sharedStore());
+  pass.add(43.07, -89.4, null, "2026-10-10");
+  assert.deepEqual(pass.add(43.07, -89.4, ROCK, "2026-10-11"), { added: true, newEra: true });
+  assert.equal(pass.list().length, 1);
+  assert.equal(pass.list()[0].era, "Cambrian");
+  assert.equal(pass.add(43.07, -89.4, null, "2026-10-12").added, false);
+  assert.equal(pass.list()[0].era, "Cambrian");
+});
+
+test("the passport reports the oldest ground looked up (largest start age), ignoring no-rock stamps", () => {
+  const pass = L.createPassport(sharedStore());
+  pass.add(51.13, 1.31, CHALK, "2026-10-10", "pin");
+  pass.add(23.81, 90.41, null, "2026-10-10", "here");
+  assert.equal(pass.stats().oldest.era, "Cenomanian");
+  pass.add(43.07, -89.4, ROCK, "2026-10-11", "pin");
+  const o = pass.stats().oldest;
+  assert.equal(o.era, "Cambrian");
+  assert.equal(o.b_age, 497.5);
+  assert.equal(o.how, "pin");
 });
 
 test("clear empties the passport", () => {
@@ -113,7 +144,7 @@ test("clear empties the passport", () => {
   const pass = L.createPassport(() => s);
   pass.add(43.07, -89.4, ROCK, "2026-10-10");
   pass.clear();
-  assert.deepEqual(pass.stats(), { places: 0, eras: 0 });
+  assert.deepEqual(pass.stats(), { places: 0, eras: 0, oldest: null });
   assert.equal(s._m.has(L.KEY), false);
 });
 
@@ -129,7 +160,8 @@ test("blocked storage: looking up localStorage throws -> passport still works in
   assert.deepEqual(pass.list(), []);
   assert.equal(pass.add(43.07, -89.4, ROCK, "2026-10-10").added, true);
   assert.equal(pass.add(51.13, 1.31, CHALK, "2026-10-10").added, true);
-  assert.deepEqual(pass.stats(), { places: 2, eras: 2 });   // kept for this visit
+  assert.equal(pass.stats().places, 2);
+  assert.equal(pass.stats().eras, 2);   // kept for this visit
   assert.equal(pass.persisted, false);                      // so the page can say it will not be remembered
   pass.clear();                                             // does not throw
   assert.equal(pass.stats().places, 0);

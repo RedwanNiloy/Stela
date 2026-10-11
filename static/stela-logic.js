@@ -8,6 +8,7 @@
   const MAX_ACCURACY_M = 200;    // ignore GPS fixes less accurate than this: they would look like movement
   const KEY = "stela.passport.v1";
   const MAX_ENTRIES = 300;
+  const NO_ROCK = "No rock mapped";   // era label of a stamp where the rock map has no unit
 
   /* ---------- Walk mode ---------- */
   function distanceMeters(a, b) {  // haversine, a and b are {lat, lng}
@@ -42,14 +43,16 @@
 
   function eraOf(rock) { return clip(rock.b_int_name || rock.t_int_name || "Unknown era", 60); }
 
-  function makeEntry(lat, lng, rock, date) {
+  /* rock may be null (nothing mapped there). how: "here" = the user's real position, "pin" = a pin dropped on the map. */
+  function makeEntry(lat, lng, rock, date, how) {
+    const base = { lat: round3(lat), lng: round3(lng), date: clip(date, 10), how: how === "pin" ? "pin" : "here" };   // 3 decimals = about 110 m; date YYYY-MM-DD
+    if (!rock) return { ...base, rock: NO_ROCK, era: NO_ROCK, b_age: null, t_age: null };
     return {
-      lat: round3(lat), lng: round3(lng),                    // rounded to 3 decimals (about 110 m)
+      ...base,
       rock: clip(rock.name || rock.strat_name || "Unnamed rock", 120),
       era: eraOf(rock),
       b_age: Number.isFinite(rock.b_age) ? rock.b_age : null,
       t_age: Number.isFinite(rock.t_age) ? rock.t_age : null,
-      date: clip(date, 10),                                   // YYYY-MM-DD
     };
   }
 
@@ -59,11 +62,14 @@
     return list.filter((e) => e && Number.isFinite(e.lat) && Number.isFinite(e.lng) && typeof e.rock === "string"
       && typeof e.era === "string" && typeof e.date === "string")
       .map((e) => ({ lat: round3(e.lat), lng: round3(e.lng), rock: clip(e.rock, 120), era: clip(e.era, 60),
-        b_age: Number.isFinite(e.b_age) ? e.b_age : null, t_age: Number.isFinite(e.t_age) ? e.t_age : null, date: clip(e.date, 10) }))
+        b_age: Number.isFinite(e.b_age) ? e.b_age : null, t_age: Number.isFinite(e.t_age) ? e.t_age : null, date: clip(e.date, 10), how: e.how === "pin" ? "pin" : "here" }))
       .slice(-MAX_ENTRIES);
   }
 
-  const distinctEras = (list) => new Set(list.map((e) => e.era)).size;
+  const hasRock = (e) => e.era !== NO_ROCK;
+  const distinctEras = (list) => new Set(list.filter(hasRock).map((e) => e.era)).size;
+  /* The stamp whose rock began forming longest ago (the oldest time period reached), or null if no stamp has a rock age. */
+  const oldestOf = (list) => list.reduce((best, e) => (Number.isFinite(e.b_age) && (!best || e.b_age > best.b_age) ? e : best), null);
 
   /* getStorage is a function so that even *looking up* window.localStorage happens inside try/catch
    * (browsers throw there when site data is blocked). If storage fails, the passport keeps working in
@@ -104,13 +110,18 @@
     return {
       list: read,
       get persisted() { return persisted; },
-      /* Adds a place unless that rounded spot is already stamped. Returns { added, newEra }. */
-      add(lat, lng, rock, date) {
-        if (!rock || !Number.isFinite(lat) || !Number.isFinite(lng)) return { added: false, newEra: false };
+      /* Adds a place (with or without a mapped rock) unless that rounded spot is already stamped. Returns { added, newEra }.
+       * A spot first stamped with no rock is filled in if a later lookup there finds one. */
+      add(lat, lng, rock, date, how) {
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return { added: false, newEra: false };
         const list = read();
-        const entry = makeEntry(lat, lng, rock, date);
-        if (list.some((e) => e.lat === entry.lat && e.lng === entry.lng)) return { added: false, newEra: false };
-        const newEra = !list.some((e) => e.era === entry.era);
+        const entry = makeEntry(lat, lng, rock, date, how);
+        const at = list.findIndex((e) => e.lat === entry.lat && e.lng === entry.lng);
+        if (at >= 0) {
+          if (hasRock(list[at]) || !hasRock(entry)) return { added: false, newEra: false };
+          list.splice(at, 1);
+        }
+        const newEra = hasRock(entry) && !list.some((e) => e.era === entry.era);
         list.push(entry);
         write(list.slice(-MAX_ENTRIES));
         return { added: true, newEra };
@@ -125,13 +136,13 @@
       },
       stats() {
         const list = read();
-        return { places: list.length, eras: distinctEras(list) };
+        return { places: list.length, eras: distinctEras(list), oldest: oldestOf(list) };
       },
     };
   }
 
   const api = { WALK_THRESHOLD_M, MAX_ACCURACY_M, KEY, MAX_ENTRIES, distanceMeters, shouldRequestStory, rockChange,
-    makeEntry, sanitize, distinctEras, createPassport };
+    makeEntry, sanitize, distinctEras, oldestOf, NO_ROCK, createPassport };
   root.StelaLogic = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);
