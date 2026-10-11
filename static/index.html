@@ -260,7 +260,7 @@
     <h2>My badges</h2>
     <p class="rank-line" id="badges-rank"></p>
     <ul class="bd-grid" id="badges-grid"></ul>
-    <h3 class="bd-sub">Separate badge</h3>
+    <h3 class="bd-sub">Armchair Explorer (separate: never counts toward your rank)</h3>
     <ul class="bd-grid" id="badges-armchair"></ul>
     <p class="small" id="badges-unsaved" hidden>Your browser is blocking storage, so badges only last until you close the page.</p>
     <button class="link-btn" id="badges-clear" type="button">Clear my badges</button>
@@ -1062,27 +1062,34 @@ function rankText() {
   return `Rank: ${r} (${n} of ${StelaBadges.ERA_BADGES.length} era badges)`;
 }
 function updateBadgeUi() {
-  badgesBtn.textContent = `My badges (${badgeBook.eraCount() + (badgeBook.hasArmchair() ? 1 : 0)})`;
+  badgesBtn.textContent = `My badges (${badgeBook.eraCount() + badgeBook.armchairCount()})`;
   $("#sum-rank").textContent = rankText();
   if (!$("#badges").hidden) renderBadges();
 }
 
+/* Armchair divisions reuse the era art with a small armchair in the corner, so they read as "this era, from the armchair". */
+function badgeArtFor(b, cls) {
+  if (!b.armchair) return badgeArt(b.art, cls);
+  const chair = badgeArt("bd-armchair", "bd-chair");
+  return h("span", { class: "bd-artwrap" }, badgeArt(b.art, cls), chair);
+}
 function badgeTile(b, entry) {
   const earned = !!entry;
   return h("li", { class: "bd " + (earned ? "earned" : "locked") },
-    badgeArt(b.art),
+    badgeArtFor(b),
     h("div", { class: "bd-text" },
       h("div", { class: "bd-name" }, b.name),
       earned
         ? h("div", { class: "small" }, [entry.era, entry.rock].filter(Boolean).join(" \u00b7 "), h("br"), [entry.date, entry.place && "near " + entry.place].filter(Boolean).join(" \u00b7 "))
-        : h("div", { class: "small" }, "Locked. " + (b.range ? "Needs rock that is " + b.range + " (by its oldest age)." : b.how + "."))));
+        : h("div", { class: "small" }, "Locked. " + (b.armchair ? "Drop a pin on rock that is " + b.range + " (by its oldest age)."
+          : b.range ? "Needs rock that is " + b.range + " (by its oldest age)." : b.how + "."))));
 }
 
 function renderBadges() {
   const got = badgeBook.earned(), n = badgeBook.eraCount(), next = StelaBadges.nextRank(n);
   setContent($("#badges-rank"), rankText(), next ? h("span", { class: "small" }, ` Next rank, ${next.title}, at ${next.needs} badge${next.needs === 1 ? "" : "s"}.`) : null);
   setContent($("#badges-grid"), StelaBadges.ERA_BADGES.map((b) => badgeTile(b, got[b.id])));
-  setContent($("#badges-armchair"), badgeTile(Object.assign({}, StelaBadges.ARMCHAIR), got.armchair));
+  setContent($("#badges-armchair"), [StelaBadges.ARMCHAIR, ...StelaBadges.ARMCHAIR_DIVISIONS].map((b) => badgeTile(b, got[b.id])));
   $("#badges-unsaved").hidden = badgeBook.persisted;
   badgesClear.textContent = badgesClearArmed ? "Tap again to clear all badges" : "Clear my badges";
 }
@@ -1114,9 +1121,9 @@ function awardBadge(lat, lng, rock, how) {
       h("p", {}, how === "here" ? "No rock age is mapped at this spot, so there is nothing to award." : "Pins only earn Armchair Explorer."), foot);
   } else if (res.kind === "armchair") {
     setContent(card,
-      h("div", { class: "bd-row" }, badgeArt(res.badge.art, "bd-art bd-big"), h("div", {},
-        h("p", { class: "bd-title" }, res.isNew ? "Badge unlocked: Armchair Explorer" : "Armchair Explorer"),
-        h("p", {}, "You looked this place up on the map. Pins earn only this badge: era badges and your rank need your device's location."),
+      h("div", { class: "bd-row" }, badgeArtFor(res.badge, "bd-art bd-big"), h("div", {},
+        h("p", { class: "bd-title" }, (res.isNew ? "Badge unlocked: " : "") + res.badge.name),
+        h("p", {}, "You looked this place up on the map" + (res.badge.armchair ? ", so it is sorted into the age band of its rock" : "") + ". Pins earn only Armchair Explorer badges: era badges and your rank need your device's location."),
         res.preview ? h("p", { class: "small" }, `Standing here, the rock's oldest age would give "${res.preview.name}" (rock ${res.preview.range}).`) : null)),
       notes, foot);
   } else {
@@ -1140,7 +1147,7 @@ const splashEl = $("#splash");
 function showSplash(res) {
   if (reduceMotion()) return;
   splashEl.hidden = true;
-  setContent($("#splash-art"), badgeArt(res.badge.art, "bd-art splash-badge"));
+  setContent($("#splash-art"), badgeArtFor(res.badge, "bd-art splash-badge"));
   $("#splash-name").textContent = res.badge.name;
   $("#splash-sub").textContent = res.kind === "era" ? rankText().replace(/^Rank: /, "Rank: ") : "A separate badge: it does not count toward your rank.";
   splashEl.classList.remove("go");

@@ -23,9 +23,14 @@
     { id: "deep",   name: "Deep Time Pioneer",    upTo: Infinity,                art: "bd-deep",   range: "over about 539 million years old" },
   ];
 
-  /* The separate badge for pins dropped on the map. It never counts toward the rank. */
+  /* The separate badges for pins dropped on the map. They never count toward the rank. "Armchair Explorer" is earned by
+   * the first pin of any kind; it is also classified by the same age bands as the era badges (a pin on Cretaceous chalk
+   * gives "Armchair Explorer: Dino Era"), so a pin lookup is sorted into a historic division too. */
   const ARMCHAIR = { id: "armchair", name: "Armchair Explorer", art: "bd-armchair",
     how: "Look up any place by dropping a pin on the map" };
+  const DIVISION_SHORT = { fresh: "Fresh Ground", ice: "Ice Age", mammal: "Mammal Age", dino: "Dino Era", seas: "Ancient Seas", deep: "Deep Time" };
+  const ARMCHAIR_DIVISIONS = ERA_BADGES.map((b) => ({ id: "armchair-" + b.id, eraId: b.id, name: "Armchair Explorer: " + DIVISION_SHORT[b.id],
+    art: b.art, range: b.range, armchair: true }));
 
   /* Rank by the number of distinct era badges collected with the device's location. */
   const RANKS = [
@@ -76,7 +81,7 @@
     return `${f(lat, "N", "S")}, ${f(lng, "E", "W")}`;
   }
 
-  const KNOWN = new Set([...ERA_BADGES.map((b) => b.id), ARMCHAIR.id]);
+  const KNOWN = new Set([...ERA_BADGES.map((b) => b.id), ARMCHAIR.id, ...ARMCHAIR_DIVISIONS.map((b) => b.id)]);
   function sanitize(obj) {
     const out = {};
     if (!obj || typeof obj !== "object" || Array.isArray(obj)) return out;
@@ -128,19 +133,25 @@
       eraCount() { const b = read(); return ERA_BADGES.filter((x) => b[x.id]).length; },
       rank() { return rankFor(this.eraCount()); },
       hasArmchair() { return !!read()[ARMCHAIR.id]; },
+      armchairCount() { const b = read(); return [ARMCHAIR, ...ARMCHAIR_DIVISIONS].filter((x) => b[x.id]).length; },
 
       /* Records one lookup. how = "here" (the device's location, which includes Walk mode) or "pin" (dropped on the map).
-       * "here" can earn an era badge; "pin" can earn only Armchair Explorer. Returns
-       * { kind: "era" | "armchair" | "none", badge, isNew, preview } where preview (pins only) is the era badge the rock
-       * would have given, which is shown but never stored or counted. */
+       * "here" can earn an era badge; "pin" can earn only Armchair Explorer and its division for the rock's age band. Returns
+       * { kind: "era" | "armchair" | "none", badge, isNew, preview } where badge is the most specific badge of the lookup and
+       * preview (pins only) is the era badge the rock would have given, shown but never stored or counted. */
       record({ rock, lat, lng, how, date }) {
         const book = read();
         const entry = (r) => ({ era: clip(r && (r.b_int_name || r.t_int_name) || "", 60), rock: clip(r && (r.name || r.strat_name) || "", 120),
           date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : "", place: placeLabel(lat, lng) });
         if (how === "pin") {
-          const isNew = !book[ARMCHAIR.id];
-          if (isNew) { book[ARMCHAIR.id] = entry(rock); write(book); }
-          return { kind: "armchair", badge: ARMCHAIR, isNew, preview: badgeFor(rock) };
+          const era = badgeFor(rock);
+          const division = era ? ARMCHAIR_DIVISIONS.find((d) => d.eraId === era.id) : null;
+          const newBase = !book[ARMCHAIR.id], newDivision = !!division && !book[division.id];
+          if (newBase) book[ARMCHAIR.id] = entry(rock);
+          if (newDivision) book[division.id] = entry(rock);
+          if (newBase || newDivision) write(book);
+          // the badge to show: the division if there is one, else plain Armchair Explorer
+          return { kind: "armchair", badge: division || ARMCHAIR, isNew: division ? newDivision || newBase : newBase, preview: era };
         }
         const badge = how === "here" ? badgeFor(rock) : null;   // era badges only for the device's location
         if (!badge) return { kind: "none", badge: null, isNew: false, preview: null };
@@ -160,7 +171,7 @@
     };
   }
 
-  const api = { BOUNDARY_MA, ERA_BADGES, ARMCHAIR, RANKS, WIDE_RANGE_MA, KEY, badgeFor, basisNotes, rankFor, nextRank, placeLabel,
+  const api = { BOUNDARY_MA, ERA_BADGES, ARMCHAIR, ARMCHAIR_DIVISIONS, RANKS, WIDE_RANGE_MA, KEY, badgeFor, basisNotes, rankFor, nextRank, placeLabel,
     sanitize, createBadgeBook };
   root.StelaBadges = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;

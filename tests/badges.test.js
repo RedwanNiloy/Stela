@@ -103,15 +103,17 @@ test("pin visits earn only Armchair Explorer and never count toward the rank", (
   const [get, s] = shared();
   const book = B.createBadgeBook(get);
   const r = book.record({ rock: rockAt(497.5), lat: 43.07, lng: -89.4, how: "pin", date: DATE });
-  assert.deepEqual([r.kind, r.badge.id, r.isNew], ["armchair", "armchair", true]);
-  assert.equal(r.preview.id, "seas");                 // shown to the visitor, not stored
+  assert.deepEqual([r.kind, r.badge.id, r.isNew], ["armchair", "armchair-seas", true]);   // classified by the rock's age band
+  assert.equal(r.badge.name, "Armchair Explorer: Ancient Seas");
+  assert.equal(r.preview.id, "seas");                 // the era badge it would have given: shown, not stored
   assert.equal(book.eraCount(), 0);
   assert.equal(book.rank(), null);
   assert.equal(book.hasArmchair(), true);
-  assert.deepEqual(Object.keys(JSON.parse(s._m.get(B.KEY))), ["armchair"]);
+  assert.deepEqual(Object.keys(JSON.parse(s._m.get(B.KEY))).sort(), ["armchair", "armchair-seas"]);
   for (let age of [0.001, 1, 30, 100, 400, 1800]) book.record({ rock: rockAt(age), lat: 10, lng: 10, how: "pin", date: DATE });
   assert.equal(book.eraCount(), 0);
   assert.equal(book.rank(), null);
+  assert.equal(book.armchairCount(), 7);              // the base badge plus one division per age band
   assert.equal(book.record({ rock: null, lat: 1, lng: 1, how: "pin", date: DATE }).isNew, false);   // only once
 });
 
@@ -205,4 +207,16 @@ test("index.html never passes badge data to fetch", () => {
   assert.equal(/fetch\([^)]*badge/i.test(html), false);
   const src = fs.readFileSync(path.join(__dirname, "..", "static", "stela-badges.js"), "utf8");
   assert.equal(/fetch\(|XMLHttpRequest|sendBeacon/.test(src), false);
+});
+
+test("a pin on a rock with no age earns plain Armchair Explorer; each age band has its own armchair division", () => {
+  const book = B.createBadgeBook(shared()[0]);
+  const r = book.record({ rock: null, lat: 23.81, lng: 90.41, how: "pin", date: DATE });
+  assert.deepEqual([r.badge.id, r.isNew, r.preview], ["armchair", true, null]);
+  assert.equal(B.ARMCHAIR_DIVISIONS.length, 6);
+  assert.deepEqual(B.ARMCHAIR_DIVISIONS.map((d) => d.eraId), B.ERA_BADGES.map((b) => b.id));
+  const d = book.record({ rock: rockAt(100.5), lat: 51.13, lng: 1.31, how: "pin", date: DATE });
+  assert.deepEqual([d.badge.id, d.isNew], ["armchair-dino", true]);
+  assert.equal(book.record({ rock: rockAt(120), lat: 51.2, lng: 1.4, how: "pin", date: DATE }).isNew, false);
+  assert.equal(book.eraCount(), 0);
 });

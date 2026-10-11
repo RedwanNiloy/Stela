@@ -346,3 +346,7 @@ body.drawer-open { overflow: hidden; }
 .splash-rays i:nth-child(7) { --a: 180deg; } .splash-rays i:nth-child(8) { --a: 210deg; } .splash-rays i:nth-child(9) { --a: 240deg; }
 .splash-rays i:nth-child(10) { --a: 270deg; } .splash-rays i:nth-child(11) { --a: 300deg; } .splash-rays i:nth-child(12) { --a: 330deg; }
 @media (prefers-reduced-motion: reduce) { .splash { display: none !important; } }
+.bd-artwrap { position: relative; display: inline-block; flex: none; line-height: 0; }
+.bd-chair { position: absolute; right: -6px; bottom: -6px; width: 30px; height: 30px; }
+.splash .bd-chair { width: 44px; height: 44px; }
+.bd.locked .bd-chair { filter: grayscale(1); opacity: .6; }
