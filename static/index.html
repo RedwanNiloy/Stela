@@ -260,6 +260,38 @@
     <p class="small">Only lookups made with your device's location (Start, Use my location, Walk mode) earn era badges and count toward your rank. Dropping a pin earns only Armchair Explorer.</p>
   </section>
 
+  <details class="drawer-group about-project" id="about-project">
+    <summary>About this project</summary>
+    <h3>What it does</h3>
+    <p>Stela tells you what the ground under you was long ago: the rock and its age, what the place probably was (sea, land or swamp), fossils and rare animal records nearby, and early human history. Code collects the facts from open datasets, and an open-weight AI model only narrates those facts. If the model is unavailable you get the same facts as plain text.</p>
+    <h3>Features</h3>
+    <ul>
+      <li>Use your location or drop a pin on the map</li>
+      <li>Rock, age and a "dig down through time" timeline</li>
+      <li>Fossils, rare animal records (with local names and credited photos) and people and history, each labelled with how far from you its facts come from</li>
+      <li>Listen to the story read aloud</li>
+      <li>Walk mode: a new story as you move into new ground</li>
+      <li>Passport, era badges and traveler ranks, stored only in your browser</li>
+      <li>Light and dark mode, optional sound effects</li>
+    </ul>
+    <h3>Run it, with your own model</h3>
+    <p>The code is on GitHub. Clone it and point it at any OpenAI-compatible endpoint that serves an open-weight model, or at a local Ollama:</p>
+    <pre class="code">git clone https://github.com/RedwanNiloy/Stela.git
+cd Stela
+pip install -r requirements.txt
+
+# your own hosted model
+export LLM_BASE_URL=https://your-provider.example/v1
+export LLM_API_KEY=...
+export LLM_MODEL=your-model-name
+
+# or a local model with Ollama (leave LLM_BASE_URL empty)
+export OLLAMA_MODEL=gemma3:4b
+
+uvicorn app.main:app --port 8000 --no-access-log</pre>
+    <p class="small">The model name is never hard-coded. The full setup, data sources and limits are in the README.</p>
+    <p><a href="https://github.com/RedwanNiloy/Stela" target="_blank" rel="noopener">Stela on GitHub</a></p>
+  </details>
 </aside>
 
 <nav class="bottombar" aria-label="Main actions">

@@ -309,3 +309,11 @@ body[data-view="start"] { padding-bottom: 0; }
 .drawer .bd-grid { grid-template-columns: 1fr; }
 body.drawer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .drawer { animation: none; } }
+.about-project { padding: var(--s3) var(--s4); border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.about-project > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 700; }
+.about-project h3 { margin-top: var(--s4); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ochre); }
+.about-project p, .about-project ul { margin-top: var(--s2); }
+.about-project ul { padding-left: var(--s5); }
+.about-project li + li { margin-top: var(--s1); }
+.about-project a { font-weight: 700; display: inline-block; min-height: 44px; line-height: 44px; }
+.code { margin: var(--s2) 0 0; padding: var(--s3); overflow-x: auto; background: var(--chip); border: 1px solid var(--line); border-radius: 8px; font: .8rem/1.5 ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--ink); white-space: pre; }
