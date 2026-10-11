@@ -1137,16 +1137,18 @@ function awardBadge(lat, lng, rock, how) {
   }
   card.classList.remove("unlocked");
   card.hidden = false;
-  if (res.isNew && !reduceMotion()) { void card.offsetWidth; card.classList.add("unlocked"); showSplash(res); }   // no sound
+  if (res.isNew) {   // no sound; under reduced motion the card and splash appear without animation
+    if (!reduceMotion()) { void card.offsetWidth; card.classList.add("unlocked"); }
+    showSplash(res);
+  }
   card.setAttribute("role", "status");
 }
 updateBadgeUi();
 
 /* The splash for a newly earned badge: a short burst over the page (about 1 s, no sound) that stays until OK is tapped.
- * Skipped under prefers-reduced-motion, because the badge card and its text still announce the badge. */
+ * Under prefers-reduced-motion it appears with no animation (the OK button still closes it). */
 const splashEl = $("#splash");
 function showSplash(res) {
-  if (reduceMotion()) return;
   splashEl.hidden = true;
   setContent($("#splash-art"), badgeArtFor(res.badge, "bd-art splash-badge"));
   $("#splash-name").textContent = res.badge.name;
