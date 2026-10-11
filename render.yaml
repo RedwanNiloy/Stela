@@ -17,4 +17,4 @@ services:
       - key: LLM_MODEL
         sync: false
       - key: STELA_CONTACT
-        sync: false
+        value: https://github.com/RedwanNiloy/Stela
