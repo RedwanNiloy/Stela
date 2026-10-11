@@ -74,6 +74,11 @@
       </ul>
     </div>
     <p class="start-status" id="start-status" role="status" aria-live="polite"></p>
+    <section class="places" id="places" aria-labelledby="places-title" hidden>
+      <h2 class="places-h" id="places-title">Try these places</h2>
+      <ul class="places-row" id="places-row"></ul>
+      <p class="places-note" id="places-note"></p>
+    </section>
   </div>
 </section>
 
@@ -124,6 +129,7 @@
 
   <section id="results" hidden aria-label="Result">
     <article class="panel summary" id="summary">
+      <p class="sum-example" id="sum-example" hidden></p>
       <p class="sum-rank" id="sum-rank"></p>
       <div class="sum-top"><h2 class="sum-place" id="sum-place">Your spot</h2><span class="sum-coord" id="sum-coord"></span></div>
       <p class="sum-rock" id="sum-rock"></p>
@@ -313,6 +319,7 @@ uvicorn app.main:app --port 8000 --no-access-log</pre>
 <script src="stela-logic.js"></script>
 <script src="stela-sound.js"></script>
 <script src="stela-badges.js"></script>
+<script src="stela-places.js"></script>
 <script src="stela-start.js"></script>
 <script>
 "use strict";
@@ -528,7 +535,31 @@ const startFlow = StelaStart.create({
   },
   onFound: foundMe,
   onUnavailable: noLocation,
+  onExample: exampleVisit,
 });
+
+/* "Try these places": a hard-coded list (stela-places.js). A card opens the map at that place and runs the normal lookup
+ * as a pin visit labelled "Example place". It never asks for the location and never writes to the passport or the badges. */
+function exampleVisit(place) {
+  if (mapcard.classList.contains("collapsed")) setMapCollapsed(false);
+  placePin(place.lat, place.lng);
+  if (map) map.setView([place.lat, place.lng], 11);
+  explore(place.lat, place.lng, { example: place });
+}
+(function buildPlaces() {
+  if (typeof StelaPlaces === "undefined") return;   // the list is optional: the start screen works without it
+  const row = $("#places-row");
+  StelaPlaces.PLACES.forEach((p) => {
+    const b = h("button", { class: "place-card", type: "button", "data-place": p.id },
+      h("span", { class: "place-name" }, p.name),
+      h("span", { class: "place-where" }, p.where),
+      h("span", { class: "place-why" }, p.reason));
+    b.addEventListener("click", () => startFlow.example(p));
+    row.append(h("li", {}, b));
+  });
+  $("#places-note").textContent = StelaPlaces.LIST_NOTE;
+  $("#places").hidden = false;
+})();
 startGo.addEventListener("click", () => startFlow.start());
 $("#start-map").addEventListener("click", () => startFlow.exploreMap());
 $("#home").addEventListener("click", () => startFlow.home());
@@ -565,7 +596,7 @@ async function api(path, lat, lng) {
  * Returns { data } on success or { error } so walk mode can back off. */
 async function explore(lat, lng, opts = {}) {
   const me = ++run;
-  lastLookup = { lat, lng, real: !!opts.real };
+  lastLookup = { lat, lng, real: !!opts.real, example: opts.example || null };
   if (!opts.walk) {
     Voice.stop(); setListenLabel();
     storyText = "";
@@ -591,12 +622,27 @@ async function explore(lat, lng, opts = {}) {
   if (!opts.walk) play(data.facts.rock ? "chime" : "low");   // results arrived (or the map had no rock): the cards appear
   updateReadMore();
   if (!opts.walk) { setMapCollapsed(true); mapToggle.hidden = false; $("#summary").scrollIntoView(scrollOpts("start")); }
-  stampPassport(lat, lng, data.facts.rock, opts.real ? "here" : "pin");
-  awardBadge(lat, lng, data.facts.rock, opts.real ? "here" : "pin");
+  if (opts.example) {
+    // an example place is a pin visit that is not counted: nothing is stamped, awarded or stored
+    markExample(opts.example);
+  } else {
+    markExample(null);
+    stampPassport(lat, lng, data.facts.rock, opts.real ? "here" : "pin");
+    awardBadge(lat, lng, data.facts.rock, opts.real ? "here" : "pin");
+  }
   if (data.facts.rock) lastRock = data.facts.rock;
   loadPeople(me, lat, lng);
   loadFossils(me, lat, lng);
   return { data };
+}
+
+/* The label above the summary for an example place, and no stale badge card from an earlier lookup. */
+function markExample(place) {
+  const tag = $("#sum-example");
+  tag.hidden = !place;
+  if (!place) return;
+  setContent(tag, h("strong", {}, `${StelaPlaces.EXAMPLE_LABEL}: ${place.name}, ${place.where}.`), " " + StelaPlaces.EXAMPLE_NOTE);
+  $("#badge-card").hidden = true;
 }
 
 /* The two slow sections load in the background; each has its own skeleton, retry and failure state. */
@@ -668,7 +714,7 @@ function renderWhere(d) {
   // Rare animal records: sightings, specimens, ... never a claim about where an animal lives
   const rare = f.rare_animals_recorded_nearby;
   setContent($("#rare"),
-    rare == null ? retryRow("Could not be checked right now.", () => explore(lastLookup.lat, lastLookup.lng, { real: lastLookup.real }))
+    rare == null ? retryRow("Could not be checked right now.", () => explore(lastLookup.lat, lastLookup.lng, { real: lastLookup.real, example: lastLookup.example }))
       : rare.length === 0 ? (scopeLine(sc.rare) || empty("Nothing recorded nearby."))
       : [scopeLine(sc.rare), h("ul", { class: "records" }, rare.map(rareEntry)),
          h("p", { class: "small" }, f.rare_animals_note),

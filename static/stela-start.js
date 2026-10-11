@@ -20,6 +20,9 @@
         );
       },
       exploreMap() { pending++; deps.setBusy(false); deps.showApp(); },
+      /* An example place from the start screen's list: opens the map there and runs the normal lookup as a pin visit.
+       * It never asks for the location, and it cancels a Start that is still waiting for the browser's answer. */
+      example(place) { pending++; deps.setBusy(false); deps.showApp(); deps.onExample(place); },
       home() { pending++; deps.setBusy(false); deps.showStart(); },
     };
   }

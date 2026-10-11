@@ -24,6 +24,27 @@ Visitors first see a full-screen intro (wordmark, tagline, a short hook, a large
 - Moving from the start screen to the app is a 220 ms fade, skipped under `prefers-reduced-motion`. The theme toggle is on the start screen too. No sound, no autoplay, no large images; tap targets are at least 44 px.
 - The flow lives in `static/stela-start.js` (no DOM code), tested in `tests/start.test.js`: creating it and "Explore the map" never request the location, Start requests it once, and a late answer after choosing the map is ignored.
 
+### Try these places
+
+Under the buttons is a short row of six example places (a horizontal scroll row on a phone, two columns on a wide screen). Tapping one opens the map at that place and runs the normal lookup, labelled **Example place**.
+
+- An example is a pin visit that is **not counted**: it never asks for your location, never writes to the passport, never earns an era badge, a rank or an Armchair Explorer badge, and nothing about it is stored. The list is hard-coded in `static/stela-places.js` and written by hand, never by the model; the reasons are general and name no specific fossil. No new data source is used.
+- Under the list: "Dense fossil records often reflect where research has been done. A quiet place may be understudied, not empty."
+- If the lookup fails, the normal friendly "The stone is quiet right now" message and its **Try again** button appear, and the retry stays an example.
+
+Each place was checked on 2026-10-11 against OpenStreetMap Nominatim and Wikipedia coordinates, then run through the real app (rock, age and the fossil, animal and history sections; the fossil "finds" count is capped at 200 per lookup by the app):
+
+| Place | Coordinates | Rock returned (map scale) | Age (Ma) | Fossil finds |
+|---|---|---|---|---|
+| Jurassic Coast, Charmouth, UK | 50.738, -2.907 | Lias Group (regional) | 208.5 to 170.3 | 200 (capped) |
+| Dover, UK | 51.125, 1.313 | White Chalk Subgroup (regional) | 100.5 to 66 | 200 (capped) |
+| Cincinnati region, Ohio, USA | 39.101, -84.513 | Point Pleasant Formation (regional) | 454.5 to 451 | 200 (capped) |
+| Hell Creek area, Montana, USA | 47.0, -107.0 | Hell Creek Formation (regional) | 67.5 to 66 | 147 |
+| La Brea Tar Pits, Los Angeles, USA | 34.063, -118.356 | Old alluvial-fan deposits (detailed) | 0.78 to 0.01 | 200 (capped) |
+| New Orleans, USA | 29.951, -90.072 | Natural Levees (regional) | 0.01 to 0 | 200 (capped) |
+
+Dhaka was tried as the young-ground contrast and replaced: the rock map returns nothing for Dhaka or for any of ten other Bangladeshi towns tried, so the card would have opened an empty lookup. New Orleans gives a real, very young rock instead.
+
 ## Icons
 
 An original carved-stone tablet with strata bands (sand, turquoise, ochre) in `static/favicon.svg`. `python tools/make_icons.py` builds `favicon-32.png`, `favicon-48.png`, `favicon.ico` (16/32/48), and the full-bleed `apple-touch-icon.png` (180), `icon-192.png` and `icon-512.png` for `manifest.webmanifest`. It rasterises the SVG with headless Edge/Chrome and packs the files with Pillow (`pip install pillow`); cairosvg was not used because it needs the native Cairo library. The static folder is served as-is, so `/favicon.ico` and the rest need no extra Render setup.
@@ -63,6 +84,7 @@ static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tes
 static/stela-sound.js  optional synthesized UI sounds (one play(name) function, easy to remove)
 static/stela-badges.js  era badge table, ranks and the localStorage badge book (pure logic, tested in Node)
 static/stela-start.js  start-screen flow (when the location is requested), tested in Node
+static/stela-places.js  the hand-written "Try these places" list, tested in Node
 static/favicon.svg, *.png, favicon.ico, manifest.webmanifest  icons (built by tools/make_icons.py)
 tests/           parsing, scope, names, picture and fallback tests on saved real API responses (tests/samples), plus Node tests of the browser logic and sounds
 ```
@@ -164,6 +186,17 @@ The boundaries are in one table (`ERA_BADGES` and `BOUNDARY_MA` in `static/stela
 
 **Walk mode.** A toggle that uses `watchPosition` (never a timer). It asks for a new story only when you have moved more than about 300 m from the last request, ignores GPS fixes less accurate than 200 m, and stops watching when you switch it off or the page is hidden (it resumes when the page is visible again). A small "You have moved into a new rock unit" message appears only when the rock unit or era really changed. It never speaks on its own: you either tick "Read each new story aloud automatically" or tap the offered Listen button. It reuses the normal `/api/where` and `/api/fossils` calls, so the server cache and rate limit apply as usual. **Walk mode keeps GPS on and uses more battery.**
 
+## Where it is most useful
+
+Stela is a quick, plain-language first look at the ground under a place. It is most useful where there is something to look at and the open data is good enough to say something:
+
+- **Geoparks and fossil coasts**, where the rock is exposed and many fossils have been recorded: the example places above are of this kind.
+- **School trips and field days**: a class can look up the ground at the site beforehand, or on the spot, and see the age of the rock and which kinds of fossils have been recorded nearby.
+- **Hikers and walkers**: Walk mode (optional, off by default) updates the story as you cross from one mapped rock unit into another.
+- **Curious travellers**: any place with a published geological map, including cities built on very young ground.
+
+Limits to keep in mind: the rock map is often regional rather than detailed (each lookup says which), some places have no mapped rock at all (Bangladesh returned none in the checks above), and fossil records are denser where researchers have worked. A quiet result may mean the place is understudied, not that nothing was there.
+
 ## Run it locally
 
 ```bash
@@ -201,7 +234,7 @@ On a slow CPU a local reply can take longer than the 30 s limit, and Stela then 
 
 ```bash
 python -m pytest -q          # no network needed (also runs the browser-logic tests if Node.js is installed)
-node --test tests/logic.test.js tests/sound.test.js   # the browser-logic tests on their own: walk-mode distance rule, passport storage, sound rules
+node --test tests/*.test.js   # the browser-logic tests on their own: walk-mode distance rule, passport storage, sound rules, badges, start flow, example places
 python tests/capture_samples.py   # optional: re-record the sample API responses (also capture_people.py, capture_phylopic.py; Wikipedia rate-limits bursts, so run them one place at a time)
 ```
 

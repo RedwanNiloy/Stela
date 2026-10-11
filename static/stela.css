@@ -352,3 +352,27 @@ body.drawer-open { overflow: hidden; }
 .bd-chair { position: absolute; right: -6px; bottom: -6px; width: 30px; height: 30px; }
 .splash .bd-chair { width: 44px; height: 44px; }
 .bd.locked .bd-chair { filter: grayscale(1); opacity: .6; }
+
+/* ---------- Start screen: Try these places ---------- */
+.start { grid-template-columns: minmax(0, 1fr); }   /* the scrolling row must not widen the page */
+.start-inner { min-width: 0; }
+.places { width: 100%; min-width: 0; margin-top: var(--s5); text-align: left; }
+.places-h { font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ochre); margin-bottom: var(--s2); }
+.places-row { list-style: none; margin: 0 calc(-1 * var(--s4)); padding: 2px var(--s4) var(--s2); display: flex; gap: var(--s3);
+  overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scroll-padding: 0 var(--s4); }
+.places-row > li { flex: 0 0 min(220px, 70vw); scroll-snap-align: start; display: flex; }
+.place-card { width: 100%; min-height: 44px; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+  padding: var(--s3); border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); color: var(--ink); box-shadow: var(--shadow); cursor: pointer; }
+.place-card:hover { border-color: var(--accent); }
+.place-name { font-weight: 700; font-size: 1rem; line-height: 1.25; }
+.place-where { font-size: .8rem; color: var(--muted); }
+.place-why { margin-top: var(--s1, 4px); font-size: .88rem; line-height: 1.4; color: var(--soft); }
+.places-note { margin-top: var(--s3); font-size: .85rem; line-height: 1.45; color: var(--soft); }
+@media (min-width: 640px) {
+  .places-row { margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; overflow: visible; }
+  .places-row > li { flex: none; }
+}
+.sum-example { font-size: .88rem; line-height: 1.45; color: var(--soft); background: var(--accent-bg); border: 1px solid var(--line); border-radius: var(--r);
+  padding: var(--s2) var(--s3); margin-bottom: var(--s3); }
+.sum-example strong { color: var(--ink); }
+#summary { scroll-margin-top: 64px; }   /* keep the top of the result clear of the sticky header after the auto-scroll */
