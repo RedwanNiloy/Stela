@@ -6,10 +6,10 @@
 
 - Live demo: https://stela-0oz5.onrender.com/ (placeholder: replace with the real Render URL)
 - Demo video: https://youtube.com/shorts/qN13-StkjzA?si=Na2rDM00hBfKPCYL (placeholder: replace after uploading)
-- DEV post: YOUR-DEV-POST-LINK (placeholder: fill in after publishing)
+- DEV post: https://dev.to/redwan_niloy_f5f612e7196a/stela-stand-anywhere-and-hear-what-the-ground-under-you-was-long-ago-882
 - Repo: https://github.com/RedwanNiloy/Stela
 
-Built October YOUR-START-DATE to 11, 2026 for the Hacktoberfest Open-Source AI Challenge, Week 1.
+Built October YOUR- 8 to 11, 2026 for the Hacktoberfest Open-Source AI Challenge, Week 1.
 
 Open Stela on your phone, tap **Start** (or drop a pin on the map), and put the phone away. A calm "stone scribe" tells you about the ground under your feet: the rock and its age, what the place probably was (sea, land, swamp), the fossils found nearby, rare animal records nearby, and human history close by. It can read the story aloud.
 
