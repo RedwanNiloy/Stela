@@ -20,7 +20,10 @@ def test_start_screen_has_the_required_text_and_buttons():
     assert "Want to know what was here before you?" in HTML
     assert "seas, swamps, ancient animals and early people" in HTML
     assert "millions of years" not in HTML.split('id="app"')[0]          # some rocks are young
-    assert "Stela uses your location only to look up the ground under you. It is not stored." in HTML
+    # the location promise is in the How it works pop-up, not as a line under the headline
+    assert 'id="start-note"' not in HTML
+    modal = HTML.split('id="how-modal"')[1].split('<div id="app"')[0]
+    assert "Your location is used for this lookup only. Stela does not store or log it." in modal
     for text in (">Start<", ">Explore the map instead<", ">How it works<"):
         assert text in HTML
 
