@@ -43,3 +43,12 @@ def test_a_retry_after_a_failed_example_lookup_stays_an_example():
 def test_example_label_text():
     assert "Example place" in (STATIC / "stela-places.js").read_text(encoding="utf-8")
     assert re.search(r"A quiet place may be understudied, not empty\.", (STATIC / "stela-places.js").read_text(encoding="utf-8"))
+
+
+def test_start_backdrop_is_decorative_inline_svg_with_no_external_image():
+    start = HTML.split('id="app"')[0]
+    block = start.split('class="start-bg"')[1].split("</div>")[0]
+    assert 'aria-hidden="true"' in start.split('class="start-bg"')[0][-60:] or "aria-hidden" in block
+    assert "<svg" in block and "<img" not in block and "http" not in block.replace("http://www.w3.org", "")
+    css = (STATIC / "stela.css").read_text(encoding="utf-8")
+    assert "url(" not in css.split("Start screen: blurred fossil")[1]   # no image file, no new data source

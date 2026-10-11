@@ -24,6 +24,8 @@ Visitors first see a full-screen intro (wordmark, tagline, a short hook, a large
 - Moving from the start screen to the app is a 220 ms fade, skipped under `prefers-reduced-motion`. The theme toggle is on the start screen too. No sound, no autoplay, no large images; tap targets are at least 44 px.
 - The flow lives in `static/stela-start.js` (no DOM code), tested in `tests/start.test.js`: creating it and "Explore the map" never request the location, Start requests it once, and a late answer after choosing the map is ignored.
 
+The start screen has a soft, blurred backdrop of rock strata and an ammonite-style spiral. It is original inline SVG in `static/index.html` (no image file, no new data source, hidden from screen readers), blurred with CSS and faded behind the text so it stays readable in light and dark mode.
+
 ### Try these places
 
 Under the buttons is a short row of six example places (a horizontal scroll row on a phone, two columns on a wide screen). Tapping one opens the map at that place and runs the normal lookup, labelled **Example place**.

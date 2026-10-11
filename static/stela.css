@@ -376,3 +376,17 @@ body.drawer-open { overflow: hidden; }
   padding: var(--s2) var(--s3); margin-bottom: var(--s3); }
 .sum-example strong { color: var(--ink); }
 #summary { scroll-margin-top: 64px; }   /* keep the top of the result clear of the sticky header after the auto-scroll */
+
+/* ---------- Start screen: blurred fossil and rock backdrop (original inline SVG, decorative only) ---------- */
+.start { overflow: hidden; isolation: isolate; }
+.start-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.start-bg svg { width: 100%; height: 100%; display: block; transform: scale(1.12); filter: blur(4px); opacity: .9; }
+.start-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, var(--bg) 0%, transparent 78%); opacity: .5; }
+.bg-a { fill: var(--chip); } .bg-b { fill: color-mix(in srgb, var(--ochre) 38%, var(--bg)); } .bg-c { fill: color-mix(in srgb, var(--accent) 32%, var(--bg)); }
+.bg-peb { fill: color-mix(in srgb, var(--ochre) 38%, var(--bg)); }
+.bg-shell { fill: color-mix(in srgb, var(--ochre) 20%, var(--bg)); }
+.bg-line { fill: none; stroke: var(--ochre); stroke-width: 11; stroke-linecap: round; opacity: .8; }
+.bg-rib { fill: none; stroke: var(--ochre); stroke-width: 6; stroke-linecap: round; opacity: .6; }
+@media (min-width: 640px) {
+  .start-bg svg { width: 880px; margin: 0 auto; -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
+}
