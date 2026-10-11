@@ -17,7 +17,7 @@ The model never looks anything up. If a source is empty, the story says "nothing
 
 Visitors first see a full-screen intro (wordmark, tagline, a short hook, a large **Start** button), not the map.
 
-- **Start** asks the browser for your location, and only then. Nothing asks for it while the page loads. While the browser's prompt is open the button says "Finding you..."; when a position arrives the results view opens and the lookup runs. If location is denied, unavailable or times out, the map view opens with a friendly message pointing to the pin.
+- **Start** asks the browser for your location, and only then. The buttons respond to hover, press and keyboard focus (CSS only, no sound, no motion under `prefers-reduced-motion`). Nothing asks for it while the page loads. While the browser's prompt is open the button says "Finding you..."; when a position arrives the results view opens and the lookup runs. If location is denied, unavailable or times out, the map view opens with a friendly message pointing to the pin.
 - **Explore the map instead** opens the map with no location request.
 - The location promise ("Your location is used for this lookup only. Stela does not store or log it.") is in the **How it works** pop-up, not as a line under the headline.
 - **How it works** opens a pop-up message (closes with Escape, a tap outside, or "Got it") with three bullets reusing the About text (open data, an open-weight model that only narrates the facts, location used for the lookup only).

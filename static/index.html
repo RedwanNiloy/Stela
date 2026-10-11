@@ -67,7 +67,7 @@
     <p class="start-hook">Stand anywhere and find out what the ground beneath you was long ago: seas, swamps, ancient animals and early people.</p>
     <noscript><p class="panel">Stela needs JavaScript to look up the ground under your feet.</p></noscript>
     <div class="start-actions">
-      <button class="btn btn-start" id="start-go" type="button">Start</button>
+      <button class="btn btn-start" id="start-go" type="button"><span class="lbl">Start</span><svg class="go-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="btn btn-quiet btn-map" id="start-map" type="button">Explore the map instead</button>
       <button class="link-btn" id="start-how" type="button" aria-haspopup="dialog" aria-controls="how-modal">How it works</button>
     </div>
@@ -546,7 +546,7 @@ const startFlow = StelaStart.create({
   showApp, showStart,
   setBusy(busy) {
     startGo.disabled = busy;
-    startGo.textContent = busy ? "Finding you..." : "Start";
+    startGo.querySelector(".lbl").textContent = busy ? "Finding you" : "Start";   // the dots are drawn by CSS while aria-busy
     startGo.setAttribute("aria-busy", String(busy));
     startStatus.textContent = busy ? "Waiting for your browser to share your location." : "";
   },

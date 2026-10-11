@@ -489,3 +489,35 @@ body.drawer-open { overflow: hidden; }
   .btn-start { min-height: 50px; } .btn-map { min-height: 44px; }
   .places { margin-top: var(--s2); }
 }
+
+/* ---------- Start screen: interactive buttons (CSS only, no sound; motion is off under prefers-reduced-motion) ---------- */
+.btn-start { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease; box-shadow: 0 2px 0 rgba(0, 0, 0, .18), 0 8px 18px rgba(14, 84, 80, .22); }
+.btn-start::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%);
+  transform: translateX(-120%); pointer-events: none; }
+.go-arrow { width: 20px; height: 20px; flex: none; transition: transform .18s ease; }
+.btn-map, .link-btn, .place-card { transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease, border-color .16s ease; }
+.btn-map:active { transform: scale(.985); }
+.btn-start:active:not(:disabled) { transform: translateY(1px) scale(.985); box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 2px 8px rgba(14, 84, 80, .2); }
+.place-card:active { transform: scale(.975); }
+@media (hover: hover) {
+  .btn-start:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 4px 0 rgba(0, 0, 0, .16), 0 14px 26px rgba(14, 84, 80, .3); }
+  .btn-start:hover:not(:disabled) .go-arrow { transform: translateX(5px); }
+  .btn-start:hover:not(:disabled)::after { transform: translateX(120%); transition: transform .55s ease; }
+  .btn-map:hover { background: var(--accent-bg); border-color: var(--accent); transform: translateY(-1px); }
+  .link-btn:hover { text-decoration-thickness: 2px; }
+  .place-card:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(60, 40, 10, .18); border-color: var(--accent); }
+}
+.btn-start:focus-visible, .btn-map:focus-visible, .place-card:focus-visible { outline: 3px solid var(--ochre); outline-offset: 3px; }
+/* waiting for the browser's location prompt: the arrow goes and three dots pulse */
+.btn-start[aria-busy="true"] .go-arrow { display: none; }
+.btn-start[aria-busy="true"] .lbl::after { content: "..."; display: inline-block; width: 1.2em; text-align: left; animation: dots 1s steps(4, end) infinite; overflow: hidden; vertical-align: bottom; }
+@keyframes dots { 0% { width: 0; } 100% { width: 1.2em; } }
+@media (prefers-reduced-motion: reduce) {
+  .btn-start, .btn-map, .link-btn, .place-card, .go-arrow { transition: none; }
+  .btn-start:hover:not(:disabled), .btn-start:active:not(:disabled), .btn-map:hover, .btn-map:active, .place-card:hover, .place-card:active { transform: none; }
+  .btn-start::after { display: none; }
+  .btn-start[aria-busy="true"] .lbl::after { animation: none; width: 1.2em; }
+}
+/* the busy message is for screen readers: the button itself shows "Finding you..." */
+.start-status { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
