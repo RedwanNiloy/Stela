@@ -910,8 +910,11 @@ function stampPassport(lat, lng, rock) {
   if (res.added) {
     const era = rock.b_int_name || rock.t_int_name || "Unknown era";
     setContent(note, "Stamped in your passport.", res.newEra ? unlockBadge(era) : null);
-    note.hidden = false;
+  } else {
+    // say why nothing was stamped, instead of silently doing nothing
+    setContent(note, rock ? "This spot is already in your passport." : "Not stamped: no rock unit is mapped at this spot, so there is no era to collect. Try another place.");
   }
+  note.hidden = false;
 }
 
 function ageRange(e) {
