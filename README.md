@@ -28,7 +28,7 @@ The start screen has a soft, blurred backdrop of rock strata and an ammonite-sty
 
 ### Try these places
 
-Under the buttons is a short row of six example places (a horizontal scroll row on a phone, two columns on a wide screen). Tapping one opens the map at that place and runs the normal lookup, labelled **Example place**.
+Under the buttons is a one-row slider of six example places (swipe on a phone; previous and next arrows on a wide screen). The start screen is laid out to fit one screen, so it does not need vertical scrolling (checked at 390x844, 360x740, 375x667, 1280x800, 1366x640 and 768x1024). Tapping one opens the map at that place and runs the normal lookup, labelled **Example place**.
 
 - An example is a pin visit that is **not counted**: it never asks for your location, never writes to the passport, never earns an era badge, a rank or an Armchair Explorer badge, and nothing about it is stored. The list is hard-coded in `static/stela-places.js` and written by hand, never by the model; the reasons are general and name no specific fossil. No new data source is used.
 - Under the list: "Dense fossil records often reflect where research has been done. A quiet place may be understudied, not empty."

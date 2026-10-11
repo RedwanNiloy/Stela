@@ -78,7 +78,13 @@
     </div>
     <p class="start-status" id="start-status" role="status" aria-live="polite"></p>
     <section class="places" id="places" aria-labelledby="places-title" hidden>
-      <h2 class="places-h" id="places-title">Try these places</h2>
+      <div class="places-head">
+        <h2 class="places-h" id="places-title">Try these places</h2>
+        <div class="places-nav">
+          <button class="icon-btn" id="places-prev" type="button" aria-label="Previous places" aria-controls="places-row"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="icon-btn" id="places-next" type="button" aria-label="Next places" aria-controls="places-row"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
       <ul class="places-row" id="places-row"></ul>
       <p class="places-note" id="places-note"></p>
     </section>
@@ -560,6 +566,9 @@ function exampleVisit(place) {
     b.addEventListener("click", () => startFlow.example(p));
     row.append(h("li", {}, b));
   });
+  const slide = (dir) => row.scrollBy({ left: dir * Math.max(200, row.clientWidth * 0.8), behavior: reduceMotion() ? "auto" : "smooth" });
+  $("#places-prev").addEventListener("click", () => slide(-1));
+  $("#places-next").addEventListener("click", () => slide(1));
   $("#places-note").textContent = StelaPlaces.LIST_NOTE;
   $("#places").hidden = false;
 })();
