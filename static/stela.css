@@ -317,3 +317,32 @@ body.drawer-open { overflow: hidden; }
 .about-project li + li { margin-top: var(--s1); }
 .about-project a { font-weight: 700; display: inline-block; min-height: 44px; line-height: 44px; }
 .code { margin: var(--s2) 0 0; padding: var(--s3); overflow-x: auto; background: var(--chip); border: 1px solid var(--line); border-radius: 8px; font: .8rem/1.5 ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--ink); white-space: pre; }
+
+/* ---------- Badge splash ---------- */
+.splash { position: fixed; inset: 0; z-index: 1600; display: grid; place-content: center; justify-items: center; text-align: center; padding: var(--s5);
+  background: radial-gradient(circle at 50% 45%, rgba(14, 84, 80, .82), rgba(20, 12, 4, .9) 75%); color: #fff6e0; pointer-events: none; opacity: 0; }
+.splash.go { animation: splashlife 1.8s ease-out both; }
+.splash-art { position: relative; z-index: 2; }
+.splash-badge { width: 132px; height: 132px; filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .45)); }
+.splash.go .splash-badge { animation: splashpop .7s cubic-bezier(.2, .85, .3, 1.15) both; }
+.splash-ring { position: absolute; left: 50%; top: 50%; width: 160px; height: 160px; margin: -112px 0 0 -80px; border-radius: 50%; border: 4px solid #f0b45c; opacity: 0; }
+.splash.go .splash-ring { animation: splashring .8s ease-out .05s both; }
+.splash-rays { position: absolute; left: 50%; top: 50%; width: 0; height: 0; margin-top: -40px; }
+.splash-rays i { position: absolute; left: -3px; top: -3px; width: 6px; height: 18px; border-radius: 3px; background: #f0b45c; opacity: 0; }
+.splash-rays i:nth-child(3n) { background: #7fdacf; }
+.splash-rays i:nth-child(3n+1) { background: #f6e9c8; }
+.splash.go .splash-rays i { animation: splashray .9s ease-out .1s both; }
+.splash-kicker { margin-top: var(--s5); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #f0b45c; }
+.splash-name { margin-top: var(--s1); font-family: var(--display); font-size: 1.5rem; font-weight: 600; letter-spacing: .04em; }
+.splash-sub { margin-top: var(--s2); font-size: .9rem; max-width: 22rem; color: #f4eada; }
+.splash.go .splash-kicker, .splash.go .splash-name, .splash.go .splash-sub { animation: splashtext .5s ease-out .25s both; }
+@keyframes splashlife { 0% { opacity: 0; } 12% { opacity: 1; } 78% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes splashpop { 0% { transform: scale(.3) rotate(-14deg); opacity: 0; } 65% { transform: scale(1.12) rotate(4deg); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes splashring { 0% { transform: scale(.5); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes splashray { 0% { transform: rotate(var(--a)) translateY(30px); opacity: 0; } 25% { opacity: 1; } 100% { transform: rotate(var(--a)) translateY(110px); opacity: 0; } }
+@keyframes splashtext { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.splash-rays i:nth-child(1) { --a: 0deg; } .splash-rays i:nth-child(2) { --a: 30deg; } .splash-rays i:nth-child(3) { --a: 60deg; }
+.splash-rays i:nth-child(4) { --a: 90deg; } .splash-rays i:nth-child(5) { --a: 120deg; } .splash-rays i:nth-child(6) { --a: 150deg; }
+.splash-rays i:nth-child(7) { --a: 180deg; } .splash-rays i:nth-child(8) { --a: 210deg; } .splash-rays i:nth-child(9) { --a: 240deg; }
+.splash-rays i:nth-child(10) { --a: 270deg; } .splash-rays i:nth-child(11) { --a: 300deg; } .splash-rays i:nth-child(12) { --a: 330deg; }
+@media (prefers-reduced-motion: reduce) { .splash { display: none !important; } }

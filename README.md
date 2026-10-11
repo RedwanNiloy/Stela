@@ -133,7 +133,7 @@ Walk mode, the Passport and My badges live in a side panel opened from the menu 
 
 ## Era badges and traveler ranks
 
-Each lookup can earn an **era badge** from how old the rock is, and the number of different era badges sets your **rank**. There is a "My badges" view (original inline SVG art; locked badges are greyed out and say which age range unlocks them), the rank is shown at the top of the results, and a card under the summary says what the lookup gave. A new badge gets a short "Badge unlocked" pop (under 1 second, no sound, none under `prefers-reduced-motion`).
+Each lookup can earn an **era badge** from how old the rock is, and the number of different era badges sets your **rank**. There is a "My badges" view (original inline SVG art; locked badges are greyed out and say which age range unlocks them), the rank is shown at the top of the results, and a card under the summary says what the lookup gave. A new badge gets a splash over the page: the badge pops in with a ring and rays, with its name and rank (about 1.8 s, no sound, never blocks taps, none under `prefers-reduced-motion`; the badge card still announces it).
 
 | Badge | The rock's **oldest** age is... | Boundary used |
 |---|---|---|

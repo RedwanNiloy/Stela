@@ -218,6 +218,14 @@
   </details>
 </main>
 
+<div class="splash" id="splash" hidden role="status" aria-live="polite">
+  <div class="splash-rays" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="splash-ring" aria-hidden="true"></div>
+  <div class="splash-art" id="splash-art"></div>
+  <p class="splash-kicker">Badge unlocked</p>
+  <p class="splash-name" id="splash-name"></p>
+  <p class="splash-sub" id="splash-sub"></p>
+</div>
 <div class="scrim" id="scrim" hidden></div>
 <aside class="drawer" id="drawer" hidden aria-label="Walk mode, passport and badges" tabindex="-1">
   <div class="drawer-top">
@@ -1121,10 +1129,27 @@ function awardBadge(lat, lng, rock, how) {
   }
   card.classList.remove("unlocked");
   card.hidden = false;
-  if (res.isNew && !reduceMotion()) { void card.offsetWidth; card.classList.add("unlocked"); }   // under 1 s, no sound
+  if (res.isNew && !reduceMotion()) { void card.offsetWidth; card.classList.add("unlocked"); showSplash(res); }   // no sound
   card.setAttribute("role", "status");
 }
 updateBadgeUi();
+
+/* The splash for a newly earned badge: a short burst over the page (about 1.8 s, no sound, never blocks taps, skipped under
+ * prefers-reduced-motion because the badge card and its text still announce the badge). It removes itself when the animation ends. */
+const splashEl = $("#splash");
+function showSplash(res) {
+  if (reduceMotion()) return;
+  splashEl.hidden = true;
+  setContent($("#splash-art"), badgeArt(res.badge.art, "bd-art splash-badge"));
+  $("#splash-name").textContent = res.badge.name;
+  $("#splash-sub").textContent = res.kind === "era" ? rankText().replace(/^Rank: /, "Rank: ") : "A separate badge: it does not count toward your rank.";
+  splashEl.classList.remove("go");
+  splashEl.hidden = false;
+  void splashEl.offsetWidth;
+  splashEl.classList.add("go");
+}
+splashEl.addEventListener("animationend", (e) => { if (e.target === splashEl) { splashEl.hidden = true; splashEl.classList.remove("go"); } });
+splashEl.addEventListener("click", () => { splashEl.hidden = true; splashEl.classList.remove("go"); });
 
 /* ---------- Side panel: Walk mode, Passport and badges (kept out of the page flow so the results are not pushed down) ---------- */
 const drawer = $("#drawer"), scrim = $("#scrim"), menuBtn = $("#menu");
