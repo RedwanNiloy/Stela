@@ -269,3 +269,24 @@ body[data-view="start"] { padding-bottom: 0; }
 @media (min-width: 768px) { .start-inner { max-width: 560px; } .start-q { font-size: 1.45rem; } }
 .pass-oldest { margin-top: var(--s2); padding: var(--s2) var(--s3); border-left: 3px solid var(--ochre); background: var(--chip); border-radius: 0 8px 8px 0; font-size: .92rem; }
 .pass-label { display: block; font-weight: 700; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ochre); }
+
+/* ---------- Era badges and ranks ---------- */
+.sum-rank { font-size: .85rem; font-weight: 700; color: var(--ochre); margin-bottom: var(--s2); }
+.rank-line { font-weight: 700; margin-top: var(--s2); }
+.bd-sub { margin-top: var(--s4); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ochre); }
+.bd-grid { list-style: none; margin: var(--s3) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s3); }
+.bd { display: flex; gap: var(--s3); align-items: center; padding: var(--s3); border: 1px solid var(--line); border-radius: var(--r); background: var(--chip); }
+.bd-art { width: 64px; height: 64px; flex: none; }
+.bd-name { font-weight: 700; }
+.bd.locked .bd-art { filter: grayscale(1); opacity: .45; }
+.bd.locked { background: transparent; border-style: dashed; color: var(--soft); }
+.bd.earned { border-color: var(--accent); background: var(--accent-bg); }
+.badgecard .bd-row { display: flex; gap: var(--s3); align-items: center; }
+.badgecard .bd-big { width: 72px; height: 72px; }
+.badgecard p + p { margin-top: var(--s1); }
+.bd-title { font-weight: 700; font-size: 1.05rem; }
+.badgecard.unlocked .bd-big { animation: bdpop .7s cubic-bezier(.2, .8, .3, 1) both; }
+.badgecard.unlocked { animation: bdglow .9s ease-out both; }
+@keyframes bdpop { 0% { transform: scale(.6) rotate(-8deg); opacity: 0; } 60% { transform: scale(1.12) rotate(3deg); opacity: 1; } 100% { transform: none; } }
+@keyframes bdglow { 0% { box-shadow: 0 0 0 0 var(--ochre); } 40% { box-shadow: 0 0 0 6px var(--ochre); } 100% { box-shadow: var(--shadow); } }
+@media (prefers-reduced-motion: reduce) { .badgecard.unlocked, .badgecard.unlocked .bd-big { animation: none; } }

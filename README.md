@@ -61,6 +61,7 @@ static/index.html  one mobile-first page, vanilla JS, Leaflet map, no build step
 static/stela.css   the look: palette tokens, light/dark, accordion sections, timeline, image boxes
 static/stela-logic.js  walk-mode distance rule and the passport (pure logic, tested in Node)
 static/stela-sound.js  optional synthesized UI sounds (one play(name) function, easy to remove)
+static/stela-badges.js  era badge table, ranks and the localStorage badge book (pure logic, tested in Node)
 static/stela-start.js  start-screen flow (when the location is requested), tested in Node
 static/favicon.svg, *.png, favicon.ico, manifest.webmanifest  icons (built by tools/make_icons.py)
 tests/           parsing, scope, names, picture and fallback tests on saved real API responses (tests/samples), plus Node tests of the browser logic and sounds
@@ -125,6 +126,33 @@ The same rules apply everywhere: a picture is shown only with an author and a li
 ## Sound effects
 
 Optional and off by default. A speaker button in the header turns them on; the choice is remembered in your browser (and the page works the same if storage is blocked). The sounds are synthesized in your browser with the Web Audio API (oscillators and filtered noise): there are no audio files and no libraries, and nothing is sent anywhere. They are a soft stone tap on buttons and sections, a short low chime when results arrive, a quiet low tone for empty or error states, and a two-note sound for "Era unlocked". Each is under 0.5 s and quiet. Audio starts only after your first tap, never while the Listen voice is speaking, and never as the only feedback: each sound goes with a visible change. All of it lives in `static/stela-sound.js`, so it is easy to remove.
+
+## Era badges and traveler ranks
+
+Each lookup can earn an **era badge** from how old the rock is, and the number of different era badges sets your **rank**. There is a "My badges" view (original inline SVG art; locked badges are greyed out and say which age range unlocks them), the rank is shown at the top of the results, and a card under the summary says what the lookup gave. A new badge gets a short "Badge unlocked" pop (under 1 second, no sound, none under `prefers-reduced-motion`).
+
+| Badge | The rock's **oldest** age is... | Boundary used |
+|---|---|---|
+| Fresh Ground Walker | up to 0.0117 Ma (about 12 thousand years) | base of the Holocene |
+| Ice Age Wanderer | up to 2.58 Ma | base of the Quaternary |
+| Mammal Age Explorer | up to 66.0 Ma | base of the Cenozoic (Paleogene) |
+| Dino Era Traveler | up to 251.902 Ma | base of the Mesozoic (Triassic) |
+| Ancient Seas Voyager | up to 538.8 Ma | base of the Phanerozoic (Cambrian) |
+| Deep Time Pioneer | over 538.8 Ma | |
+
+The boundaries are in one table (`ERA_BADGES` and `BOUNDARY_MA` in `static/stela-badges.js`) and come from the International Commission on Stratigraphy's International Chronostratigraphic Chart, v2024/12 ([stratigraphy.org/chart](https://stratigraphy.org/chart)); the ICS revises them from time to time. A rock whose oldest age is exactly on a boundary gets the younger badge. If the rock has no mapped age, nothing is awarded.
+
+| Rank | Distinct era badges |
+|---|---|
+| Noob Pre-Historic Traveler | 1 |
+| Fossil Hunter | 2 to 3 |
+| Ancient Traveler | 4 to 5 |
+| Deep Time Master | 6 |
+
+- **Only your device's location earns era badges.** Start, "Use my location" and Walk mode count. A pin dropped on the map earns only the separate **Armchair Explorer** badge, which never counts toward the rank. After a pin lookup the card says which era badge the rock would have given, but it is not stored or counted.
+- **Honesty on the card.** If the rock's age is a wide range (more than 25 million years between its oldest and youngest age, a Stela choice, not an ICS value) or comes from a regional or continental map scale, the card says so ("Based on regional rock data, so it is less precise.").
+- **Privacy.** Badges live only in your browser's localStorage and are never sent to the server. For each badge Stela stores only the era name, the rock name, the date and a coarse place label (latitude and longitude rounded to one decimal, about 11 km), never exact coordinates. If storage is blocked everything still works and the view says the badges only last for this visit. "Clear my badges" (two taps) removes them. Note: "Badges are based on the rock's mapped age range and are stored only in this browser."
+- This is separate from the Passport below, which keeps its own list (rounded to about 110 m) in your browser.
 
 ## Passport and Walk mode
 
@@ -193,7 +221,7 @@ python tests/capture_samples.py   # optional: re-record the sample API responses
 
 ## Privacy
 
-Stela does not store or log your location or IP address. Your browser's language tag (for example `bn-BD`) is sent with each lookup only to choose which animal names to show; it is not stored or logged. Pictures (species photos, history lead images, fossil illustrations) are loaded by your browser directly from Wikimedia's servers (`thumb.wikimedia.org`) and PhyloPic's (`images.phylopic.org`), so those services can see your IP address, as for any image on the web. The requests carry no referrer. Stela does not proxy the photos; a proxy would hide your IP from Wikimedia but make our server fetch, hold and serve images (more bandwidth, a cache to run, and a new thing that can break), so it is a choice for the project owner. The passport is stored only in your own browser and is never sent to the server. In Walk mode your position is sent to the server like any other lookup, but only when you have moved about 300 m. Logs contain only the route, status, timing and error types. Coordinates are rounded to 3 decimals (about 110 m) for the in-memory cache, which is lost on restart. The rate limiter keeps IPs in memory only. Your coordinates are sent to Macrostrat, PBDB, GBIF and Wikipedia to fetch the facts, as part of the request URL. They are also sent to a geocoding service, [OpenStreetMap Nominatim](https://operations.osmfoundation.org/policies/nominatim/): always for "People and past civilizations" (to get your place hierarchy: neighbourhood, city, district, region, country), and when nothing is recorded within 10 km for the nearest named place (and, for fossils, your country). Wikipedia then receives only the place names that came back (for example "Dover" or "Kent"), not your coordinates, but those names are of course close to where you are. That is one extra third party, only in that case. Stela spaces those requests to at most one per second, and caches the result in memory by rounded coordinates.
+Stela does not store or log your location or IP address. Your browser's language tag (for example `bn-BD`) is sent with each lookup only to choose which animal names to show; it is not stored or logged. Pictures (species photos, history lead images, fossil illustrations) are loaded by your browser directly from Wikimedia's servers (`thumb.wikimedia.org`) and PhyloPic's (`images.phylopic.org`), so those services can see your IP address, as for any image on the web. The requests carry no referrer. Stela does not proxy the photos; a proxy would hide your IP from Wikimedia but make our server fetch, hold and serve images (more bandwidth, a cache to run, and a new thing that can break), so it is a choice for the project owner. The passport and your era badges are stored only in your own browser and are never sent to the server (badges keep only the era, rock name, date and a place rounded to about 11 km). In Walk mode your position is sent to the server like any other lookup, but only when you have moved about 300 m. Logs contain only the route, status, timing and error types. Coordinates are rounded to 3 decimals (about 110 m) for the in-memory cache, which is lost on restart. The rate limiter keeps IPs in memory only. Your coordinates are sent to Macrostrat, PBDB, GBIF and Wikipedia to fetch the facts, as part of the request URL. They are also sent to a geocoding service, [OpenStreetMap Nominatim](https://operations.osmfoundation.org/policies/nominatim/): always for "People and past civilizations" (to get your place hierarchy: neighbourhood, city, district, region, country), and when nothing is recorded within 10 km for the nearest named place (and, for fossils, your country). Wikipedia then receives only the place names that came back (for example "Dover" or "Kent"), not your coordinates, but those names are of course close to where you are. That is one extra third party, only in that case. Stela spaces those requests to at most one per second, and caches the result in memory by rounded coordinates.
 
 ## Data sources and licenses
 
